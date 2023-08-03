@@ -30,7 +30,7 @@ return new class extends Migration {
         });
 
 
-        Schema::create('parent_student_relation', function (Blueprint $table) {
+        Schema::create('parent_relations', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->unsignedBigInteger('parent_id');
@@ -169,7 +169,7 @@ return new class extends Migration {
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('student_id');
@@ -208,7 +208,7 @@ return new class extends Migration {
             $table->dateTime('created_at')->default(time());
         });
 
-        Schema::create('teacher_meet_schedule', function (Blueprint $table) {
+        Schema::create('teacher_meet_schedules', function (Blueprint $table) {
             $table->id();
             $table->text("location");
             $table->unsignedBigInteger('user_id');
