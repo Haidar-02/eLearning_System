@@ -4,17 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('user_types', function (Blueprint $table) {
-            $table->id();
-            $table->text('name');
-        });
+
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -28,7 +24,10 @@ return new class extends Migration
             $table->foreign('user_type')->references('id')->on('user_types');
         });
 
-
+        Schema::create('user_types', function (Blueprint $table) {
+            $table->id();
+            $table->text('name');
+        });
 
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
@@ -49,6 +48,7 @@ return new class extends Migration
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('student_id')->references('id')->on('users');
         });
+
         Schema::create('material_types', function (Blueprint $table) {
             $table->id();
             $table->text('name');
@@ -68,11 +68,6 @@ return new class extends Migration
 
         });
 
-        Schema::create('task_types', function (Blueprint $table) {
-            $table->id();
-            $table->text('name');
-
-        });
 
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
@@ -88,6 +83,14 @@ return new class extends Migration
             $table->foreign('task_type')->references('id')->on('task_types');
 
         });
+
+
+        Schema::create('task_types', function (Blueprint $table) {
+            $table->id();
+            $table->text('name');
+
+        });
+
 
         Schema::create('task_submissions', function (Blueprint $table) {
             $table->id();
@@ -109,7 +112,7 @@ return new class extends Migration
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
-        Schema::create('project_students', function (Blueprint $table) {
+        Schema::create('grades', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('project_id');
