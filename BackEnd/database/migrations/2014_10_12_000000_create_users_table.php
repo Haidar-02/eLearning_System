@@ -29,6 +29,15 @@ return new class extends Migration {
             $table->text('name');
         });
 
+        Schema::create('parent_student_relation', function (Blueprint $table) {
+            $table->id();
+            $table->text('name');
+            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('student_id')->references('id')->on('users');
+        });
+
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('teacher_id');
@@ -112,7 +121,7 @@ return new class extends Migration {
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
-        Schema::create('grades', function (Blueprint $table) {
+        Schema::create('project_students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('project_id');
