@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->text('name');
             $table->unsignedBigInteger('parent_id');
             $table->unsignedBigInteger('student_id');
-            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('parent_id')->references('id')->on('users');
             $table->foreign('student_id')->references('id')->on('users');
         });
 
@@ -137,8 +137,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('session_id');
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('project_id')->references('id')->on('group_projects');
+            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('session_id')->references('id')->on('sessions');
         });
 
         Schema::create('group_projects', function (Blueprint $table) {
@@ -176,7 +176,9 @@ return new class extends Migration {
             $table->unsignedBigInteger('course_id');
             $table->mediumText('rating');
             $table->mediumText('comment');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('student_id')->references('id')->on('users');
+
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
@@ -186,7 +188,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('parent_id');
             $table->dateTime('date');
             $table->string('meet_link');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->foreign('parent_id')->references('id')->on('users');
         });
 
@@ -195,7 +197,6 @@ return new class extends Migration {
             $table->text('notification');
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('parent_id')->references('id')->on('users');
         });
 
         Schema::create('messages', function (Blueprint $table) {
@@ -205,7 +206,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('reciever');
             $table->foreign('sender')->references('id')->on('users');
             $table->foreign('reciever')->references('id')->on('users');
-            $table->dateTime('created_at')->default(time());
+            $table->timestamp('created_at')->useCurrent();
         });
 
         Schema::create('teacher_meet_schedules', function (Blueprint $table) {
@@ -215,7 +216,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('teacher_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('teacher_id')->references('id')->on('users');
-            $table->dateTime('created_at')->default(time());
+            $table->timestamp('created_at')->useCurrent();
             $table->string("meet_link");
             $table->dateTime("start_time");
             $table->dateTime("end_time");
