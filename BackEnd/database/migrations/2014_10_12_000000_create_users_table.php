@@ -208,7 +208,7 @@ return new class extends Migration {
             $table->dateTime('created_at')->default(time());
         });
 
-        Schema::create('teacher_meet_scheduals', function (Blueprint $table) {
+        Schema::create('teacher_meet_schedule', function (Blueprint $table) {
             $table->id();
             $table->text("location");
             $table->unsignedBigInteger('user_id');
@@ -227,7 +227,7 @@ return new class extends Migration {
             $table->text("background_color");
             $table->text("font_color");
         });
-        Schema::create('email_template', function (Blueprint $table) {
+        Schema::create('email_templates', function (Blueprint $table) {
             $table->id();
             $table->mediumText("html");
         });
