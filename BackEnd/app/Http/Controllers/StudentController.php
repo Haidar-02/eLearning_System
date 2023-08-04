@@ -51,8 +51,7 @@ class StudentController extends Controller
     
     public function enrolledCourses(){
         try{
-            $user_id=Auth::id();
-            $user=User::find($user_id);
+            $user=Auth::user();
             $courses=$user->courses;
             return response()->json([
                 'status' => 'success',
