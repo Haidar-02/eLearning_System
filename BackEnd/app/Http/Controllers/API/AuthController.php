@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Course_Enrollment;
 use App\Models\User;
 use App\Models\User_Type;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
+
 
     public function login(Request $request)
     {
@@ -38,11 +40,11 @@ class AuthController extends Controller
             'authorization' => [
                 'token' => $token,
                 'type' => 'bearer',
-                'users' => User_Type::find(1)->users(),
             ]
         ]);
-
     }
+
+
 
     public function register(Request $request)
     {
@@ -63,6 +65,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'User created successfully',
             'user' => $user,
+
         ]);
     }
 
