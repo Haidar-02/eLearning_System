@@ -22,7 +22,19 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::post("refresh", [AuthController::class, "refresh"]);
 
     });
-
+    Route::group(["prefix"=>"teacher","middleware" => "teacher.valid"], function () {
+    });
+    Route::group(["prefix"=>"student","middleware" => "student.valid"], function () {
+    });
+    
+    Route::group(["prefix"=>"admin","middleware" => "admin.valid"], function () {
+    });
+    
+    Route::group(["prefix"=>"parent","middleware" => "parent.valid"], function () {
+    });
 });
+
+
+
 Route::post("login", [AuthController::class, "login"]);
 Route::post("register", [AuthController::class, "register"]);

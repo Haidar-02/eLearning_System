@@ -2,6 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminValid;
+use App\Http\Middleware\ParentValid;
+use App\Http\Middleware\StudentValid;
+use App\Http\Middleware\TeacherValid;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -53,6 +57,10 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
+        'admin.valid'=>AdminValid::class,
+        'student.valid'=>StudentValid::class,
+        'teacher.valid'=>TeacherValid::class,
+        'parent.valid'=>ParentValid::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
