@@ -19,33 +19,34 @@ use App\Http\Controllers\API\AuthController;
 */
 
 
-Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
+
 
 Route::group(["middleware" => "auth:api"], function () {
     Route::group(["prefix" => "user"], function () {
         Route::post("logout", [AuthController::class, "logout"]);
         Route::post("refresh", [AuthController::class, "refresh"]);
     });
-    Route::group(["prefix"=>"teacher","middleware" => "teacher.valid"], function () {
+    // Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
 
-    });
-    Route::group(["prefix"=>"student","middleware" => "student.valid"], function () {
+    // });
+    Route::group(["prefix" => "student", "middleware" => "student.valid"], function () {
         Route::controller(StudentController::class)->group(function () {
-            Route::get("get-courses","getAllCourses");
-            Route::post("enroll-course","enrollCourse");
-            Route::get("enrolled-courses","enrolledCourses");
-            Route::get("course-schedules/{course_id}","getCourseSchedules");
-            Route::get("schedule-materials/{course_id}/{schedule_id}","getScheduleMaterials");
-
+            Route::get("get-courses", "getAllCourses");
+            Route::post("enroll-course", "enrollCourse");
+            Route::get("enrolled-courses", "enrolledCourses");
+            Route::get("course-schedules/{course_id}", "getCourseSchedules");
+            Route::get("schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
+            // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
-    
-    Route::group(["prefix"=>"admin","middleware" => "admin.valid"], function () {
-        Route::post("register", "register");
 
+    Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
+        Route::controller(StudentController::class)->group(function () {
+            Route::post("register", "register");
+        });
     });
-    
-    Route::group(["prefix"=>"parent","middleware" => "parent.valid"], function () {
+
+    Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
     });
 });
 
