@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Course_Enrollment;
-use App\Models\Course_Material;
+use App\Models\CourseEnrollment;
+use App\Models\CourseMaterial;
+use App\Models\Schedule;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    function getAllCourses(){
+    public function getAllCourses(){
         try{
             $courses=Course::all();
             return response()->json([
@@ -26,12 +29,12 @@ class StudentController extends Controller
         }
     }
 
-    function enrollCourse(Request $request){
+    public function enrollCourse(Request $request){
         try{
-            $course=new Course_Enrollment;
+            $course=new CourseEnrollment;
             $course->student_id=Auth::id();
             $course->course_id=$request->course_id;
-            $course.save();
+            $course->save();
             return response()->json([
                 'status' => 'success',
             ]);
@@ -46,11 +49,14 @@ class StudentController extends Controller
     }
 
     
-    function enrolledCourses(){
+    public function enrolledCourses(){
         try{
-            $user=Auth::user();
+            $user_id=Auth::id();
+            $user=User::find($user_id);
+            $courses=$user->courses;
             return response()->json([
                 'status' => 'success',
+                'courses' => $courses
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -58,14 +64,12 @@ class StudentController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
-
-    
     }
     
-    function getCourseSchedules(Request $request){
+    public function getCourseSchedules($course_id){
         try{
-            $course_id=$request->course_id;
-            $schedules=DB::table('courses')->whereColumn([['course_id','=',$course_id]])->schedules();
+            $course=Course::find($course_id);
+            $schedules=$course->schedules;
             return response()->json([
                 'status' => 'success',
                 'schedules'=>$schedules
@@ -77,11 +81,12 @@ class StudentController extends Controller
             ]);
         }    
     }
-    function getCourseMaterials(Request $request){
+    public function getScheduleMaterials($course_id,$schedule_id){
         try{
-            $course_id=$request->course_id;
-            $schedule_id=$request->schedule_id;
-            $materials=DB::table('schedules')->whereColumn([['course_id','=',$course_id],['schedule_id','=',$schedule_id]])->materials();
+
+            $schedule=Schedule::where([['course_id','=',$course_id],['id','=',$schedule_id]])->first();
+            $materials=$schedule->materials;
+
             return response()->json([
                 'status' => 'success',
                 'materials'=>$materials
