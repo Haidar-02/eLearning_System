@@ -10,18 +10,18 @@ class Schedule extends Model
 {
     use HasFactory;
 
-    function materials(): HasMany
+    public function materials(): HasMany
     {
-        return $this->hasMany(Course_Material::class);
+        return $this->hasMany(CourseMaterial::class);
     }
 
-    function tasks(): HasMany
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
 
     }
 
-    function sessions(): HasMany
+    public function sessions(): HasMany
     {
         return $this->hasMany(Session::class);
 

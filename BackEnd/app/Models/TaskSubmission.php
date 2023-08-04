@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course_Material extends Model
+class TaskSubmission extends Model
 {
     use HasFactory;
 }

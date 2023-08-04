@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Email_Template extends Model
+class BoardMessage extends Model
 {
     use HasFactory;
 }
