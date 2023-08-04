@@ -16,7 +16,7 @@ class ParentValid
     public function handle(Request $request, Closure $next): Response
     {
         $user=Auth::user();
-        if($user->type_id=="3"){
+        if($user->user_type=="3"){
             return $next($request);
         }
 }
