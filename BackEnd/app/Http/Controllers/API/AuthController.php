@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\User;
+use App\Models\User_Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,13 +32,16 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
+
         return response()->json([
             'user' => $user,
             'authorization' => [
                 'token' => $token,
                 'type' => 'bearer',
+                'users' => User_Type::find(1)->users(),
             ]
         ]);
+
     }
 
     public function register(Request $request)
@@ -58,7 +62,7 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'User created successfully',
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
