@@ -20,5 +20,8 @@ class TeacherValid
         if($user->user_type=="2"){
             return $next($request);
         }    
+
+        return redirect()->route("unauthorized");
+
     }
 }

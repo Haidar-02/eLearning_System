@@ -19,6 +19,7 @@ use App\Http\Controllers\API\AuthController;
 */
 
 
+Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
 
 Route::group(["middleware" => "auth:api"], function () {
     Route::group(["prefix" => "user"], function () {
@@ -29,7 +30,6 @@ Route::group(["middleware" => "auth:api"], function () {
 
     });
     Route::group(["prefix"=>"student","middleware" => "student.valid"], function () {
-        Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         Route::controller(StudentController::class)->group(function () {
             Route::get("get-courses","getAllCourses");
             Route::post("enroll-course","enrollCourse");
@@ -41,6 +41,8 @@ Route::group(["middleware" => "auth:api"], function () {
     });
     
     Route::group(["prefix"=>"admin","middleware" => "admin.valid"], function () {
+        Route::post("register", "register");
+
     });
     
     Route::group(["prefix"=>"parent","middleware" => "parent.valid"], function () {
@@ -48,6 +50,5 @@ Route::group(["middleware" => "auth:api"], function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post("register", "register");
     Route::post("login", "login");
 });
