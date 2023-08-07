@@ -60,6 +60,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('student_id');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('student_id')->references('id')->on('users');
+            $table->integer('grade')->nullable();
         });
 
         Schema::create('schedules', function (Blueprint $table) {
@@ -115,6 +116,7 @@ return new class extends Migration {
             $table->dateTime('submission_date');
             $table->text('file_path');
             $table->integer('grade')->nullable();
+            $table->text('status')->nullable(); //late,missing,submitted
             $table->foreign('task_id')->references('id')->on('tasks');
             $table->foreign('student_id')->references('id')->on('users');
         });
@@ -127,17 +129,20 @@ return new class extends Migration {
 
         Schema::create('attendance_status', function (Blueprint $table) {
             $table->id();
-            $table->string("status");
+            $table->string("status"); //attended,missed,late
         });
 
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('session_id');
-            $table->unsignedBigInteger('status');
-            $table->dateTime('date');
+            $table->unsignedBigInteger('attendance_status'); 
+            $table->dateTime('attendance_date');
+            $table->timestamp('created_at')->useCurrent();
             $table->foreign('student_id')->references('id')->on('users');
             $table->foreign('session_id')->references('id')->on('sessions');
+            $table->foreign('attendance_status')->references('id')->on('attendance_status');
+
         });
 
 
@@ -147,7 +152,7 @@ return new class extends Migration {
             $table->dateTime('submission_date');
             $table->text('file_path');
             $table->text('status');
-            $table->integer('grade');
+            $table->integer('grade')->nullable();
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
@@ -155,6 +160,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('project_id');
+            $table->integer('grade')->nullable();
             $table->foreign('student_id')->references('id')->on('users');
             $table->foreign('project_id')->references('id')->on('group_projects');
         });
@@ -164,6 +170,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id');
             $table->mediumText('message');
+            $table->timestamp('created_at')->useCurrent();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('course_id')->references('id')->on('courses');
         });
@@ -185,6 +192,7 @@ return new class extends Migration {
             $table->id();
             $table->text('notification');
             $table->unsignedBigInteger('course_id');
+            $table->timestamp('created_at')->useCurrent();
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
