@@ -12,5 +12,6 @@ class Course extends Model
     use HasFactory;
 
     public $timestamps = false;
+    
 
 }
