@@ -3,54 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\CourseEnrollment;
-use App\Models\CourseMaterial;
 use App\Models\Schedule;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
-    public function getAllCourses(){
-        try{
-            $courses=Course::all();
-            return response()->json([
-                'status' => 'success',
-                'courses' => $courses,
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
 
-    public function enrollCourse(Request $request){
+    public function getTeacherCourses(){
         try{
-            $course=new CourseEnrollment;
-            $course->student_id=Auth::id();
-            $course->course_id=$request->course_id;
-            $course->save();
-            return response()->json([
-                'status' => 'success',
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        }    
-    }
-
-    
-    public function enrolledCourses(){
-        try{
-            $user=Auth::user();
-            $courses=$user->courses;
+            $user=Auth::id();
+            $courses=Course::where('teacher_id',$user)->get();
             return response()->json([
                 'status' => 'success',
                 'courses' => $courses
@@ -62,7 +26,8 @@ class StudentController extends Controller
             ]);
         }
     }
-    
+
+
     public function getCourseSchedules($course_id){
         try{
             $course=Course::find($course_id);
@@ -77,6 +42,15 @@ class StudentController extends Controller
                 'message' => $e->getMessage()
             ]);
         }    
+    }
+
+    public function addCourseSchedule(Request $request){
+
+    }
+
+    
+    public function removeCourseSchedule(Request $request){
+        
     }
     public function getScheduleMaterials($course_id,$schedule_id){
         try{
@@ -96,5 +70,73 @@ class StudentController extends Controller
         }    
     }
 
+    public function addScheduleMaterial(Request $request){
 
+    }
+
+    
+    public function removeScheduleMaterial(Request $request){
+        
+    }
+
+    
+    public function getScheduleTasks($course_id,$schedule_id){
+        try{
+
+            $schedule=Schedule::where([['course_id','=',$course_id],['id','=',$schedule_id]])->first();
+            $materials=$schedule->materials;
+
+            return response()->json([
+                'status' => 'success',
+                'materials'=>$materials
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }    
+    }
+    public function addScheduleTask($course_id,$schedule_id){
+    }
+
+    public function removeScheduleTask($course_id,$schedule_id){
+
+    }
+
+    public function getScheduleSessions($course_id,$schedule_id){
+        try{
+
+            $schedule=Schedule::where([['course_id','=',$course_id],['id','=',$schedule_id]])->first();
+            $materials=$schedule->materials;
+
+            return response()->json([
+                'status' => 'success',
+                'materials'=>$materials
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }    
+    }
+    public function addScheduleSessions($course_id,$schedule_id){
+    }
+
+    public function removeScheduleSessions($course_id,$schedule_id){
+
+    }
+
+    public function addAttendance($course_id,$schedule_id){
+
+    }
+
+    public function projectGroups($course_id,$schedule_id){
+
+    }
+
+    public function projectGroupMembers($course_id,$schedule_id){
+
+    }
 }

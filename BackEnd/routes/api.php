@@ -36,12 +36,13 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("enrolled-courses", "enrolledCourses");
             Route::get("course-schedules/{course_id}", "getCourseSchedules");
             Route::get("schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
+
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
 
     Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
-        Route::controller(StudentController::class)->group(function () {
+        Route::controller(AuthController::class)->group(function () {
             Route::post("register", "register");
         });
     });
