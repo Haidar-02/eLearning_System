@@ -25,7 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
     ];
-
+    public $timestamps = false;
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -72,7 +72,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function courses(): BelongsToMany
-    {   
-        return $this->belongsToMany(Course::class,'course_enrollments','student_id','course_id');
+    {
+        return $this->belongsToMany(Course::class, 'course_enrollments', 'student_id', 'course_id');
     }
 }
