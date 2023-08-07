@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
+use App\Models\ParentRelation;
 use App\Models\TaskType;
 use App\Models\UserType;
 use App\Models\User;
@@ -26,9 +27,10 @@ class DatabaseSeeder extends Seeder
         TaskType::create(['name' => 'quiz']);
 
         User::factory(20)->create();
+        ParentRelation::factory(10)->create();
 
         Course::factory(10)->create();
-
         CourseEnrollment::factory(20)->create();
+
     }
 }
