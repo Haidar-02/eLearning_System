@@ -9,6 +9,8 @@ class UserType extends Model
 {
     protected $table = 'user_types';
     use HasFactory;
+
+    public $timestamps = false;
     public function users()
     {
         return $this->hasMany(User::class, "user_type");

@@ -10,4 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Course extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
 }

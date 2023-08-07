@@ -113,7 +113,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('task_id');
             $table->unsignedBigInteger('student_id');
-            $table->dateTime('submission_date');
+            $table->timestamp('submission_date')->useCurrent();
             $table->text('file_path');
             $table->integer('grade')->nullable();
             $table->text('status')->nullable(); //late,missing,submitted

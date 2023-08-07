@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ParentRelation extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
 }
