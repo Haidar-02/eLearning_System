@@ -1,3 +1,20 @@
 #root {
   height: 100%;
 }
+
+:root {
+  --cyan-dark: #2b788b;
+  --cyan-medium: #5996a5;
+  --cyan-light: #c3dce3;
+  --pink-light: #f2d4dc;
+  --pink-medium: #a15993;
+  --pink-dark: #945069;
+  --grey-light: #f6f5f4;
+  --grey-medium: #e0e0e0;
+  --grey-dark: #757575;
+  --grey-icon: #bababa;
+  --green: #639b6d;
+  --dark-red: #a95151;
+  --mustard: #c4a24c;
+  --fire-orange: #cb5b43;
+}
