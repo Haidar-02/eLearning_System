@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->text('email')->unique();
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->text('password');
             $table->unsignedBigInteger('user_type');
