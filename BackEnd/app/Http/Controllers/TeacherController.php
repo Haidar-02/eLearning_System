@@ -165,13 +165,6 @@ class TeacherController extends Controller
 
     }
 
-    public function getMessage(){
-
-    }
-
-    public function sendMessage(Request $request){
-
-    }
 
     public function createNotification(Request $request){
 
