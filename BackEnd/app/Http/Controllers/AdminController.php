@@ -45,7 +45,7 @@ class AdminController extends Controller
     }
 
     function deleteUser(User $user){
-        
+
         $user->delete();
 
         return response()->json([
@@ -54,9 +54,31 @@ class AdminController extends Controller
     }
     
 
-    function addCourse(Request $request){
+   function addCourse(Request $request)
+    {
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'teacher_id' => 'required|exists:users,id',
+        'enrollment_limit' => 'required|integer|min:1',
+        'class_code' => 'required|string|unique:courses,class_code',
+    ]);
 
-    }
+    $course = new Course([
+        'title' => $request->title,
+        'description' => $request->description,
+        'teacher_id' => $request->teacher_id,
+        'enrollment_limit' => $request->enrollment_limit,
+        'class_code' => $request->class_code,
+    ]);
+
+    $course->save();
+
+    return response()->json([
+        'message' => 'Course created successfully',
+        'course' => $course,
+    ]);
+}
 
     function modifyCourse(Request $request){
 
