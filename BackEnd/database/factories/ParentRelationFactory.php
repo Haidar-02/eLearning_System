@@ -24,3 +24,4 @@ class ParentRelationFactory extends Factory
         ];
     }
 }
+
