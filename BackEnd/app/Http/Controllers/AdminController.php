@@ -3,19 +3,56 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\UserType;
 
 class AdminController extends Controller
 {
-    function addUser(Request $request){
+
+    function modifyUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email|max:255|unique:users',
+            'password' => 'sometimes|string|min:6',
+            'user_type' => 'sometimes|integer',
+        ]);
+    
+        if ($request->name) {
+            $user->name = $request->name;
+        }
+    
+        if ($request->has('email')) {
+            $user->email = $request->email;
+        }
+    
+        if ($request->has('password')) {
+            $user->password = Hash::make($request->password);
+        }
+    
+        if ($request->has('user_type')) {
+            $user->user_type = $request->user_type;
+        }
+    
+        $user->save();
+    
+        return response()->json([
+            'message' => 'User modified successfully',
+            'user' => $user,
+        ]);
 
     }
-    function modifyUser(Request $request){
 
+    function deleteUser(User $user){
+        
+        $user->delete();
+
+        return response()->json([
+            'message' => 'User deleted successfully',
+        ]);
     }
-
-    function deleteUser($user_id){
-
-    }
+    
 
     function addCourse(Request $request){
 
