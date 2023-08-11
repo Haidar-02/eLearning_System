@@ -1,0 +1,22 @@
+.nav-container {
+  padding: 1rem 4rem;
+  border-bottom: 1px solid grey;
+}
+
+.user-letter {
+  background-color: aquamarine;
+  width: 32px;
+  height: 32px;
+}
+.nav-button {
+  cursor: pointer;
+}
+.user {
+  gap: 8px;
+}
+.mid-section {
+  gap: 5rem;
+}
+.right-section {
+  gap: 32px;
+}

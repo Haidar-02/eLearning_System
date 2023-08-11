@@ -1,0 +1,31 @@
+.landing-images {
+  position: relative;
+}
+.hero {
+  padding: 0 4rem;
+}
+.hero-text {
+  width: 50%;
+  max-width: 600px;
+}
+.plant,
+.toy {
+  position: absolute;
+}
+
+.kid {
+  width: 500px;
+  z-index: 0;
+}
+
+.toy {
+  z-index: -1;
+  width: 130px;
+}
+
+.plant {
+  z-index: 1;
+  width: 400px;
+  left: 300px;
+  top: 100px;
+}
