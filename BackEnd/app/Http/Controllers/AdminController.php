@@ -46,6 +46,8 @@ class AdminController extends Controller
 
     }
 
+
+
     function deleteUser(User $user){
 
         $user->delete();
@@ -54,6 +56,8 @@ class AdminController extends Controller
             'message' => 'User deleted successfully',
         ]);
     }
+
+
     
 
    function addCourse(Request $request)
@@ -87,12 +91,39 @@ class AdminController extends Controller
     ]);
 
     }
-    function modifyCourse(Request $request){
+
+
+
+    function modifyCourse(Request $request, Course $course)
+    {
+        $request->validate([
+            'title' => 'sometimes|string|max:255',
+            'description' => 'sometimes|string',
+            'teacher_id' => 'sometimes|exists:users,id',
+            'enrollment_limit' => 'sometimes|integer|min:1',
+            'meet_link' => 'sometimes|nullable|string',
+        ]);
+    
+        $course->update($request->only([
+            'title',
+            'description',
+            'teacher_id',
+            'enrollment_limit',
+            'meet_link',
+        ]));
+    
+        return response()->json([
+            'message' => 'Course updated successfully',
+            'course' => $course,
+        ]);
 
     }
 
-    function deleteCourse($course_id){
-        
+    function deleteCourse(Course $course){
+        $course->delete();
+        return response()->json([
+            'message' => 'Course deleted successfully',
+        ]);
     }
 
     function courseLimit(Request $request){
