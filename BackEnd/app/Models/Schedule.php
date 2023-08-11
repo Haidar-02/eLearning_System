@@ -26,4 +26,10 @@ class Schedule extends Model
         return $this->hasMany(Session::class);
 
     }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(GroupProject::class);
+
+    }
 }
