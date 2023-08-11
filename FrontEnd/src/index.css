@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.gothic {
+  font-family: 'Dela Gothic One', cursive;
+}
+
+.monster {
+  font-family: 'Montserrat', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+Html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter';
+}
+a {
+  text-decoration: none;
+  font: inherit;
+  color: black;
+}
+
+button {
+  /* appearance: none; */
+  font-family: 'Inter';
+  border: none;
+  width: fit-content;
+}
