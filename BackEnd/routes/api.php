@@ -43,7 +43,6 @@ Route::group(["middleware" => "auth:api"], function () {
 
     Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
         Route::controller(AuthController::class)->group(function () {
-            Route::post("register", "register");
         });
     });
 
@@ -53,4 +52,6 @@ Route::group(["middleware" => "auth:api"], function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::post("login", "login");
+    Route::post("register", "register");
+
 });
