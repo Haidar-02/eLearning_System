@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App flex h-full">
+    <div className="App h-full">
       <Routes>
         <Route path="/" element={<LandingPage />} />
       </Routes>
