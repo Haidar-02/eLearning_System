@@ -11,7 +11,7 @@ const LandingPage = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <main className="flex flex-col grow h-full">
+    <main className="flex flex-col h-full">
       <Navbar setShow={setShow} />
       {show && <SignInForm setShow={setShow} />}
       <div className="hero monster flex items-center grow">

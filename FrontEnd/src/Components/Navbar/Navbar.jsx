@@ -25,8 +25,8 @@ const Navbar = ({ setShow }) => {
       </div>
       <div className="right-section flex items-center justify-">
         <div className="monster user flex items-center cursor-pointer">
-          <div className="user-letter  flex items-center justify-center rounded-full ">
-            <span className="">A</span>
+          <div className="user-letter  flex items-center justify-center rounded-full bg-cyan-dark">
+            <span className="text-white font-medium">A</span>
           </div>
           <div className="user-name ">Alex</div>
         </div>
