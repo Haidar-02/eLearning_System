@@ -49,6 +49,8 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post("modifyUser/{user_id}","modifyUser");
             Route::delete('/deleteUser/{user}',"deleteUser");
             Route::post('/addCourse',"addCourse");
+            Route::post('/modifyCourse/{course}',"modifyCourse");
+            Route::delete('/deleteCourse/{course}',"deleteCourse");
 
         });
 
