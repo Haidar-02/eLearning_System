@@ -199,8 +199,8 @@ return new class extends Migration {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->text('message');
-            $table->unsignedBigInteger('sender');
-            $table->unsignedBigInteger('reciever');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('reciever_id');
             $table->foreign('sender')->references('id')->on('users');
             $table->foreign('reciever')->references('id')->on('users');
             $table->timestamp('created_at')->useCurrent();
