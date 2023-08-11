@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
 use App\Models\CourseMaterial;
+use App\Models\GroupProject;
+use App\Models\Message;
 use App\Models\Schedule;
+use App\Models\TeacherMeetSchedule;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -47,7 +50,7 @@ class StudentController extends Controller
     }
 
     
-    public function enrolledCourses(){
+    public function getEnrolledCourses(){
         try{
             $user=Auth::user();
             $courses=$user->courses;
@@ -78,10 +81,10 @@ class StudentController extends Controller
             ]);
         }    
     }
-    public function getScheduleMaterials($course_id,$schedule_id){
+    public function getScheduleMaterials($schedule_id){
         try{
 
-            $schedule=Schedule::where([['course_id','=',$course_id],['id','=',$schedule_id]])->first();
+            $schedule=Schedule::where([['id','=',$schedule_id]])->first();
             $materials=$schedule->materials;
 
             return response()->json([
@@ -95,4 +98,162 @@ class StudentController extends Controller
             ]);
         }    
     }
+    public function getScheduleTasks($schedule_id){
+    try{
+        $schedule=Schedule::where([['id','=',$schedule_id]])->first();
+        $tasks=$schedule->tasks;
+
+        return response()->json([
+            'status' => 'success',
+            'tasks'=>$tasks
+        ]);
+    } catch(Exception $e){
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ]);
+    } 
+    }
+
+    public function getScheduleSessions($schedule_id){
+        try{
+            $schedule=Schedule::where([['id','=',$schedule_id]])->first();
+            $sessions=$schedule->sessions;
+    
+            return response()->json([
+                'status' => 'success',
+                'sessions'=>$sessions
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+    }
+
+    public function getScheduleProjects($schedule_id){
+        try{
+            $schedule=Schedule::where([['id','=',$schedule_id]])->first();
+            $projects=$schedule->projects;
+    
+            return response()->json([
+                'status' => 'success',
+                'projects'=>$projects
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+    }
+
+    public function getProjectMembers($project_id){
+        try{
+            $project=GroupProject::where([['id','=',$project_id]])->first();
+            $members=$project->members()->with('info')->get();
+            return response()->json([
+                'status' => 'success',
+                'projects'=>$members
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+    }
+    public function getCourseGrades($course_id){
+        try{
+            $course=Course::where([['id','=',$course_id]])->first();
+            // $schedules=$course->schedules->with('tasks')->where()->get();
+
+            return response()->json([
+                'status' => 'success',
+                // 'projects'=>$members
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+    }
+
+    public function addTaskSubmission(Request $request){
+
+    }
+
+    public function sendMessage(Request $request){
+        try{
+        $message=new Message;
+        $message->sender_id=Auth::id();
+        $message->receiver_id=$request->receiver_id;
+        $message->message=$request->message;
+        $message->save();
+        return response()->json([
+            'status' => 'success',
+        ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+
+    }
+
+    public function getCourseTeacher($course_id){
+        try{
+            $course=Course::where([['id','=',$course_id]])->first();
+            $teacher=$course->teacher;
+            return response()->json([
+                'status' => 'success',
+                'teacher'=> $teacher
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+    }
+    public function addTeacherMeet(Request $request){
+        //location and meet_link should be set by teacher
+        try{
+            $teacher_meet=new TeacherMeetSchedule;
+            $teacher_meet->teacher_id=$request->teacher_id;
+            $teacher_meet->student_id=$request->Auth::id();
+            $teacher_meet->start_time=$request->start_time;
+            $teacher_meet->end_time=$request->end_time;
+            $teacher_meet->save();
+            return response()->json([
+                'status' => 'success',
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+
+
+    }
+
+    public function getTeacherMeet($teacher_id){
+        try{
+        $teacher_meet=TeacherMeetSchedule::where([['teacher_id','=',$teacher_id],['user_id','=',Auth::id()]])->first();
+        return response()->json([
+            'status' => 'success',
+            'teacher_meet'=> $teacher_meet
+        ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+    }
+
 }
