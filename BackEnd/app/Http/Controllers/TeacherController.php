@@ -27,7 +27,9 @@ class TeacherController extends Controller
         }
     }
 
+    public function getCourseStudents(){
 
+    }
     public function getCourseSchedules($course_id){
         try{
             $course=Course::find($course_id);
@@ -121,22 +123,66 @@ class TeacherController extends Controller
             ]);
         }    
     }
-    public function addScheduleSessions($course_id,$schedule_id){
+    public function addScheduleSession($course_id,$schedule_id){
     }
 
-    public function removeScheduleSessions($course_id,$schedule_id){
-
-    }
-
-    public function addAttendance($course_id,$schedule_id){
+    public function removeScheduleSession($course_id,$schedule_id){
 
     }
 
-    public function projectGroups($course_id,$schedule_id){
+
+
+
+    public function getSessionAttendance($session_id){
+
+    }
+    public function addSessionAttendance(Request $request){
 
     }
 
-    public function projectGroupMembers($course_id,$schedule_id){
+
+    public function getCourseProjects($course_id){
 
     }
+
+    
+    public function addCourseProject(Request $request){
+
+    }
+    public function addProjectMembers(Request $request){
+
+    }
+
+    public function addTaskGrade(Request $request){
+
+    }
+
+    public function addProjectGrade(Request $request){
+        
+    }
+
+    public function addFeedback(Request $request){
+
+    }
+
+    public function getMessage(){
+
+    }
+
+    public function sendMessage(Request $request){
+
+    }
+
+    public function createNotification(Request $request){
+
+    }
+
+    public function getCourseDiscussion($course_id){
+
+    }
+    public function addDiscussionMessage(Request $request){
+
+    }
+
+    
 }
