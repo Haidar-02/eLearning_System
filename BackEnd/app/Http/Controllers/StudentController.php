@@ -8,6 +8,7 @@ use App\Models\CourseMaterial;
 use App\Models\GroupProject;
 use App\Models\Message;
 use App\Models\Schedule;
+use App\Models\TaskSubmission;
 use App\Models\TeacherMeetSchedule;
 use App\Models\User;
 use Exception;
@@ -164,14 +165,33 @@ class StudentController extends Controller
             ]);
         } 
     }
-    public function getCourseGrades($course_id){
-        try{
-            $course=Course::where([['id','=',$course_id]])->first();
-            // $schedules=$course->schedules->with('tasks')->where()->get();
+    // public function getCourseGrades($course_id){
+    //     try{
+    //         $course=Course::where([['id','=',$course_id]])->first();
+    //         // $schedules=$course->schedules->with('tasks')->where()->get();
 
+    //         return response()->json([
+    //             'status' => 'success',
+    //             // 'projects'=>$members
+    //         ]);
+    //     } catch(Exception $e){
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => $e->getMessage()
+    //         ]);
+    //     } 
+    // }
+
+    public function addTaskSubmission(Request $request){
+
+        try{
+            $submission=new TaskSubmission;
+            $submission->task_id=$request->task_id;
+            $submission->student_id=$request->Auth::id();
+            $submission->file_path=$request->file_path;
+            $submission->save();
             return response()->json([
                 'status' => 'success',
-                // 'projects'=>$members
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -179,10 +199,6 @@ class StudentController extends Controller
                 'message' => $e->getMessage()
             ]);
         } 
-    }
-
-    public function addTaskSubmission(Request $request){
-
     }
 
     public function sendMessage(Request $request){
@@ -194,6 +210,22 @@ class StudentController extends Controller
         $message->save();
         return response()->json([
             'status' => 'success',
+        ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+
+    }
+
+    public function getMessages(){
+        try{
+        $messages=Message::where('sender_id',Auth::id())->orWhere('receiver_id',Auth::id())->get();
+        return response()->json([
+            'status' => 'success',
+            'message'=>$messages
         ]);
         } catch(Exception $e){
             return response()->json([
