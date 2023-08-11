@@ -42,7 +42,7 @@ const SignInForm = ({ setShow }) => {
       <div className="form-header gothic bg-cyan-dark flex p-6 w-full rounded-t-2xl ">
         Sign In
       </div>
-      <div className="form-container flex flex-col gap-5 p-6 ">
+      <div className="form-container flex flex-col gap-5 p-6 pb-0 ">
         <CustomInput
           label="Email"
           name="email"
@@ -60,22 +60,21 @@ const SignInForm = ({ setShow }) => {
           className={'w-[300px]  '}
         />
       </div>
-      <div className=" monster flex  gap-3 w-full px-5">
+      <div className="error font-normal text-red-700 text-sm">{errors}</div>
+      <div className=" monster flex  gap-3 w-full px-5 pb-5">
         <div
           onClick={() => handleSignIn()}
-          className="sign-in bg-insta-blue mt-5 p-2 rounded text-center text-white  bg-cyan-dark  w-full cursor-pointer"
+          className="sign-in bg-insta-blue p-2 rounded text-center text-white  bg-cyan-dark  w-full cursor-pointer"
         >
           Sign In
         </div>
         <div
           onClick={() => setShow(false)}
-          className=" sign-in color-cyan-medium mt-5 p-2 rounded text-center w-full cursor-pointer"
+          className=" sign-in color-cyan-medium p-2 rounded text-center w-full cursor-pointer"
         >
           Cancel
         </div>
       </div>
-
-      <div className="error font-normal text-red-700 text-sm">{errors}</div>
     </div>
   );
 };
