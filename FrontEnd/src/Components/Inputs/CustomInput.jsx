@@ -5,7 +5,7 @@ const CustomInput = ({
   label,
   value,
   onChange,
-  type,
+  type = 'text',
   className,
   error,
 }) => {
