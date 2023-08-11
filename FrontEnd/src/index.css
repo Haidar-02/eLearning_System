@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.gothic {
-  font-family: 'Dela Gothic One', cursive;
-}
-
-.monster {
-  font-family: 'Montserrat', sans-serif;
-}
-
 *,
 *::before,
 *::after {

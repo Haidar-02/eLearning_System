@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SignInForm from '../../Components/Forms/SignInForm';
 import Navbar from '../../Components/Navbar/Navbar';
 
 import kidImage from '../../assets/images/Homepage/kid.png';
@@ -7,14 +8,17 @@ import toy from '../../assets/images/Homepage/toy.png';
 
 import './LandingPage.css';
 const LandingPage = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <main className="flex flex-col grow h-full">
-      <Navbar />
+      <Navbar setShow={setShow} />
+      {show && <SignInForm setShow={setShow} />}
       <div className="hero monster flex items-center grow">
         <div className="left flex justify-center items-center">
           <div className="hero-text flex flex-col grow gap-2">
             <div className="">E-COURSE-PLATFORM</div>
-            <div className="main-text gothic  text-[48px] ">
+            <div className="main-text gothic  text-[48px]">
               Learning and teaching online, made easy.
             </div>
             <div>Enjoy various games, puzzles, and challenges</div>
