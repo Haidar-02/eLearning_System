@@ -201,8 +201,8 @@ return new class extends Migration {
             $table->text('message');
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('reciever_id');
-            $table->foreign('sender')->references('id')->on('users');
-            $table->foreign('reciever')->references('id')->on('users');
+            $table->foreign('sender_id')->references('id')->on('users');
+            $table->foreign('reciever_id')->references('id')->on('users');
             $table->timestamp('created_at')->useCurrent();
         });
 
