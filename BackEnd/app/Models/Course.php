@@ -12,6 +12,13 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'teacher_id',
+        'enrollment_limit',
+        'class_code'
+        ];
     public $timestamps = false;
     
     public function teacher(): HasOne{

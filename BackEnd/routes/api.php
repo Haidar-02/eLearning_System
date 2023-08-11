@@ -48,6 +48,8 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::controller(AdminController::class)->group(function () {
             Route::post("modifyUser/{user_id}","modifyUser");
             Route::delete('/deleteUser/{user}',"deleteUser");
+            Route::post('/addCourse',"addCourse");
+
         });
 
         Route::controller(AuthController::class)->group(function () {

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserType;
+use App\Models\Course;
 
 class AdminController extends Controller
 {
@@ -56,30 +58,35 @@ class AdminController extends Controller
 
    function addCourse(Request $request)
     {
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'teacher_id' => 'required|exists:users,id',
-        'enrollment_limit' => 'required|integer|min:1',
-        'class_code' => 'required|string|unique:courses,class_code',
-    ]);
 
+    // try {
+    // $request->validate([
+    //     'title' => 'required|string|max:255',
+    //     'description' => 'required|string',
+    //     'teacher_id' => 'required|exists:users,id',
+    //     'enrollment_limit' => 'required|integer|min:1',
+    //     'class_code' => 'required|unique:courses,class_code',
+    // ]);
+ 
     $course = new Course([
         'title' => $request->title,
         'description' => $request->description,
         'teacher_id' => $request->teacher_id,
         'enrollment_limit' => $request->enrollment_limit,
-        'class_code' => $request->class_code,
     ]);
-
+// }catch (\Exception $e) {
+//     error_log($e->getMessage());
+//     return response()->json(['error' => 'An error occurred while creating the course'], 500);
+// }
+    $course->class_code = substr(Str::uuid(), 0, 8) ; 
     $course->save();
 
     return response()->json([
         'message' => 'Course created successfully',
         'course' => $course,
     ]);
-}
 
+    }
     function modifyCourse(Request $request){
 
     }
