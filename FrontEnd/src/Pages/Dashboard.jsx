@@ -1,11 +1,34 @@
 import React, { useState } from 'react';
 import SideBar from '../Components/DashBoard/SideBar';
 import DashBoardButton from '../Components/DashBoard/DashBoardButton';
-import grades from '../assets/icons/ChartSquareBarOutline.svg';
-import dash from '../assets/icons/dashboard.svg';
-import classes from '../assets/icons/UserGroupOutline.svg';
-// import messages from '../assets/icons/';
+import gradesIcon from '../assets/icons/ChartSquareBarOutline.svg';
+import dashIcon from '../assets/icons/dashboard.svg';
+import classesIcon from '../assets/icons/UserGroupOutline.svg';
+import clipBoardIcon from '../assets/icons/ClipboardListOutline.svg';
+
+const falseState = {
+  dashboard: false,
+  grades: false,
+  classes: false,
+  assignments: false,
+  messages: false,
+};
+
 const DashBoard = () => {
+  const [state, setState] = useState({
+    dashboard: true,
+    grades: false,
+    classes: false,
+    assignments: false,
+    messages: false,
+  });
+
+  const togglePage = (page) => {
+    setState({ ...falseState, [page]: true });
+  };
+
+  const { dashboard, grades, classes, assignments } = state;
+
   return (
     <div className="dashBoardWrapper flex justify-between h-full">
       <SideBar className="bg-cyan-dark">
@@ -17,30 +40,56 @@ const DashBoard = () => {
         <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
           <div className="button-wrapper bg-cyan-light">
             <DashBoardButton
-              icon={dash}
+              icon={dashIcon}
               iconStyle="w-[24px] "
               textStyle="text-[18px] color-cyan-dark"
               text="Dashboard"
               className="font-semibold text-lg"
+              onClick={() => {
+                togglePage('dashboard');
+              }}
             />
           </div>
-          <DashBoardButton icon={grades} text="Grades" />
-          <DashBoardButton icon={classes} text="Classes" />
-          <DashBoardButton icon={dash} text="Dashboard" />
-          <DashBoardButton icon={dash} text="Dashboard" />
-          <DashBoardButton icon={dash} text="Dashboard" />
+          <DashBoardButton
+            onClick={() => {
+              togglePage('grades');
+            }}
+            icon={gradesIcon}
+            text="Grades"
+          />
+          <DashBoardButton
+            onClick={() => {
+              togglePage('classes');
+            }}
+            icon={classesIcon}
+            text="Classes"
+          />
+          <DashBoardButton
+            onClick={() => {
+              togglePage('assignments');
+            }}
+            icon={clipBoardIcon}
+            text="Assignments"
+          />
+          <DashBoardButton icon={dashIcon} text="Dashboard" />
+          <DashBoardButton icon={dashIcon} text="Dashboard" />
         </div>
       </SideBar>
+
       <div className="mainContent flex flex-col ">
-        <span className="h-[500px] p-10">medium</span>
+        {dashboard && <span className="h-[500px] p-10">Analytics</span>}
+        {grades && <span className="h-[500px] p-10">Grades</span>}
+        {classes && <span className="h-[500px] p-10">Classes</span>}
+        {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
+
       <SideBar className={'right-0'}>
-        <DashBoardButton icon={dash} text="Dashboard" />
-        <DashBoardButton icon={dash} text="Dashboard" />
-        <DashBoardButton icon={dash} text="Dashboard" />
-        <DashBoardButton icon={dash} text="Dashboard" />
-        <DashBoardButton icon={dash} text="Dashboard" />
-        <DashBoardButton icon={dash} text="Dashboard" />
+        <DashBoardButton icon={dashIcon} text="Dashboard" />
+        <DashBoardButton icon={dashIcon} text="Dashboard" />
+        <DashBoardButton icon={dashIcon} text="Dashboard" />
+        <DashBoardButton icon={dashIcon} text="Dashboard" />
+        <DashBoardButton icon={dashIcon} text="Dashboard" />
+        <DashBoardButton icon={dashIcon} text="Dashboard" />
       </SideBar>
     </div>
   );
