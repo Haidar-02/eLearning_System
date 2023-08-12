@@ -77,6 +77,7 @@ class TeacherController extends Controller
     try{
         $material=new CourseMaterial;
         $material->schedule_id=$request->schedule_id;
+        $material->course_id=$request->course_id;
         $material->teacher_id=Auth::id();
         $material->material_type=$request->material_type;
         $material->title=$request->title;
@@ -120,6 +121,7 @@ class TeacherController extends Controller
             $task->title=$request->title;
             $task->description=$request->description;
             $task->due_date=$request->due_date;
+            $task->course_id=$request->course_id;
             $task->schedule_id=$request->schedule_id;
             $task->teacher_id=Auth::id();
             $task->task_type=$request->task_type;
@@ -156,6 +158,9 @@ class TeacherController extends Controller
         try{
             $session=new Session;
             $session->date=$request->date;
+            $session->course_id=$request->course_id;
+            $session->schedule_id=$request->schedule_id;
+
             $session->save();
             return response()->json([
                 'status' => 'success',
