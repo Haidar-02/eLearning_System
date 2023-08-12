@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-// import instaLogo from '../assets/images/Instagram_logo.svg';
+import Modal from '../Common/Modal';
+import CustomInput from '../Inputs/CustomInput';
+
 import { logIn } from '../../helpers/auth.helpers';
 import { useNavigate } from 'react-router-dom';
-import CustomInput from '../Inputs/CustomInput';
 
 const initialState = {
   email: '',
@@ -39,7 +40,10 @@ const SignInForm = ({ setShow }) => {
 
   const { email, password } = inputState;
   return (
-    <div className="signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border  h-fit  z-10 rounded-2xl  bg-grey-light transition-opacity  absolute top-1/2  left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <Modal
+      setShow={setShow}
+      className=" signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border rounded-b-2xl "
+    >
       <div className="form-header gothic bg-cyan-dark flex p-6 w-full rounded-t-2xl ">
         Sign In
       </div>
@@ -76,7 +80,7 @@ const SignInForm = ({ setShow }) => {
           Cancel
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 
