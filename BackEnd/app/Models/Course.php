@@ -32,4 +32,10 @@ class Course extends Model
     {
     return $this->hasMany(Schedule::class);
     }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(GroupProject::class);
+
+    }
 }

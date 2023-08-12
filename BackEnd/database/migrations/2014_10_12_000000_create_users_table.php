@@ -82,7 +82,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('teacher_id');
             $table->text('title');
             $table->text('content')->nullable();
-            $table->text('file_path_url')->nullable();
+            $table->text('file_path')->nullable();
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->foreign('teacher_id')->references('id')->on('users');
         });
@@ -208,7 +208,7 @@ return new class extends Migration {
             $table->id();
             $table->text('message');
             $table->unsignedBigInteger('sender_id');
-            $table->unsignedBigInteger('reciever_id');
+            $table->unsignedBigInteger('receiver_id');
             $table->foreign('sender_id')->references('id')->on('users');
             $table->foreign('reciever_id')->references('id')->on('users');
             $table->timestamp('created_at')->useCurrent();

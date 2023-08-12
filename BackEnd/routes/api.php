@@ -35,9 +35,9 @@ Route::group(["middleware" => "auth:api"], function () {
             //date time  'YYYY-MM-DD hh:mm:ss' 
             Route::get("get-teacher-courses","getTeacherCourses");
             Route::post("add-course-schedule","addCourseSchedule");
-            Route::delete("remove-course-schedule","removeCourseSchedule");
+            Route::delete("remove-course-schedule/schedule_id}","removeCourseSchedule");
             Route::post("add-schedule-material","addScheduleMaterial");
-            Route::delete("remove-schedule-material","removeScheduleMaterial");
+            Route::delete("remove-schedule-material/{material_id}","removeScheduleMaterial");
             Route::post("add-schedule-task","addScheduleTask");
             Route::delete("remove-schedule-task","removeScheduleTask");
             Route::post("add-schedule-Session","addScheduleSession");
@@ -62,15 +62,19 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("get-course-students/{course_id}","getCourseStudents");
             Route::get("get-course-schedules/{course_id}", "getCourseSchedules");
             Route::get("get-schedule-materials/{schedule_id}", "getScheduleMaterials");
-            Route::get("get-schedule-tasks","getScheduleTasks");
-            Route::get("get-schedule-sessions","getScheduleSessions");
-            Route::get("get-schedule-projects","getScheduleProjects");
-            Route::get("get-project-members","getProjectMembers");
-            Route::get("get-schedule-tasks","getScheduleTasks");
+            Route::get("get-schedule-tasks/{schedule_id}","getScheduleTasks");
+            Route::get("get-task-submissions/{task_id}","getTaskSubmissions");
+            Route::get("get-schedule-sessions/{schedule_id}","getScheduleSessions");
+            Route::get("get-course-projects/{course_id}","getCourseProjects");
+            Route::get("get-project-members/{project_id}","getProjectMembers");
+            Route::get("get-student-feedback/{course_id}/{student_id}","getStudentFeedback");
             Route::post("send-message","sendMessage");
             Route::get("get-messages","getMessages");
-            Route::get("get-course-discussion","getCourseDiscussion");
+            Route::get("get-course-discussion/{course_id}","getCourseDiscussion");
             Route::post("add-course-discussion","addCourseDiscussion");
+            Route::get("get-course-notifications/{course_id}","getCourseNotifications");
+            Route::get("get-course-teacher/{course_id}",'getCourseTeacher');
+
 
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
@@ -81,7 +85,6 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post("enroll-course", "enrollCourse");
             Route::get("get-enrolled-courses", "getEnrolledCourses");
             Route::post("add-submission",'addTaskSubmission');
-            Route::get("get-course_teacher/{course_id}",'getCourseTeacher');
             Route::post("add-teacher_meet","addTeacherMeet");
             Route::get("get-teacher-meet/{teacher_id}","getTeacherMeet");
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);

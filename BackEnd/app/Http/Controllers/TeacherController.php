@@ -106,7 +106,7 @@ class TeacherController extends Controller
 
         Storage::disk('public')->put('files/' . $fileName, $binaryData);
         $publicUrl = Storage::disk('public')->url('files/' . $fileName);
-        $material->file_path_url=$publicUrl;
+        $material->file_path=$publicUrl;
         $material->save();
         return response()->json([
             'status' => 'success',
@@ -235,7 +235,7 @@ class TeacherController extends Controller
     public function addCourseProject(Request $request){
         try{
             $project=new GroupProject;
-            $project->course_id=$request->date;
+            $project->course_id=$request->course_id;
             $project->submission_date=$request->submission_date;
             $project->status=$request->status;
 
@@ -262,7 +262,7 @@ class TeacherController extends Controller
 
             Storage::disk('public')->put('files/' . $fileName, $binaryData);
             $publicUrl = Storage::disk('public')->url('files/' . $fileName);
-            $project->file_path_url=$publicUrl;
+            $project->file_path=$publicUrl;
             $project->save();
             return response()->json([
                 'status' => 'success',
@@ -311,7 +311,7 @@ class TeacherController extends Controller
         try{
             $project_id=$request->project_id;
             $grade=$request->grade;
-            TaskSubmission::where([['id','=',$project_id]])->update(['grade' => $grade]);
+            GroupProject::where([['id','=',$project_id]])->update(['grade' => $grade]);
             return response()->json([
                 'status' => 'success',
             ]);

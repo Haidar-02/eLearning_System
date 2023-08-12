@@ -29,9 +29,4 @@ class Schedule extends Model
 
     }
 
-    public function projects(): HasMany
-    {
-        return $this->hasMany(GroupProject::class);
-
-    }
 }
