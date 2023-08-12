@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Auth;
 class CommonController extends Controller
 {
     
+    public function getAllCourses(){
+        try{
+            $courses=Course::all();
+            return response()->json([
+                'status' => 'success',
+                'courses' => $courses,
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
     public function getCourseSchedules($course_id){
         try{
             $course=Course::find($course_id);
