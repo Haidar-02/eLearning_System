@@ -33,7 +33,7 @@ const SignInForm = ({ setShow }) => {
     if (data) {
       localStorage.setItem('user', JSON.stringify(data));
 
-      navigate('/dashBoard');
+      navigate('/adminDash');
     }
   }
 

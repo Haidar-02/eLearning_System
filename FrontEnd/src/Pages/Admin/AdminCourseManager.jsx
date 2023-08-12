@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import DisplayCourse from '../../Components/Courses/DisplayCourse';
+import CourseCard from '../../Components/Courses/CourseCard';
 import { getAllCourses } from '../../helpers/admin.helpers';
 
 const AdminCourseManager = () => {
   const [courses, SetCourses] = useState();
-  console.log(courses);
+
   useEffect(() => {
     const fetchCourses = async () => {
       const res = await getAllCourses();
@@ -22,7 +22,7 @@ const AdminCourseManager = () => {
       </div>
       {courses &&
         courses.map((course, index) => (
-          <DisplayCourse key={index} course={course} />
+          <CourseCard key={index} course={course} />
         ))}
     </div>
   );

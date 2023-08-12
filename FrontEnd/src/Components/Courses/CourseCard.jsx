@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import CourseModal from './CourseModal';
+import Button from '../Common/Button';
 
-const DisplayCourse = ({ course, onClick }) => {
+const CourseCard = ({ course, onClick }) => {
+  const [show, setShow] = useState(false);
   const {
     class_code,
     description,
@@ -13,7 +16,8 @@ const DisplayCourse = ({ course, onClick }) => {
   const { id: teacher_id, name, email } = teacher;
 
   return (
-    <div className="flex flex-col p-3 border gap-2">
+    <div className="flex flex-col p-3 border gap-3">
+      {show && <CourseModal course={course} setShow={setShow} />}
       <div className="course-title ">
         <span className="gothic font-semibold text-md">{title}</span>
       </div>
@@ -22,13 +26,14 @@ const DisplayCourse = ({ course, onClick }) => {
           <span className="font-semibold underline">Description: </span>
           {description}
         </div>
-        <div className="enrollment">
-          <span className="font-semibold underline">Enrollment limit: </span>
-          {enrollment_limit}
-        </div>
       </div>
+      <Button
+        text="content"
+        onClick={() => setShow((prev) => !prev)}
+        className="self-end mr-2 "
+      />
     </div>
   );
 };
 
-export default DisplayCourse;
+export default CourseCard;

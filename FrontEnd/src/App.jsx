@@ -6,7 +6,7 @@ import AdminDashBoard from './Pages/Admin/AdminDashBoard';
 
 function App() {
   return (
-    <div className="App h-full">
+    <div className="App h-full monster">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/adminDash" element={<AdminDashBoard />} />
