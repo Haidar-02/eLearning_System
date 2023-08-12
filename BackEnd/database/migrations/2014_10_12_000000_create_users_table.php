@@ -80,9 +80,8 @@ return new class extends Migration {
             $table->foreign('course_id')->references('id')->on('courses');
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('teacher_id');
-            $table->unsignedBigInteger('material_type');
             $table->text('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->text('file_path_url')->nullable();
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->foreign('teacher_id')->references('id')->on('users');
