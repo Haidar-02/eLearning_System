@@ -210,7 +210,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
             $table->foreign('sender_id')->references('id')->on('users');
-            $table->foreign('reciever_id')->references('id')->on('users');
+            $table->foreign('receiver_id')->references('id')->on('users');
             $table->timestamp('created_at')->useCurrent();
         });
 
