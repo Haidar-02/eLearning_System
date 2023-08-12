@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UnauthorizedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,13 +30,35 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::post("logout", [AuthController::class, "logout"]);
         Route::post("refresh", [AuthController::class, "refresh"]);
     });
-    // Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
+    Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
+        Route::controller(TeacherController::class)->group(function () {
+            Route::get("get-teacher-courses","getTeacherCourses");
+            Route::post("add-course-schedule","addCourseSchedule");
+            Route::delete("remove-course-schedule","removeCourseSchedule");
+            Route::post("add-schedule-material","addScheduleMaterial");
+            Route::delete("remove-schedule-material","removeScheduleMaterial");
+            Route::post("add-schedule-task","addScheduleTask");
+            Route::delete("remove-schedule-task","removeScheduleTask");
+            Route::post("add-schedule-Session","addScheduleSession");
+            Route::delete("remove-schedule-Session","removeScheduleSession");
+            //leave till the end
+            // Route::get("get-session-attendance","getSessionAttendance");
+            // Route::post("add-session-attendance","addSessionAttendance");
+            Route::post("add-course-project","addCourseProject");
+            Route::post("add-project-member","addProjectMembers");
+            Route::put("modify-task-grade","modifyTaskGrade");
+            Route::put("modify-project-grade","modifyProjectGrade");
+            Route::post("add-feedback","addFeedback");
+            Route::post("add-notification","addNotification");
 
-    // });
+        });
 
-    Route::group(["prefix" => "common", "middleware" => "student.valid"], function () {
+    });
+
+    Route::group(["prefix" => "common"], function () {
         Route::controller(CommonController::class)->group(function () {
             Route::get("get-courses", "getAllCourses");
+            Route::get("get-course-students/{course_id}","getCourseStudents");
             Route::get("get-course-schedules/{course_id}", "getCourseSchedules");
             Route::get("get-schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
             Route::get("get-schedule-tasks", "getScheduleTasks");
@@ -75,7 +98,6 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get('/checkEnrollmentLimit/{course}', "checkEnrollmentLimit");
             Route::get('/createBackup', 'createBackup');
 
-
         });
 
         Route::controller(AuthController::class)->group(function () {
@@ -83,6 +105,7 @@ Route::group(["middleware" => "auth:api"], function () {
     });
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
+        
     });
 });
 

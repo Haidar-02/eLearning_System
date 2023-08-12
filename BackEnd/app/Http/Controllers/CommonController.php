@@ -28,6 +28,22 @@ class CommonController extends Controller
             ]);
         }
     }
+
+    public function getCourseStudents($course_id){
+        try{
+            $course=Course::find($course_id);
+            $students=$course->students;
+            return response()->json([
+                'status' => 'success',
+                'students'=>$students
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }    
+    }
     public function getCourseSchedules($course_id){
         try{
             $course=Course::find($course_id);
