@@ -24,7 +24,12 @@ class Course extends Model
     }
 
     public function students(): BelongsToMany
-{
+    {
     return $this->belongsToMany(User::class, 'course_enrollments', 'course_id', 'student_id');
-}
+    }
+
+    public function schedules(): HasMany
+    {
+    return $this->hasMany(Schedule::class);
+    }
 }
