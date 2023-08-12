@@ -10,8 +10,9 @@ class BoardMessage extends Model
 {
     use HasFactory;
 
+    public $timestamps=false;
     public function user(): HasOne
     {
-        return $this->hasOne(User::class)->select('user.id','user.name','user.email');
+        return $this->hasOne(User::class,"id","user_id")->select('id','name','email');
     }
 }
