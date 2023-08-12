@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
+
+
 
 
 
@@ -72,13 +75,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-// Route::get('send-email',function(){
-//     $mailData = [
-//         "name" => "test test",
-//         "message" => "12392"
-//     ];
-//     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
-//     dd("sent successfully")
-// });
 
+Route::get('/send-mail',[MailController::class,'sendMail']);
 

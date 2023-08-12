@@ -15,6 +15,9 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\CourseEnrollmentNotification;
+use Illuminate\Support\Facades\Mail;
+
 
 class StudentController extends Controller
 {
@@ -39,6 +42,7 @@ class StudentController extends Controller
             $course->student_id=Auth::id();
             $course->course_id=$request->course_id;
             $course->save();
+            Mail::to(Auth::user()->email)->send(new CourseEnrollmentNotification($course));
             return response()->json([
                 'status' => 'success',
             ]);
@@ -48,6 +52,7 @@ class StudentController extends Controller
                 'message' => $e->getMessage()
             ]);
         }    
+
     }
     
     public function getEnrolledCourses(){

@@ -177,12 +177,12 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            // 'to' => 'hilal_bodon@hotmail.com',
 
-            'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-                'name' => env('MAIL_FROM_NAME', 'Example'),
-            ],
+            // 'from' => [
+            //     'address' => env('MAIL_FROM_ADDRESS', 'hilal.bodon@gmail.com'),
+            //     'name' => env('MAIL_FROM_NAME', 'Example'),
+            // ],
         ],
 
         'slack' => [

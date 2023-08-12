@@ -64,14 +64,12 @@ class AdminController extends Controller
    function addCourse(Request $request)
     {
 
-    // try {
-    // $request->validate([
-    //     'title' => 'required|string|max:255',
-    //     'description' => 'required|string',
-    //     'teacher_id' => 'required|exists:users,id',
-    //     'enrollment_limit' => 'required|integer|min:1',
-    //     'class_code' => 'required|unique:courses,class_code',
-    // ]);
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'teacher_id' => 'required|exists:users,id',
+        'enrollment_limit' => 'required|integer|min:1',
+    ]);
  
     $course = new Course([
         'title' => $request->title,
@@ -79,10 +77,7 @@ class AdminController extends Controller
         'teacher_id' => $request->teacher_id,
         'enrollment_limit' => $request->enrollment_limit,
     ]);
-// }catch (\Exception $e) {
-//     error_log($e->getMessage());
-//     return response()->json(['error' => 'An error occurred while creating the course'], 500);
-// }
+
     $course->class_code = substr(Str::uuid(), 0, 8) ; 
     $course->save();
 
