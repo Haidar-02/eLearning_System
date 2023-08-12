@@ -75,6 +75,8 @@ return new class extends Migration {
 
         Schema::create('course_materials', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('material_type');
@@ -102,6 +104,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('task_type');
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->foreign('teacher_id')->references('id')->on('users');
             $table->foreign('task_type')->references('id')->on('task_types');
@@ -124,6 +128,10 @@ return new class extends Migration {
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->unsignedBigInteger('schedule_id');
+            $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->dateTime("date");
         });
 
