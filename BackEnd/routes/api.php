@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UnauthorizedController;
 use Illuminate\Http\Request;
@@ -31,13 +32,23 @@ Route::group(["middleware" => "auth:api"], function () {
     // Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
 
     // });
+
+    Route::group(["prefix" => "common", "middleware" => "student.valid"], function () {
+        Route::controller(CommonController::class)->group(function () {
+            Route::get("get-courses", "getAllCourses");
+            Route::get("course-schedules/{course_id}", "getCourseSchedules");
+            Route::get("schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
+
+            // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
+        });
+    });
+
     Route::group(["prefix" => "student", "middleware" => "student.valid"], function () {
         Route::controller(StudentController::class)->group(function () {
             Route::get("get-courses", "getAllCourses");
             Route::post("enroll-course", "enrollCourse");
             Route::get("enrolled-courses", "getEnrolledCourses");
-            Route::get("course-schedules/{course_id}", "getCourseSchedules");
-            Route::get("schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
+
 
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
