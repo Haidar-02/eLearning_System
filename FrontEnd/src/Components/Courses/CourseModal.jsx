@@ -4,7 +4,7 @@ import Button from '../Common/Button';
 import CourseDetails from './CourseDetails';
 import CourseEdit from './CourseEdit';
 
-import { editCourse } from '../../helpers/admin.helpers';
+import { editCourse, deleteCourse } from '../../helpers/admin.helpers';
 
 const CourseModal = ({ course, setShow, setCourses }) => {
   console.log(course);
@@ -74,7 +74,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
   return (
     <Modal
       setShow={setShow}
-      className=" flex flex-col p-5 justify-center rounded-2xl gap-5"
+      className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
       {toggleEdit ? (
         <CourseEdit
@@ -103,6 +103,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
         <Button
           text="delete"
           onClick={() => {
+            deleteCourse(id);
             setShow(false);
           }}
           className="text-[16px] text-white bg-red-dark  p-3 self-end "

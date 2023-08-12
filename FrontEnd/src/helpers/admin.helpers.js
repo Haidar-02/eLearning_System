@@ -35,7 +35,6 @@ async function editCourse(
   { title, description, teacher_id, meet_link, enrollment_limit }
 ) {
   try {
-    console.log(title, description, teacher_id, meet_link, enrollment_limit);
     const res = await axios.put(
       `${baseUrl}admin/modifyCourse/${id}`,
       {
@@ -73,4 +72,11 @@ async function editCourse(
   }
 }
 
-export { getAllCourses, editCourse };
+async function deleteCourse(id) {
+  try {
+    await axios.delete(`${baseUrl}admin/deleteCourse/${id}`, auth());
+  } catch (error) {
+    console.log(error);
+  }
+}
+export { getAllCourses, editCourse, deleteCourse };
