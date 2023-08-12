@@ -316,24 +316,5 @@ class TeacherController extends Controller
                 'message' => $e->getMessage()
             ]);
         } 
-    }
-    public function addDiscussionMessage(Request $request){
-        try{
-            $discussion=new BoardMessage;
-            $discussion->user_id=Auth::id();
-            $discussion->course_id=$request->course_id;
-            $discussion->message=$request->message;
-            $discussion->save();
-            return response()->json([
-                'status' => 'success',
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        } 
-    }
-
-    
+    }    
 }
