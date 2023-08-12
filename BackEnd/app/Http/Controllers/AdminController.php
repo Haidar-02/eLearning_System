@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -95,8 +96,10 @@ class AdminController extends Controller
 
 
 
-    function modifyCourse(Request $request, Course $course)
+    function modifyCourse(Request $request,$id)
     {
+        $course = Course::findOrFail($id);
+
         $request->validate([
             'title' => 'sometimes|string|max:255',
             'description' => 'sometimes|string',
