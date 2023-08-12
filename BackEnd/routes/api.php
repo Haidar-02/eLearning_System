@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UnauthorizedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,13 +30,17 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::post("logout", [AuthController::class, "logout"]);
         Route::post("refresh", [AuthController::class, "refresh"]);
     });
-    // Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
+    Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
+        Route::controller(TeacherController::class)->group(function () {
 
-    // });
+        });
 
-    Route::group(["prefix" => "common", "middleware" => "student.valid"], function () {
+    });
+
+    Route::group(["prefix" => "common"], function () {
         Route::controller(CommonController::class)->group(function () {
             Route::get("get-courses", "getAllCourses");
+            Route::get("get-course-students/{course_id}","getCourseStudents");
             Route::get("get-course-schedules/{course_id}", "getCourseSchedules");
             Route::get("get-schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
             Route::get("get-schedule-tasks","getScheduleTasks");
@@ -75,7 +80,6 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get('/checkEnrollmentLimit/{course}',"checkEnrollmentLimit");
             Route::get('/createBackup','createBackup');
 
-
         });
 
         Route::controller(AuthController::class)->group(function () {
@@ -83,6 +87,7 @@ Route::group(["middleware" => "auth:api"], function () {
     });
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
+        
     });
 });
 
