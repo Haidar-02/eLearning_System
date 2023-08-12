@@ -32,6 +32,23 @@ Route::group(["middleware" => "auth:api"], function () {
     });
     Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
         Route::controller(TeacherController::class)->group(function () {
+            Route::get("get-teacher-courses","getTeacherCourses");
+            Route::post("add-course-schedule","addCourseSchedule");
+            Route::delete("remove-course-schedule","removeCourseSchedule");
+            Route::post("add-schedule-material","addScheduleMaterial");
+            Route::delete("remove-schedule-material","removeScheduleMaterial");
+            Route::post("add-schedule-task","addScheduleTask");
+            Route::delete("remove-schedule-task","removeScheduleTask");
+            Route::post("add-schedule-Session","addScheduleSession");
+            Route::delete("remove-schedule-Session","removeScheduleSession");
+            Route::get("get-session-attendance","getSessionAttendance");
+            // Route::post("add-session-attendance","addSessionAttendance");
+            Route::post("add-course-project","addCourseProject");
+            Route::post("add-project-member","addProjectMembers");
+            Route::put("modify-task-grade","modifyTaskGrade");
+            Route::put("modify-project-grade","modifyProjectGrade");
+            Route::post("add-feedback","addFeedback");
+            Route::post("add-notification","addNotification");
 
         });
 
