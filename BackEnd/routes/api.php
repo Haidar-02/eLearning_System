@@ -35,7 +35,7 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::controller(StudentController::class)->group(function () {
             Route::get("get-courses", "getAllCourses");
             Route::post("enroll-course", "enrollCourse");
-            Route::get("enrolled-courses", "enrolledCourses");
+            Route::get("enrolled-courses", "getEnrolledCourses");
             Route::get("course-schedules/{course_id}", "getCourseSchedules");
             Route::get("schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
 
@@ -51,6 +51,9 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post('/addCourse',"addCourse");
             Route::post('/modifyCourse/{course}',"modifyCourse");
             Route::delete('/deleteCourse/{course}',"deleteCourse");
+            Route::get('/checkEnrollmentLimit/{course}',"checkEnrollmentLimit");
+            Route::get('/createBackup','createBackup');
+
 
         });
 
@@ -66,3 +69,13 @@ Route::group(["middleware" => "auth:api"], function () {
 Route::controller(AuthController::class)->group(function () {
     Route::post("login", "login");
 });
+
+
+// Route::get('send-email',function(){
+//     $mailData = [
+//         "name" => "test test",
+//         "message" => "12392"
+//     ];
+//     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
+//     dd("sent successfully")
+// });
