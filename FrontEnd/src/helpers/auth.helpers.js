@@ -1,5 +1,5 @@
 import axios from 'axios';
-const base_url = 'http://127.0.0.1:8000/api/';
+const base_url = 'http://54.165.111.250:8000/api/';
 async function logIn({ email, password }) {
   try {
     const res = await axios.post(`${base_url}login`, {

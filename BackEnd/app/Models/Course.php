@@ -12,9 +12,21 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'teacher_id',
+        'enrollment_limit',
+        'class_code'
+        ];
     public $timestamps = false;
     
     public function teacher(): HasOne{
-       return $this->hasOne(User::class,'id','teacher_id');
+       return $this->hasOne(User::class,'id','teacher_id')->select('id','name','email');
     }
+
+    public function students(): BelongsToMany
+{
+    return $this->belongsToMany(User::class, 'course_enrollments', 'course_id', 'student_id');
+}
 }
