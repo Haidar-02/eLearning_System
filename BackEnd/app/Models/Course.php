@@ -22,7 +22,7 @@ class Course extends Model
     public $timestamps = false;
     
     public function teacher(): HasOne{
-       return $this->hasOne(User::class,'id','teacher_id');
+       return $this->hasOne(User::class,'id','teacher_id')->select('id','name','email');
     }
 
     public function students(): BelongsToMany
