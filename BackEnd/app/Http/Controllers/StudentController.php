@@ -18,20 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function getAllCourses(){
-        try{
-            $courses=Course::all();
-            return response()->json([
-                'status' => 'success',
-                'courses' => $courses,
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
+
 
     public function enrollCourse(Request $request){
         try{
