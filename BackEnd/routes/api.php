@@ -94,10 +94,10 @@ Route::group(["middleware" => "auth:api"], function () {
     Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
 
         Route::controller(AdminController::class)->group(function () {
-            Route::post("modifyUser/{user_id}","modifyUser");
+            Route::put("modifyUser/{user_id}","modifyUser");
             Route::delete('/deleteUser/{user}',"deleteUser");
             Route::post('/addCourse',"addCourse");
-            Route::post('/modifyCourse/{course}',"modifyCourse");
+            Route::put('/modifyCourse/{course_id}',"modifyCourse");
             Route::delete('/deleteCourse/{course}',"deleteCourse");
             Route::get('/checkEnrollmentLimit/{course}',"checkEnrollmentLimit");
             Route::get('/createBackup','createBackup');
