@@ -71,6 +71,49 @@ async function editCourse(
     return { message };
   }
 }
+async function addCourse({
+  title,
+  description,
+  teacher_id,
+  meet_link,
+  enrollment_limit,
+}) {
+  try {
+    const res = await axios.post(
+      `${baseUrl}admin/addCourse`,
+      {
+        title,
+        description,
+        teacher_id,
+        enrollment_limit,
+      },
+      auth()
+    );
+    console.log(res);
+    if (res.status === 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
 
 async function deleteCourse(id) {
   try {
@@ -79,4 +122,4 @@ async function deleteCourse(id) {
     console.log(error);
   }
 }
-export { getAllCourses, editCourse, deleteCourse };
+export { getAllCourses, editCourse, deleteCourse, addCourse };

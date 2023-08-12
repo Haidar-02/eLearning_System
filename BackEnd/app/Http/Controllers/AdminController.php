@@ -65,26 +65,26 @@ class AdminController extends Controller
 
     function addCourse(Request $request)
     {
-
-        // try {
-        // $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'description' => 'required|string',
-        //     'teacher_id' => 'required|exists:users,id',
-        //     'enrollment_limit' => 'required|integer|min:1',
-        //     'class_code' => 'required|unique:courses,class_code',
-        // ]);
-
-        $course = new Course([
-            'title' => $request->title,
-            'description' => $request->description,
-            'teacher_id' => $request->teacher_id,
-            'enrollment_limit' => $request->enrollment_limit,
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'teacher_id' => 'required|exists:users,id',
+            'enrollment_limit' => 'required|integer|min:1',
+            // 'class_code' => 'required|unique:courses,class_code',
         ]);
-        // }catch (\Exception $e) {
-//     error_log($e->getMessage());
-//     return response()->json(['error' => 'An error occurred while creating the course'], 500);
-// }
+
+        try {
+
+            $course = new Course([
+                'title' => $request->title,
+                'description' => $request->description,
+                'teacher_id' => $request->teacher_id,
+                'enrollment_limit' => $request->enrollment_limit,
+            ]);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            return response()->json(['error' => 'An error occurred while creating the course'], 500);
+        }
         $course->class_code = substr(Str::uuid(), 0, 8);
         $course->save();
 

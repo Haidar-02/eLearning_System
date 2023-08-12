@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
 
 const CourseEdit = ({ state, setState, error }) => {
-  const [show, setShow] = useState(false);
-
   function textInputHandler(e) {
     const { value, name } = e.target;
     if (name === 'teacher') {
@@ -40,7 +38,7 @@ const CourseEdit = ({ state, setState, error }) => {
       <CustomInput
         label="meet"
         name="meet_link"
-        value={state.meet_link}
+        value={state.meet_link ? state.meet_link : ''}
         onChange={textInputHandler}
       />
       <CustomInput
