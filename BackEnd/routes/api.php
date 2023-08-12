@@ -32,6 +32,7 @@ Route::group(["middleware" => "auth:api"], function () {
     });
     Route::group(["prefix" => "teacher", "middleware" => "teacher.valid"], function () {
         Route::controller(TeacherController::class)->group(function () {
+            //date time  'YYYY-MM-DD hh:mm:ss' 
             Route::get("get-teacher-courses","getTeacherCourses");
             Route::post("add-course-schedule","addCourseSchedule");
             Route::delete("remove-course-schedule","removeCourseSchedule");
@@ -60,7 +61,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("get-courses", "getAllCourses");
             Route::get("get-course-students/{course_id}","getCourseStudents");
             Route::get("get-course-schedules/{course_id}", "getCourseSchedules");
-            Route::get("get-schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
+            Route::get("get-schedule-materials/{schedule_id}", "getScheduleMaterials");
             Route::get("get-schedule-tasks","getScheduleTasks");
             Route::get("get-schedule-sessions","getScheduleSessions");
             Route::get("get-schedule-projects","getScheduleProjects");
