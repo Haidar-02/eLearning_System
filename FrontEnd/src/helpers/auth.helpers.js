@@ -1,17 +1,18 @@
 import axios from 'axios';
-const base_url = 'http://54.165.111.250:8000/api/';
+const remoteUrl = 'http://54.165.111.250:8000/api/';
+const baseUrl = 'http://127.0.0.1:8000/api/';
 async function logIn({ email, password }) {
   try {
-    const res = await axios.post(`${base_url}login`, {
+    const res = await axios.post(`${baseUrl}login`, {
       email,
       password,
     });
     if (res.status === 200) {
       const data = res.data;
-      console.log(data);
       return { data };
     }
   } catch (error) {
+    console.log(error);
     const {
       response: {
         data: { message, errors },

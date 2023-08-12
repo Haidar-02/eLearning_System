@@ -5,6 +5,7 @@ import gradesIcon from '../assets/icons/ChartSquareBarOutline.svg';
 import dashIcon from '../assets/icons/dashboard.svg';
 import classesIcon from '../assets/icons/UserGroupOutline.svg';
 import clipBoardIcon from '../assets/icons/ClipboardListOutline.svg';
+import { getAllCourses } from '../helpers/admin.helpers';
 
 const falseState = {
   dashboard: false,
@@ -23,6 +24,7 @@ const AdminDashBoard = () => {
     messages: false,
   });
 
+  const [courses, SetCourses] = useState();
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
   };
@@ -58,8 +60,9 @@ const AdminDashBoard = () => {
             text="Users"
           />
           <DashBoardButton
-            onClick={() => {
+            onClick={async () => {
               togglePage('classes');
+              const courses = getAllCourses();
             }}
             icon={classesIcon}
             text="Classes"

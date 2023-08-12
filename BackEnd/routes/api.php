@@ -38,15 +38,15 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("get-courses", "getAllCourses");
             Route::get("get-course-schedules/{course_id}", "getCourseSchedules");
             Route::get("get-schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
-            Route::get("get-schedule-tasks","getScheduleTasks");
-            Route::get("get-schedule-sessions","getScheduleSessions");
-            Route::get("get-schedule-projects","getScheduleProjects");
-            Route::get("get-project-members","getProjectMembers");
-            Route::get("get-schedule-tasks","getScheduleTasks");
-            Route::post("send-message","sendMessage");
-            Route::get("get-messages","getMessages");
-            Route::get("get-course-discussion","getCourseDiscussion");
-            Route::post("add-course-discussion","addCourseDiscussion");
+            Route::get("get-schedule-tasks", "getScheduleTasks");
+            Route::get("get-schedule-sessions", "getScheduleSessions");
+            Route::get("get-schedule-projects", "getScheduleProjects");
+            Route::get("get-project-members", "getProjectMembers");
+            Route::get("get-schedule-tasks", "getScheduleTasks");
+            Route::post("send-message", "sendMessage");
+            Route::get("get-messages", "getMessages");
+            Route::get("get-course-discussion", "getCourseDiscussion");
+            Route::post("add-course-discussion", "addCourseDiscussion");
 
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
@@ -56,10 +56,10 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::controller(StudentController::class)->group(function () {
             Route::post("enroll-course", "enrollCourse");
             Route::get("get-enrolled-courses", "getEnrolledCourses");
-            Route::post("add-submission",'addTaskSubmission');
-            Route::get("get-course_teacher/{course_id}",'getCourseTeacher');
-            Route::post("add-teacher_meet","addTeacherMeet");
-            Route::get("get-teacher-meet/{teacher_id}","getTeacherMeet");
+            Route::post("add-submission", 'addTaskSubmission');
+            Route::get("get-course_teacher/{course_id}", 'getCourseTeacher');
+            Route::post("add-teacher_meet", "addTeacherMeet");
+            Route::get("get-teacher-meet/{teacher_id}", "getTeacherMeet");
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
@@ -67,13 +67,13 @@ Route::group(["middleware" => "auth:api"], function () {
     Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
 
         Route::controller(AdminController::class)->group(function () {
-            Route::post("modifyUser/{user_id}","modifyUser");
-            Route::delete('/deleteUser/{user}',"deleteUser");
-            Route::post('/addCourse',"addCourse");
-            Route::post('/modifyCourse/{course}',"modifyCourse");
-            Route::delete('/deleteCourse/{course}',"deleteCourse");
-            Route::get('/checkEnrollmentLimit/{course}',"checkEnrollmentLimit");
-            Route::get('/createBackup','createBackup');
+            Route::post("modifyUser/{user_id}", "modifyUser");
+            Route::delete('/deleteUser/{user}', "deleteUser");
+            Route::post('/addCourse', "addCourse");
+            Route::post('/modifyCourse/{course}', "modifyCourse");
+            Route::delete('/deleteCourse/{course}', "deleteCourse");
+            Route::get('/checkEnrollmentLimit/{course}', "checkEnrollmentLimit");
+            Route::get('/createBackup', 'createBackup');
 
 
         });
@@ -101,4 +101,3 @@ Route::controller(AuthController::class)->group(function () {
 //     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
 //     dd("sent successfully")
 // });
-
