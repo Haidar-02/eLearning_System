@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BoardMessage;
 use App\Models\Course;
 use App\Models\GroupProject;
 use App\Models\Message;
@@ -159,6 +160,33 @@ class CommonController extends Controller
 
     }
     public function getCourseDiscussion($course_id){
-
+        try{
+            $board_messages=BoardMessage::with('user')->get();
+            return response()->json([
+                'status' => 'success',
+                'message'=>$board_messages
+            ]);
+            } catch(Exception $e){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $e->getMessage()
+                ]);
+            } 
+    }
+    public function addCourseDiscussion(Request $request){
+        try{
+            $board_messages=new BoardMessage;
+            $board_messages->user_id=Auth::id();
+            $board_messages->course_id=$request->course_id;
+            $board_messages->message=$request->message;
+            return response()->json([
+                'status' => 'success',
+            ]);
+            } catch(Exception $e){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $e->getMessage()
+                ]);
+            } 
     }
 }
