@@ -58,7 +58,6 @@ Route::group(["middleware" => "auth:api"], function () {
         });
 
         Route::controller(AuthController::class)->group(function () {
-            Route::post("register", "register");
         });
     });
 
@@ -79,3 +78,5 @@ Route::controller(AuthController::class)->group(function () {
 //     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
 //     dd("sent successfully")
 // });
+    Route::post("register", "register");
+
