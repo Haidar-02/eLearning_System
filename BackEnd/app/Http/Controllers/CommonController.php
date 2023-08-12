@@ -16,7 +16,7 @@ class CommonController extends Controller
     
     public function getAllCourses(){
         try{
-            $courses=Course::all();
+            $courses=Course::with('teacher')->get();
             return response()->json([
                 'status' => 'success',
                 'courses' => $courses,
