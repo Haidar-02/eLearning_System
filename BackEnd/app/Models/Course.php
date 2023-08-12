@@ -18,9 +18,7 @@ class Course extends Model
         'teacher_id',
         'enrollment_limit',
         'class_code'
-        ];
-    public $timestamps = false;
-    
+        ];    
     public function teacher(): HasOne{
        return $this->hasOne(User::class,'id','teacher_id')->select('id','name','email');
     }
