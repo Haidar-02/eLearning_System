@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -126,9 +127,20 @@ class AdminController extends Controller
         ]);
     }
 
-    function courseLimit(Request $request){
 
+
+    public function checkEnrollmentLimit(Course $course)
+    {
+        $enrolledStudentCount = $course->students()->where('user_type', 4)->count();
+        $remainingSlots = $course->enrollment_limit - $enrolledStudentCount;
+    
+        return response()->json([
+            'enrolled_student_count' => $enrolledStudentCount,
+            'remaining_slots' => $remainingSlots,
+        ]);
     }
+
+    
 
     //student grades per course
     function studentProgress($student_id){
@@ -154,8 +166,17 @@ class AdminController extends Controller
     function getSupportMessage(){
 
     }
-    function databaseBackup(){
-        // Artisan::call('backup:run');
+
+
+
+        public function createBackup()
+    {
+        Artisan::call('backup:run');
+
+        return response()->json([
+            'message' => 'Backup created successfully',
+        ]);
     }
+ 
 
 }

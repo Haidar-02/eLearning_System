@@ -24,4 +24,9 @@ class Course extends Model
     public function teacher(): HasOne{
        return $this->hasOne(User::class,'id','teacher_id');
     }
+
+    public function students(): BelongsToMany
+{
+    return $this->belongsToMany(User::class, 'course_enrollments', 'course_id', 'student_id');
+}
 }

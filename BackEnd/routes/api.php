@@ -51,6 +51,9 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post('/addCourse',"addCourse");
             Route::post('/modifyCourse/{course}',"modifyCourse");
             Route::delete('/deleteCourse/{course}',"deleteCourse");
+            Route::get('/checkEnrollmentLimit/{course}',"checkEnrollmentLimit");
+            Route::get('/createBackup','createBackup');
+
 
         });
 
@@ -64,6 +67,20 @@ Route::group(["middleware" => "auth:api"], function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::post("login", "login");
+<<<<<<< HEAD
     Route::post("register", "register");
 
 });
+=======
+});
+
+
+// Route::get('send-email',function(){
+//     $mailData = [
+//         "name" => "test test",
+//         "message" => "12392"
+//     ];
+//     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
+//     dd("sent successfully")
+// });
+>>>>>>> 256d985 (adding mailtrap)
