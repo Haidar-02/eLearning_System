@@ -5,6 +5,8 @@ use App\Http\Controllers\UnauthorizedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\AdminController;
+
 
 
 /*
@@ -42,6 +44,19 @@ Route::group(["middleware" => "auth:api"], function () {
     });
 
     Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
+
+        Route::controller(AdminController::class)->group(function () {
+            Route::post("modifyUser/{user_id}","modifyUser");
+            Route::delete('/deleteUser/{user}',"deleteUser");
+            Route::post('/addCourse',"addCourse");
+            Route::post('/modifyCourse/{course}',"modifyCourse");
+            Route::delete('/deleteCourse/{course}',"deleteCourse");
+            Route::get('/checkEnrollmentLimit/{course}',"checkEnrollmentLimit");
+            Route::get('/createBackup','createBackup');
+
+
+        });
+
         Route::controller(AuthController::class)->group(function () {
         });
     });
@@ -52,6 +67,16 @@ Route::group(["middleware" => "auth:api"], function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::post("login", "login");
+});
+
+
+// Route::get('send-email',function(){
+//     $mailData = [
+//         "name" => "test test",
+//         "message" => "12392"
+//     ];
+//     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
+//     dd("sent successfully")
+// });
     Route::post("register", "register");
 
-});
