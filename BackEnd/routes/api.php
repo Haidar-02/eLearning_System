@@ -36,8 +36,17 @@ Route::group(["middleware" => "auth:api"], function () {
     Route::group(["prefix" => "common", "middleware" => "student.valid"], function () {
         Route::controller(CommonController::class)->group(function () {
             Route::get("get-courses", "getAllCourses");
-            Route::get("course-schedules/{course_id}", "getCourseSchedules");
-            Route::get("schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
+            Route::get("get-course-schedules/{course_id}", "getCourseSchedules");
+            Route::get("get-schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
+            Route::get("get-schedule-tasks","getScheduleTasks");
+            Route::get("get-schedule-sessions","getScheduleSessions");
+            Route::get("get-schedule-projects","getScheduleProjects");
+            Route::get("get-project-members","getProjectMembers");
+            Route::get("get-schedule-tasks","getScheduleTasks");
+            Route::post("send-message","sendMessage");
+            Route::get("get-messages","getMessages");
+            Route::get("get-course-discussion","getCourseDiscussion");
+            Route::post("add-course-discussion","addCourseDiscussion");
 
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
@@ -45,11 +54,12 @@ Route::group(["middleware" => "auth:api"], function () {
 
     Route::group(["prefix" => "student", "middleware" => "student.valid"], function () {
         Route::controller(StudentController::class)->group(function () {
-            Route::get("get-courses", "getAllCourses");
             Route::post("enroll-course", "enrollCourse");
-            Route::get("enrolled-courses", "getEnrolledCourses");
-
-
+            Route::get("get-enrolled-courses", "getEnrolledCourses");
+            Route::post("add-submission",'addTaskSubmission');
+            Route::get("get-course_teacher/{course_id}",'getCourseTeacher');
+            Route::post("add-teacher_meet","addTeacherMeet");
+            Route::get("get-teacher-meet/{teacher_id}","getTeacherMeet");
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
