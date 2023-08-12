@@ -16,6 +16,7 @@ use App\Models\TaskSubmission;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class TeacherController extends Controller
 {
@@ -79,14 +80,33 @@ class TeacherController extends Controller
         $material->schedule_id=$request->schedule_id;
         $material->course_id=$request->course_id;
         $material->teacher_id=Auth::id();
-        $material->material_type=$request->material_type;
         $material->title=$request->title;
         $material->content=$request->content;
-        $base64Image=$request->file;
-        $file=base64_decode($base64Image);
-        $fileName = time() . '.png'; 
-        file_put_contents(public_path('files/' . $fileName), $file);
-        $material->file_path_url='http://localhost:8000/files/' . $fileName;  
+
+        $base64Image=$request->input('file');
+        $binaryData=base64_decode($base64Image);
+        $originalFileName = $request->file_name;
+
+        //create temp file
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
+        file_put_contents($tempFilePath, $binaryData);
+
+        $uploadedFile = new \Illuminate\Http\UploadedFile(
+            $tempFilePath,
+            $originalFileName, // Provide a fallback original filename
+            mime_content_type($tempFilePath), // Guess the MIME type
+            null,
+            true // Delete the file after it's used
+        );
+    
+        //get file extension
+        $fileExtension = $uploadedFile->getClientOriginalExtension();
+        unlink($tempFilePath);
+        $fileName = uniqid() . '.'.$fileExtension;
+
+        Storage::disk('public')->put('files/' . $fileName, $binaryData);
+        $publicUrl = Storage::disk('public')->url('files/' . $fileName);
+        $material->file_path_url=$publicUrl;
         $material->save();
         return response()->json([
             'status' => 'success',
@@ -218,11 +238,31 @@ class TeacherController extends Controller
             $project->course_id=$request->date;
             $project->submission_date=$request->submission_date;
             $project->status=$request->status;
-            $base64Image=$request->file;
-            $file=base64_decode($base64Image);
-            $fileName = time() . '.png'; 
-            file_put_contents(public_path('files/' . $fileName), $file);
-            $project->file_path_url='http://localhost:8000/files/' . $fileName;  
+
+            $base64Image=$request->input('file');
+            $binaryData=base64_decode($base64Image);
+            $originalFileName = $request->file_name;
+
+            //create temp file
+            $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
+            file_put_contents($tempFilePath, $binaryData);
+
+            $uploadedFile = new \Illuminate\Http\UploadedFile(
+                $tempFilePath,
+                $originalFileName, // Provide a fallback original filename
+                mime_content_type($tempFilePath), // Guess the MIME type
+                null,
+                true // Delete the file after it's used
+            );
+        
+            //get file extension
+            $fileExtension = $uploadedFile->getClientOriginalExtension();
+            unlink($tempFilePath);
+            $fileName = uniqid() . '.'.$fileExtension;
+
+            Storage::disk('public')->put('files/' . $fileName, $binaryData);
+            $publicUrl = Storage::disk('public')->url('files/' . $fileName);
+            $project->file_path_url=$publicUrl;
             $project->save();
             return response()->json([
                 'status' => 'success',
