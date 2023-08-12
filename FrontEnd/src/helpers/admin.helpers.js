@@ -9,12 +9,14 @@ const auth = () => {
     headers: { Authorization: `Bearer ${token}` },
   };
 };
+
 async function getAllUsers() {
   try {
     const { token } = localStorage.getItem('user');
     const res = await axios.get(`${baseUrl}`);
   } catch (error) {}
 }
+
 async function getAllCourses() {
   try {
     const res = await axios.get(`${baseUrl}common/get-courses`, auth());
