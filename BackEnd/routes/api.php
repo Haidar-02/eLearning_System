@@ -33,7 +33,7 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::controller(StudentController::class)->group(function () {
             Route::get("get-courses", "getAllCourses");
             Route::post("enroll-course", "enrollCourse");
-            Route::get("enrolled-courses", "enrolledCourses");
+            Route::get("enrolled-courses", "getEnrolledCourses");
             Route::get("course-schedules/{course_id}", "getCourseSchedules");
             Route::get("schedule-materials/{course_id}/{schedule_id}", "getScheduleMaterials");
 
