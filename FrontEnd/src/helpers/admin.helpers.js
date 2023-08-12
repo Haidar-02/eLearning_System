@@ -28,4 +28,46 @@ async function getAllCourses() {
   }
 }
 
-export { getAllCourses };
+async function editCourse(
+  id,
+  { title, description, teacher_id, meet_link, enrollment_limit }
+) {
+  try {
+    const res = await axios.post(
+      `${baseUrl}admin/modifyCourse/${id}`,
+      {
+        title,
+        description,
+        teacher_id,
+        meet_link,
+        enrollment_limit,
+      },
+      auth()
+    );
+    console.log(res);
+    if (res.status === 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+
+export { getAllCourses, editCourse };

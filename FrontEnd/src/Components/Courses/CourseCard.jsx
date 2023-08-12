@@ -13,7 +13,7 @@ const CourseCard = ({ course, onClick, setCourses }) => {
     teacher,
     title,
   } = course;
-  const { teacher_id, name, email } = teacher;
+  const { id: teacher_id, name, email } = teacher;
 
   return (
     <div className="flex flex-col p-3 border gap-3">

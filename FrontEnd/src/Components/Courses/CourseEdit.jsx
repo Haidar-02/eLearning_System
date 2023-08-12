@@ -34,7 +34,7 @@ const CourseEdit = ({ state, setState }) => {
       <CustomInput
         label="Teacher"
         name="teacher"
-        value={state.teacher.name}
+        value={state.teacher.id}
         onChange={textInputHandler}
       />
       <CustomInput

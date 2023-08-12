@@ -3,10 +3,9 @@ import Modal from '../Common/Modal';
 import Button from '../Common/Button';
 import CourseDetails from './CourseDetails';
 import CourseEdit from './CourseEdit';
-const falseState = {
-  details: false,
-  edit: false,
-};
+
+import { editCourse } from '../../helpers/admin.helpers';
+
 const CourseModal = ({ course, setShow, setCourses }) => {
   console.log(course);
   const {
@@ -18,38 +17,30 @@ const CourseModal = ({ course, setShow, setCourses }) => {
     teacher,
     title,
   } = course;
+
   const { id: teacher_id, name, email } = teacher;
+
   const [editState, setEditState] = useState({
     id,
     title: '',
     description: '',
-
     teacher: '',
-
     meet_link: '',
     enrollment_limit: '',
   });
+
+  const [toggleEdit, setToggleEdit] = useState(false);
 
   useEffect(() => {
     setEditState({
       id,
       teacher: { ...teacher },
-
       title,
       description,
       meet_link,
       enrollment_limit,
     });
   }, []);
-
-  const [state, setState] = useState({
-    details: true,
-    edit: false,
-  });
-
-  const toggleState = (page) => {
-    setState({ ...falseState, [page]: true });
-  };
 
   const replaceObjectById = (id, newObject, state) => {
     const updatedObjects = state.map((obj) =>
@@ -58,35 +49,47 @@ const CourseModal = ({ course, setShow, setCourses }) => {
     return updatedObjects;
   };
 
-  const { details, edit } = state;
   return (
     <Modal
       setShow={setShow}
       className=" flex flex-col p-5 justify-center rounded-2xl gap-5"
     >
-      {details && (
-        <CourseDetails course={course} className="flex flex-col gap-10" />
-      )}
-
-      {edit && (
+      {toggleEdit ? (
         <CourseEdit
           state={editState}
           setState={setEditState}
           course={course}
           className="flex flex-col gap-10"
         />
+      ) : (
+        <CourseDetails course={course} className="flex flex-col gap-10" />
       )}
       <div className="button-container flex justify-end gap-3">
         <Button
-          text={edit ? 'Save' : 'Edit'}
+          text={toggleEdit ? 'Save' : 'Edit'}
           onClick={() => {
-            if (edit) {
+            if (toggleEdit) {
+              const {
+                teacher,
+                title,
+                description,
+                meet_link,
+                enrollment_limit,
+              } = editState;
+              const data = {
+                teacher_id: teacher.id,
+                title,
+                description,
+                meet_link,
+                enrollment_limit,
+              };
+              editCourse(id, { data });
               setCourses((prev) => {
                 const newArr = replaceObjectById(id, editState, prev);
                 return newArr;
               });
             } else {
-              toggleState('edit');
+              setToggleEdit((prev) => !prev);
             }
           }}
           className="text-[16px] bg-green text-white  p-3 self-end "
