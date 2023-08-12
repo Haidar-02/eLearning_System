@@ -85,8 +85,8 @@ class TeacherController extends Controller
         $base64Image=$request->file;
         $file=base64_decode($base64Image);
         $fileName = time() . '.png'; 
-        file_put_contents(public_path('img/' . $fileName), $file);
-        $material->file_path_url='http://localhost:8000/img/' . $fileName;  
+        file_put_contents(public_path('files/' . $fileName), $file);
+        $material->file_path_url='http://localhost:8000/files/' . $fileName;  
         $material->save();
         return response()->json([
             'status' => 'success',
@@ -221,8 +221,8 @@ class TeacherController extends Controller
             $base64Image=$request->file;
             $file=base64_decode($base64Image);
             $fileName = time() . '.png'; 
-            file_put_contents(public_path('img/' . $fileName), $file);
-            $project->file_path_url='http://localhost:8000/img/' . $fileName;  
+            file_put_contents(public_path('files/' . $fileName), $file);
+            $project->file_path_url='http://localhost:8000/files/' . $fileName;  
             $project->save();
             return response()->json([
                 'status' => 'success',
