@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
-
+import TextArea from '../Inputs/TextArea';
 const CourseEdit = ({ state, setState, error }) => {
   function textInputHandler(e) {
     const { value, name } = e.target;
@@ -15,17 +15,17 @@ const CourseEdit = ({ state, setState, error }) => {
   }
   console.log(state);
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <CustomInput
         label="Title"
         name="title"
         value={state.title}
         onChange={textInputHandler}
       />
-      <CustomInput
+      <TextArea
         label="Description"
         name="description"
-        type="textarea"
+        rows="7"
         value={state.description}
         onChange={textInputHandler}
       />

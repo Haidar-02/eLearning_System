@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
 import Modal from '../Common/Modal';
-
+import TextArea from '../Inputs/TextArea';
 import { addCourse } from '../../helpers/admin.helpers';
 import Button from '../Common/Button';
 const initialState = {
@@ -11,10 +11,6 @@ const initialState = {
   enrollment_limit: '',
 };
 const CourseAdd = ({ setShow, setCourses }) => {
-  // 'title' => 'required|string|max:255',
-  // 'description' => 'required|string',
-  // 'teacher_id' => 'required|exists:users,id',
-  // 'enrollment_limit' => 'required|integer|min:1',
   const [state, setState] = useState(initialState);
   const [error, setError] = useState();
   console.log(state);
@@ -54,10 +50,9 @@ const CourseAdd = ({ setShow, setCourses }) => {
         value={title}
         onChange={textInputHandler}
       />
-      <CustomInput
+      <TextArea
         label="Description"
         name="description"
-        type="textarea"
         value={description}
         onChange={textInputHandler}
       />
