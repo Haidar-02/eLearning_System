@@ -186,23 +186,23 @@ class TeacherController extends Controller
 
 
 
-    public function getSessionAttendance($session_id){
+    // public function getSessionAttendance($session_id){
 
-        try{
-            $session=Session::where([['id','=',$session_id]])->first();
-            $attendances=$session->attendances;
-            return response()->json([
-                'status' => 'success',
-                'attendances'=>$attendances
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        } 
+    //     try{
+    //         $session=Session::where([['id','=',$session_id]])->first();
+    //         $attendances=$session->attendances;
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'attendances'=>$attendances
+    //         ]);
+    //     } catch(Exception $e){
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => $e->getMessage()
+    //         ]);
+    //     } 
 
-    }
+    // }
     // public function addSessionAttendance(Request $request){
         
     // }
