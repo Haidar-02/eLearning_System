@@ -10,6 +10,8 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function materials(): HasMany
     {
         return $this->hasMany(CourseMaterial::class);
