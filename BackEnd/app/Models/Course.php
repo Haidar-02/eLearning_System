@@ -18,19 +18,21 @@ class Course extends Model
         'teacher_id',
         'enrollment_limit',
         'class_code'
-        ];    
-    public function teacher(): HasOne{
-       return $this->hasOne(User::class,'id','teacher_id')->select('id','name','email');
+    ];
+    public $timestamps = false;
+    public function teacher(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'teacher_id')->select('id', 'name', 'email');
     }
 
     public function students(): BelongsToMany
     {
-    return $this->belongsToMany(User::class, 'course_enrollments', 'course_id', 'student_id');
+        return $this->belongsToMany(User::class, 'course_enrollments', 'course_id', 'student_id');
     }
 
     public function schedules(): HasMany
     {
-    return $this->hasMany(Schedule::class);
+        return $this->hasMany(Schedule::class);
     }
 
     public function projects(): HasMany

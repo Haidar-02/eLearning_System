@@ -22,25 +22,25 @@ class AdminController extends Controller
             'password' => 'sometimes|string|min:6',
             'user_type' => 'sometimes|integer',
         ]);
-    
+
         if ($request->name) {
             $user->name = $request->name;
         }
-    
+
         if ($request->has('email')) {
             $user->email = $request->email;
         }
-    
+
         if ($request->has('password')) {
             $user->password = Hash::make($request->password);
         }
-    
+
         if ($request->has('user_type')) {
             $user->user_type = $request->user_type;
         }
-    
+
         $user->save();
-    
+
         return response()->json([
             'message' => 'User modified successfully',
             'user' => $user,
@@ -50,7 +50,8 @@ class AdminController extends Controller
 
 
 
-    function deleteUser(User $user){
+    function deleteUser(User $user)
+    {
 
         $user->delete();
 
@@ -60,43 +61,43 @@ class AdminController extends Controller
     }
 
 
-    
 
-   function addCourse(Request $request)
+
+    function addCourse(Request $request)
     {
 
-    // try {
-    // $request->validate([
-    //     'title' => 'required|string|max:255',
-    //     'description' => 'required|string',
-    //     'teacher_id' => 'required|exists:users,id',
-    //     'enrollment_limit' => 'required|integer|min:1',
-    //     'class_code' => 'required|unique:courses,class_code',
-    // ]);
- 
-    $course = new Course([
-        'title' => $request->title,
-        'description' => $request->description,
-        'teacher_id' => $request->teacher_id,
-        'enrollment_limit' => $request->enrollment_limit,
-    ]);
-// }catch (\Exception $e) {
+        // try {
+        // $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        //     'teacher_id' => 'required|exists:users,id',
+        //     'enrollment_limit' => 'required|integer|min:1',
+        //     'class_code' => 'required|unique:courses,class_code',
+        // ]);
+
+        $course = new Course([
+            'title' => $request->title,
+            'description' => $request->description,
+            'teacher_id' => $request->teacher_id,
+            'enrollment_limit' => $request->enrollment_limit,
+        ]);
+        // }catch (\Exception $e) {
 //     error_log($e->getMessage());
 //     return response()->json(['error' => 'An error occurred while creating the course'], 500);
 // }
-    $course->class_code = substr(Str::uuid(), 0, 8) ; 
-    $course->save();
+        $course->class_code = substr(Str::uuid(), 0, 8);
+        $course->save();
 
-    return response()->json([
-        'message' => 'Course created successfully',
-        'course' => $course,
-    ]);
+        return response()->json([
+            'message' => 'Course created successfully',
+            'course' => $course,
+        ]);
 
     }
 
 
 
-    function modifyCourse(Request $request,$id)
+    function modifyCourse(Request $request, $id)
     {
         $course = Course::findOrFail($id);
 
@@ -107,7 +108,7 @@ class AdminController extends Controller
             'enrollment_limit' => 'sometimes|integer|min:1',
             'meet_link' => 'sometimes|nullable|string',
         ]);
-    
+
         $course->update($request->only([
             'title',
             'description',
@@ -115,7 +116,7 @@ class AdminController extends Controller
             'enrollment_limit',
             'meet_link',
         ]));
-    
+
         return response()->json([
             'message' => 'Course updated successfully',
             'course' => $course,
@@ -123,7 +124,8 @@ class AdminController extends Controller
 
     }
 
-    function deleteCourse(Course $course){
+    function deleteCourse(Course $course)
+    {
         $course->delete();
         return response()->json([
             'message' => 'Course deleted successfully',
@@ -136,43 +138,49 @@ class AdminController extends Controller
     {
         $enrolledStudentCount = $course->students()->where('user_type', 4)->count();
         $remainingSlots = $course->enrollment_limit - $enrolledStudentCount;
-    
+
         return response()->json([
             'enrolled_student_count' => $enrolledStudentCount,
             'remaining_slots' => $remainingSlots,
         ]);
     }
 
-    
+
 
     //student grades per course
-    function studentProgress($student_id){
+    function studentProgress($student_id)
+    {
 
     }
 
     //how many students succeeded in each course
-    function courseCompletion($course_id){
+    function courseCompletion($course_id)
+    {
 
     }
 
-    function teacherPerformance($teacher_id){
+    function teacherPerformance($teacher_id)
+    {
 
     }
 
-    function addTheme(){
+    function addTheme()
+    {
 
     }
-    function addEmailTemplate(){
-
-    }
-
-    function getSupportMessage(){
+    function addEmailTemplate()
+    {
 
     }
 
+    function getSupportMessage()
+    {
+
+    }
 
 
-        public function createBackup()
+
+    public function createBackup()
     {
         Artisan::call('backup:run');
 
@@ -180,6 +188,6 @@ class AdminController extends Controller
             'message' => 'Backup created successfully',
         ]);
     }
- 
+
 
 }

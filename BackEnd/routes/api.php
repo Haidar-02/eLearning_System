@@ -97,7 +97,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::put("modifyUser/{user_id}", "modifyUser");
             Route::delete('/deleteUser/{user}', "deleteUser");
             Route::post('/addCourse', "addCourse");
-            Route::put('/modifyCourse/{course_id}', "modifyCourse");
+            Route::put('/modifyCourse/{id}', "modifyCourse");
             Route::delete('/deleteCourse/{course}', "deleteCourse");
             Route::get('/checkEnrollmentLimit/{course}', "checkEnrollmentLimit");
             Route::get('/createBackup', 'createBackup');

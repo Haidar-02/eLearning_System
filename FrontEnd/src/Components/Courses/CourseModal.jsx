@@ -18,8 +18,6 @@ const CourseModal = ({ course, setShow, setCourses }) => {
     title,
   } = course;
 
-  const { id: teacher_id, name, email } = teacher;
-
   const [editState, setEditState] = useState({
     id,
     title: '',
@@ -28,6 +26,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
     meet_link: '',
     enrollment_limit: '',
   });
+  const [editError, setEditError] = useState();
 
   const [toggleEdit, setToggleEdit] = useState(false);
 
@@ -48,7 +47,30 @@ const CourseModal = ({ course, setShow, setCourses }) => {
     );
     return updatedObjects;
   };
-
+  async function handleSave() {
+    const payload = {
+      teacher_id: editState.teacher.id,
+      title: editState.title,
+      description: editState.description,
+      meet_link: editState.meet_link,
+      enrollment_limit: editState.enrollment_limit,
+    };
+    const { data, errorMessages, message } = await editCourse(id, payload);
+    if (errorMessages) {
+      setEditError(errorMessages[0]);
+      return;
+    } else if (message) {
+      setEditError(message);
+      return;
+    }
+    if (data) {
+      setCourses((prev) => {
+        const newArr = replaceObjectById(id, editState, prev);
+        return newArr;
+      });
+      setShow(false);
+    }
+  }
   return (
     <Modal
       setShow={setShow}
@@ -58,6 +80,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
         <CourseEdit
           state={editState}
           setState={setEditState}
+          error={editError}
           course={course}
           className="flex flex-col gap-10"
         />
@@ -69,25 +92,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
           text={toggleEdit ? 'Save' : 'Edit'}
           onClick={() => {
             if (toggleEdit) {
-              const {
-                teacher,
-                title,
-                description,
-                meet_link,
-                enrollment_limit,
-              } = editState;
-              const data = {
-                teacher_id: teacher.id,
-                title,
-                description,
-                meet_link,
-                enrollment_limit,
-              };
-              editCourse(id, { data });
-              setCourses((prev) => {
-                const newArr = replaceObjectById(id, editState, prev);
-                return newArr;
-              });
+              handleSave();
             } else {
               setToggleEdit((prev) => !prev);
             }

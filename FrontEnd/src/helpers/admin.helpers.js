@@ -35,7 +35,8 @@ async function editCourse(
   { title, description, teacher_id, meet_link, enrollment_limit }
 ) {
   try {
-    const res = await axios.post(
+    console.log(title, description, teacher_id, meet_link, enrollment_limit);
+    const res = await axios.put(
       `${baseUrl}admin/modifyCourse/${id}`,
       {
         title,

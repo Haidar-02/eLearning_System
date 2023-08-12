@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
 
-const CourseEdit = ({ state, setState }) => {
+const CourseEdit = ({ state, setState, error }) => {
   const [show, setShow] = useState(false);
 
   function textInputHandler(e) {
@@ -9,7 +9,7 @@ const CourseEdit = ({ state, setState }) => {
     if (name === 'teacher') {
       setState((prev) => ({
         ...prev,
-        teacher: { ...prev.teacher, name: value },
+        teacher: { ...prev.teacher, id: value },
       }));
     } else {
       setState((prev) => ({ ...prev, [name]: value }));
@@ -49,6 +49,8 @@ const CourseEdit = ({ state, setState }) => {
         value={state.enrollment_limit}
         onChange={textInputHandler}
       />
+
+      <div className="error text-sm text-red-500 ">{error}</div>
     </div>
   );
 };
