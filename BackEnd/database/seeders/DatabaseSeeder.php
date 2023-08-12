@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         TaskType::create(['name' => 'assignment']);
         TaskType::create(['name' => 'quiz']);
 
+        User::create(['name'=>'admin','email'=>"admin@admin.com","password"=>"adminadmin","user_type"=>"1"]);
         User::factory(20)->create();
         ParentRelation::factory(10)->create();
 
