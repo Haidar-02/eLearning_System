@@ -54,8 +54,9 @@ class StudentController extends Controller
         }    
 
     }
+
     
-    public function getEnrolledCourses(){
+    public function enrolledCourses(){
         try{
             $user=Auth::user();
             $courses=$user->courses;

@@ -77,7 +77,6 @@ class AdminController extends Controller
         'teacher_id' => $request->teacher_id,
         'enrollment_limit' => $request->enrollment_limit,
     ]);
-
     $course->class_code = substr(Str::uuid(), 0, 8) ; 
     $course->save();
 

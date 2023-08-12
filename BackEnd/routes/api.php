@@ -5,11 +5,6 @@ use App\Http\Controllers\UnauthorizedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\MailController;
-
-
-
 
 
 /*
@@ -73,8 +68,3 @@ Route::controller(AuthController::class)->group(function () {
     Route::post("register", "register");
 
 });
-
-
-
-Route::get('/send-mail',[MailController::class,'sendMail']);
-
