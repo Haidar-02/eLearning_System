@@ -14,7 +14,7 @@ const falseState = {
   messages: false,
 };
 
-const DashBoard = () => {
+const AdminDashBoard = () => {
   const [state, setState] = useState({
     dashboard: true,
     grades: false,
@@ -55,7 +55,7 @@ const DashBoard = () => {
               togglePage('grades');
             }}
             icon={gradesIcon}
-            text="Grades"
+            text="Users"
           />
           <DashBoardButton
             onClick={() => {
@@ -77,8 +77,9 @@ const DashBoard = () => {
       </SideBar>
 
       <div className="mainContent flex flex-col ">
+        {/* PAGES GO HERE */}
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
-        {grades && <span className="h-[500px] p-10">Grades</span>}
+        {grades && <span className="h-[500px] p-10">Manage Users</span>}
         {classes && <span className="h-[500px] p-10">Classes</span>}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
@@ -95,4 +96,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default AdminDashBoard;
