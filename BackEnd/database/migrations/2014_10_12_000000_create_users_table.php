@@ -49,6 +49,7 @@ return new class extends Migration {
             $table->text('title');
             $table->text('description');
             $table->text('class_code');
+            $table->timestamps();
             $table->text('meet_link')->nullable();
             $table->foreign('teacher_id')->references('id')->on('users');
 
