@@ -67,11 +67,8 @@ Route::group(["middleware" => "auth:api"], function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::post("login", "login");
-<<<<<<< HEAD
     Route::post("register", "register");
 
-});
-=======
 });
 
 
@@ -83,4 +80,5 @@ Route::controller(AuthController::class)->group(function () {
 //     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
 //     dd("sent successfully")
 // });
->>>>>>> 256d985 (adding mailtrap)
+
+
