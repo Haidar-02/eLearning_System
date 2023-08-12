@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import SideBar from '../Components/DashBoard/SideBar';
-import DashBoardButton from '../Components/DashBoard/DashBoardButton';
-import gradesIcon from '../assets/icons/ChartSquareBarOutline.svg';
-import dashIcon from '../assets/icons/dashboard.svg';
-import classesIcon from '../assets/icons/UserGroupOutline.svg';
-import clipBoardIcon from '../assets/icons/ClipboardListOutline.svg';
-import { getAllCourses } from '../helpers/admin.helpers';
+
+import gradesIcon from '../../assets/icons/ChartSquareBarOutline.svg';
+import dashIcon from '../../assets/icons/dashboard.svg';
+import classesIcon from '../../assets/icons/UserGroupOutline.svg';
+import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
+
+import SideBar from '../../Components/DashBoard/SideBar';
+import AdminCourseManager from './AdminCourseManager';
+import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
+
+import { getAllCourses } from '../../helpers/admin.helpers';
 
 const falseState = {
   dashboard: false,
@@ -24,7 +28,6 @@ const AdminDashBoard = () => {
     messages: false,
   });
 
-  const [courses, SetCourses] = useState();
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
   };
@@ -62,7 +65,7 @@ const AdminDashBoard = () => {
           <DashBoardButton
             onClick={async () => {
               togglePage('classes');
-              const courses = getAllCourses();
+              const courses = await getAllCourses();
             }}
             icon={classesIcon}
             text="Classes"
@@ -79,11 +82,11 @@ const AdminDashBoard = () => {
         </div>
       </SideBar>
 
-      <div className="mainContent flex flex-col ">
+      <div className="mainContent flex flex-col   px-14 py-10 h-fit ">
         {/* PAGES GO HERE */}
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
         {grades && <span className="h-[500px] p-10">Manage Users</span>}
-        {classes && <span className="h-[500px] p-10">Classes</span>}
+        {classes && <AdminCourseManager />}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
 
