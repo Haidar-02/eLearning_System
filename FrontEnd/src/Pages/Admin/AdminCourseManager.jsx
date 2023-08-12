@@ -32,7 +32,7 @@ const AdminCourseManager = () => {
           />
         </div>
       </div>
-      {show && <CourseAdd setShow={setShow} />}
+      {show && <CourseAdd setShow={setShow} setCourses={setCourses} />}
       {courses &&
         courses.map((course, index) => (
           <CourseCard key={index} course={course} setCourses={setCourses} />

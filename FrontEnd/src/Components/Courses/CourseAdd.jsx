@@ -32,9 +32,11 @@ const CourseAdd = ({ setShow, setCourses }) => {
       return;
     }
     if (data) {
-      // setCourses((prev) => {
-      //   [...prev, data];
-      // });
+      console.log(data);
+      //   setCourses((prev) => {
+      //     return [...prev];
+      //   });
+
       setShow(false);
     }
   }
