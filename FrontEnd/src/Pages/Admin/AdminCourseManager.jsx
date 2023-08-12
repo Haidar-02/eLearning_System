@@ -4,17 +4,18 @@ import CourseCard from '../../Components/Courses/CourseCard';
 import { getAllCourses } from '../../helpers/admin.helpers';
 
 const AdminCourseManager = () => {
-  const [courses, SetCourses] = useState();
+  const [courses, setCourses] = useState();
 
   useEffect(() => {
     const fetchCourses = async () => {
       const res = await getAllCourses();
-      SetCourses(res);
+      setCourses(res);
     };
 
     fetchCourses();
   }, []);
 
+  console.log(courses);
   return (
     <div className="">
       <div className="page-header gothic color-cyan-dark text-2xl py-5 mb-5">
@@ -22,7 +23,7 @@ const AdminCourseManager = () => {
       </div>
       {courses &&
         courses.map((course, index) => (
-          <CourseCard key={index} course={course} />
+          <CourseCard key={index} course={course} setCourses={setCourses} />
         ))}
     </div>
   );
