@@ -58,4 +58,35 @@ async function addSchedule({
   }
 }
 
-export { getTeacherCourses,addSchedule};
+async function removeSchedule(schedule_id) {
+  try {
+    const res = await axios.delete(
+      `${remoteUrl}teacher/remove-course-schedule/${schedule_id}`,
+      auth()
+    );
+    if (res.status === 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+
+export { getTeacherCourses,addSchedule,removeSchedule};

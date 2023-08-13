@@ -41,7 +41,7 @@ const TeacherCourseManager = ({course}) => {
         {
           schedules &&
           schedules.map((schedule, index) => (
-            <ScheduleCard key={index} schedule={schedule}/>
+            <ScheduleCard key={index} schedule={schedule} setSchedules={setSchedules}/>
           ))
         }
       </>

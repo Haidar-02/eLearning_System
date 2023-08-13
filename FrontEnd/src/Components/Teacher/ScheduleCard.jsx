@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import Button from '../Common/Button';
-import CourseModal from '../Common/CourseModal';
+import { removeSchedule } from '../../helpers/Teacher.helpers';
 
 
 
+const ScheduleCard = ({ schedule,setSchedules}) => {
 
-const ScheduleCard = ({ schedule}) => {
+
+  const deleteSchedule = async (schedule_id) => {
+    const res = await removeSchedule(schedule_id);
+    setSchedules((prev)=>prev.filter(i => i.id !== schedule_id));
+};
+
+
 const {
     id,
     course_id,
@@ -29,6 +36,11 @@ const {
           {end_date}
         </div>
       </div>
+      <Button
+              onClick={() => deleteSchedule(id)}
+              text="Delete"
+              className="p-0 bg-transparent text-xl text-black"
+      />
       {/* <div>
       <Button
         text="Add Task"
