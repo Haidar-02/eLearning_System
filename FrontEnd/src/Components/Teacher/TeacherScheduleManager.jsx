@@ -32,7 +32,7 @@ const TeacherCourseManager = ({course}) => {
           />
         </div>
       </div>
-      {/* {show && <CourseAdd setShow={setShow} setCourses={setCourses} />} */}
+      {show && <ScheduleAdd setShow={setShow} setSchedules={setSchedules} course_id={course.id}/>}
 
       {schedules &&
         schedules.map((schedule, index) => (
