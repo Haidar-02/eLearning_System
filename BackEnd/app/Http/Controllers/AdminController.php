@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserType;
 use App\Models\Course;
+use App\Models\Assignment;
+
+use App\Mail\HomeworkNotification;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -171,6 +175,6 @@ class AdminController extends Controller
             'message' => 'Backup created successfully',
         ]);
     }
- 
+
 
 }

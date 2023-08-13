@@ -42,9 +42,10 @@ class StudentController extends Controller
             $course->student_id=Auth::id();
             $course->course_id=$request->course_id;
             $course->save();
-            Mail::to(Auth::user()->email)->send(new CourseEnrollmentNotification($course));
+            $CRF = Course::find($course->course_id);
+            Mail::to(Auth::user()->email)->send(new CourseEnrollmentNotification($CRF));
             return response()->json([
-                'status' => 'success',
+                'status' => $course,
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -52,11 +53,9 @@ class StudentController extends Controller
                 'message' => $e->getMessage()
             ]);
         }    
-
     }
-
     
-    public function enrolledCourses(){
+    public function getEnrolledCourses(){
         try{
             $user=Auth::user();
             $courses=$user->courses;

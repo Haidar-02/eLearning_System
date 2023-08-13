@@ -15,13 +15,14 @@ class CourseEnrollmentNotification extends Mailable
 
     public function __construct($course)
     {
+
         $this->course = $course;
     }
 
     public function build()
     {
         return $this->subject('Course Enrollment Notification')
-            ->view('course_enrollment');
+            ->view('emails.course_enrollment');
     }
 
 
@@ -42,7 +43,7 @@ class CourseEnrollmentNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'course_enrollment',
+            view: 'emails.course_enrollment',
         );
     }
 
