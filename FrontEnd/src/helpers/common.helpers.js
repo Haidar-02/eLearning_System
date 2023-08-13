@@ -34,24 +34,24 @@ async function getScheduleTasks(schedule_id) {
     const { data } = res;
 
     if (res.status === 200) {
-      return data.courses;
+      return data.tasks;
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-async function getScheduleAssignments() {
+async function getScheduleMaterials(schedule_id) {
   try {
-    const res = await axios.get(`${remoteUrl}common/get-courses`, auth());
+    const res = await axios.get(`${remoteUrl}common/get-schedule-materials/${schedule_id}`, auth());
     const { data } = res;
 
     if (res.status === 200) {
-      return data.courses;
+      return data.materials;
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-export { getAllCourses,getCourseSchedules};
+export { getAllCourses,getCourseSchedules,getScheduleTasks,getScheduleMaterials};
