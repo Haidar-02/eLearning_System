@@ -15,7 +15,7 @@ async function getStudentCourses() {
     console.log(error);
   }
 }
-async function enroll() {
+async function enroll(course_id) {
   try {
     const res = await axios.post(
       `${baseUrl}student/enroll-course`,
@@ -26,7 +26,7 @@ async function enroll() {
 
     if (res.status === 200) {
       console.log(data);
-      // return data.courses;
+      return res;
     }
   } catch (error) {
     console.log(error);
@@ -41,8 +41,7 @@ async function getEnrolledCourses() {
     );
     const { data } = res;
     if (res.status === 200) {
-      console.log(data);
-      // return data.courses;
+      return data.courses;
     }
   } catch (error) {
     console.log(error);

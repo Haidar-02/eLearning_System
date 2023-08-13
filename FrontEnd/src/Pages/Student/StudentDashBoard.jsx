@@ -87,14 +87,14 @@ const AdminDashBoard = () => {
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
 
-      <SideBar className={'right-0'}>
+      {/* <SideBar className={'right-0'}>
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar>
+      </SideBar> */}
     </div>
   );
 };
