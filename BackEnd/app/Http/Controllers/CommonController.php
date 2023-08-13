@@ -22,7 +22,7 @@ class CommonController extends Controller
         try{
             $courses=Course::with('teacher')->get();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'courses' => $courses,
             ]);
         } catch(Exception $e){
@@ -38,7 +38,7 @@ class CommonController extends Controller
             $course=Course::find($course_id);
             $students=$course->students;
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'students'=>$students
             ]);
         } catch(Exception $e){
@@ -53,7 +53,7 @@ class CommonController extends Controller
             $course=Course::find($course_id);
             $schedules=$course->schedules;
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'schedules'=>$schedules
             ]);
         } catch(Exception $e){
@@ -70,7 +70,7 @@ class CommonController extends Controller
             $materials=$schedule->materials;
 
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'materials'=>$materials
             ]);
         } catch(Exception $e){
@@ -86,7 +86,7 @@ class CommonController extends Controller
         $tasks=$schedule->tasks;
 
         return response()->json([
-            'status' => 'success',
+            'status' => '200',
             'tasks'=>$tasks
         ]);
     } catch(Exception $e){
@@ -102,7 +102,7 @@ class CommonController extends Controller
             $submissions=TaskSubmission::where([['task_id','=',$task_id]])->get();
             echo 'marc';
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'submissions'=>$submissions
             ]);
         } catch(Exception $e){
@@ -118,7 +118,7 @@ class CommonController extends Controller
             $sessions=$schedule->sessions;
     
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'sessions'=>$sessions
             ]);
         } catch(Exception $e){
@@ -135,7 +135,7 @@ class CommonController extends Controller
             $projects=$course->projects;
     
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'projects'=>$projects
             ]);
         } catch(Exception $e){
@@ -151,7 +151,7 @@ class CommonController extends Controller
             $project=GroupProject::where([['id','=',$project_id]])->first();
             $members=$project->members()->with('info')->get();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'projects'=>$members
             ]);
         } catch(Exception $e){
@@ -166,7 +166,7 @@ class CommonController extends Controller
         try{
             $feedback=Feedback::where([['course_id','=',$course_id],['student_id','=',$student_id]])->first();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'feedback'=>$feedback
             ]);
         } catch(Exception $e){
@@ -184,7 +184,7 @@ class CommonController extends Controller
         $message->message=$request->message;
         $message->save();
         return response()->json([
-            'status' => 'success',
+            'status' => '200',
         ]);
         } catch(Exception $e){
             return response()->json([
@@ -201,18 +201,18 @@ class CommonController extends Controller
             $received=Message::where('receiver_id',Auth::id())->with('isReceiver')->get();
             if(var_dump($received->isEmpty())){
                 return response()->json([
-                    'status' => 'success',
+                    'status' => '200',
                     'message'=>'empty'
                 ]);
             }else{
                 return response()->json([
-                    'status' => 'success',
+                    'status' => '200',
                     'message'=>$received
                 ]);
             }        
         }else {
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'message'=>$sent
             ]);        
         }
@@ -229,7 +229,7 @@ class CommonController extends Controller
         try{
             $board_messages=BoardMessage::with('user')->get();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'message'=>$board_messages
             ]);
             } catch(Exception $e){
@@ -245,7 +245,7 @@ class CommonController extends Controller
         try{
             $notifications=Notification::where("course_id",$course_id)->get();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'notifications'=>$notifications
             ]);
             } catch(Exception $e){
@@ -263,7 +263,7 @@ class CommonController extends Controller
             $board_messages->message=$request->message;
             $board_messages->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
             } catch(Exception $e){
                 return response()->json([
@@ -278,7 +278,7 @@ class CommonController extends Controller
             $course=Course::where([['id','=',$course_id]])->first();
             $teacher=$course->teacher;
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'teacher'=> $teacher
             ]);
         } catch(Exception $e){

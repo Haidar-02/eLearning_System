@@ -26,7 +26,7 @@ class TeacherController extends Controller
             $user=Auth::id();
             $courses=Course::where('teacher_id',$user)->get();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'courses' => $courses
             ]);
         } catch(Exception $e){
@@ -43,11 +43,12 @@ class TeacherController extends Controller
         try{
             $schedule=new Schedule;
             $schedule->course_id=$request->course_id;
+            $schedule->name=$request->name;
             $schedule->start_date=$request->start_date;
             $schedule->end_date=$request->end_date;
             $schedule->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -64,7 +65,7 @@ class TeacherController extends Controller
             Schedule::where([['id','=',$schedule_id]])->delete();
 
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -109,7 +110,7 @@ class TeacherController extends Controller
         $material->file_path=$publicUrl;
         $material->save();
         return response()->json([
-            'status' => 'success',
+            'status' => '200',
         ]);
     } catch(Exception $e){
         return response()->json([
@@ -125,7 +126,7 @@ class TeacherController extends Controller
             CourseMaterial::where([['id','=',$material_id]])->delete();
 
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -147,7 +148,7 @@ class TeacherController extends Controller
             $task->task_type=$request->task_type;
             $task->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -162,7 +163,7 @@ class TeacherController extends Controller
             Task::where([['id','=',$task_id]])->delete();
 
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -183,7 +184,7 @@ class TeacherController extends Controller
 
             $session->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -198,7 +199,7 @@ class TeacherController extends Controller
             Session::where([['id','=',$session_id]])->delete();
 
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -217,7 +218,7 @@ class TeacherController extends Controller
     //         $session=Session::where([['id','=',$session_id]])->first();
     //         $attendances=$session->attendances;
     //         return response()->json([
-    //             'status' => 'success',
+    //             'status' => '200',
     //             'attendances'=>$attendances
     //         ]);
     //     } catch(Exception $e){
@@ -265,7 +266,7 @@ class TeacherController extends Controller
             $project->file_path=$publicUrl;
             $project->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -281,7 +282,7 @@ class TeacherController extends Controller
             $member->project_id=$request->project_id;
             $member->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -297,7 +298,7 @@ class TeacherController extends Controller
             $grade=$request->grade;
             TaskSubmission::where([['id','=',$submission_id]])->update(['grade' => $grade]);
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -313,7 +314,7 @@ class TeacherController extends Controller
             $grade=$request->grade;
             GroupProject::where([['id','=',$project_id]])->update(['grade' => $grade]);
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -334,7 +335,7 @@ class TeacherController extends Controller
             $feedback->comment=$request->comment;
             $feedback->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -353,7 +354,7 @@ class TeacherController extends Controller
             $notification->notification=$request->notification;
             $notification->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([

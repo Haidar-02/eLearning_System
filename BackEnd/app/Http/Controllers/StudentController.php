@@ -28,7 +28,7 @@ class StudentController extends Controller
             $course->course_id=$request->course_id;
             $course->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -43,7 +43,7 @@ class StudentController extends Controller
             $user=Auth::user();
             $courses=$user->courses;
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
                 'courses' => $courses
             ]);
         } catch(Exception $e){
@@ -64,7 +64,7 @@ class StudentController extends Controller
     //         // $schedules=$course->schedules->with('tasks')->where()->get();
 
     //         return response()->json([
-    //             'status' => 'success',
+    //             'status' => '200',
     //             // 'projects'=>$members
     //         ]);
     //     } catch(Exception $e){
@@ -107,7 +107,7 @@ class StudentController extends Controller
             $submission->file_path=$publicUrl;
             $submission->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -128,7 +128,7 @@ class StudentController extends Controller
             $teacher_meet->end_time=$request->end_time;
             $teacher_meet->save();
             return response()->json([
-                'status' => 'success',
+                'status' => '200',
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -144,7 +144,7 @@ class StudentController extends Controller
         try{
         $teacher_meet=TeacherMeetSchedule::where([['teacher_id','=',$teacher_id],['user_id','=',Auth::id()]])->first();
         return response()->json([
-            'status' => 'success',
+            'status' => '200',
             'teacher_meet'=> $teacher_meet
         ]);
         } catch(Exception $e){
