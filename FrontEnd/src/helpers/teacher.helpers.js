@@ -33,7 +33,6 @@ async function addSchedule({
       },
       auth()
     );
-    console.log(res);
     if (res.status === 200) {
       const data = res.data;
       return { data };
