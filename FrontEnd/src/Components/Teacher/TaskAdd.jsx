@@ -9,7 +9,7 @@ const initialState = {
   start_date: '',
   end_date: '',
 };
-const ScheduleAdd = ({ setShow, setSchedules, course_id}) => {
+const TaskAdd = ({ setShow, setSchedules, course_id}) => {
   const [state, setState] = useState(initialState);
   const [error, setError] = useState();
   function inputHandler(e) {
@@ -72,4 +72,4 @@ const ScheduleAdd = ({ setShow, setSchedules, course_id}) => {
   );
 };
 
-export default ScheduleAdd;
+export default TaskAdd;
