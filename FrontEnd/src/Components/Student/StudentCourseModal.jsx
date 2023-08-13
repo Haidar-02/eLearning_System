@@ -27,9 +27,10 @@ const StudenCourseModal = ({
           text="enroll"
           onClick={async () => {
             const { course, status } = await enroll(id);
+
             if (status === 'success') {
               setEnrolledCourses((prev) => [course, ...prev]);
-              setDisabled((prev) => !prev);
+              setDisabled(true);
             }
           }}
           className="text-[16px] text-white bg-green p-3 self-end "

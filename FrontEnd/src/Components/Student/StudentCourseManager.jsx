@@ -27,6 +27,7 @@ const StudentCourseManager = () => {
   }, []);
 
   const enrolledIn = enrolledCourses?.map((e) => e.id);
+  console.log(viewEnrolled);
   return (
     <div className="">
       <div className="flex items-center  justify-between">
@@ -37,11 +38,11 @@ const StudentCourseManager = () => {
           onClick={() => {
             setViewEnrolled((prev) => !prev);
           }}
-          text={`View ${viewEnrolled ? 'enrolled' : 'all'}`}
+          text={`View ${viewEnrolled ? 'all' : 'enrolled'}`}
           className="text-white"
         />
       </div>
-      {viewEnrolled
+      {!viewEnrolled
         ? courses &&
           enrolledCourses &&
           courses.map((course, index) => (

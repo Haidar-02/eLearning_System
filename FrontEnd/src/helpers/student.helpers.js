@@ -22,11 +22,10 @@ async function enroll(course_id) {
       { course_id },
       auth()
     );
-    const { data } = res;
+    console.log(res);
 
     if (res.status === 200) {
-      console.log(data);
-      return res;
+      return res.data;
     }
   } catch (error) {
     console.log(error);
