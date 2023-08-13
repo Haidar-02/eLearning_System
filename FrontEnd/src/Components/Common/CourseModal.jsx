@@ -9,7 +9,7 @@ import bullhornSolid from '../../assets/icons/bullhorn-solid.svg';
 import messageIcon from '../../assets/icons/message-regular.svg';
 import discussionBoard from '../../assets/icons/rectangle-list-regular.svg';
 import homeIcon from '../../assets/icons/house-solid.svg';
-
+import TeacherScheduleManager from '..\src\Components\Teacher\TeacherScheduleManager.jsx';
 const falseState = {
     home_page: false,
     anouncements: false,
@@ -89,7 +89,7 @@ const CourseModal = ({course,courseModel,setCourseModel}) => {
 
         <div className="mainContent flex flex-col px-14 py-10 h-fit ">
           {/* PAGES GO HERE */}
-          {home_page && <span className="h-[500px] p-10">schedules</span>}
+          {home_page && <TeacherScheduleManager course={course}/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
 
