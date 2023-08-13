@@ -33,8 +33,15 @@ const SignInForm = ({ setShow }) => {
     }
     if (data) {
       localStorage.setItem('user', JSON.stringify(data));
-
-      navigate('/adminDash');
+      if(data.user_type=="1"){
+        navigate('/adminDash');
+      } else if(data.user_type=="2"){
+        navigate('/teacherDash');
+      } else if(data.user_type=="3"){
+        navigate('/parentDash');
+      } else {
+        navigate('/studentDash');
+      }
     }
   }
 
