@@ -60,7 +60,7 @@ async function addCourse({
 }) {
   try {
     const res = await axios.post(
-      `${baseUrl}admin/addCourse`,
+      `${remoteUrl}admin/addCourse`,
       {
         title,
         description,
@@ -97,7 +97,7 @@ async function addCourse({
 
 async function deleteCourse(id) {
   try {
-    await axios.delete(`${baseUrl}admin/deleteCourse/${id}`, auth());
+    await axios.delete(`${remoteUrl}admin/deleteCourse/${id}`, auth());
   } catch (error) {
     console.log(error);
   }
