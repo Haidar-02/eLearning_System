@@ -95,7 +95,7 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Course created successfully',
-            // 'course' => $course,
+
             'course' => [
                 'teacher' => $course->teacher,
                 'description' => $course->description,
