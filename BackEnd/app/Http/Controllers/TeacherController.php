@@ -16,7 +16,7 @@ use App\Models\TaskSubmission;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {

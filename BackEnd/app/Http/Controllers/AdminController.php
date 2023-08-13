@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -199,6 +199,10 @@ class AdminController extends Controller
             'message' => 'Backup created successfully',
         ]);
     }
-
-
 }
+
+// student: priscilla.abernathy@example.net
+// teacher: kulas.alia@example.org
+// Mostafa Kreidly10:19 PM
+// admin: admin@admin.com
+// adminadmin

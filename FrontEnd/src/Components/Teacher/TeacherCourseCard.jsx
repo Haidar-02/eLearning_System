@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-import Button from '../Common/Button';
-import CourseModal from '../Common/CourseModal';
+import React, { useState } from "react";
+import Button from "../Common/Button";
+import CourseModal from "../Common/CourseModal";
 
-
-
-
-const CourseCard = ({ course}) => {
-  const [courseModel,setCourseModel]=useState(false);
-
+const CourseCard = ({ course }) => {
+  const [courseModel, setCourseModel] = useState(false);
 
   const {
     class_code,
@@ -19,23 +15,34 @@ const CourseCard = ({ course}) => {
     title,
   } = course;
   return (
-    <div className="flex flex-col p-3 border gap-3">
-      {courseModel && <CourseModal courseModel={courseModel} setCourseModel={setCourseModel} course={course}/>}
+    <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors hover:bg-slate-200">
+      {courseModel && (
+        <CourseModal
+          courseModel={courseModel}
+          setCourseModel={setCourseModel}
+          course={course}
+        />
+      )}
 
-      <div className="course-title  cursor-pointer " onClick={()=>setCourseModel(true)}>
-        <span className="gothic font-semibold text-md">{title}</span>
+      <div
+        className="course-title  cursor-pointer "
+        onClick={() => setCourseModel(true)}
+      >
+        <span className="text-md font-bold uppercase hover:underline">
+          {title}
+        </span>
       </div>
-      <div className="content monster text-xs flex flex-col gap-2">
+      <div className="content monster text-xs flex flex-col gap-5 cursor-default">
         <div className="description">
-          <span className="font-semibold underline">Description: </span>
+          <span className="font-semibold">Description: </span>
           {description}
         </div>
         <div className="enrollment-limit">
-          <span className="font-semibold underline">Enrollment Limit: </span>
+          <span className="font-semibold">Enrollment Limit: </span>
           {enrollment_limit}
         </div>
         <div className="meet_link">
-          <span className="font-semibold underline">Meet Link: </span>
+          <span className="font-semibold">Meet Link: </span>
           {meet_link}
         </div>
       </div>
@@ -56,7 +63,6 @@ const CourseCard = ({ course}) => {
         className="text-white self-end mr-2 "
       />
       </div> */}
-
     </div>
   );
 };

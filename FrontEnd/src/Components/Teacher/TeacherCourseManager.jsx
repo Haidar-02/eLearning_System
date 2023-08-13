@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import CourseCard from './TeacherCourseCard';
-import Button from '../Common/Button';
-import { getTeacherCourses } from '../../helpers/Teacher.helpers';
-
-
+import CourseCard from "./TeacherCourseCard";
+import Button from "../Common/Button";
+import { getTeacherCourses } from "../../helpers/Teacher.helpers";
 const TeacherCourseManager = () => {
   const [courses, setCourses] = useState();
 
@@ -35,9 +33,8 @@ const TeacherCourseManager = () => {
 
       {courses &&
         courses.map((course, index) => (
-          <CourseCard key={index} course={course}/>
+          <CourseCard key={index} course={course} />
         ))}
-
     </div>
   );
 };

@@ -15,7 +15,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
