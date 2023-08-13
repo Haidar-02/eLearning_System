@@ -24,7 +24,7 @@ async function addSchedule({
 }) {
   try {
     const res = await axios.post(
-      `${remoteUrl}teacher/add-course-schedule"`,
+      `${remoteUrl}teacher/add-course-schedule`,
       {
         course_id,
         name,

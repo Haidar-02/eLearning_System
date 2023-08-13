@@ -15,9 +15,9 @@ async function getAllCourses() {
     console.log(error);
   }
 }
-async function getCourseSchedules() {
+async function getCourseSchedules(course_id) {
   try {
-    const res = await axios.get(`${remoteUrl}common/get-courses`, auth());
+    const res = await axios.get(`${remoteUrl}common/get-course-schedules/${course_id}`, auth());
     const { data } = res;
 
     if (res.status === 200) {
@@ -28,9 +28,9 @@ async function getCourseSchedules() {
   }
 }
 
-async function getScheduleTasks(course_id) {
+async function getScheduleTasks(schedule_id) {
   try {
-    const res = await axios.get(`${remoteUrl}common/get-course-schedules/${course_id}`, auth());
+    const res = await axios.get(`${remoteUrl}common/get-schedule-tasks/${schedule_id}`, auth());
     const { data } = res;
 
     if (res.status === 200) {
@@ -54,4 +54,4 @@ async function getScheduleAssignments() {
   }
 }
 
-export { getAllCourses };
+export { getAllCourses,getCourseSchedules};
