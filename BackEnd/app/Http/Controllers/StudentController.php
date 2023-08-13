@@ -23,6 +23,18 @@ class StudentController extends Controller
 
     public function enrollCourse(Request $request)
     {
+        // $request->validate([
+        //    'course_id' =>' required|exists:course,id'
+        // ]);
+        $user = Auth::user();
+
+
+        $exists = CourseEnrollment::where('course_id', $request->course_id)->where('student_id', $user->id)->first();
+        if ($exists) {
+            return response()->json([
+                "error" => "already enrolled"
+            ]);
+        }
         try {
             $course = new CourseEnrollment;
             $course->student_id = Auth::id();
@@ -30,6 +42,8 @@ class StudentController extends Controller
             $course->save();
             return response()->json([
                 'status' => 'success',
+                'course' => Course::with('teacher')->find($request->course_id),
+                'exists' => $exists
             ]);
         } catch (Exception $e) {
             return response()->json([
