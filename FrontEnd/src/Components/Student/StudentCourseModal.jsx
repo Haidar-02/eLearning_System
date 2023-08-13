@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Modal from '../Common/Modal';
 import Button from '../Common/Button';
-
+import { enroll } from '../../helpers/student.helpers';
 import CourseDetails from '../Courses/CourseDetails';
 
-const StudenCourseModal = ({ course, setShow, setCourses }) => {
-  console.log(course);
-  const {
-    class_code,
-    description,
-    enrollment_limit,
-    id,
-    meet_link,
-    teacher,
-    title,
-    enrollments_count,
-  } = course;
+const StudenCourseModal = ({
+  course,
+  setShow,
+  setEnrolledCourses,
+  isEnrolled,
+}) => {
+  const { enrollment_limit, enrollments_count, id } = course;
+  const [disabled, setDisabled] = useState(false);
 
   const isMaxedOut = enrollments_count === enrollment_limit ? true : false;
+  console.log(disabled || isEnrolled || isMaxedOut);
   return (
     <Modal
       setShow={setShow}
@@ -28,9 +25,15 @@ const StudenCourseModal = ({ course, setShow, setCourses }) => {
       <div className="button-container flex justify-end gap-3">
         <Button
           text="enroll"
-          onClick={() => {}}
+          onClick={async () => {
+            const { course, status } = await enroll(id);
+            if (status === 'success') {
+              setEnrolledCourses((prev) => [course, ...prev]);
+              setDisabled((prev) => !prev);
+            }
+          }}
           className="text-[16px] text-white bg-green p-3 self-end "
-          disabled={isMaxedOut ? true : false}
+          disabled={disabled || isEnrolled || isMaxedOut ? true : false}
         />
         <Button
           text="cancel"

@@ -10,12 +10,9 @@ import { getEnrolledCourses } from '../../helpers/student.helpers';
 const StudentCourseManager = () => {
   const [courses, setCourses] = useState();
   const [enrolledCourses, setEnrolledCourses] = useState();
-  const [user, setUser] = useState();
-  //   const [show, setShow] = useState(false);
+  const [viewEnrolled, setViewEnrolled] = useState(false);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-
     const fetchCourses = async () => {
       const res = await getAllCourses();
       setCourses(res);
@@ -24,31 +21,47 @@ const StudentCourseManager = () => {
       const res = await getEnrolledCourses();
       setEnrolledCourses(res);
     };
-    setUser(user);
+
     fetchCourses();
     fetchEnrolled();
   }, []);
 
-  const enrolledIn = enrolledCourses?.map((e) => {
-    if (e.id === user.id) {
-      return e.id;
-    }
-  });
-
+  const enrolledIn = enrolledCourses?.map((e) => e.id);
   return (
     <div className="">
-      <div className="page-header gothic color-cyan-dark text-2xl py-5">
-        Manage Courses
+      <div className="flex items-center  justify-between">
+        <div className="page-header gothic color-cyan-dark text-2xl py-5">
+          {viewEnrolled ? 'Enrolled Courses' : 'All Courses'}
+        </div>
+        <Button
+          onClick={() => {
+            setViewEnrolled((prev) => !prev);
+          }}
+          text={`View ${viewEnrolled ? 'enrolled' : 'all'}`}
+          className="text-white"
+        />
       </div>
-
-      {courses &&
-        courses.map((course, index) => (
-          <StudentCourseCard
-            key={index}
-            course={course}
-            setCourses={setCourses}
-          />
-        ))}
+      {viewEnrolled
+        ? courses &&
+          enrolledCourses &&
+          courses.map((course, index) => (
+            <StudentCourseCard
+              key={index}
+              course={course}
+              setEnrolledCourses={setEnrolledCourses}
+              enrolledIn={enrolledIn}
+            />
+          ))
+        : courses &&
+          enrolledCourses &&
+          enrolledCourses.map((course, index) => (
+            <StudentCourseCard
+              key={index}
+              course={course}
+              setEnrolledCourses={setEnrolledCourses}
+              enrolledIn={enrolledIn}
+            />
+          ))}
     </div>
   );
 };
