@@ -15,6 +15,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\CourseEnrollmentNotification;
+use Illuminate\Support\Facades\Mail;
+
+use Storage;
 
 class StudentController extends Controller
 {
