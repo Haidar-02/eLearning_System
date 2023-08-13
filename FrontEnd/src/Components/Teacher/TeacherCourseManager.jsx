@@ -3,13 +3,11 @@ import React, { useEffect, useState } from 'react';
 import CourseCard from './CourseCard';
 import Button from '../Common/Button';
 import { getTeacherCourses } from '../../helpers/Teacher.helpers';
-import CourseAdd from '../Courses/CourseAdd';
+
 
 const TeacherCourseManager = () => {
   const [courses, setCourses] = useState();
-  const [show, setShow] = useState(false);
 
-  console.log(courses);
   useEffect(() => {
     const fetchCourses = async () => {
       const res = await getTeacherCourses();
@@ -37,8 +35,9 @@ const TeacherCourseManager = () => {
 
       {courses &&
         courses.map((course, index) => (
-          <CourseCard key={index} course={course} setCourses={setCourses} />
+          <CourseCard key={index} course={course}/>
         ))}
+
     </div>
   );
 };

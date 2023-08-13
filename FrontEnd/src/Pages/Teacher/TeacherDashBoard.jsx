@@ -10,6 +10,7 @@ import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
 import SideBar from '../../Components/DashBoard/SideBar';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 import TeacherCourseManager from '../../Components/Teacher/TeacherCourseManager';
+import CourseModal from '../../Components/Common/CourseModal';
 
 const falseState = {
   dashboard: false,
@@ -27,7 +28,7 @@ const TeacherDashBoard = () => {
     assignments: false,
     messages: false,
   });
-
+  const [courseModel,setCourseModel]=useState(false);
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
   };
@@ -85,7 +86,7 @@ const TeacherDashBoard = () => {
         {/* PAGES GO HERE */}
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
         {/* {grades && <span className="h-[500px] p-10">Manage Users</span>} */}
-        {classes && <TeacherCourseManager />}
+        {classes && <TeacherCourseManager/>}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
 {/* 

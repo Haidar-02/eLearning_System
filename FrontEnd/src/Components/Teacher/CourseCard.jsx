@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
-import CourseModal from '../Courses/CourseModal';
 import Button from '../Common/Button';
+import CourseModal from '../Common/CourseModal';
 
-const CourseCard = ({ course, onClick, setCourses }) => {
-  const [show, setShow] = useState(false);
+const falseState = {
+  dashboard: false,
+  grades: false,
+  classes: false,
+  assignments: false,
+  messages: false,
+};
+
+
+const CourseCard = ({ course}) => {
+  const [courseModel,setCourseModel]=useState(false);
+
+
   const {
     class_code,
     description,
@@ -13,17 +24,11 @@ const CourseCard = ({ course, onClick, setCourses }) => {
     teacher,
     title,
   } = course;
-
   return (
     <div className="flex flex-col p-3 border gap-3">
-      {show && (
-        <CourseModal
-          course={course}
-          setCourses={setCourses}
-          setShow={setShow}
-        />
-      )}
-      <div className="course-title ">
+      {courseModel && <CourseModal courseModel={courseModel} setCourseModel={setCourseModel} course={course}/>}
+
+      <div className="course-title  cursor-pointer " onClick={()=>setCourseModel(true)}>
         <span className="gothic font-semibold text-md">{title}</span>
       </div>
       <div className="content monster text-xs flex flex-col gap-2">
