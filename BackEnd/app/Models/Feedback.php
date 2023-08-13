@@ -9,6 +9,7 @@ class Feedback extends Model
 {
     use HasFactory;
 
+    public $table="feedbacks";
     public $timestamps = false;
 
 }

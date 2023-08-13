@@ -26,7 +26,7 @@ class UserFactory extends Factory
 
             'password' => Hash::make("123456"),
             'remember_token' => Str::random(10),
-            'user_type' => UserType::all()->random()
+            'user_type' => UserType::all()->where('id','!=','1')->random()
         ];
     }
 

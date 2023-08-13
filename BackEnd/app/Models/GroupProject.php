@@ -14,7 +14,7 @@ class GroupProject extends Model
 
     public function members(): HasMany
     {
-        return $this->hasMany(StudentProject::class);
+        return $this->hasMany(StudentProject::class,"project_id");
 
     }
 }

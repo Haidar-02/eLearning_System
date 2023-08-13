@@ -15,26 +15,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Mail\CourseEnrollmentNotification;
-use Illuminate\Support\Facades\Mail;
-
 
 class StudentController extends Controller
 {
-    public function getAllCourses(){
-        try{
-            $courses=Course::all();
-            return response()->json([
-                'status' => 'success',
-                'courses' => $courses,
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
+
 
     public function enrollCourse(Request $request){
         try{
@@ -97,12 +81,31 @@ class StudentController extends Controller
         try{
             $submission=new TaskSubmission;
             $submission->task_id=$request->task_id;
-            $submission->student_id=$request->Auth::id();
-            $base64Image=$request->file;
-            $file=base64_decode($base64Image);
-            $fileName = time() . '.png'; 
-            file_put_contents(public_path('img/' . $fileName), $file);
-            $submission->file_path_url='http://localhost:8000/img/' . $fileName;  
+            $submission->student_id=Auth::id();
+            $base64Image=$request->input('file');
+            $binaryData=base64_decode($base64Image);
+            $originalFileName = $request->file_name;
+    
+            //create temp file
+            $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
+            file_put_contents($tempFilePath, $binaryData);
+    
+            $uploadedFile = new \Illuminate\Http\UploadedFile(
+                $tempFilePath,
+                $originalFileName, // Provide a fallback original filename
+                mime_content_type($tempFilePath), // Guess the MIME type
+                null,
+                true // Delete the file after it's used
+            );
+        
+            //get file extension
+            $fileExtension = $uploadedFile->getClientOriginalExtension();
+            unlink($tempFilePath);
+            $fileName = uniqid() . '.'.$fileExtension;
+    
+            Storage::disk('public')->put('files/' . $fileName, $binaryData);
+            $publicUrl = Storage::disk('public')->url('files/' . $fileName);
+            $submission->file_path=$publicUrl;
             $submission->save();
             return response()->json([
                 'status' => 'success',
@@ -115,27 +118,13 @@ class StudentController extends Controller
         } 
     }
 
-    public function getCourseTeacher($course_id){
-        try{
-            $course=Course::where([['id','=',$course_id]])->first();
-            $teacher=$course->teacher;
-            return response()->json([
-                'status' => 'success',
-                'teacher'=> $teacher
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        } 
-    }
+
     public function addTeacherMeet(Request $request){
         //location and meet_link should be set by teacher
         try{
             $teacher_meet=new TeacherMeetSchedule;
             $teacher_meet->teacher_id=$request->teacher_id;
-            $teacher_meet->student_id=$request->Auth::id();
+            $teacher_meet->user_id=Auth::id();
             $teacher_meet->start_time=$request->start_time;
             $teacher_meet->end_time=$request->end_time;
             $teacher_meet->save();

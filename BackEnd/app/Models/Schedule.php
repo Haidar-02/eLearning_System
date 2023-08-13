@@ -10,6 +10,8 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function materials(): HasMany
     {
         return $this->hasMany(CourseMaterial::class);
@@ -27,9 +29,4 @@ class Schedule extends Model
 
     }
 
-    public function projects(): HasMany
-    {
-        return $this->hasMany(GroupProject::class);
-
-    }
 }

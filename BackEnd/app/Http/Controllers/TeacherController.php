@@ -16,6 +16,7 @@ use App\Models\TaskSubmission;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class TeacherController extends Controller
 {
@@ -77,15 +78,35 @@ class TeacherController extends Controller
     try{
         $material=new CourseMaterial;
         $material->schedule_id=$request->schedule_id;
+        $material->course_id=$request->course_id;
         $material->teacher_id=Auth::id();
-        $material->material_type=$request->material_type;
         $material->title=$request->title;
         $material->content=$request->content;
-        $base64Image=$request->file;
-        $file=base64_decode($base64Image);
-        $fileName = time() . '.png'; 
-        file_put_contents(public_path('img/' . $fileName), $file);
-        $material->file_path_url='http://localhost:8000/img/' . $fileName;  
+
+        $base64Image=$request->input('file');
+        $binaryData=base64_decode($base64Image);
+        $originalFileName = $request->file_name;
+
+        //create temp file
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
+        file_put_contents($tempFilePath, $binaryData);
+
+        $uploadedFile = new \Illuminate\Http\UploadedFile(
+            $tempFilePath,
+            $originalFileName, // Provide a fallback original filename
+            mime_content_type($tempFilePath), // Guess the MIME type
+            null,
+            true // Delete the file after it's used
+        );
+    
+        //get file extension
+        $fileExtension = $uploadedFile->getClientOriginalExtension();
+        unlink($tempFilePath);
+        $fileName = uniqid() . '.'.$fileExtension;
+
+        Storage::disk('public')->put('files/' . $fileName, $binaryData);
+        $publicUrl = Storage::disk('public')->url('files/' . $fileName);
+        $material->file_path=$publicUrl;
         $material->save();
         return response()->json([
             'status' => 'success',
@@ -120,6 +141,7 @@ class TeacherController extends Controller
             $task->title=$request->title;
             $task->description=$request->description;
             $task->due_date=$request->due_date;
+            $task->course_id=$request->course_id;
             $task->schedule_id=$request->schedule_id;
             $task->teacher_id=Auth::id();
             $task->task_type=$request->task_type;
@@ -156,6 +178,9 @@ class TeacherController extends Controller
         try{
             $session=new Session;
             $session->date=$request->date;
+            $session->course_id=$request->course_id;
+            $session->schedule_id=$request->schedule_id;
+
             $session->save();
             return response()->json([
                 'status' => 'success',
@@ -186,23 +211,23 @@ class TeacherController extends Controller
 
 
 
-    public function getSessionAttendance($session_id){
+    // public function getSessionAttendance($session_id){
 
-        try{
-            $session=Session::where([['id','=',$session_id]])->first();
-            $attendances=$session->attendances;
-            return response()->json([
-                'status' => 'success',
-                'attendances'=>$attendances
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        } 
+    //     try{
+    //         $session=Session::where([['id','=',$session_id]])->first();
+    //         $attendances=$session->attendances;
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'attendances'=>$attendances
+    //         ]);
+    //     } catch(Exception $e){
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => $e->getMessage()
+    //         ]);
+    //     } 
 
-    }
+    // }
     // public function addSessionAttendance(Request $request){
         
     // }
@@ -210,14 +235,34 @@ class TeacherController extends Controller
     public function addCourseProject(Request $request){
         try{
             $project=new GroupProject;
-            $project->course_id=$request->date;
+            $project->course_id=$request->course_id;
             $project->submission_date=$request->submission_date;
             $project->status=$request->status;
-            $base64Image=$request->file;
-            $file=base64_decode($base64Image);
-            $fileName = time() . '.png'; 
-            file_put_contents(public_path('img/' . $fileName), $file);
-            $project->file_path_url='http://localhost:8000/img/' . $fileName;  
+
+            $base64Image=$request->input('file');
+            $binaryData=base64_decode($base64Image);
+            $originalFileName = $request->file_name;
+
+            //create temp file
+            $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
+            file_put_contents($tempFilePath, $binaryData);
+
+            $uploadedFile = new \Illuminate\Http\UploadedFile(
+                $tempFilePath,
+                $originalFileName, // Provide a fallback original filename
+                mime_content_type($tempFilePath), // Guess the MIME type
+                null,
+                true // Delete the file after it's used
+            );
+        
+            //get file extension
+            $fileExtension = $uploadedFile->getClientOriginalExtension();
+            unlink($tempFilePath);
+            $fileName = uniqid() . '.'.$fileExtension;
+
+            Storage::disk('public')->put('files/' . $fileName, $binaryData);
+            $publicUrl = Storage::disk('public')->url('files/' . $fileName);
+            $project->file_path=$publicUrl;
             $project->save();
             return response()->json([
                 'status' => 'success',
@@ -266,7 +311,7 @@ class TeacherController extends Controller
         try{
             $project_id=$request->project_id;
             $grade=$request->grade;
-            TaskSubmission::where([['id','=',$project_id]])->update(['grade' => $grade]);
+            GroupProject::where([['id','=',$project_id]])->update(['grade' => $grade]);
             return response()->json([
                 'status' => 'success',
             ]);
@@ -316,24 +361,5 @@ class TeacherController extends Controller
                 'message' => $e->getMessage()
             ]);
         } 
-    }
-    public function addDiscussionMessage(Request $request){
-        try{
-            $discussion=new BoardMessage;
-            $discussion->user_id=Auth::id();
-            $discussion->course_id=$request->course_id;
-            $discussion->message=$request->message;
-            $discussion->save();
-            return response()->json([
-                'status' => 'success',
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        } 
-    }
-
-    
+    }    
 }
