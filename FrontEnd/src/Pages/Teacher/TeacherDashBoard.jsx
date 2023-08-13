@@ -72,13 +72,6 @@ const TeacherDashBoard = () => {
           />
           <DashBoardButton
             onClick={() => {
-              togglePage("assignments");
-            }}
-            icon={gradesIcon}
-            text="Assignments"
-          />
-          <DashBoardButton
-            onClick={() => {
               togglePage("messages");
             }}
             icon={messageIcon}
@@ -99,7 +92,6 @@ const TeacherDashBoard = () => {
         {/* {grades && <span className="h-[500px] p-10">Manage Users</span>} */}
         {classes && <TeacherCourseManager />}
         {messages && <span className="h-[500px] p-10">Messages</span>}
-        {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
       {/* 
       <SideBar className={'right-0'}>
