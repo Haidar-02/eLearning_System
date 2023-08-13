@@ -86,6 +86,44 @@ async function removeSchedule(schedule_id) {
     return { message };
   }
 }
+
+async function addTeacherCourse({ title, description, enrollment_limit }) {
+  try {
+    const res = await axios.post(
+      `${remoteUrl}teacher/add-new-course`,
+      {
+        title,
+        description,
+        enrollment_limit,
+      },
+      auth()
+    );
+
+    if (res.status === 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+
 async function addScheduleMaterial({
   schedule_id,
   course_id,
@@ -548,6 +586,7 @@ async function addNotification({ course_id, notification }) {
 
 export {
   getTeacherCourses,
+  addTeacherCourse,
   addSchedule,
   removeSchedule,
   addScheduleMaterial,
