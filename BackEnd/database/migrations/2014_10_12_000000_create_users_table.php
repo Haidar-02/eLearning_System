@@ -59,8 +59,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('student_id');
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('grade')->nullable();
         });
 
@@ -69,7 +69,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('course_id');
             $table->dateTime("start_date");
             $table->dateTime("end_date");
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            ;
         });
 
 
@@ -77,7 +78,8 @@ return new class extends Migration {
         Schema::create('course_materials', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            ;
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('teacher_id');
             $table->text('title');
@@ -105,7 +107,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('task_type');
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            ;
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->foreign('teacher_id')->references('id')->on('users');
             $table->foreign('task_type')->references('id')->on('task_types');
@@ -121,15 +124,16 @@ return new class extends Migration {
             $table->text('file_path');
             $table->integer('grade')->nullable();
             $table->text('status')->nullable(); //late,missing,submitted
-            $table->foreign('task_id')->references('id')->on('tasks');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+
         });
 
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->unsignedBigInteger('schedule_id');
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->dateTime("date");
@@ -144,10 +148,11 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('session_id');
-            $table->unsignedBigInteger('attendance_status'); 
+            $table->unsignedBigInteger('attendance_status');
             $table->dateTime('attendance_date');
             $table->timestamp('created_at')->useCurrent();
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            ;
             $table->foreign('session_id')->references('id')->on('sessions');
             $table->foreign('attendance_status')->references('id')->on('attendance_status');
 
@@ -161,7 +166,7 @@ return new class extends Migration {
             $table->text('file_path');
             $table->text('status');
             $table->integer('grade')->nullable();
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
 
         Schema::create('student_projects', function (Blueprint $table) {
@@ -169,8 +174,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('project_id');
             $table->integer('grade')->nullable();
-            $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('project_id')->references('id')->on('group_projects');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('group_projects')->onDelete('cascade');
         });
 
         Schema::create('board_messages', function (Blueprint $table) {
@@ -179,8 +184,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('course_id');
             $table->mediumText('message');
             $table->timestamp('created_at')->useCurrent();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
 
         Schema::create('feedbacks', function (Blueprint $table) {

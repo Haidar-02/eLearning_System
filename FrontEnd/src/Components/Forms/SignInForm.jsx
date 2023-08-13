@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+
+// import instaLogo from '../assets/images/Instagram_logo.svg';
 import { logIn } from '../../helpers/auth.helpers';
 import { useNavigate } from 'react-router-dom';
-import CustomInput from '../Inputs/CustomInput';
 
 const initialState = {
   email: '',
@@ -30,14 +31,25 @@ const SignInForm = ({ setShow }) => {
     }
     if (data) {
       localStorage.setItem('user', JSON.stringify(data));
-      navigate('/dashBoard');
+      if(data.user_type=="1"){
+        navigate('/adminDash');
+      } else if(data.user_type=="2"){
+        navigate('/teacherDash');
+      } else if(data.user_type=="3"){
+        navigate('/parentDash');
+      } else {
+        navigate('/studentDash');
+      }
     }
   }
 
   const { email, password } = inputState;
   return (
-    <div className="dark:border dark:bg-slate-900 dark:text-slate-200 signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border  h-fit  z-10 rounded-2xl  bg-grey-light transition-opacity  absolute top-1/2  left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div className="form-header gothic dark:bg-slate-900 dark:border bg-cyan-dark flex p-6 w-full rounded-t-2xl ">
+    <Modal
+      setShow={setShow}
+      className=" signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border rounded-b-2xl "
+    >
+      <div className="form-header gothic bg-cyan-dark flex p-6 w-full rounded-t-2xl ">
         Sign In
       </div>
       <div className="form-container flex flex-col gap-5 p-6 pb-0 ">
@@ -74,7 +86,7 @@ const SignInForm = ({ setShow }) => {
           Cancel
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 
