@@ -23,7 +23,7 @@ const StudentCourseCard = ({ course, setEnrolledCourses, enrolledIn }) => {
         />
       )}
       <div className="course-title ">
-        <span className="gothic font-semibold text-md">{title}</span>
+        <span className="monster font-bold  text-md">{title}</span>
       </div>
       <div className="content monster text-xs flex flex-col gap-2">
         <div className="description">
@@ -32,7 +32,12 @@ const StudentCourseCard = ({ course, setEnrolledCourses, enrolledIn }) => {
         </div>
       </div>
       <div className={`flex ${isEnrolled ? 'justify-between' : 'justify-end'}`}>
-        {isEnrolled && <img className="w-[20px]" src={enrolled} alt="" />}
+        {isEnrolled && (
+          <div className="flex items-center gap-3">
+            <img className="w-[20px]" src={enrolled} alt="" />
+            <span className="font-normal text-sm">Enrolled</span>
+          </div>
+        )}
         <Button
           text="content"
           onClick={() => setShow((prev) => !prev)}

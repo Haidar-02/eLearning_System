@@ -39,7 +39,7 @@ const StudentCourseManager = () => {
             setViewEnrolled((prev) => !prev);
           }}
           text={`View ${viewEnrolled ? 'all' : 'enrolled'}`}
-          className="text-white"
+          className="text-white mr-6"
         />
       </div>
       {!viewEnrolled
