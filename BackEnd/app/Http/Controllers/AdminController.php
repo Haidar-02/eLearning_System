@@ -88,9 +88,20 @@ class AdminController extends Controller
         $course->class_code = substr(Str::uuid(), 0, 8);
         $course->save();
 
+
         return response()->json([
             'message' => 'Course created successfully',
-            'course' => $course,
+            // 'course' => $course,
+            'course' => [
+                'teacher' => $course->teacher,
+                'description' => $course->description,
+                'title' => $course->title,
+                'enrollment_limit' => $course->enrollment_limit,
+                'teacher_id' => $course->teacher_id,
+                'meet_link' => $course->meet_link,
+                'id' => $course->id,
+                'class_code' => $course->class_code,
+            ]
         ]);
 
     }

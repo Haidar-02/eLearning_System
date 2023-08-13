@@ -47,6 +47,12 @@ const CourseModal = ({ course, setShow, setCourses }) => {
     );
     return updatedObjects;
   };
+  async function handleDelete() {
+    setCourses((prev) => {
+      const newArr = prev.filter((e) => e.id !== id);
+      return newArr;
+    });
+  }
   async function handleSave() {
     const payload = {
       teacher_id: editState.teacher.id,
@@ -104,6 +110,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
           text="delete"
           onClick={() => {
             deleteCourse(id);
+            handleDelete();
             setShow(false);
           }}
           className="text-[16px] text-white bg-red-dark  p-3 self-end "

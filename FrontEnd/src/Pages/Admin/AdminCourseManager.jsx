@@ -8,7 +8,7 @@ import CourseAdd from '../../Components/Courses/CourseAdd';
 const AdminCourseManager = () => {
   const [courses, setCourses] = useState();
   const [show, setShow] = useState(false);
-
+  console.log(courses);
   useEffect(() => {
     const fetchCourses = async () => {
       const res = await getAllCourses();
@@ -33,6 +33,7 @@ const AdminCourseManager = () => {
         </div>
       </div>
       {show && <CourseAdd setShow={setShow} setCourses={setCourses} />}
+
       {courses &&
         courses.map((course, index) => (
           <CourseCard key={index} course={course} setCourses={setCourses} />

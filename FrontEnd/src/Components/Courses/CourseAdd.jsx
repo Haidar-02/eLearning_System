@@ -29,9 +29,9 @@ const CourseAdd = ({ setShow, setCourses }) => {
     }
     if (data) {
       console.log(data);
-      //   setCourses((prev) => {
-      //     return [...prev];
-      //   });
+      setCourses((prev) => {
+        return [data.course, ...prev];
+      });
 
       setShow(false);
     }
