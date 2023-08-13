@@ -6,7 +6,7 @@ const baseUrl = 'http://127.0.0.1:8000/api/';
 async function getAllUsers() {
   try {
     const { token } = localStorage.getItem('user');
-    const res = await axios.get(`${remoteUrl}`);
+    const res = await axios.get(`${baseUrl}`);
   } catch (error) {}
 }
 
@@ -16,7 +16,7 @@ async function editCourse(
 ) {
   try {
     const res = await axios.put(
-      `${remoteUrl}admin/modifyCourse/${id}`,
+      `${baseUrl}admin/modifyCourse/${id}`,
       {
         title,
         description,
@@ -60,7 +60,7 @@ async function addCourse({
 }) {
   try {
     const res = await axios.post(
-      `${remoteUrl}admin/addCourse`,
+      `${baseUrl}admin/addCourse`,
       {
         title,
         description,
@@ -97,7 +97,7 @@ async function addCourse({
 
 async function deleteCourse(id) {
   try {
-    await axios.delete(`${remoteUrl}admin/deleteCourse/${id}`, auth());
+    await axios.delete(`${baseUrl}admin/deleteCourse/${id}`, auth());
   } catch (error) {
     console.log(error);
   }

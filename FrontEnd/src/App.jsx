@@ -13,10 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/adminDash" element={<AdminDashBoard />} />
-        <Route path="/studentDash" element={<StudentDashBoard/>} />
+        <Route path="/studentDash" element={<StudentDashBoard />} />
         <Route path="/parentDash" element={<ParentDashBoard />} />
         <Route path="/teacherDash" element={<TeacherDashBoard />} />
-
       </Routes>
     </div>
   );

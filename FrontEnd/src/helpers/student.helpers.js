@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { auth } from './auth.helpers';
-
 const remoteUrl = 'http://54.165.111.250:8000/api/';
 const baseUrl = 'http://127.0.0.1:8000/api/';
-async function getAllCourses() {
+
+async function getStudentCourses() {
   try {
     const res = await axios.get(`${baseUrl}common/get-courses`, auth());
     const { data } = res;
@@ -16,4 +16,4 @@ async function getAllCourses() {
   }
 }
 
-export { getAllCourses };
+export { getStudentCourses };
