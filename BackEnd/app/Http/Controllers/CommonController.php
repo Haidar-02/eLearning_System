@@ -51,7 +51,8 @@ class CommonController extends Controller
     public function getCourseSchedules($course_id){
         try{
             $course=Course::find($course_id);
-            $schedules=$course->schedules->get();
+            $schedules=$course->schedules;
+            if($schedules)
             return response()->json([
                 'status' => '200',
                 'schedules'=>$schedules
