@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import CourseCard from '../../Components/Courses/CourseCard';
 import Button from '../../Components/Common/Button';
-import { getAllCourses } from '../../helpers/admin.helpers';
+import { getAllCourses } from '../../helpers/common.helpers';
 import CourseAdd from '../../Components/Courses/CourseAdd';
 
 const AdminCourseManager = () => {

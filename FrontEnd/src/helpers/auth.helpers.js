@@ -1,6 +1,15 @@
 import axios from 'axios';
 const remoteUrl = 'http://54.165.111.250:8000/api/';
 const baseUrl = 'http://127.0.0.1:8000/api/';
+
+const auth = () => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+
+  return {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+};
+
 async function logIn({ email, password }) {
   try {
     const res = await axios.post(`${baseUrl}login`, {
@@ -32,4 +41,4 @@ async function logIn({ email, password }) {
   }
 }
 
-export { logIn };
+export { logIn, auth };

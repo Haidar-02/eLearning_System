@@ -9,8 +9,6 @@ import SideBar from '../../Components/DashBoard/SideBar';
 import AdminCourseManager from './AdminCourseManager';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 
-import { getAllCourses } from '../../helpers/admin.helpers';
-
 const falseState = {
   dashboard: false,
   grades: false,
@@ -65,7 +63,6 @@ const AdminDashBoard = () => {
           <DashBoardButton
             onClick={async () => {
               togglePage('classes');
-              const courses = await getAllCourses();
             }}
             icon={classesIcon}
             text="Classes"
