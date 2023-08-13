@@ -30,7 +30,7 @@ const StudentCourseManager = () => {
   console.log(viewEnrolled);
   return (
     <div className="">
-      <div className="flex items-center  justify-between">
+      <div className="flex items-center justify-between">
         <div className="page-header gothic color-cyan-dark text-2xl py-5">
           {viewEnrolled ? 'Enrolled Courses' : 'All Courses'}
         </div>
