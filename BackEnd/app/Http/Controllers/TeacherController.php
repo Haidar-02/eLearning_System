@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BoardMessage;
 use App\Models\Course;
+use Illuminate\Support\Str;
 use App\Models\CourseMaterial;
 use App\Models\Feedback;
 use App\Models\GroupProject;
@@ -208,6 +209,45 @@ class TeacherController extends Controller
                 'message' => $e->getMessage()
             ]);
         } 
+    }
+    function addCourse(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'enrollment_limit' => 'required|integer|min:1',
+            // 'class_code' => 'required|unique:courses,class_code',
+        ]);
+
+        try {
+            $course = new Course([
+                'title' => $request->title,
+                'description' => $request->description,
+                'teacher_id' => Auth::user()->id,
+                'enrollment_limit' => $request->enrollment_limit,
+            ]);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            return response()->json(['error' => 'An error occurred while creating the course'], 500);
+        }
+        $course->class_code = substr(Str::uuid(), 0, 8);
+        $course->save();
+
+
+        return response()->json([
+            'message' => 'Course created successfully',
+            // 'course' => $course,
+            'course' => [
+                'teacher' => $course->teacher,
+                'description' => $course->description,
+                'title' => $course->title,
+                'enrollment_limit' => $course->enrollment_limit,
+                'teacher_id' => $course->teacher_id,
+                'meet_link' => $course->meet_link,
+                'id' => $course->id,
+                'class_code' => $course->class_code,
+            ]
+        ]);
     }
 
 

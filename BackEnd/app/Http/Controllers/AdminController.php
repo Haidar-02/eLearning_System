@@ -103,7 +103,6 @@ class AdminController extends Controller
                 'class_code' => $course->class_code,
             ]
         ]);
-
     }
 
 

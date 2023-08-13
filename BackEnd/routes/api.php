@@ -35,6 +35,7 @@ Route::group(["middleware" => "auth:api"], function () {
             //date time  'YYYY-MM-DD hh:mm:ss' 
             Route::get("get-teacher-courses", "getTeacherCourses");
             Route::post("add-course-schedule", "addCourseSchedule");
+            Route::post("add-new-course", "addCourse");
             Route::delete("remove-course-schedule/{schedule_id}", "removeCourseSchedule");
             Route::post("add-schedule-material", "addScheduleMaterial");
             Route::delete("remove-schedule-material/{material_id}", "removeScheduleMaterial");
