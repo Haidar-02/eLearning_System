@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 
+import enrolled from '../../assets/icons/book.svg';
+
 import Button from '../Common/Button';
 import StudentCourseModal from './StudentCourseModal';
 
-const StudentCourseCard = ({ course, onClick, setCourses }) => {
+const StudentCourseCard = ({ course, setEnrolledCourses, enrolledIn }) => {
   const [show, setShow] = useState(false);
-  const {
-    class_code,
-    description,
-    enrollment_limit,
-    id,
-    meet_link,
-    teacher,
-    title,
-  } = course;
-  const { id: teacher_id, name, email } = teacher;
+
+  const { description, id, teacher, title } = course;
+
+  const isEnrolled = enrolledIn.includes(id);
 
   return (
     <div className="flex flex-col p-3 border gap-3">
-      {show && <StudentCourseModal course={course} setShow={setShow} />}
+      {show && (
+        <StudentCourseModal
+          isEnrolled={isEnrolled}
+          course={course}
+          setShow={setShow}
+          setEnrolledCourses={setEnrolledCourses}
+        />
+      )}
       <div className="course-title ">
         <span className="gothic font-semibold text-md">{title}</span>
       </div>
@@ -28,11 +31,14 @@ const StudentCourseCard = ({ course, onClick, setCourses }) => {
           {description}
         </div>
       </div>
-      <Button
-        text="content"
-        onClick={() => setShow((prev) => !prev)}
-        className="text-white self-end mr-2 "
-      />
+      <div className={`flex ${isEnrolled ? 'justify-between' : 'justify-end'}`}>
+        {isEnrolled && <img className="w-[20px]" src={enrolled} alt="" />}
+        <Button
+          text="content"
+          onClick={() => setShow((prev) => !prev)}
+          className="text-white self-end mr-2 "
+        />
+      </div>
     </div>
   );
 };
