@@ -17,30 +17,7 @@ const StudenCourseModal = ({ course, setShow, setCourses }) => {
     enrollments_count,
   } = course;
 
-  //   async function handleSave() {
-  //     const payload = {
-  //       teacher_id: editState.teacher.id,
-  //       title: editState.title,
-  //       description: editState.description,
-  //       meet_link: editState.meet_link,
-  //       enrollment_limit: editState.enrollment_limit,
-  //     };
-  //     const { data, errorMessages, message } = await editCourse(id, payload);
-  //     if (errorMessages) {
-  //       setEditError(errorMessages[0]);
-  //       return;
-  //     } else if (message) {
-  //       setEditError(message);
-  //       return;
-  //     }
-  //     if (data) {
-  //       setCourses((prev) => {
-  //         const newArr = replaceObjectById(id, editState, prev);
-  //         return newArr;
-  //       });
-  //       setShow(false);
-  //     }
-  //   }
+  const isMaxedOut = enrollments_count === enrollment_limit ? true : false;
   return (
     <Modal
       setShow={setShow}
@@ -51,12 +28,9 @@ const StudenCourseModal = ({ course, setShow, setCourses }) => {
       <div className="button-container flex justify-end gap-3">
         <Button
           text="enroll"
-          onClick={() => {
-            // deleteCourse(id);
-            // handleDelete();
-            // setShow(false);
-          }}
+          onClick={() => {}}
           className="text-[16px] text-white bg-green p-3 self-end "
+          disabled={isMaxedOut ? true : false}
         />
         <Button
           text="cancel"
