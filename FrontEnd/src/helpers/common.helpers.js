@@ -21,7 +21,7 @@ async function getCourseSchedules(course_id) {
     const { data } = res;
 
     if (res.status === 200) {
-      return data.courses;
+      return data.schedules;
     }
   } catch (error) {
     console.log(error);
