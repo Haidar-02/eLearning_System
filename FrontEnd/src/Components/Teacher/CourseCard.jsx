@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import Button from '../Common/Button';
 import CourseModal from '../Common/CourseModal';
 
-const falseState = {
-  dashboard: false,
-  grades: false,
-  classes: false,
-  assignments: false,
-  messages: false,
-};
+
 
 
 const CourseCard = ({ course}) => {
