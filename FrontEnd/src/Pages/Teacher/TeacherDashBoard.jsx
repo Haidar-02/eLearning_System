@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 import gradesIcon from '../../assets/icons/ChartSquareBarOutline.svg';
 import dashIcon from '../../assets/icons/dashboard.svg';
 import classesIcon from '../../assets/icons/UserGroupOutline.svg';
-import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
+import messageIcon from '../../assets/icons/message-regular.svg';
+import logoutIcon from '../../assets/icons/right-from-bracket-solid.svg';
 
+import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
 import SideBar from '../../Components/DashBoard/SideBar';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
+import TeacherCourseManager from '../../Components/Teacher/TeacherCourseManager';
 
 const falseState = {
   dashboard: false,
@@ -16,7 +19,7 @@ const falseState = {
   messages: false,
 };
 
-const AdminDashBoard = () => {
+const TeacherDashBoard = () => {
   const [state, setState] = useState({
     dashboard: true,
     grades: false,
@@ -52,13 +55,13 @@ const AdminDashBoard = () => {
               }}
             />
           </div>
-          <DashBoardButton
+          {/* <DashBoardButton
             onClick={() => {
               togglePage('grades');
             }}
             icon={gradesIcon}
             text="Users"
-          />
+          /> */}
           <DashBoardButton
             onClick={async () => {
               togglePage('classes');
@@ -70,22 +73,22 @@ const AdminDashBoard = () => {
             onClick={() => {
               togglePage('assignments');
             }}
-            icon={clipBoardIcon}
-            text="Assignments"
+            icon={messageIcon}
+            text="Messages"
           />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
+          <DashBoardButton icon={logoutIcon} text="Logout" />
+          {/* <DashBoardButton icon={dashIcon} text="Dashboard" /> */}
         </div>
       </SideBar>
 
       <div className="mainContent flex flex-col   px-14 py-10 h-fit ">
         {/* PAGES GO HERE */}
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
-        {grades && <span className="h-[500px] p-10">Manage Users</span>}
-        {/* {classes && <AdminCourseManager />} */}
+        {/* {grades && <span className="h-[500px] p-10">Manage Users</span>} */}
+        {classes && <TeacherCourseManager />}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
-
+{/* 
       <SideBar className={'right-0'}>
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
@@ -93,9 +96,9 @@ const AdminDashBoard = () => {
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar>
+      </SideBar> */}
     </div>
   );
 };
 
-export default AdminDashBoard;
+export default TeacherDashBoard;
