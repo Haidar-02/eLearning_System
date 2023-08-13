@@ -29,4 +29,17 @@ async function sendMessage({ receiver_id, message }) {
   }
 }
 
+async function search(search, userType) {
+  try {
+    const response = await axios.get(`${base_url}user/search/${search}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export { getAllCourses, sendMessage };
