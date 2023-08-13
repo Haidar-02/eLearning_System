@@ -17,15 +17,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CommonController extends Controller
 {
-    
-    public function getAllCourses(){
-        try{
-            $courses=Course::with('teacher')->get();
+
+    public function getAllCourses()
+    {
+        try {
+            $courses = Course::with('teacher')->withCount("enrollments")->get();
             return response()->json([
                 'status' => 'success',
                 'courses' => $courses,
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
@@ -33,260 +34,274 @@ class CommonController extends Controller
         }
     }
 
-    public function getCourseStudents($course_id){
-        try{
-            $course=Course::find($course_id);
-            $students=$course->students;
+    public function getCourseStudents($course_id)
+    {
+        try {
+            $course = Course::find($course_id);
+            $students = $course->students;
             return response()->json([
                 'status' => 'success',
-                'students'=>$students
+                'students' => $students
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        }    
+        }
     }
-    public function getCourseSchedules($course_id){
-        try{
-            $course=Course::find($course_id);
-            $schedules=$course->schedules;
+    public function getCourseSchedules($course_id)
+    {
+        try {
+            $course = Course::find($course_id);
+            $schedules = $course->schedules;
             return response()->json([
                 'status' => 'success',
-                'schedules'=>$schedules
+                'schedules' => $schedules
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        }    
+        }
     }
-    public function getScheduleMaterials($schedule_id){
-        try{
+    public function getScheduleMaterials($schedule_id)
+    {
+        try {
 
-            $schedule=Schedule::where([['id','=',$schedule_id]])->first();
-            $materials=$schedule->materials;
+            $schedule = Schedule::where([['id', '=', $schedule_id]])->first();
+            $materials = $schedule->materials;
 
             return response()->json([
                 'status' => 'success',
-                'materials'=>$materials
+                'materials' => $materials
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        }    
+        }
     }
-    public function getScheduleTasks($schedule_id){
-    try{
-        $schedule=Schedule::where([['id','=',$schedule_id]])->first();
-        $tasks=$schedule->tasks;
+    public function getScheduleTasks($schedule_id)
+    {
+        try {
+            $schedule = Schedule::where([['id', '=', $schedule_id]])->first();
+            $tasks = $schedule->tasks;
 
-        return response()->json([
-            'status' => 'success',
-            'tasks'=>$tasks
-        ]);
-    } catch(Exception $e){
-        return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage()
-        ]);
-    } 
+            return response()->json([
+                'status' => 'success',
+                'tasks' => $tasks
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
-    public function getTaskSubmissions($task_id){
-        try{
-            $submissions=TaskSubmission::where([['task_id','=',$task_id]])->get();
+    public function getTaskSubmissions($task_id)
+    {
+        try {
+            $submissions = TaskSubmission::where([['task_id', '=', $task_id]])->get();
             echo 'marc';
             return response()->json([
                 'status' => 'success',
-                'submissions'=>$submissions
+                'submissions' => $submissions
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
         }
-    public function getScheduleSessions($schedule_id){
-        try{
-            $schedule=Schedule::where([['id','=',$schedule_id]])->first();
-            $sessions=$schedule->sessions;
-    
+    }
+    public function getScheduleSessions($schedule_id)
+    {
+        try {
+            $schedule = Schedule::where([['id', '=', $schedule_id]])->first();
+            $sessions = $schedule->sessions;
+
             return response()->json([
                 'status' => 'success',
-                'sessions'=>$sessions
+                'sessions' => $sessions
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
     }
 
-    public function getCourseProjects($course_id){
-        try{
-            $course=Course::where([['id','=',$course_id]])->first();
-            $projects=$course->projects;
-    
+    public function getCourseProjects($course_id)
+    {
+        try {
+            $course = Course::where([['id', '=', $course_id]])->first();
+            $projects = $course->projects;
+
             return response()->json([
                 'status' => 'success',
-                'projects'=>$projects
+                'projects' => $projects
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
     }
 
-    public function getProjectMembers($project_id){
-        try{
-            $project=GroupProject::where([['id','=',$project_id]])->first();
-            $members=$project->members()->with('info')->get();
+    public function getProjectMembers($project_id)
+    {
+        try {
+            $project = GroupProject::where([['id', '=', $project_id]])->first();
+            $members = $project->members()->with('info')->get();
             return response()->json([
                 'status' => 'success',
-                'projects'=>$members
+                'projects' => $members
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
     }
 
-    public function getStudentFeedback($course_id,$student_id){
-        try{
-            $feedback=Feedback::where([['course_id','=',$course_id],['student_id','=',$student_id]])->first();
+    public function getStudentFeedback($course_id, $student_id)
+    {
+        try {
+            $feedback = Feedback::where([['course_id', '=', $course_id], ['student_id', '=', $student_id]])->first();
             return response()->json([
                 'status' => 'success',
-                'feedback'=>$feedback
+                'feedback' => $feedback
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
     }
-    public function sendMessage(Request $request){
-        try{
-        $message=new Message;
-        $message->sender_id=Auth::id();
-        $message->receiver_id=$request->receiver_id;
-        $message->message=$request->message;
-        $message->save();
-        return response()->json([
-            'status' => 'success',
-        ]);
-        } catch(Exception $e){
+    public function sendMessage(Request $request)
+    {
+        try {
+            $message = new Message;
+            $message->sender_id = Auth::id();
+            $message->receiver_id = $request->receiver_id;
+            $message->message = $request->message;
+            $message->save();
+            return response()->json([
+                'status' => 'success',
+            ]);
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
-
-    }
-    public function getMessages(){
-        try{
-        $sent=Message::where('sender_id',Auth::id())->select('message','sender_id','receiver_id')->with('isSender')->get();
-        if(var_dump($sent->isEmpty())){
-            $received=Message::where('receiver_id',Auth::id())->with('isReceiver')->get();
-            if(var_dump($received->isEmpty())){
-                return response()->json([
-                    'status' => 'success',
-                    'message'=>'empty'
-                ]);
-            }else{
-                return response()->json([
-                    'status' => 'success',
-                    'message'=>$received
-                ]);
-            }        
-        }else {
-            return response()->json([
-                'status' => 'success',
-                'message'=>$sent
-            ]);        
         }
 
-        } catch(Exception $e){
+    }
+    public function getMessages()
+    {
+        try {
+            $sent = Message::where('sender_id', Auth::id())->select('message', 'sender_id', 'receiver_id')->with('isSender')->get();
+            if (var_dump($sent->isEmpty())) {
+                $received = Message::where('receiver_id', Auth::id())->with('isReceiver')->get();
+                if (var_dump($received->isEmpty())) {
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'empty'
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => $received
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => $sent
+                ]);
+            }
+
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
 
     }
-    public function getCourseDiscussion($course_id){
-        try{
-            $board_messages=BoardMessage::with('user')->get();
+    public function getCourseDiscussion($course_id)
+    {
+        try {
+            $board_messages = BoardMessage::with('user')->get();
             return response()->json([
                 'status' => 'success',
-                'message'=>$board_messages
+                'message' => $board_messages
             ]);
-            } catch(Exception $e){
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ]);
-            } 
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
-    
-    public function getCourseNotifications($course_id){
-        try{
-            $notifications=Notification::where("course_id",$course_id)->get();
+
+    public function getCourseNotifications($course_id)
+    {
+        try {
+            $notifications = Notification::where("course_id", $course_id)->get();
             return response()->json([
                 'status' => 'success',
-                'notifications'=>$notifications
+                'notifications' => $notifications
             ]);
-            } catch(Exception $e){
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ]);
-            } 
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
-    public function addCourseDiscussion(Request $request){
-        try{
-            $board_messages=new BoardMessage;
-            $board_messages->user_id=Auth::id();
-            $board_messages->course_id=$request->course_id;
-            $board_messages->message=$request->message;
+    public function addCourseDiscussion(Request $request)
+    {
+        try {
+            $board_messages = new BoardMessage;
+            $board_messages->user_id = Auth::id();
+            $board_messages->course_id = $request->course_id;
+            $board_messages->message = $request->message;
             $board_messages->save();
             return response()->json([
                 'status' => 'success',
             ]);
-            } catch(Exception $e){
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ]);
-            } 
-    }
-    
-    public function getCourseTeacher($course_id){
-        try{
-            $course=Course::where([['id','=',$course_id]])->first();
-            $teacher=$course->teacher;
-            return response()->json([
-                'status' => 'success',
-                'teacher'=> $teacher
-            ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
+    }
+
+    public function getCourseTeacher($course_id)
+    {
+        try {
+            $course = Course::where([['id', '=', $course_id]])->first();
+            $teacher = $course->teacher;
+            return response()->json([
+                'status' => 'success',
+                'teacher' => $teacher
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }
-
