@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import SignInForm from '../../Components/Forms/SignInForm';
 import Navbar from '../../Components/Navbar/Navbar';
-
 import kidImage from '../../assets/images/Homepage/kid.png';
 import plant from '../../assets/images/Homepage/plant.png';
 import toy from '../../assets/images/Homepage/toy.png';
-
 import './LandingPage.css';
+import Toggle from '../../Components/toggle';
+
+
+
 const LandingPage = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <main className="flex flex-col h-full ">
+    <main className='flex flex-col h-full '>
       <Navbar setShow={setShow} />
       {show && <SignInForm setShow={setShow} />}
+      <Toggle />
       <div className="hero monster flex justify-center items-center grow">
         <div className="left flex justify-center items-center">
           <div className="hero-text flex flex-col grow gap-2">
