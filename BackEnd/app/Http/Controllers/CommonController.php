@@ -11,6 +11,7 @@ use App\Models\Notification;
 use App\Models\Schedule;
 use App\Models\Task;
 use App\Models\TaskSubmission;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -304,4 +305,29 @@ class CommonController extends Controller
             ]);
         }
     }
+
+    function searchUser(Request $request, $user_type, $search)
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        if (!$search) {
+            return;
+        }
+
+        $res = User::where('name', 'LIKE', "%{$search}%")
+            ->where('id', '!=', $userId)
+            ->where('user_type', '=', $user_type)
+            ->get();
+
+        return response()->json([
+            "users" => $res,
+        ]);
+    }
+
+
+
+
+
+
 }

@@ -74,8 +74,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post("add-course-discussion", "addCourseDiscussion");
             Route::get("get-course-notifications/{course_id}", "getCourseNotifications");
             Route::get("get-course-teacher/{course_id}", 'getCourseTeacher');
-
-
+            Route::get("searchUser/{user_type}/{search}", 'searchUser');
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
