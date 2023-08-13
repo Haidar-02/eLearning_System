@@ -7,7 +7,7 @@ import CourseAdd from '../../Components/Courses/CourseAdd';
 import StudentCourseCard from './StudentCourseCard';
 import { getEnrolledCourses } from '../../helpers/student.helpers';
 
-const StudentCourseManager = () => {
+const StudentCourseManager = ({ className }) => {
   const [courses, setCourses] = useState();
   const [enrolledCourses, setEnrolledCourses] = useState();
   const [viewEnrolled, setViewEnrolled] = useState(false);
@@ -29,7 +29,7 @@ const StudentCourseManager = () => {
   const enrolledIn = enrolledCourses?.map((e) => e.id);
   console.log(viewEnrolled);
   return (
-    <div className="">
+    <div className={`${classNames}`}>
       <div className="flex items-center justify-between">
         <div className="page-header gothic color-cyan-dark text-2xl py-5">
           {viewEnrolled ? 'Enrolled Courses' : 'All Courses'}
