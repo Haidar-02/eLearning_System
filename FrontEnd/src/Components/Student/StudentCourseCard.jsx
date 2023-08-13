@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import CourseModal from './CourseModal';
+
 import Button from '../Common/Button';
+import StudentCourseModal from './StudentCourseModal';
 
 const StudentCourseCard = ({ course, onClick, setCourses }) => {
   const [show, setShow] = useState(false);
@@ -17,13 +18,7 @@ const StudentCourseCard = ({ course, onClick, setCourses }) => {
 
   return (
     <div className="flex flex-col p-3 border gap-3">
-      {show && (
-        <CourseModal
-          course={course}
-          setCourses={setCourses}
-          setShow={setShow}
-        />
-      )}
+      {show && <StudentCourseModal course={course} setShow={setShow} />}
       <div className="course-title ">
         <span className="gothic font-semibold text-md">{title}</span>
       </div>
