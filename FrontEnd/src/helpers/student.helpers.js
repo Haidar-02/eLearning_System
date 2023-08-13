@@ -15,5 +15,38 @@ async function getStudentCourses() {
     console.log(error);
   }
 }
+async function enroll() {
+  try {
+    const res = await axios.post(
+      `${baseUrl}student/enroll-course`,
+      { course_id },
+      auth()
+    );
+    const { data } = res;
 
-export { getStudentCourses };
+    if (res.status === 200) {
+      console.log(data);
+      // return data.courses;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getEnrolledCourses() {
+  try {
+    const res = await axios.get(
+      `${baseUrl}student/get-enrolled-courses`,
+      auth()
+    );
+    const { data } = res;
+    if (res.status === 200) {
+      console.log(data);
+      // return data.courses;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { getStudentCourses, getEnrolledCourses, enroll };
