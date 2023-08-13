@@ -49,6 +49,7 @@ class TeacherController extends Controller
             $schedule->save();
             return response()->json([
                 'status' => '200',
+                'schedule'=>$schedule
             ]);
         } catch(Exception $e){
             return response()->json([
