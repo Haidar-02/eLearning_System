@@ -8,6 +8,7 @@ import CourseAdd from '../../Components/Courses/CourseAdd';
 const AdminCourseManager = () => {
   const [courses, setCourses] = useState();
   const [show, setShow] = useState(false);
+
   console.log(courses);
   useEffect(() => {
     const fetchCourses = async () => {

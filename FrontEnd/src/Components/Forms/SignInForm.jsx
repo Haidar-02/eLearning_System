@@ -33,15 +33,16 @@ const SignInForm = ({ setShow }) => {
     }
     if (data) {
       localStorage.setItem('user', JSON.stringify(data));
-      if(data.user_type=="1"){
-        navigate('/adminDash');
-      } else if(data.user_type=="2"){
-        navigate('/teacherDash');
-      } else if(data.user_type=="3"){
-        navigate('/parentDash');
-      } else {
-        navigate('/studentDash');
-      }
+      console.log(data.user_type);
+      // if(data.user_type=="1"){
+      //   navigate('/adminDash');
+      // } else if(data.user_type=="2"){
+      //   navigate('/teacherDash');
+      // } else if(data.user_type=="3"){
+      //   navigate('/parentDash');
+      // } else {
+      //   navigate('/studentDash');
+      // }
     }
   }
 
