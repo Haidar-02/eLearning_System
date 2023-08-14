@@ -398,12 +398,14 @@ async function addCourseProject({
   }
 }
 
-async function addProjectGroupMembers({ project_id, students }) {
+async function addProjectGroupMembers({ course_id, selectedStudents }) {
   try {
+    let students=selectedStudents;
+
     const res = await axios.post(
       `${remoteUrl}teacher/add-project-group-members`,
       {
-        project_id,
+        course_id,
         students,
       },
       auth()

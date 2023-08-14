@@ -30,11 +30,10 @@ const ProjectGroupManager = ({course_id}) => {
     }
     if (data) {
       console.log(data);
-      setMaterials((prev) => {
-        return [data.material, ...prev];
-      });
+      // setGroups((prev) => {
+      //   return [data.students, ...prev];
+      // });
 
-      setMaterialAdd(false);
     }
   }
     return ( 
