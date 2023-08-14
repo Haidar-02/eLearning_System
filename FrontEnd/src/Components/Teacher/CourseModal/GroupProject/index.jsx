@@ -16,15 +16,15 @@ const GroupProject = ({course_id}) => {
       <div>
         { !showAddGroups ? 
           <>
-          <div className="flex items-center">
+          <div className="flex items-center justify-between">
             <div className="page-header gothic color-cyan-dark text-2xl py-5">
                 Project Groups
             </div>
-            <div className="button-container flex items-center rounded-full p-3 w-[20px] h-[20px] ">
+            <div className="button-container flex items-center rounded-full p-3 h-[20px] ">
                 <Button
                 onClick={() => setAddGroups(true)}
                 text="Add Groups"
-                className="p-0 bg-transparent text-xl text-black"
+                className="p-0 bg-cyan text-xl text-white"
                 />
             </div>
           </div>
@@ -35,15 +35,15 @@ const GroupProject = ({course_id}) => {
 
         :
         <>
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
         <div className="page-header gothic color-cyan-dark text-2xl py-5">
             Project Groups
         </div>
-        <div className="button-container flex items-center rounded-full p-3 w-[20px] h-[20px] ">
+        <div className="button-container flex items-center rounded-full p-3 h-[20px] ">
         <Button
             onClick={() => setAddGroups(false)}
             text="Back"
-            className="p-0 bg-transparent text-xl text-black"
+            className="p-0 bg-cyan text-xl text-white"
             />
         </div>
         </div>

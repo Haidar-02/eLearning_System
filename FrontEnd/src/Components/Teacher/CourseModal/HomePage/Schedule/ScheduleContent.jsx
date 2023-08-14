@@ -42,25 +42,25 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
       {showTaskAdd && <TaskAdd setTaskAdd={setTaskAdd} setTasks={setTasks} course_id={course_id} schedule_id={schedule_id}/> }
       {showMaterialAdd && <MaterialAdd setMaterialAdd={setMaterialAdd} setMaterials={setMaterials} course_id={course_id} schedule_id={schedule_id}/> }
 
-          <div className="flex items-center">
+          <div className="flex  justify-between items-center">
               <div className="page-header gothic color-cyan-dark text-2xl py-5">
                   Schedule Content
               </div>
-              <div className="button-container flex items-center rounded-full p-3 w-[20px] h-[20px] ">
+              <div className="button-container flex items-center rounded-full p-3 h-[20px] ">
                   <Button
                   onClick={() => setScheduleContent({id:null,show:false})}
                   text="Back"
-                  className="p-0 bg-transparent text-xl text-black"
+                  className="p-0 bg-cyan text-xl text-white"
                   />
                   <Button
                   onClick={() => setTaskAdd(true)}
                   text="Add Task"
-                  className="p-0 bg-transparent text-xl text-black"
+                  className="p-0 bg-cyan text-xl text-white"
                   />
                   <Button
                   onClick={() => setMaterialAdd(true)}
                   text="Add Material"
-                  className="p-0 bg-transparent text-xl text-black"
+                  className="p-0 bg-cyan text-xl text-white"
                   />
               </div>
           </div>

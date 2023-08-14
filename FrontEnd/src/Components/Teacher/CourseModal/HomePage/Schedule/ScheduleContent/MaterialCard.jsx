@@ -16,7 +16,7 @@ const MaterialCard = ({ material,setMaterials}) => {
 
 
   return (
-    <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors hover:bg-slate-200">
+    <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors bg-cyan-light m-5 hover:bg-slate-200">
       <div
         className="material-title"
       >
@@ -37,7 +37,7 @@ const MaterialCard = ({ material,setMaterials}) => {
       <Button
                 onClick={() => deleteMaterial()}
                 text="Delete"
-                className="p-0 bg-transparent text-xl text-black"
+                className="p-0 bg-cyan text-xl text-white"
         />
     </div>
   );

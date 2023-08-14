@@ -22,7 +22,7 @@ const {
     end_date
   } = schedule;
   return (
-    <div className="flex flex-col p-3 border gap-3">
+    <div className="flex flex-col p-3 border gap-3 m-5 bg-cyan-light  hover:bg-slate-200">
         <div className="schedule-name cursor-pointer" onClick={()=>setScheduleContent({id:schedule.id,show:true})}>
           <span className="gothic font-semibold text-md">{name}</span>
         </div>
@@ -39,7 +39,7 @@ const {
         <Button
                 onClick={() => deleteSchedule(id)}
                 text="Delete"
-                className="p-0 bg-transparent text-xl text-black"
+                className="p-0 bg-cyan text-xl text-white"
         />
     </div>
   );

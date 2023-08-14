@@ -15,15 +15,15 @@ const Submissions = ({task_id,setShowSubmissions}) => {
       }, []);
     return ( 
         <>
-            <div className="flex items-center">
+            <div className="flex items-center justify-between">
                 <div className="page-header gothic color-cyan-dark text-2xl py-5">
                     Schedule Content
                 </div>
-                <div className="button-container flex items-center rounded-full p-3 w-[20px] h-[20px] ">
+                <div className="button-container flex items-center rounded-full p-3 h-[20px] ">
                     <Button
                     onClick={() => setShowSubmissions({id:null,show:false})}
                     text="Back"
-                    className="p-0 bg-transparent text-xl text-black"
+                    className="p-0 bg-cyan text-xl text-white"
                     />
 
                 </div>

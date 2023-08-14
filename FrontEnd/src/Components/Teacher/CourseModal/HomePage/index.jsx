@@ -29,11 +29,11 @@ const TeacherScheduleManager = ({course}) => {
             <ScheduleContent schedule_id={showScheduleContent.id} course_id={course.id} setScheduleContent={setScheduleContent} />
           ) : (
             <>
-              <div className="flex items-center">
+              <div className="flex items-center justify-between">
                 <div className="page-header gothic color-cyan-dark text-2xl py-5">
                   Course Schedules
                 </div>
-                <div className="button-container flex justify-center items-center rounded-full p-3 w-[20px] h-[20px] bg-cyan-dark">
+                <div className="button-container flex justify-center items-center rounded-full p-3 h-[20px] bg-cyan-dark">
                   <Button
                     onClick={() => setShow(true)}
                     text="+"

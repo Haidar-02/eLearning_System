@@ -21,7 +21,7 @@ const TaskCard = ({ task,setTasks,setShowSubmissions}) => {
     setTasks((prev)=>prev.filter(i => i.id !== id));
 };
   return ( 
-      <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors hover:bg-slate-200">
+      <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors bg-cyan-light m-5 hover:bg-slate-200">
       <div
         className="course-title cursor-pointer" onClick={()=>setShowSubmissions({show:true,task_id:id})}
       >
@@ -42,7 +42,7 @@ const TaskCard = ({ task,setTasks,setShowSubmissions}) => {
       <Button
                 onClick={() => deleteTask()}
                 text="Delete"
-                className="p-0 bg-transparent text-xl text-black"
+                className="p-0 bg-cyan text-xl text-white"
         />
     </div>
  
