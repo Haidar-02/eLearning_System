@@ -321,15 +321,17 @@ class TeacherController extends Controller
     }
     public function addProjectGroupMembers(Request $request){
         try{
+            $group = new GroupProject;
+            $group->course_id=$request->course_id;
+            $group->save();
             $member=new StudentProject;
 
             $students=$request->students;
-            echo $students;
-            // foreach($students as $student){
-            //     $member->student_id=$student;
-            //     $member->project_id=$request->project_id;
-            //     $member->save();
-            // }
+            foreach($students as $student){
+                $member->student_id=$student;
+                $member->project_id=$group->id;
+                $member->save();
+            }
 
             return response()->json([
                 'status' => '200',
