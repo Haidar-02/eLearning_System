@@ -113,13 +113,20 @@ Route::group(["middleware" => "auth:api"], function () {
     });
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
-
+        Route::controller(ParentController::class)->group(function () {
+            Route::get("get-child", "getChild");
+            Route::get("get-child-courses", "getChildCourses");
+            Route::get("get-child-teachers", "getChildTeachers");
+            Route::get("get-child-attendance", "getChildAttendance");
+            Route::get("get-child-course-schedules", "getChildCourseSchedules");
+            Route::get("get-teacher-conference-slots/{teacherId}", "getTeacherConferenceSlots");
+            Route::post("schedule-conference-with-teacher/{teacherId}", "scheduleConferenceWithTeacher");
+        });
     });
 });
 
 Route::controller(AuthController::class)->group(function () {
     Route::post("register", "register");
-
     Route::post("login", "login");
 });
 
