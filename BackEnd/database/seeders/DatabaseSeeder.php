@@ -5,10 +5,17 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
+use App\Models\CourseMaterial;
+use App\Models\Message;
 use App\Models\ParentRelation;
+use App\Models\Task;
+use App\Models\TaskSubmission;
 use App\Models\TaskType;
 use App\Models\UserType;
+use App\Models\Schedule;
 use App\Models\User;
+
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,12 +33,19 @@ class DatabaseSeeder extends Seeder
         TaskType::create(['name' => 'assignment']);
         TaskType::create(['name' => 'quiz']);
 
-        User::create(['name'=>'admin','email'=>"admin@admin.com","password"=>"adminadmin","user_type"=>"1"]);
+        User::create(['name' => 'admin', 'email' => "admin@admin.com", "password" => "adminadmin", "user_type" => "1"]);
         User::factory(20)->create();
         ParentRelation::factory(10)->create();
 
         Course::factory(10)->create();
         CourseEnrollment::factory(20)->create();
+        Message::factory(100)->create();
+        Schedule::factory(50)->create();
+        CourseMaterial::factory(50)->create();
+        Task::factory(100)->create();
+        TaskSubmission::factory(50)->create();
+
+
 
     }
 }

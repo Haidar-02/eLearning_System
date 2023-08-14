@@ -13,7 +13,6 @@ const SignInForm = ({ setShow }) => {
   const [inputState, setInputState] = useState(initialState);
   const [errors, setErrors] = useState('');
   const navigate = useNavigate();
-  console.log(errors);
 
   function onChange(e) {
     const { value, name } = e.target;

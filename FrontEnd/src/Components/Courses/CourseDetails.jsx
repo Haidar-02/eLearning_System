@@ -10,6 +10,7 @@ const CourseDetails = ({ course, className }) => {
     meet_link,
     teacher,
     title,
+    enrollments_count,
   } = course;
   const { id: teacher_id, name, email } = teacher;
 
@@ -32,8 +33,8 @@ const CourseDetails = ({ course, className }) => {
           {meet_link}
         </div>
         <div className="enrollment">
-          <span className="font-semibold underline">Enrollment limit: </span>
-          {enrollment_limit}
+          <span className="font-semibold underline">Enrollments: </span>
+          {`${enrollments_count}/${enrollment_limit}`}
         </div>
       </div>
     </>

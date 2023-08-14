@@ -66,6 +66,7 @@ return new class extends Migration {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
+            $table->text('name');
             $table->dateTime("start_date");
             $table->dateTime("end_date");
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
@@ -161,9 +162,9 @@ return new class extends Migration {
         Schema::create('group_projects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->dateTime('submission_date');
-            $table->text('file_path');
-            $table->text('status');
+            $table->dateTime('submission_date')->nullable();
+            $table->text('file_path')->nullable();
+            $table->text('status')->nullable();
             $table->integer('grade')->nullable();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });

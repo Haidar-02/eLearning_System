@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GroupProject extends Model
@@ -16,6 +17,10 @@ class GroupProject extends Model
     {
         return $this->hasMany(StudentProject::class,"project_id");
 
+    }
+    public function membersInfo(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class,'student_projects','student_id','project_id')->select('users.id','users.name');
     }
 }
 

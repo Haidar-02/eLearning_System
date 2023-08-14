@@ -4,9 +4,13 @@ import gradesIcon from '../../assets/icons/ChartSquareBarOutline.svg';
 import dashIcon from '../../assets/icons/dashboard.svg';
 import classesIcon from '../../assets/icons/UserGroupOutline.svg';
 import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
+import chat from '../../assets/icons/ChatOutline.svg';
+import play from '../../assets/icons/noun-interactive-1171204 (1).svg';
 
 import SideBar from '../../Components/DashBoard/SideBar';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
+import StudentCourseManager from '../../Components/Student/StudentCourseManager';
+import MessageBox from '../../Components/Messaging/MessageBox';
 
 const falseState = {
   dashboard: false,
@@ -14,6 +18,7 @@ const falseState = {
   classes: false,
   assignments: false,
   messages: false,
+  interactive: false,
 };
 
 const AdminDashBoard = () => {
@@ -29,10 +34,11 @@ const AdminDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { dashboard, grades, classes, assignments } = state;
+  const { dashboard, grades, classes, assignments, messages, interactive } =
+    state;
 
   return (
-    <div className="dashBoardWrapper flex justify-between h-full">
+    <div className="dashBoardWrapper flex h-full">
       <SideBar className="bg-cyan-dark">
         <div className="logo  flex items-center justify-center gothic">
           <span className="text-3xl cursor-pointer p-5 py-10 text-white">
@@ -53,19 +59,21 @@ const AdminDashBoard = () => {
             />
           </div>
           <DashBoardButton
-            onClick={() => {
-              togglePage('grades');
-            }}
-            icon={gradesIcon}
-            text="Users"
-          />
-          <DashBoardButton
             onClick={async () => {
               togglePage('classes');
             }}
             icon={classesIcon}
             text="Classes"
           />
+
+          <DashBoardButton
+            onClick={() => {
+              togglePage('grades');
+            }}
+            icon={gradesIcon}
+            text="Grades"
+          />
+
           <DashBoardButton
             onClick={() => {
               togglePage('assignments');
@@ -73,27 +81,44 @@ const AdminDashBoard = () => {
             icon={clipBoardIcon}
             text="Assignments"
           />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
+
+          <DashBoardButton
+            onClick={() => {
+              togglePage('messages');
+            }}
+            icon={chat}
+            text="Messaging"
+          />
+
+          <DashBoardButton
+            onClick={() => {
+              togglePage('interactive');
+            }}
+            icon={play}
+            text="Interactive"
+            iconStyle={'w-[15px]'}
+          />
         </div>
       </SideBar>
 
       <div className="mainContent flex flex-col   px-14 py-10 h-fit ">
         {/* PAGES GO HERE */}
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
+        {classes && <StudentCourseManager className="p-20" />}
         {grades && <span className="h-[500px] p-10">Manage Users</span>}
-        {/* {classes && <AdminCourseManager />} */}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
+        {messages && <MessageBox />}
+        {interactive && <span className="h-[500px] p-10">Interactive</span>}
       </div>
 
-      <SideBar className={'right-0'}>
+      {/* <SideBar className={'right-0'}>
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar>
+      </SideBar> */}
     </div>
   );
 };
