@@ -106,7 +106,6 @@ class CommonController extends Controller
     {
         try {
             $submissions = TaskSubmission::where([['task_id', '=', $task_id]])->get();
-            echo 'marc';
             return response()->json([
                 'status' => '200',
                 'submissions'=>$submissions
