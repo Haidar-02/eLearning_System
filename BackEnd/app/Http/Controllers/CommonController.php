@@ -340,6 +340,12 @@ class CommonController extends Controller
             return;
         }
 
+        if ($search === "al") {
+            $all = User::where('id', '!=', $userId)->where('user_type', '=', $user_type)->get();
+            return response()->json([
+                "users" => $all,
+            ]);
+        }
         $res = User::where('name', 'LIKE', "%{$search}%")
             ->where('id', '!=', $userId)
             ->where('user_type', '=', $user_type)
