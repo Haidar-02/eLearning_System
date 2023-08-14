@@ -97,6 +97,7 @@ Route::group(["middleware" => "auth:api"], function () {
     Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
 
         Route::controller(AdminController::class)->group(function () {
+            Route::get('/getAllUsers', 'getAllUsers');
             Route::put("modifyUser/{user_id}", "modifyUser");
             Route::delete('/deleteUser/{user}', "deleteUser");
             Route::post('/addCourse', "addCourse");
@@ -104,6 +105,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::delete('/deleteCourse/{course}', "deleteCourse");
             Route::get('/checkEnrollmentLimit/{course}', "checkEnrollmentLimit");
             Route::get('/createBackup', 'createBackup');
+            
 
         });
 

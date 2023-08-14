@@ -1,46 +1,51 @@
 import React, { useEffect, useState } from 'react';
+import UserCard from '../../Components/Admin/UserCard';
 
-import CourseCard from '../../Components/Courses/CourseCard';
-import Button from '../../Components/Common/Button';
-import { getAllCourses } from '../../helpers/common.helpers';
-import CourseAdd from '../../Components/Courses/CourseAdd';
+import teacherIcon from'../../assets/icons/teacher.svg'
+import parentIcon from'../../assets/icons/parent.svg'
+import studentIcon from'../../assets/icons/student.svg'
+import { getAllUsers } from '../../helpers/admin.helpers';
 
-const AdminCourseManager = () => {
-  const [courses, setCourses] = useState();
+const AdminUserManager = () => {
+  const [users, setUsers] = useState([]); 
   const [show, setShow] = useState(false);
 
-  console.log(courses);
   useEffect(() => {
-    const fetchCourses = async () => {
-      const res = await getAllCourses();
-      setCourses(res);
+    const fetchUsers = async () => {
+      const res = await getAllUsers();
+      console.log(res.users);
+
+      setUsers([...res.users]);
+      
     };
 
-    fetchCourses();
+    fetchUsers();
   }, []);
 
+  console.log(users);
+
   return (
-    <div className="">
-      <div className="flex justify-between items-center">
-        <div className="page-header gothic color-cyan-dark text-2xl py-5">
-          Manage Courses
-        </div>
-        <div className="button-container flex justify-center items-center rounded-full p-3 w-[20px] h-[20px] bg-cyan-dark">
-          <Button
-            onClick={() => setShow(true)}
-            text="+"
-            className="p-0 bg-transparent text-xl text-white"
-          />
+<div>
+  <div className="w-24 dark">
+    <img className="" src={teacherIcon} alt="teacherIcon" />
+  </div>
+  <div className="w-24">
+    <img src={parentIcon} alt="parentIcon" />
+  </div>
+  <div className="w-24">
+    <img src={studentIcon} alt="studentIcon" />
+  </div>
+
+  <div>
+        <h1>User List</h1>
+        <div className="user-list">
+          {users.map((user) => (
+            <UserCard key={user.id} user={user} />
+          ))}
         </div>
       </div>
-      {show && <CourseAdd setShow={setShow} setCourses={setCourses} />}
-
-      {courses &&
-        courses.map((course, index) => (
-          <CourseCard key={index} course={course} setCourses={setCourses} />
-        ))}
     </div>
   );
 };
 
-export default AdminCourseManager;
+export default AdminUserManager;

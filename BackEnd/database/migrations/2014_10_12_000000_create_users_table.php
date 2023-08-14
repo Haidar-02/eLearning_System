@@ -11,7 +11,6 @@ return new class extends Migration {
     public function up(): void
     {
 
-        // USERS
         Schema::create('user_types', function (Blueprint $table) {
             $table->id();
             $table->text('name');
