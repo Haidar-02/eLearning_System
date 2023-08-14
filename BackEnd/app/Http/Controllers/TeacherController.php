@@ -18,6 +18,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class TeacherController extends Controller
 {
@@ -320,29 +321,30 @@ class TeacherController extends Controller
         } 
     }
     public function addProjectGroupMembers(Request $request){
-        try{
+        try {
             $group = new GroupProject;
-            $group->course_id=$request->course_id;
+            $group->course_id = $request->course_id;
             $group->save();
-            $member=new StudentProject;
-
-            $students=$request->students;
-            foreach($students as $student){
-                $member->student_id=$student["id"];
-                $member->project_id=$group->id;
-                echo $member;
+            $students = $request->students;
+            foreach ($students as $student) {
+                $member = new StudentProject;
+                $member->student_id = $student["id"];
+                $member->project_id = $group->id;
                 $member->save();
             }
+            $group=$group->with('members')->first();
 
             return response()->json([
                 'status' => '200',
+                'group' => $group
             ]);
-        } catch(Exception $e){
+        } catch (Throwable $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
+        
     }
 
     public function modifyTaskGrade(Request $request){
