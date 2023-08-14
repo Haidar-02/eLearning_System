@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+
 use App\Models\Course;
 use App\Models\CourseEnrollment;
 use App\Models\CourseMaterial;
 use App\Models\GroupProject;
 use App\Models\Message;
 use App\Models\Schedule;
+use App\Models\Task;
 use App\Models\TaskSubmission;
 use App\Models\TeacherMeetSchedule;
 use App\Models\User;
@@ -93,7 +96,15 @@ class StudentController extends Controller
     {
 
         try {
+            $task=Task::find($request->task_id);
+            $dueDate = Carbon::parse($task->due_date);
             $submission = new TaskSubmission;
+
+            if ($dueDate->isPast()) {
+                $submission->status="Late";
+            } else {
+               $submission->status="Submitted";
+            }
             $submission->task_id = $request->task_id;
             $submission->student_id = Auth::id();
             $base64Image = $request->input('file');
