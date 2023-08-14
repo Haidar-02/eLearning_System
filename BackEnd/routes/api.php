@@ -40,7 +40,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post("add-schedule-material", "addScheduleMaterial");
             Route::delete("remove-schedule-material/{material_id}", "removeScheduleMaterial");
             Route::post("add-schedule-task", "addScheduleTask");
-            Route::delete("remove-schedule-task", "removeScheduleTask");
+            Route::delete("remove-schedule-task/{task_id}", "removeScheduleTask");
             Route::post("add-schedule-Session", "addScheduleSession");
             Route::delete("remove-schedule-Session", "removeScheduleSession");
             //leave till the end
