@@ -131,18 +131,20 @@ async function addScheduleMaterial({
   title,
   content,
   file,
+  file_name,
 }) {
   try {
-    const formData = new FormData();
-    formData.append("schedule_id", schedule_id);
-    formData.append("course_id", course_id);
-    formData.append("title", title);
-    formData.append("description", content);
-    formData.append("file", file);
 
     const res = await axios.post(
       `${remoteUrl}teacher/add-schedule-material`,
-      formData,
+      {
+        schedule_id,
+        course_id,
+        title,
+        content,
+        file,
+        file_name,
+      },
       auth()
     );
 

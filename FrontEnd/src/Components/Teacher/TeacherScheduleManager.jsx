@@ -20,7 +20,6 @@ const TeacherCourseManager = ({course}) => {
 
     fetchSchedules();
   }, []);
-
   return (
     <div className="">
       
@@ -30,10 +29,9 @@ const TeacherCourseManager = ({course}) => {
       (
         <>
         {showScheduleContent.show ? 
-          <ScheduleContent schedule_id={showScheduleContent.id} setScheduleContent={setScheduleContent}/>
+          <ScheduleContent schedule_id={showScheduleContent.id} course_id={course.id} setScheduleContent={setScheduleContent}/>
         :
         <>
-
           <div className="flex justify-between items-center">
             <div className="page-header gothic color-cyan-dark text-2xl py-5">
               Course Schedules
@@ -47,18 +45,17 @@ const TeacherCourseManager = ({course}) => {
             </div>
           </div>
           {
-            
             schedules &&
             schedules.map((schedule, index) => (
               <>
               <ScheduleCard key={index} schedule={schedule} setSchedules={setSchedules} setScheduleContent={setScheduleContent}/>
               </>
             ))
-
           }
         </>
       }
-      </>)
+      </>
+      )
       }
 
     </div>

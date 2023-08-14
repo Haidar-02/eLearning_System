@@ -1,23 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
 import Modal from '../Common/Modal';
-import TextArea from '../Inputs/TextArea';
-import { addSchedule } from '../../helpers/Teacher.helpers';
+import { addScheduleMaterial, addScheduleTask } from '../../helpers/Teacher.helpers';
 import Button from '../Common/Button';
+import TextArea from '../Inputs/TextArea';
 const initialState = {
-  name: '',
-  start_date: '',
-  end_date: '',
+  title: '',
+  content: '',
+  file: '',
+  file_name:''
 };
-const MaterialAdd = ({ setShow, setSchedules, course_id}) => {
+const MaterialAdd = ({ setMaterialAdd, setMaterials,schedule_id,course_id}) => {
   const [state, setState] = useState(initialState);
   const [error, setError] = useState();
   function inputHandler(e) {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
+}
+  function fileHandler(e){
+      let selectedImage=e.target.files[0];
+      if (!selectedImage) {
+          console.log('Please select an image.');
+          return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = function () {
+          const base64Image = reader.result.split(',')[1];
+          setState((prev) => ({ ...prev, [e.target.name]: base64Image ,file_name:selectedImage.name}));
+
+        };
+      reader.readAsDataURL(selectedImage);
+    
   }
   async function handleSave() {
-    const { data, errorMessages, message } = await addSchedule({...state,course_id});
+    const { data, errorMessages, message } = await addScheduleMaterial({...state,course_id,schedule_id});
     if (errorMessages) {
       setError(errorMessages[0]);
       return;
@@ -27,49 +43,55 @@ const MaterialAdd = ({ setShow, setSchedules, course_id}) => {
     }
     if (data) {
       console.log(data);
-      setSchedules((prev) => {
-        return [data.schedule, ...prev];
+      setMaterials((prev) => {
+        return [data.tasks, prev];
       });
 
-      setShow(false);
+      setMaterialAdd(false);
     }
   }
 
-  const { name, start_date, end_date } = state;
+  const { title, content, file } = state;
   return (
-    <div
-      className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+    <Modal
+    setShow={setMaterialAdd}
+    className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
-      <CustomInput
-        label="Name"
-        name="name"
-        value={name}
-        onChange={inputHandler}
+    <CustomInput
+      label="Title"
+      name="title"
+      value={title}
+      onChange={inputHandler}
+    />
+    <TextArea
+      label="content"
+      name="content"
+      value={content}
+      onChange={inputHandler}
+    />
+    <input type='file' name='file' onChange={fileHandler}/>
+
+    <div className="error text-sm text-red-500 ">{error}</div>
+
+    <div className="button-container flex gap-5 justify-end">
+      <Button
+        text="Create"
+        className=" text-[16px] bg-green text-white p-3 self-end"
+        onClick={() => {
+          handleSave();
+        }}
       />
-
-      <input type="datetime-local" value={start_date} name="start_date" onChange={inputHandler}/>
-      <input type="datetime-local" value={end_date} name="end_date" onChange={inputHandler}/>
-
-      <div className="error text-sm text-red-500 ">{error}</div>
-
-      <div className="button-container flex gap-5 justify-end">
-        <Button
-          text="Create"
-          className=" text-[16px] bg-green text-white p-3 self-end"
-          onClick={() => {
-            handleSave();
-          }}
-        />
-        <Button
-          text="Return"
-          onClick={() => {
-            setShow(false);
-          }}
-          className="text-[16px] bg-transparent text-cyan-600  p-3 self-end "
-        />
-      </div>
+      <Button
+        text="cancel"
+        onClick={() => {
+          setMaterialAdd(false);
+        }}
+        className="text-[16px] bg-transparent text-cyan-600  p-3 self-end "
+      />
     </div>
+    </Modal>
   );
 };
 
 export default MaterialAdd;
+

@@ -1,32 +1,29 @@
 import React, { useState } from "react";
 import Button from "../Common/Button";
 import CourseModal from "../Common/CourseModal";
+import { removeScheduleTask } from "../../helpers/Teacher.helpers";
 
-const CourseCard = ({ course }) => {
-  const [courseModel, setCourseModel] = useState(false);
-
+const TaskCard = ({ task,setTasks}) => {
   const {
-    class_code,
-    description,
-    enrollment_limit,
     id,
-    meet_link,
-    teacher,
+    schedule_id,
+    course_id,
     title,
-  } = course;
+    max_score,
+    teacher_id,
+    description,
+    due_date,
+    task_type
+  } = task;
+
+  const deleteTask = async () => {
+    const res = await removeScheduleTask(id);
+    setTasks((prev)=>prev.filter(i => i.id !== id));
+};
   return (
     <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors hover:bg-slate-200">
-      {courseModel && (
-        <CourseModal
-          courseModel={courseModel}
-          setCourseModel={setCourseModel}
-          course={course}
-        />
-      )}
-
       <div
-        className="course-title  cursor-pointer "
-        onClick={() => setCourseModel(true)}
+        className="course-title"
       >
         <span className="text-md font-bold uppercase hover:underline">
           {title}
@@ -38,16 +35,17 @@ const CourseCard = ({ course }) => {
           {description}
         </div>
         <div className="enrollment-limit">
-          <span className="font-semibold">Enrollment Limit: </span>
-          {enrollment_limit}
-        </div>
-        <div className="meet_link">
-          <span className="font-semibold">Meet Link: </span>
-          {meet_link}
+          <span className="font-semibold">Due date: </span>
+          {due_date}
         </div>
       </div>
+      <Button
+                onClick={() => deleteTask()}
+                text="Delete"
+                className="p-0 bg-transparent text-xl text-black"
+        />
     </div>
   );
 };
 
-export default CourseCard;
+export default TaskCard;

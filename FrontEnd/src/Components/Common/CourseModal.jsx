@@ -9,7 +9,7 @@ import bullhornSolid from "../../assets/icons/bullhorn-solid.svg";
 import messageIcon from "../../assets/icons/message-regular.svg";
 import discussionBoard from "../../assets/icons/rectangle-list-regular.svg";
 import homeIcon from "../../assets/icons/house-solid.svg";
-
+import TeacherScheduleManager from '../Teacher/TeacherScheduleManager';
 const falseState = {
   home_page: false,
   anouncements: false,
@@ -86,7 +86,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           </div>
         </SideBar>
 
-        <div className="mainContent flex flex-col px-14 py-10">
+        <div className="mainContent flex flex-col px-14 py-10 flex-grow">
           {/* PAGES GO HERE */}
           {home_page && <TeacherScheduleManager course={course} />}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
