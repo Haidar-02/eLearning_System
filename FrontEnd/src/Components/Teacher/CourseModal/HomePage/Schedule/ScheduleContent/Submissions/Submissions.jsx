@@ -31,7 +31,7 @@ const Submissions = ({task_id,setShowSubmissions}) => {
             <div className="submissions">
             {
                 submissions && submissions.map((submission)=>(
-                    <SubmissionCard  key={submission.id} submission={submission} setSubmissions={setSubmissions}/>
+                    <SubmissionCard  key={submission.id} submission={submission} setSubmissions={setSubmissions} submissions={submissions}/>
                 ))
             }
             </div>

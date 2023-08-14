@@ -12,7 +12,7 @@ async function getTeacherCourses() {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.courses;
     }
   } catch (error) {
@@ -32,7 +32,7 @@ async function addSchedule({ course_id, name, start_date, end_date }) {
       },
       auth()
     );
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -63,7 +63,7 @@ async function removeSchedule(schedule_id) {
       `${remoteUrl}teacher/remove-course-schedule/${schedule_id}`,
       auth()
     );
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -100,7 +100,7 @@ async function addTeacherCourse({ title, description, enrollment_limit }) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -148,7 +148,7 @@ async function addScheduleMaterial({
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -180,7 +180,7 @@ async function removeScheduleMaterial(material_id) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -227,7 +227,7 @@ async function addScheduleTask({
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -259,7 +259,7 @@ async function removeScheduleTask(task_id) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -296,7 +296,7 @@ async function addScheduleSession({ schedule_id, course_id, date }) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -328,7 +328,7 @@ async function removeScheduleSession(session_id) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -373,7 +373,7 @@ async function addCourseProject({
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -411,7 +411,7 @@ async function addProjectGroupMembers({ course_id, selectedStudents }) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -471,14 +471,13 @@ async function modifyTaskGrade({ submission_id, grade }) {
       `${remoteUrl}teacher/modify-task-grade`,
       {
         submission_id,
-        student_id,
+        grade,
       },
       auth()
     );
 
-    if (res.status === 200) {
-      const data = res.data;
-      return { data };
+    if (res.data.status == 200) {
+      return res.data;
     }
   } catch (error) {
     console.log(error);
@@ -512,7 +511,7 @@ async function modifyProjectGrade({ project_id, grade }) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -557,7 +556,7 @@ async function addFeedback({
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -593,7 +592,7 @@ async function addNotification({ course_id, notification }) {
       auth()
     );
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       const data = res.data;
       return { data };
     }
