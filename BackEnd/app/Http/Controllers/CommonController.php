@@ -130,7 +130,7 @@ class CommonController extends Controller
         } 
     }
 
-    public function getCourseProject($course_id){
+    public function getProjectGroups($course_id){
         try{
             $course=Course::where([['id','=',$course_id]])->first();
             $groups=$course->groups()->with('members')->get();
@@ -147,7 +147,7 @@ class CommonController extends Controller
         } 
     }
 
-    public function getProjectMembers($project_id){
+    public function getGroupMembers($project_id){
         try{
             $project=GroupProject::where([['id','=',$project_id]])->first();
             $members=$project->members()->with('info')->get();
