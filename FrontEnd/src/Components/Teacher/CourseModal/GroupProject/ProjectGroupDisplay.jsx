@@ -6,8 +6,7 @@ const ProjectGroupDisplay = ({course_id,setGroups,groups}) => {
     useEffect(() => {
         const fetchProject = async () => {
           const res = await getProjectGroups(course_id);
-        //   setGroups(res);
-          console.log(res);
+          setGroups([...res]);
         };
         fetchProject()
       }, []);
