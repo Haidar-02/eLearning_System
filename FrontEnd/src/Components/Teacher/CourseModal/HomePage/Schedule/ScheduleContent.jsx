@@ -11,7 +11,7 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     const [tasks,setTasks]=useState();
     const [showTaskAdd,setTaskAdd]=useState(false);
     const [showMaterialAdd,setMaterialAdd]=useState(false);
-    const [showSubmissions,setSubmissions]=useState({show:false,id:null});
+    const [showSubmissions,setShowSubmissions]=useState({show:false,id:null});
 
     // const [showTask,setShowTask]=useState(false);
     // const [showMaterial,setShowMaterial]=useState(false);
@@ -35,7 +35,7 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     return ( 
       <>
       {showSubmissions.show ? 
-        <Submissions task_id={showSubmissions.task_id}/>
+        <Submissions task_id={showSubmissions.task_id} setShowSubmissions={setShowSubmissions}/>
       :
       (
       <div>
@@ -68,7 +68,7 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
             {
             tasks &&
             tasks.map((task, index) => (
-                <TaskCard key={index} task={task} setTasks={setTasks} setSubmissions={setSubmissions}/>
+                <TaskCard key={index} task={task} setTasks={setTasks} setShowSubmissions={setShowSubmissions}/>
             ))
             }
           </div>

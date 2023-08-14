@@ -8,7 +8,7 @@ async function getAllCourses() {
     const res = await axios.get(`${remoteUrl}common/get-courses`, auth());
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.courses;
     }
   } catch (error) {
@@ -23,7 +23,7 @@ async function getCourseSchedules(course_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.schedules;
     }
   } catch (error) {
@@ -39,7 +39,7 @@ async function getScheduleTasks(schedule_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.tasks;
     }
   } catch (error) {
@@ -55,7 +55,7 @@ async function getScheduleMaterials(schedule_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.materials;
     }
   } catch (error) {
@@ -70,7 +70,7 @@ async function getCourseStudents(course_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.students;
     }
   } catch (error) {
@@ -86,7 +86,7 @@ async function getScheduleSessions(schedule_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.sessions;
     }
   } catch (error) {
@@ -101,9 +101,8 @@ async function getTaskSubmissions(task_id) {
       auth()
     );
     const { data } = res;
-
-    if (res.status === 200) {
-      return data.submissios;
+    if (data.status == 200) {
+      return data.submissions;
     }
   } catch (error) {
     console.log(error);
@@ -118,7 +117,7 @@ async function getProjectGroups(course_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.groups;
     }
   } catch (error) {
@@ -134,7 +133,7 @@ async function getGroupMembers(project_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.members;
     }
   } catch (error) {
@@ -150,7 +149,7 @@ async function getStudentFeedback(course_id, student_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.feedback;
     }
   } catch (error) {
@@ -168,7 +167,7 @@ async function sendMessage(message, receiver_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.message;
     }
   } catch (error) {
@@ -181,7 +180,7 @@ async function getMessages() {
     const res = await axios.get(`${remoteUrl}common/get-messages`, auth());
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.messages;
     }
   } catch (error) {
@@ -197,7 +196,7 @@ async function getCourseDiscussion(course_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.discussion;
     }
   } catch (error) {
@@ -229,7 +228,7 @@ async function addCourseDiscussion(message, course_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.discussion;
     }
   } catch (error) {
@@ -256,7 +255,7 @@ async function getCourseNotifications(course_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.notifications;
     }
   } catch (error) {
@@ -272,7 +271,7 @@ async function getCourseTeacher(course_id) {
     );
     const { data } = res;
 
-    if (res.status === 200) {
+    if (res.status == 200) {
       return data.teacher;
     }
   } catch (error) {

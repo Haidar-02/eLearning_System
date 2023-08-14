@@ -3,7 +3,7 @@ import Button from "../../../../../Common/Button";
 import { removeScheduleTask } from "../../../../../../helpers/Teacher.helpers";
 import Submissions from "./Submissions/Submissions";
 
-const TaskCard = ({ task,setTasks,setSubmissions}) => {
+const TaskCard = ({ task,setTasks,setShowSubmissions}) => {
   const {
     id,
     schedule_id,
@@ -23,7 +23,7 @@ const TaskCard = ({ task,setTasks,setSubmissions}) => {
   return ( 
       <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors hover:bg-slate-200">
       <div
-        className="course-title cursor-pointer" onClick={()=>setSubmissions({show:true,task_id:id})}
+        className="course-title cursor-pointer" onClick={()=>setShowSubmissions({show:true,task_id:id})}
       >
         <span className="text-md font-bold uppercase hover:underline">
           {title}
