@@ -47,7 +47,7 @@ Route::group(["middleware" => "auth:api"], function () {
             // Route::get("get-session-attendance","getSessionAttendance");
             // Route::post("add-session-attendance","addSessionAttendance");
             Route::post("add-course-project", "addCourseProject");
-            Route::post("add-project-member", "addProjectMembers");
+            Route::post("add-project-group-members", "addProjectGroupMembers");
             Route::put("modify-task-grade", "modifyTaskGrade");
             Route::put("modify-project-grade", "modifyProjectGrade");
             Route::post("add-feedback", "addFeedback");

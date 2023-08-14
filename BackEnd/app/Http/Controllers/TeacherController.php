@@ -319,12 +319,18 @@ class TeacherController extends Controller
             ]);
         } 
     }
-    public function addProjectMembers(Request $request){
+    public function addProjectGroupMembers(Request $request){
         try{
             $member=new StudentProject;
-            $member->student_id=$request->student_id;
-            $member->project_id=$request->project_id;
-            $member->save();
+
+            $students=$request->students;
+            echo $students;
+            // foreach($students as $student){
+            //     $member->student_id=$student;
+            //     $member->project_id=$request->project_id;
+            //     $member->save();
+            // }
+
             return response()->json([
                 'status' => '200',
             ]);
