@@ -19,7 +19,6 @@ const ProjectGroupManager = ({course_id}) => {
   };
 
   async function handleSave() {
-    console.log({course_id,selectedStudents});
     const { data, errorMessages, message } = await addProjectGroupMembers({course_id,selectedStudents});
     if (errorMessages) {
       setError(errorMessages[0]);
@@ -29,7 +28,7 @@ const ProjectGroupManager = ({course_id}) => {
       return;
     }
     if (data) {
-      console.log(data);
+      setSelectedStudents([]);
       // setGroups((prev) => {
       //   return [data.students, ...prev];
       // });

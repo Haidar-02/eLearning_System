@@ -36,7 +36,7 @@ const ScheduleAdd = ({ setShow, setSchedules, course_id}) => {
   const { name, start_date, end_date } = state;
   return (
     <div
-      className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+      className=" flex flex-col rounded-2xl gap-5 w-[400px]"
     >
       <CustomInput
         label="Name"

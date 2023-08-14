@@ -119,7 +119,7 @@ async function getProjectGroups(course_id) {
     const { data } = res;
 
     if (res.status === 200) {
-      return data.project;
+      return data.groups;
     }
   } catch (error) {
     console.log(error);
