@@ -8,6 +8,7 @@ const TextArea = ({
   rows = 5,
   cols = 30,
   className,
+  placeholder,
 }) => {
   return (
     <div className="input-container flex flex-col gap-2 font-normal">
@@ -22,6 +23,7 @@ const TextArea = ({
         className={` shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline 
         } ${className}`}
         onChange={onChange}
+        placeholder={placeholder}
       />
     </div>
   );

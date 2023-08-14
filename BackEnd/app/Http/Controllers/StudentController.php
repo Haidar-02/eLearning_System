@@ -21,32 +21,44 @@ class StudentController extends Controller
 {
 
 
-    public function enrollCourse(Request $request){
-        try{
-            $course=new CourseEnrollment;
-            $course->student_id=Auth::id();
-            $course->course_id=$request->course_id;
+    public function enrollCourse(Request $request)
+    {
+
+        $user = Auth::user();
+
+        $exists = CourseEnrollment::where('course_id', $request->course_id)->where('student_id', $user->id)->first();
+        if ($exists) {
+            return response()->json([
+                "error" => "already enrolled"
+            ]);
+        }
+        try {
+            $course = new CourseEnrollment;
+            $course->student_id = Auth::id();
+            $course->course_id = $request->course_id;
             $course->save();
             return response()->json([
-                'status' => '200',
+                'status' => 'success',
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        }    
+        }
     }
-    
-    public function getEnrolledCourses(){
-        try{
-            $user=Auth::user();
-            $courses=$user->courses;
+
+    public function getEnrolledCourses()
+    {
+        try {
+            $user = Auth::user();
+            $courses = $user->courses()->with('teacher')->get();
+            //
             return response()->json([
                 'status' => '200',
                 'courses' => $courses
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
@@ -56,7 +68,7 @@ class StudentController extends Controller
 
 
 
-    
+
 
     // public function getCourseGrades($course_id){
     //     try{
@@ -75,62 +87,66 @@ class StudentController extends Controller
     //     } 
     // }
 
-    public function addTaskSubmission(Request $request){
+    public function addTaskSubmission(Request $request)
+    {
 
-        try{
-            $submission=new TaskSubmission;
-            $submission->task_id=$request->task_id;
-            $submission->student_id=Auth::id();
-            $base64Image=$request->input('file');
-            $binaryData=base64_decode($base64Image);
+        try {
+            $submission = new TaskSubmission;
+            $submission->task_id = $request->task_id;
+            $submission->student_id = Auth::id();
+            $base64Image = $request->input('file');
+            $binaryData = base64_decode($base64Image);
             $originalFileName = $request->file_name;
-    
+
             //create temp file
             $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
             file_put_contents($tempFilePath, $binaryData);
-    
+
             $uploadedFile = new \Illuminate\Http\UploadedFile(
                 $tempFilePath,
-                $originalFileName, // Provide a fallback original filename
-                mime_content_type($tempFilePath), // Guess the MIME type
+                $originalFileName,
+                // Provide a fallback original filename
+                mime_content_type($tempFilePath),
+                // Guess the MIME type
                 null,
                 true // Delete the file after it's used
             );
-        
+
             //get file extension
             $fileExtension = $uploadedFile->getClientOriginalExtension();
             unlink($tempFilePath);
-            $fileName = uniqid() . '.'.$fileExtension;
-    
+            $fileName = uniqid() . '.' . $fileExtension;
+
             Storage::disk('public')->put('files/' . $fileName, $binaryData);
             $publicUrl = Storage::disk('public')->url('files/' . $fileName);
-            $submission->file_path=$publicUrl;
+            $submission->file_path = $publicUrl;
             $submission->save();
             return response()->json([
                 'status' => '200',
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
     }
 
 
-    public function addTeacherMeet(Request $request){
+    public function addTeacherMeet(Request $request)
+    {
         //location and meet_link should be set by teacher
-        try{
-            $teacher_meet=new TeacherMeetSchedule;
-            $teacher_meet->teacher_id=$request->teacher_id;
-            $teacher_meet->user_id=Auth::id();
-            $teacher_meet->start_time=$request->start_time;
-            $teacher_meet->end_time=$request->end_time;
+        try {
+            $teacher_meet = new TeacherMeetSchedule;
+            $teacher_meet->teacher_id = $request->teacher_id;
+            $teacher_meet->user_id = Auth::id();
+            $teacher_meet->start_time = $request->start_time;
+            $teacher_meet->end_time = $request->end_time;
             $teacher_meet->save();
             return response()->json([
                 'status' => '200',
             ]);
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
@@ -152,7 +168,7 @@ class StudentController extends Controller
                 'status' => 'error',
                 'message' => $e->getMessage()
             ]);
-        } 
+        }
     }
 
 }

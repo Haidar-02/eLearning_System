@@ -71,12 +71,13 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("get-student-feedback/{course_id}/{student_id}", "getStudentFeedback");
             Route::post("send-message", "sendMessage");
             Route::get("get-messages", "getMessages");
+            Route::get("getMessagesById/{id}", "getMessagesById");
             Route::get("get-course-discussion/{course_id}", "getCourseDiscussion");
             Route::post("add-course-discussion", "addCourseDiscussion");
             Route::get("get-course-notifications/{course_id}", "getCourseNotifications");
             Route::get("get-course-teacher/{course_id}", 'getCourseTeacher');
-
-
+            Route::get("searchUser/{user_type}/{search}", 'searchUser');
+            Route::get("get/{user_type}/{search}", 'searchUser');
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });

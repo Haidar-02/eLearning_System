@@ -204,6 +204,20 @@ async function getCourseDiscussion(course_id) {
   } catch (error) {
     console.log(error);
   }
+
+} 
+async function getMessagesById(id) {
+  try {
+    const res = await axios.get(
+      `${remoteUrl}common/getMessagesById/${id}`,
+
+      auth()
+    );
+
+    return res.data.messages;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function addCourseDiscussion(message, course_id) {
@@ -219,6 +233,17 @@ async function addCourseDiscussion(message, course_id) {
     if (res.status === 200) {
       return data.discussion;
     }
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function search({ search, userType }) {
+  try {
+    const response = await axios.get(
+      `${remoteUrl}common/searchUser/${userType}/${search}`,
+      auth()
+    );
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -267,7 +292,9 @@ export {
   getProjectGroups,
   getStudentFeedback,
   sendMessage,
+  search,
   getMessages,
+  getMessagesById,
   getCourseDiscussion,
   addCourseDiscussion,
   getCourseNotifications,

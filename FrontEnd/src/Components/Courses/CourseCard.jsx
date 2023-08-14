@@ -25,7 +25,7 @@ const CourseCard = ({ course, onClick, setCourses }) => {
         />
       )}
       <div className="course-title ">
-        <span className="gothic font-semibold text-md">{title}</span>
+        <span className="monster font-bold  text-md">{title}</span>
       </div>
       <div className="content monster text-xs flex flex-col gap-2">
         <div className="description">
