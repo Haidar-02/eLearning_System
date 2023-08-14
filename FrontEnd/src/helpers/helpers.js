@@ -6,5 +6,8 @@ function toBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
-
-export { toBase64 };
+const replaceObjectById = (id, newObject, state) => {
+  const updatedObjects = state.map((obj) => (obj.id === id ? newObject : obj));
+  return updatedObjects;
+};
+export { toBase64, replaceObjectById };
