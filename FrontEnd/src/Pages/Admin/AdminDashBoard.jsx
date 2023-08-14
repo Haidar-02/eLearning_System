@@ -6,8 +6,11 @@ import classesIcon from '../../assets/icons/UserGroupOutline.svg';
 import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
 
 import SideBar from '../../Components/DashBoard/SideBar';
-import AdminCourseManager from './AdminCourseManager';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
+import AdminCourseManager from './AdminCourseManager';
+import AdminUserManager from './AdminUserManager';
+
+
 
 import PieChart from '../../Components/DashBoard/PieChart';
 import CourseProgressbar from '../../Components/DashBoard/CircularProgressBar';
@@ -15,7 +18,7 @@ import 'react-circular-progressbar/dist/styles.css';
 
 const falseState = {
   dashboard: false,
-  grades: false,
+  users: false,
   classes: false,
   assignments: false,
   messages: false,
@@ -24,7 +27,7 @@ const falseState = {
 const AdminDashBoard = () => {
   const [state, setState] = useState({
     dashboard: true,
-    grades: false,
+    users: false,
     classes: false,
     assignments: false,
     messages: false,
@@ -34,12 +37,12 @@ const AdminDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { dashboard, grades, classes, assignments } = state;
+  const { dashboard, users, classes, assignments } = state;
   
   const completionPercentage = 66;
 
   return (
-    <div className="dashBoardWrapper flex justify-between h-full">
+    <div className="  dashBoardWrapper flex justify-between h-full">
       <SideBar className="bg-cyan-dark">
         <div className="logo  flex items-center justify-center gothic">
           <span className="text-3xl cursor-pointer p-5 py-10 text-white">
@@ -61,7 +64,7 @@ const AdminDashBoard = () => {
           </div>
           <DashBoardButton
             onClick={() => {
-              togglePage('grades');
+              togglePage('users');
             }}
             icon={gradesIcon}
             text="Users"
@@ -93,11 +96,11 @@ const AdminDashBoard = () => {
           <PieChart />
          </span>
         </div>
-        <div className='h-36'>
+        <div className='w-32'>
           <CourseProgressbar targetPercentage={completionPercentage} />
         </div>
       </div>}
-        {grades && <span className="h-[500px] p-10">Manage Users</span>}
+        {users && <span className="h-[500px] p-10"><AdminUserManager/></span>}
         {classes && <AdminCourseManager />}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>

@@ -18,7 +18,7 @@ function CourseProgressbar({ targetPercentage }) {
 
   return (
     <div className="course-progress-bar">
-      <h4 >Course Completion Progress</h4>
+      <h4 className='m-5'>Course Progress</h4>
       <div className="progress-bar-container">
         <ReactCircularProgressbar
           value={percentage}

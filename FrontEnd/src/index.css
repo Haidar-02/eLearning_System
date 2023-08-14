@@ -23,8 +23,33 @@ a {
 }
 
 button {
-  /* appearance: none; */
   font-family: 'Inter';
   border: none;
   width: fit-content;
 }
+
+
+
+
+
+.dark {
+  background: rgb(30, 33, 44);
+  color: white;
+}
+
+.light {
+  background: rgb(255, 255, 255);
+  color: black;
+  border-color: rgb(120, 120, 120);
+}
+
+:root.dark .light {
+  all: inherit;
+}
+
+@media (prefers-color-scheme:dark) {
+   :root:not(.light) .light {
+    all: inherit;
+  }
+}
+
