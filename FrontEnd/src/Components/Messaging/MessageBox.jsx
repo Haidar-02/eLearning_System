@@ -12,15 +12,7 @@ const MessageBox = ({ messages }) => {
   const [userMessage, setUserMessage] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState('');
   const [selectedMessages, setSelectedMessages] = useState();
-  const [allMessages, setAllMessages] = useState();
 
-  useEffect(() => {
-    async function getMsg() {
-      const res = await getMessages();
-      setAllMessages(res);
-    }
-    getMsg();
-  }, []);
   const changeHandler = (e) => {
     const { value } = e.target;
     setUserMessage(value);
@@ -28,8 +20,9 @@ const MessageBox = ({ messages }) => {
   return (
     <div className="flex h-full gap-5">
       <Search
-        setSelectedMessages={setSelectedMessages}
-        teacher={setSelectedTeacher}
+        setMessages={setSelectedMessages}
+        setUser={setSelectedTeacher}
+        userType={2}
       />
 
       <div className="messages flex flex-col gap-3 border   border-gray-300 w-[400px] h-[400px] p-4 rounded-2xl">
@@ -43,7 +36,7 @@ const MessageBox = ({ messages }) => {
           ) : (
             selectedMessages &&
             selectedMessages.map((message) => {
-              const sent = message.is_sender.user_type === 4;
+              const sent = message.is_sender.user_type === 2;
               return (
                 <div
                   className={`flex flex-col gap-1  p-2 rounded-md ${

@@ -1,12 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
-import {
-  getMessages,
-  search,
-  getMessagesById,
-} from '../../helpers/common.helpers';
+import { search, getMessagesById } from '../../helpers/common.helpers';
 
-const Search = ({ setSelectedMessages, teacher }) => {
+const Search = ({ setMessages, setUser, userType }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState();
   const timeout = useRef();
@@ -24,7 +20,10 @@ const Search = ({ setSelectedMessages, teacher }) => {
     }
 
     timeout.current = setTimeout(async () => {
-      const users = await search({ userType: 2, search: query.trim() });
+      const users = await search({
+        userType: userType,
+        search: query.trim().toLowerCase(),
+      });
       setResults(users);
     }, 600);
   }
@@ -52,8 +51,8 @@ const Search = ({ setSelectedMessages, teacher }) => {
               key={index}
               onClick={async () => {
                 const messages = await getMessagesById(user.id);
-                setSelectedMessages(messages);
-                teacher(user.id);
+                setMessages(messages);
+                setUser(user.id);
               }}
               className=" border-b-[1px] py-2 "
             >

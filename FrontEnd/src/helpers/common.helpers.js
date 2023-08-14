@@ -24,7 +24,6 @@ async function sendMessage({ receiver_id, message }) {
       { receiver_id, message },
       auth()
     );
-    console.log(res.data);
   } catch (error) {
     console.log(error);
   }
@@ -33,7 +32,7 @@ async function sendMessage({ receiver_id, message }) {
 async function getMessages() {
   try {
     const res = await axios.get(`${baseUrl}common/get-messages`, auth());
-    console.log(res);
+
     return res;
   } catch (error) {
     console.log(error);
@@ -46,7 +45,7 @@ async function getMessagesById(id) {
 
       auth()
     );
-    console.log(res.data);
+
     return res.data.messages;
   } catch (error) {
     console.log(error);
