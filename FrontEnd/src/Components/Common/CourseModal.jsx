@@ -88,7 +88,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
 
         <div className="mainContent flex flex-col px-14 py-10">
           {/* PAGES GO HERE */}
-          {home_page && <TeacherScheduleManager course={course}/>}
+          {home_page && <TeacherScheduleManager course={course} />}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
 

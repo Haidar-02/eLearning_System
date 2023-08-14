@@ -4,13 +4,15 @@ import gradesIcon from "../../assets/icons/ChartSquareBarOutline.svg";
 import dashIcon from "../../assets/icons/dashboard.svg";
 import classesIcon from "../../assets/icons/UserGroupOutline.svg";
 import messageIcon from "../../assets/icons/message-white.svg";
-import logoutIcon from "../../assets/icons/right-from-bracket-solid.svg";
+import logoutIcon from "../../assets/icons/right-from-bracket-solid-white.svg";
 
 import clipBoardIcon from "../../assets/icons/ClipboardListOutline.svg";
 import SideBar from "../../Components/DashBoard/SideBar";
 import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 import TeacherCourseManager from "../../Components/Teacher/TeacherCourseManager";
 import CourseModal from "../../Components/Common/CourseModal";
+import MessagePreview from "../../Components/Teacher/MessagePreview";
+import MessagesList from "../../Components/Teacher/MessagesList";
 
 const falseState = {
   dashboard: false,
@@ -68,7 +70,8 @@ const TeacherDashBoard = () => {
               togglePage("classes");
             }}
             icon={classesIcon}
-            text="Classes"
+            text="My Classes"
+            className="hover:bg-blue-600 transition-all"
           />
           <DashBoardButton
             onClick={() => {
@@ -76,11 +79,12 @@ const TeacherDashBoard = () => {
             }}
             icon={messageIcon}
             text="Messages"
+            className="hover:bg-green-600 transition-all"
           />
           <DashBoardButton
             icon={logoutIcon}
             text="Logout"
-            className={"hover:text-red-200 transition-all"}
+            className={"hover:bg-red-600 transition-all"}
           />
           {/* <DashBoardButton icon={dashIcon} text="Dashboard" /> */}
         </div>
@@ -91,7 +95,7 @@ const TeacherDashBoard = () => {
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
         {/* {grades && <span className="h-[500px] p-10">Manage Users</span>} */}
         {classes && <TeacherCourseManager />}
-        {messages && <span className="h-[500px] p-10">Messages</span>}
+        {messages && <MessagesList />}
       </div>
       {/* 
       <SideBar className={'right-0'}>
