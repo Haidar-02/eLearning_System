@@ -24,7 +24,6 @@ const MessagesList = () => {
       <div className="flex-col">
         <MessagePreview onClick={handleModalOpen} />
       </div>
-      <ChatModal isOpen={isModalOpen} onClose={handleModalClose} />
     </div>
   );
 };

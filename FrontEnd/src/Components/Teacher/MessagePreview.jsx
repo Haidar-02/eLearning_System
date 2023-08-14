@@ -3,7 +3,7 @@ import messageIcon from "../../assets/icons/message-white.svg";
 import ChatModal from "../Common/ChatModal";
 import { useState } from "react";
 
-const MessagePreview = ({ onClick }) => {
+const MessagePreview = () => {
   return (
     <div className="m-3 px-5 py-3 bg-cyan-700 text-white flex gap-5 rounded-lg justify-between items-center hover:bg-gray-800 transition-all cursor-pointer hover:scale-95">
       <div>
