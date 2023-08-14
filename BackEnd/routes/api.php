@@ -66,7 +66,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("get-schedule-tasks/{schedule_id}", "getScheduleTasks");
             Route::get("get-task-submissions/{task_id}", "getTaskSubmissions");
             Route::get("get-schedule-sessions/{schedule_id}", "getScheduleSessions");
-            Route::get("get-course-projects/{course_id}", "getCourseProjects");
+            Route::get("get-course-project/{course_id}", "getCourseProject");
             Route::get("get-project-members/{project_id}", "getProjectMembers");
             Route::get("get-student-feedback/{course_id}/{student_id}", "getStudentFeedback");
             Route::post("send-message", "sendMessage");
