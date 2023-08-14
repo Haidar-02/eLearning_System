@@ -17,7 +17,7 @@ const Submissions = ({task_id,setShowSubmissions}) => {
         <>
             <div className="flex items-center justify-between">
                 <div className="page-header gothic color-cyan-dark text-2xl py-5">
-                    Schedule Content
+                    Task Submissions
                 </div>
                 <div className="button-container flex items-center rounded-full p-3 h-[20px] ">
                     <Button

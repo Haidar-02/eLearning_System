@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CourseCard from "./TeacherCourseCard";
 import Button from "../Common/Button";
 import { getTeacherCourses } from "../../helpers/Teacher.helpers";
-import CourseAdd from "../Courses/CourseAdd";
+
 const TeacherCourseManager = () => {
   const [courses, setCourses] = useState();
   const [show, setShow] = useState(false);
