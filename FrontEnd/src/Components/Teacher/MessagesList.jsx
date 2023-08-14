@@ -11,7 +11,9 @@ const MessagesList = () => {
       </h1>
 
       {/* Map messages here */}
-      <MessagePreview />
+      <div className="flex-col">
+        <MessagePreview />
+      </div>
     </div>
   );
 };

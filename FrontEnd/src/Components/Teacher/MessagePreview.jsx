@@ -3,7 +3,7 @@ import messageIcon from "../../assets/icons/message-white.svg";
 
 const MessagePreview = () => {
   return (
-    <div className="px-5 py-3 bg-cyan-700 text-white flex gap-5 rounded-lg justify-between items-center hover:bg-gray-800 transition-all cursor-pointer hover:scale-95">
+    <div className="m-3 px-5 py-3 bg-cyan-700 text-white flex gap-5 rounded-lg justify-between items-center hover:bg-gray-800 transition-all cursor-pointer hover:scale-95">
       <div>
         <img src={messageIcon} alt="" className="float-left w-5 mr-5" />
         Name Here{" "}
