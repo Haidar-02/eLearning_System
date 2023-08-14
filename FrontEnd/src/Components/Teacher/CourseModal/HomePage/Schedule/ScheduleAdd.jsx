@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import CustomInput from '../../Inputs/CustomInput';
-import { addSchedule } from '../../../helpers/Teacher.helpers';
-import Button from '../../Common/Button';
+import CustomInput from '../../../../Inputs/CustomInput';
+import { addSchedule } from '../../../../../helpers/Teacher.helpers';
+import Button from '../../../../Common/Button';
 const initialState = {
   name: '',
   start_date: '',

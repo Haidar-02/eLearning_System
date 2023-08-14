@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { getProjectGroups } from "../../../../helpers/common.helpers";
-
+import { removeGroup } from "../../../../helpers/Teacher.helpers";
+import Button from "../../../Common/Button";
 const ProjectGroupDisplay = ({course_id,setGroups,groups}) => {
 
     useEffect(() => {
@@ -10,11 +11,17 @@ const ProjectGroupDisplay = ({course_id,setGroups,groups}) => {
         };
         fetchProject()
       }, []);
-      console.log(groups)
+    
+  const deleteGroup = async (group_id) => {
+    const res = await removeGroup(group_id);
+    if(res.status=='200'){
+        setGroups((prev)=>prev.filter(i => i.id !== group_id));
+    }
+};
     return ( 
         <div className="groups">
         { groups && groups.map((group)=>(
-            <div className="flex flex-col p-3 border gap-3" key={group.id}>
+            <div className="flex flex-col p-3 border gap-3 bg-cyan-light m-5" key={group.id}>
             
             <div className="content monster text-xs flex flex-col gap-2">
                 <div className="submission-date">
@@ -44,6 +51,11 @@ const ProjectGroupDisplay = ({course_id,setGroups,groups}) => {
                 }
                 </div>
             </div>
+            <Button
+                onClick={() => deleteGroup(group.id)}
+                text="Delete"
+                className="p-0 bg-transparent text-xl text-black"
+             />
             </div>
         ))
         }

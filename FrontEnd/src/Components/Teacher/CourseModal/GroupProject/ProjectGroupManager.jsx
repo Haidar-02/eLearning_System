@@ -37,10 +37,13 @@ const ProjectGroupManager = ({course_id}) => {
   }
     return ( 
         <div>
-        <h1>Project Group Management</h1>
-        <div className="flex justify-around">
-          <StudentList handleSelectStudent={handleSelectStudent} course_id={course_id} students={students} setStudents={setStudents}/>
-          <GroupSelection selectedStudents={selectedStudents} />
+        <div className="flex justify-between">
+        <div className='flex flex-grow justify-around'>
+        <StudentList handleSelectStudent={handleSelectStudent} course_id={course_id} students={students} setStudents={setStudents}/>
+          <GroupSelection selectedStudents={selectedStudents} handleSelectStudent={handleSelectStudent} />
+        </div>
+
+          <div className='flex items-start'>
           <Button
             text="Add selected to group"
             className=" text-[16px] bg-green text-white p-3 self-end"
@@ -48,6 +51,8 @@ const ProjectGroupManager = ({course_id}) => {
               handleSave();
             }}
           />
+          </div>
+
         </div>
     </div>
      );

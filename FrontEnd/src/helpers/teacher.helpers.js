@@ -436,6 +436,35 @@ async function addProjectGroupMembers({ course_id, selectedStudents }) {
   }
 }
 
+async function removeGroup(group_id) {
+  try {
+    const res = await axios.delete(
+      `${remoteUrl}teacher/remove-group/${group_id}`,
+      auth()
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+
+
 async function modifyTaskGrade({ submission_id, grade }) {
   try {
     const res = await axios.put(
@@ -597,6 +626,7 @@ export {
   addScheduleMaterial,
   removeScheduleMaterial,
   addScheduleTask,
+  removeGroup,
   removeScheduleTask,
   addScheduleSession,
   removeScheduleSession,

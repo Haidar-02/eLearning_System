@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import Button from '../../Common/Button';
-import {getCourseSchedules} from '../../../helpers/common.helpers';
-import ScheduleCard from './ScheduleCard';
-import ScheduleAdd from './ScheduleAdd';
-import ScheduleContent from './ScheduleContent';
+import Button from '../../../Common/Button';
+import {getCourseSchedules} from '../../../../helpers/common.helpers';
+import ScheduleCard from './Schedule/ScheduleCard';
+import ScheduleAdd from './Schedule/ScheduleAdd';
+import ScheduleContent from './Schedule/ScheduleContent';
 
-const TeacherCourseManager = ({course}) => {
+const TeacherScheduleManager = ({course}) => {
   const [schedules, setSchedules] = useState();
   const [show,setShow]=useState(false);
   const [showScheduleContent,setScheduleContent]=useState({show:false,id:null});
@@ -58,4 +58,4 @@ const TeacherCourseManager = ({course}) => {
   );
 };
 
-export default TeacherCourseManager;
+export default TeacherScheduleManager;

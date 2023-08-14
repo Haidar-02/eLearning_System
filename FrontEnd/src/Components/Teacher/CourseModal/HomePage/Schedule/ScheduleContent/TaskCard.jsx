@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
-import { removeScheduleTask } from "../../../helpers/Teacher.helpers";
+import Button from "../../../../../Common/Button";
+import { removeScheduleTask } from "../../../../../../helpers/Teacher.helpers";
+import Submissions from "./Submissions/Submissions";
 
-const TaskCard = ({ task,setTasks}) => {
+const TaskCard = ({ task,setTasks,setSubmissions}) => {
   const {
     id,
     schedule_id,
@@ -19,10 +20,10 @@ const TaskCard = ({ task,setTasks}) => {
     const res = await removeScheduleTask(id);
     setTasks((prev)=>prev.filter(i => i.id !== id));
 };
-  return (
-    <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors hover:bg-slate-200">
+  return ( 
+      <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors hover:bg-slate-200">
       <div
-        className="course-title"
+        className="course-title cursor-pointer" onClick={()=>setSubmissions({show:true,task_id:id})}
       >
         <span className="text-md font-bold uppercase hover:underline">
           {title}
@@ -44,6 +45,7 @@ const TaskCard = ({ task,setTasks}) => {
                 className="p-0 bg-transparent text-xl text-black"
         />
     </div>
+ 
   );
 };
 

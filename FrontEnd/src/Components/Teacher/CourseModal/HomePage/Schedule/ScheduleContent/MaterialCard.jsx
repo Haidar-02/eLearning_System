@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
-import { removeScheduleMaterial } from "../../../helpers/Teacher.helpers";
+import Button from "../../../../../Common/Button";
+import { removeScheduleMaterial } from "../../../../../../helpers/Teacher.helpers";
 
 const MaterialCard = ({ material,setMaterials}) => {
   const {

@@ -11,7 +11,7 @@ import discussionBoard from "../../../assets/icons/rectangle-list-regular.svg";
 import homeIcon from "../../../assets/icons/house-solid.svg";
 import group from "../../../assets/icons/people-group-solid.svg";
 
-import TeacherScheduleManager from './TeacherScheduleManager';
+import TeacherScheduleManager from './HomePage';
 import GroupProject from "./GroupProject";
 const falseState = {
   home_page: false,
