@@ -209,26 +209,20 @@ class CommonController extends Controller
     public function getMessages()
     {
         try {
-            $sent = Message::where('sender_id', Auth::id())->select('message', 'sender_id', 'receiver_id')->with('isSender')->get();
-            if (var_dump($sent->isEmpty())) {
-                $received = Message::where('receiver_id', Auth::id())->with('isReceiver')->get();
-                if (var_dump($received->isEmpty())) {
-                    return response()->json([
-                        'status' => 'success',
-                        'message' => 'empty'
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 'success',
-                        'message' => $received
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 'success',
-                    'message' => $sent
-                ]);
-            }
+
+            $user_id = Auth::id();
+            $messages = Message::
+                where('sender_id', $user_id)
+                ->orWhere('receiver_id', $user_id)
+                ->with(['isSender', 'isReceiver'])
+                ->get();
+
+            return response()->json([
+                'status' => 'success',
+                'user' => Auth::user(),
+                'messages' => $messages,
+
+            ]);
 
         } catch (Exception $e) {
             return response()->json([
@@ -238,6 +232,37 @@ class CommonController extends Controller
         }
 
     }
+
+
+    public function getMessagesById(Request $request, $id)
+    {
+        try {
+            $user = Auth::user();
+            $userId = $user->id;
+
+            $messages = Message::
+                where('sender_id', $userId)
+                ->where('receiver_id', $id)
+                ->orWhere('sender_id', $id)
+                ->where('receiver_id', $userId)
+
+                ->with(['isSender', 'isReceiver'])
+                ->orderBy('created_at')
+                ->get();
+
+            return response()->json([
+                'status' => 'success',
+                'messages' => $messages,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+
+            ]);
+        }
+    }
+
     public function getCourseDiscussion($course_id)
     {
         try {
