@@ -10,6 +10,7 @@ import play from '../../assets/icons/noun-interactive-1171204 (1).svg';
 import SideBar from '../../Components/DashBoard/SideBar';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 import StudentCourseManager from '../../Components/Student/StudentCourseManager';
+import MessageBox from '../../Components/Messaging/MessageBox';
 
 const falseState = {
   dashboard: false,
@@ -106,7 +107,7 @@ const AdminDashBoard = () => {
         {classes && <StudentCourseManager className="p-20" />}
         {grades && <span className="h-[500px] p-10">Manage Users</span>}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
-        {messages && <span className="h-[500px] p-10">Messaging</span>}
+        {messages && <MessageBox />}
         {interactive && <span className="h-[500px] p-10">Interactive</span>}
       </div>
 

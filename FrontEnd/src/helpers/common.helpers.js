@@ -20,26 +20,49 @@ async function getAllCourses() {
 async function sendMessage({ receiver_id, message }) {
   try {
     const res = await axios.post(
-      `${baseUrl}common/get-courses`,
+      `${baseUrl}common/send-message`,
       { receiver_id, message },
       auth()
     );
+    console.log(res.data);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function search(search, userType) {
+async function getMessages() {
   try {
-    const response = await axios.get(`${base_url}user/search/${search}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await axios.get(`${baseUrl}common/get-messages`, auth());
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function getMessagesById(id) {
+  try {
+    const res = await axios.get(
+      `${baseUrl}common/getMessagesById/${id}`,
+
+      auth()
+    );
+    console.log(res.data);
+    return res.data.messages;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function search({ search, userType }) {
+  try {
+    const response = await axios.get(
+      `${baseUrl}common/searchUser/${userType}/${search}`,
+      auth()
+    );
     return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-export { getAllCourses, sendMessage };
+export { getAllCourses, sendMessage, search, getMessages, getMessagesById };

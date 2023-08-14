@@ -29,7 +29,7 @@ const StudentCourseManager = ({ className }) => {
   const enrolledIn = enrolledCourses?.map((e) => e.id);
   console.log(viewEnrolled);
   return (
-    <div className={`${classNames}`}>
+    <div className={`${className}`}>
       <div className="flex items-center justify-between">
         <div className="page-header gothic color-cyan-dark text-2xl py-5">
           {viewEnrolled ? 'Enrolled Courses' : 'All Courses'}
