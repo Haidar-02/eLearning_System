@@ -190,8 +190,10 @@ class CommonController extends Controller
         $message->receiver_id=$request->receiver_id;
         $message->message=$request->message;
         $message->save();
+        $message=$message->with(['isSender', 'isReceiver'])->get();
         return response()->json([
             'status' => '200',
+            'message' => $message
         ]);
         } catch(Exception $e){
             return response()->json([
