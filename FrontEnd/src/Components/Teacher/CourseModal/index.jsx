@@ -9,7 +9,10 @@ import bullhornSolid from "../../../assets/icons/bullhorn-solid.svg";
 import messageIcon from "../../../assets/icons/message-regular.svg";
 import discussionBoard from "../../../assets/icons/rectangle-list-regular.svg";
 import homeIcon from "../../../assets/icons/house-solid.svg";
+import group from "../../../assets/icons/people-group-solid.svg";
+
 import TeacherScheduleManager from './TeacherScheduleManager';
+import GroupProject from "./GroupProject";
 const falseState = {
   home_page: false,
   anouncements: false,
@@ -18,8 +21,10 @@ const falseState = {
 };
 
 const CourseModal = ({ course, courseModel, setCourseModel }) => {
+  const [project,setProject]=useState();
   const [state, setState] = useState({
     home_page: true,
+    group_project: false,
     anouncements: false,
     messages: false,
     discussion_board: false,
@@ -28,8 +33,8 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { home_page, anouncements, messages, discussion_board } = state;
-
+  const { home_page, group_project , anouncements, messages, discussion_board } = state;
+  console.log(project);
   return (
     <Modal
       setShow={setCourseModel}
@@ -62,6 +67,13 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
                 }}
               />
             </div>
+              <DashBoardButton
+                icon={group}
+                text="Group Project"
+                onClick={() => {
+                  togglePage("group_project");
+                }}
+              />
             <DashBoardButton
               onClick={() => {
                 togglePage("anouncements");
@@ -89,22 +101,14 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
         <div className="mainContent flex flex-col px-14 py-10 flex-grow">
           {/* PAGES GO HERE */}
           {home_page && <TeacherScheduleManager course={course} />}
+          {group_project && <GroupProject project={project} course_id={course.id} setProject={setProject}/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
-
           {discussion_board && (
             <span className="h-[500px] p-10">discussion board</span>
           )}
         </div>
-        {/* 
-        <SideBar className={'right-0'}>
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-        </SideBar> */}
+
       </div>
     </Modal>
   );

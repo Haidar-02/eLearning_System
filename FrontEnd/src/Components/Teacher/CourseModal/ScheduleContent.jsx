@@ -30,7 +30,6 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     
         fetchTasks();
       }, []);
-      console.log(tasks);
     return ( 
         <div>
             {showTaskAdd && <TaskAdd setTaskAdd={setTaskAdd} setTasks={setTasks} course_id={course_id} schedule_id={schedule_id}/> }

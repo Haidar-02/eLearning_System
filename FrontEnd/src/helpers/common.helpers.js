@@ -110,26 +110,26 @@ async function getTaskSubmissions(task_id) {
   }
 }
 
-async function getCourseProjects(course_id) {
+async function getProjectGroups(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-course-projects/${course_id}`,
+      `${remoteUrl}common/get-course-project/${course_id}`,
       auth()
     );
     const { data } = res;
 
     if (res.status === 200) {
-      return data.projects;
+      return data.project;
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-async function getProjectMembers(project_id) {
+async function getGroupMembers(project_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-project-members/${project_id}`,
+      `${remoteUrl}common/get-group-members/${project_id}`,
       auth()
     );
     const { data } = res;
@@ -262,8 +262,8 @@ export {
   getCourseStudents,
   getScheduleSessions,
   getTaskSubmissions,
-  getCourseProjects,
-  getProjectMembers,
+  getGroupMembers,
+  getProjectGroups,
   getStudentFeedback,
   sendMessage,
   getMessages,
