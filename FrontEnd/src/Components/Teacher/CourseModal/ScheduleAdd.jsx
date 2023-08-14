@@ -38,6 +38,9 @@ const ScheduleAdd = ({ setShow, setSchedules, course_id}) => {
     <div
       className=" flex flex-col rounded-2xl gap-5 w-[400px]"
     >
+    <div className="page-header gothic color-cyan-dark text-2xl py-5">
+      Add Schedule
+    </div>
       <CustomInput
         label="Name"
         name="name"

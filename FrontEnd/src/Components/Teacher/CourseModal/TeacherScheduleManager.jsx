@@ -20,7 +20,7 @@ const TeacherCourseManager = ({course}) => {
     fetchSchedules();
   }, []);
   return (
-    <div className="">
+    <>
       {show ? (
         <ScheduleAdd setShow={setShow} setSchedules={setSchedules} course_id={course.id} />
       ) : (
@@ -54,7 +54,7 @@ const TeacherCourseManager = ({course}) => {
           )}
         </>
       )}
-    </div>
+    </>
   );
 };
 
