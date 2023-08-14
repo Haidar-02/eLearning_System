@@ -8,7 +8,7 @@ const initialState = {
   title: '',
   description: '',
   due_date: '',
-  task_type: ''
+  task_type: '1'
 };
 const TaskAdd = ({ setTaskAdd, setTasks,schedule_id,course_id}) => {
   const [state, setState] = useState(initialState);
@@ -29,7 +29,7 @@ const TaskAdd = ({ setTaskAdd, setTasks,schedule_id,course_id}) => {
     if (data) {
       console.log(data);
       setTasks((prev) => {
-        return [data.tasks, prev];
+        return [data.task, ...prev];
       });
 
       setTaskAdd(false);

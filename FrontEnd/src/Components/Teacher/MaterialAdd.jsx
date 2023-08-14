@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
 import Modal from '../Common/Modal';
-import { addScheduleMaterial, addScheduleTask } from '../../helpers/Teacher.helpers';
+import { addScheduleMaterial } from '../../helpers/Teacher.helpers';
 import Button from '../Common/Button';
 import TextArea from '../Inputs/TextArea';
 const initialState = {
@@ -44,7 +44,7 @@ const MaterialAdd = ({ setMaterialAdd, setMaterials,schedule_id,course_id}) => {
     if (data) {
       console.log(data);
       setMaterials((prev) => {
-        return [data.tasks, prev];
+        return [data.material, ...prev];
       });
 
       setMaterialAdd(false);
