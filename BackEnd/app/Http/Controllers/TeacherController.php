@@ -331,7 +331,6 @@ class TeacherController extends Controller
                 $member->student_id = $student["id"];
                 $member->project_id = $group->id;
                 $member->save();
-                echo $member;
             }
             $group=$group->with('members')->first();
 
