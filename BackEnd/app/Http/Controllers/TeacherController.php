@@ -113,6 +113,7 @@ class TeacherController extends Controller
         $material->save();
         return response()->json([
             'status' => '200',
+            'material'=>$material
         ]);
     } catch(Exception $e){
         return response()->json([
@@ -151,6 +152,7 @@ class TeacherController extends Controller
             $task->save();
             return response()->json([
                 'status' => '200',
+                'task'=>$task
             ]);
         } catch(Exception $e){
             return response()->json([
@@ -187,6 +189,7 @@ class TeacherController extends Controller
             $session->save();
             return response()->json([
                 'status' => '200',
+                'session'=>$session
             ]);
         } catch(Exception $e){
             return response()->json([
