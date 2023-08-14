@@ -136,10 +136,10 @@ class CommonController extends Controller
         }
     }
 
-    public function getCourseProjects($course_id){
+    public function getProjectGroups($course_id){
         try{
             $course=Course::where([['id','=',$course_id]])->first();
-            $projects=$course->projects;
+            $groups=$course->groups()->with('membersInfo')->get();
     
             return response()->json([
                 'status' => '200',
