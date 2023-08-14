@@ -278,48 +278,48 @@ class TeacherController extends Controller
         
     // }
 
-    public function addCourseProject(Request $request){
-        try{
-            $project=new GroupProject;
-            $project->course_id=$request->course_id;
-            $project->submission_date=$request->submission_date;
-            $project->status=$request->status;
+    // public function addCourseProject(Request $request){
+    //     try{
+    //         $project=new GroupProject;
+    //         $project->course_id=$request->course_id;
+    //         $project->submission_date=$request->submission_date;
+    //         $project->status=$request->status;
 
-            $base64Image=$request->input('file');
-            $binaryData=base64_decode($base64Image);
-            $originalFileName = $request->file_name;
+    //         $base64Image=$request->input('file');
+    //         $binaryData=base64_decode($base64Image);
+    //         $originalFileName = $request->file_name;
 
-            //create temp file
-            $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
-            file_put_contents($tempFilePath, $binaryData);
+    //         //create temp file
+    //         $tempFilePath = tempnam(sys_get_temp_dir(), 'temp_base64');
+    //         file_put_contents($tempFilePath, $binaryData);
 
-            $uploadedFile = new \Illuminate\Http\UploadedFile(
-                $tempFilePath,
-                $originalFileName, // Provide a fallback original filename
-                mime_content_type($tempFilePath), // Guess the MIME type
-                null,
-                true // Delete the file after it's used
-            );
+    //         $uploadedFile = new \Illuminate\Http\UploadedFile(
+    //             $tempFilePath,
+    //             $originalFileName, // Provide a fallback original filename
+    //             mime_content_type($tempFilePath), // Guess the MIME type
+    //             null,
+    //             true // Delete the file after it's used
+    //         );
         
-            //get file extension
-            $fileExtension = $uploadedFile->getClientOriginalExtension();
-            unlink($tempFilePath);
-            $fileName = uniqid() . '.'.$fileExtension;
+    //         //get file extension
+    //         $fileExtension = $uploadedFile->getClientOriginalExtension();
+    //         unlink($tempFilePath);
+    //         $fileName = uniqid() . '.'.$fileExtension;
 
-            Storage::disk('public')->put('files/' . $fileName, $binaryData);
-            $publicUrl = Storage::disk('public')->url('files/' . $fileName);
-            $project->file_path=$publicUrl;
-            $project->save();
-            return response()->json([
-                'status' => '200',
-            ]);
-        } catch(Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        } 
-    }
+    //         Storage::disk('public')->put('files/' . $fileName, $binaryData);
+    //         $publicUrl = Storage::disk('public')->url('files/' . $fileName);
+    //         $project->file_path=$publicUrl;
+    //         $project->save();
+    //         return response()->json([
+    //             'status' => '200',
+    //         ]);
+    //     } catch(Exception $e){
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => $e->getMessage()
+    //         ]);
+    //     } 
+    // }
     public function addProjectGroupMembers(Request $request){
         try {
             $group = new GroupProject;
@@ -347,6 +347,22 @@ class TeacherController extends Controller
         
     }
 
+    public function removeGroup($group_id){
+
+        try{
+            GroupProject::where([['id','=',$group_id]])->delete();
+
+            return response()->json([
+                'status' => '200',
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
+        
+    }
     public function modifyTaskGrade(Request $request){
         try{
             $submission_id=$request->submission_id;
