@@ -39,6 +39,7 @@ class StudentController extends Controller
             $course->save();
             return response()->json([
                 'status' => 'success',
+                'course' => Course::with('teacher')->find($request->course_id),
             ]);
         } catch (Exception $e) {
             return response()->json([
@@ -47,6 +48,7 @@ class StudentController extends Controller
             ]);
         }
     }
+
 
     public function getEnrolledCourses()
     {
@@ -156,14 +158,15 @@ class StudentController extends Controller
 
     }
 
-    public function getTeacherMeet($teacher_id){
-        try{
-        $teacher_meet=TeacherMeetSchedule::where([['teacher_id','=',$teacher_id],['user_id','=',Auth::id()]])->first();
-        return response()->json([
-            'status' => '200',
-            'teacher_meet'=> $teacher_meet
-        ]);
-        } catch(Exception $e){
+    public function getTeacherMeet($teacher_id)
+    {
+        try {
+            $teacher_meet = TeacherMeetSchedule::where([['teacher_id', '=', $teacher_id], ['user_id', '=', Auth::id()]])->first();
+            return response()->json([
+                'status' => '200',
+                'teacher_meet' => $teacher_meet
+            ]);
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()

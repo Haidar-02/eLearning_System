@@ -5,11 +5,15 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
+use App\Models\CourseMaterial;
 use App\Models\Message;
 use App\Models\ParentRelation;
 use App\Models\TaskType;
 use App\Models\UserType;
+use App\Models\Schedule;
 use App\Models\User;
+
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -34,6 +38,9 @@ class DatabaseSeeder extends Seeder
         Course::factory(10)->create();
         CourseEnrollment::factory(20)->create();
         Message::factory(100)->create();
+        Schedule::factory(50)->create();
+        CourseMaterial::factory(50)->create();
+
 
     }
 }
