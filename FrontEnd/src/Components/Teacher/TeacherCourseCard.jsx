@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../Common/Button";
-import CourseModal from "../Common/CourseModal";
+import CourseModal from "./CourseModal";
 
 const CourseCard = ({ course }) => {
   const [courseModel, setCourseModel] = useState(false);

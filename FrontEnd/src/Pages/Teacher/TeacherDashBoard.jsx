@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 
-import gradesIcon from "../../assets/icons/ChartSquareBarOutline.svg";
 import dashIcon from "../../assets/icons/dashboard.svg";
 import classesIcon from "../../assets/icons/UserGroupOutline.svg";
 import messageIcon from "../../assets/icons/message-white.svg";
 import logoutIcon from "../../assets/icons/right-from-bracket-solid-white.svg";
 
-import clipBoardIcon from "../../assets/icons/ClipboardListOutline.svg";
 import SideBar from "../../Components/DashBoard/SideBar";
 import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 import TeacherCourseManager from "../../Components/Teacher/TeacherCourseManager";
-import CourseModal from "../../Components/Common/CourseModal";
-import MessagePreview from "../../Components/Teacher/MessagePreview";
-import MessagesList from "../../Components/Teacher/MessagesList";
+
 
 const falseState = {
   dashboard: false,

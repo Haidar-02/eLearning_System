@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Button from "../Common/Button";
-import CourseModal from "../Common/CourseModal";
-import { removeScheduleTask } from "../../helpers/Teacher.helpers";
+import Button from "../../Common/Button";
+import { removeScheduleTask } from "../../../helpers/Teacher.helpers";
 
 const TaskCard = ({ task,setTasks}) => {
   const {

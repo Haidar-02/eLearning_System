@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-import Modal from "../Common/Modal";
-import Button from "./Button";
-import SideBar from "../DashBoard/SideBar";
-import DashBoardButton from "../DashBoard/DashBoardButton";
+import Modal from "../../Common/Modal";
+import Button from "../../Common/Button";
+import SideBar from "../../DashBoard/SideBar";
+import DashBoardButton from "../../DashBoard/DashBoardButton";
 // import dashIcon from '../../assets/icons/dashboard.svg';
-import bullhornSolid from "../../assets/icons/bullhorn-solid.svg";
-import messageIcon from "../../assets/icons/message-regular.svg";
-import discussionBoard from "../../assets/icons/rectangle-list-regular.svg";
-import homeIcon from "../../assets/icons/house-solid.svg";
-import TeacherScheduleManager from '../Teacher/TeacherScheduleManager';
+import bullhornSolid from "../../../assets/icons/bullhorn-solid.svg";
+import messageIcon from "../../../assets/icons/message-regular.svg";
+import discussionBoard from "../../../assets/icons/rectangle-list-regular.svg";
+import homeIcon from "../../../assets/icons/house-solid.svg";
+import TeacherScheduleManager from './TeacherScheduleManager';
 const falseState = {
   home_page: false,
   anouncements: false,

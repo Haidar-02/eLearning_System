@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getScheduleMaterials,getScheduleTasks } from "../../helpers/common.helpers";
-import Button from "../Common/Button";
+import { getScheduleMaterials,getScheduleTasks } from "../../../helpers/common.helpers";
+import Button from "../../Common/Button";
 import TaskAdd from "./TaskAdd";
 import TaskCard from "./TaskCard";
 import MaterialAdd from "./MaterialAdd";

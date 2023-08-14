@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import CustomInput from '../Inputs/CustomInput';
-import Modal from '../Common/Modal';
-import TextArea from '../Inputs/TextArea';
-import { addSchedule } from '../../helpers/Teacher.helpers';
-import Button from '../Common/Button';
+import React, { useState } from 'react';
+import CustomInput from '../../Inputs/CustomInput';
+import { addSchedule } from '../../../helpers/Teacher.helpers';
+import Button from '../../Common/Button';
 const initialState = {
   name: '',
   start_date: '',

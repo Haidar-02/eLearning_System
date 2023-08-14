@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import CustomInput from '../Inputs/CustomInput';
-import Modal from '../Common/Modal';
-import { addScheduleMaterial } from '../../helpers/Teacher.helpers';
-import Button from '../Common/Button';
-import TextArea from '../Inputs/TextArea';
+import CustomInput from '../../Inputs/CustomInput';
+import Modal from '../../Common/Modal';
+import { addScheduleMaterial } from '../../../helpers/Teacher.helpers';
+import Button from '../../Common/Button';
+import TextArea from '../../Inputs/TextArea';
 const initialState = {
   title: '',
   content: '',

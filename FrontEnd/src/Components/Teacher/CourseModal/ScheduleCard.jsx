@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Button from '../Common/Button';
-import { removeSchedule } from '../../helpers/Teacher.helpers';
-import ScheduleContent from './ScheduleContent';
+import Button from '../../Common/Button';
+import { removeSchedule } from '../../../helpers/Teacher.helpers';
 
 
 
