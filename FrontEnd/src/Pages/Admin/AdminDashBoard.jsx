@@ -9,6 +9,10 @@ import SideBar from '../../Components/DashBoard/SideBar';
 import AdminCourseManager from './AdminCourseManager';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 
+import PieChart from '../../Components/DashBoard/PieChart';
+import CourseProgressbar from '../../Components/DashBoard/CircularProgressBar';
+import 'react-circular-progressbar/dist/styles.css';
+
 const falseState = {
   dashboard: false,
   grades: false,
@@ -31,6 +35,8 @@ const AdminDashBoard = () => {
   };
 
   const { dashboard, grades, classes, assignments } = state;
+  
+  const completionPercentage = 66;
 
   return (
     <div className="dashBoardWrapper flex justify-between h-full">
@@ -80,8 +86,17 @@ const AdminDashBoard = () => {
       </SideBar>
 
       <div className="mainContent flex flex-col   px-14 py-10 h-fit ">
-        {/* PAGES GO HERE */}
-        {dashboard && <span className="h-[500px] p-10">Analytics</span>}
+      {dashboard &&
+      <div className='flex flex-col items-center'>
+        <div>
+         <span className="h-[50px] p-10">
+          <PieChart />
+         </span>
+        </div>
+        <div className='h-36'>
+          <CourseProgressbar targetPercentage={completionPercentage} />
+        </div>
+      </div>}
         {grades && <span className="h-[500px] p-10">Manage Users</span>}
         {classes && <AdminCourseManager />}
         {assignments && <span className="h-[500px] p-10">Assignments</span>}

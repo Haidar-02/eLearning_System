@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
+import Toggle from '../../Components/toggle';
+
+
 const Navbar = ({ setShow }) => {
   const [btnState, setBtnState] = useState({
     1: false,
@@ -25,10 +28,12 @@ const Navbar = ({ setShow }) => {
       </div>
       <div className="right-section flex items-center justify-">
         <div className="monster user flex items-center cursor-pointer">
-          <div className="user-letter  flex items-center justify-center rounded-full bg-cyan-dark">
+          {/* <div className="user-letter  flex items-center justify-center rounded-full bg-cyan-dark">
             <span className="text-white font-medium">A</span>
-          </div>
-          <div className="user-name ">Alex</div>
+          </div> */}
+          {/* <div className="user-name ">Alex</div> */}
+          <Toggle />
+
         </div>
         <span
           onClick={() => {

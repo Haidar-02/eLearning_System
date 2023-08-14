@@ -69,13 +69,6 @@ class AdminController extends Controller
 
     function addCourse(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'teacher_id' => 'required|exists:users,id',
-            'enrollment_limit' => 'required|integer|min:1',
-            // 'class_code' => 'required|unique:courses,class_code',
-        ]);
 
     $request->validate([
         'title' => 'required|string|max:255',
