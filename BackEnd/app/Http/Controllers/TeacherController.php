@@ -328,7 +328,7 @@ class TeacherController extends Controller
 
             $students=$request->students;
             foreach($students as $student){
-                $member->student_id=$student->id;
+                $member->student_id=$student["id"];
                 $member->project_id=$group->id;
                 $member->save();
             }
