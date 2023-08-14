@@ -8,7 +8,7 @@ const UserCard = ({ user }) => {
       <div className="user-info">
         <span className="gothic font-semibold text-md">{name}</span>
         <span className="text-xs">{email}</span>
-        <span className="text-xs">User Type: {user_type.name}</span>
+        <span className="text-xs"> User Type: {user_type}</span>
       </div>
     </div>
   );
