@@ -330,6 +330,7 @@ class TeacherController extends Controller
             foreach($students as $student){
                 $member->student_id=$student["id"];
                 $member->project_id=$group->id;
+                echo $member;
                 $member->save();
             }
 
