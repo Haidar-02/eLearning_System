@@ -35,10 +35,11 @@ const MessageBox = ({ messages }) => {
             <span className="text-sm text-gray-400 italic">Chat is empty</span>
           ) : (
             selectedMessages &&
-            selectedMessages.map((message) => {
+            selectedMessages.map((message, index) => {
               const sent = message.is_sender.user_type === 2;
               return (
                 <div
+                  key={index}
                   className={`flex flex-col gap-1  p-2 rounded-md ${
                     sent ? 'bg-green-200' : 'bg-gray-100'
                   }`}

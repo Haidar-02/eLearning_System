@@ -197,6 +197,7 @@ class CommonController extends Controller
             $message->save();
             return response()->json([
                 'status' => 'success',
+                'message' => $message->with(['isSender', 'isReceiver'])->get()
             ]);
         } catch (Exception $e) {
             return response()->json([
