@@ -8,6 +8,8 @@ use App\Models\CourseEnrollment;
 use App\Models\CourseMaterial;
 use App\Models\Message;
 use App\Models\ParentRelation;
+use App\Models\Task;
+use App\Models\TaskSubmission;
 use App\Models\TaskType;
 use App\Models\UserType;
 use App\Models\Schedule;
@@ -40,6 +42,9 @@ class DatabaseSeeder extends Seeder
         Message::factory(100)->create();
         Schedule::factory(50)->create();
         CourseMaterial::factory(50)->create();
+        Task::factory(100)->create();
+        TaskSubmission::factory(50)->create();
+
 
 
     }
