@@ -36,7 +36,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
   return (
     <Modal
       setShow={setCourseModel}
-      className="fixed insta-border rounded-b-2xl w-[100vw] h-[100vh] ml-[100px] text-black"
+      className="fixed insta-border rounded-b-2xl w-[100vw] h-[100vh] transition-all text-black"
     >
       <div className="dashBoardWrapper flex h-full">
         <SideBar className="bg-cyan-dark">
@@ -96,7 +96,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           </div>
         </SideBar>
 
-        <div className="mainContent flex flex-col px-14 py-10 flex-grow">
+        <div className="mainContent overflow-y-scroll flex flex-col px-14 py-10 flex-grow">
           {/* PAGES GO HERE */}
           {home_page && <TeacherScheduleManager course={course} />}
           {group_project && <GroupProject course_id={course.id}/>}

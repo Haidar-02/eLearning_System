@@ -38,8 +38,8 @@ const ProjectGroupDisplay = ({course_id,setGroups,groups}) => {
                 <div className="members">
                 <span className="font-semibold underline">Members: </span>
                 {
-                    group.members.map((member)=>(
-                        <div>{member.name}</div>
+                    group.members_info.map((member)=>(
+                        <div key={member.id}>{member.name}</div>
                     ))
                 }
                 </div>

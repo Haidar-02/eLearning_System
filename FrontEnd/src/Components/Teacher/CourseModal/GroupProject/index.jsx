@@ -28,7 +28,7 @@ const GroupProject = ({course_id}) => {
                 />
             </div>
           </div>
-          <div className="group-container">
+          <div className="group-container  overflow-y-scroll">
             <ProjectGroupDisplay groups={groups} setGroups={setGroups} course_id={course_id}/>
           </div>
           </>
