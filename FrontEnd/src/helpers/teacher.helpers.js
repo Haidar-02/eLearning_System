@@ -398,13 +398,13 @@ async function addCourseProject({
   }
 }
 
-async function addProjectMembers({ project_id, student_id }) {
+async function addProjectGroupMembers({ project_id, students }) {
   try {
     const res = await axios.post(
-      `${remoteUrl}teacher/add-project-member`,
+      `${remoteUrl}teacher/add-project-group-members`,
       {
         project_id,
-        student_id,
+        students,
       },
       auth()
     );
@@ -599,7 +599,7 @@ export {
   addScheduleSession,
   removeScheduleSession,
   addCourseProject,
-  addProjectMembers,
+  addProjectGroupMembers,
   modifyTaskGrade,
   modifyProjectGrade,
   addFeedback,

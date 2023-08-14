@@ -21,7 +21,6 @@ const falseState = {
 };
 
 const CourseModal = ({ course, courseModel, setCourseModel }) => {
-  const [project,setProject]=useState();
   const [state, setState] = useState({
     home_page: true,
     group_project: false,
@@ -34,7 +33,6 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
   };
 
   const { home_page, group_project , anouncements, messages, discussion_board } = state;
-  console.log(project);
   return (
     <Modal
       setShow={setCourseModel}
@@ -101,7 +99,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
         <div className="mainContent flex flex-col px-14 py-10 flex-grow">
           {/* PAGES GO HERE */}
           {home_page && <TeacherScheduleManager course={course} />}
-          {group_project && <GroupProject project={project} course_id={course.id} setProject={setProject}/>}
+          {group_project && <GroupProject course_id={course.id}/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
           {discussion_board && (

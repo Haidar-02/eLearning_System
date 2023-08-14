@@ -113,7 +113,7 @@ async function getTaskSubmissions(task_id) {
 async function getProjectGroups(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-course-project/${course_id}`,
+      `${remoteUrl}common/get-project-groups/${course_id}`,
       auth()
     );
     const { data } = res;
