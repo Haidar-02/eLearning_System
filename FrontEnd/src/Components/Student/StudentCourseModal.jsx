@@ -44,16 +44,6 @@ const StudenCourseModal = ({
           }}
           className="text-[16px] bg-transparent text-cyan-600  p-3 self-end "
         />
-        <Button
-          text="Schedules"
-          onClick={async () => {
-            const s = await getCourseSchedules(id);
-
-            console.log(s);
-            // setShow(false);
-          }}
-          className="text-[16px] bg-transparent text-cyan-600  p-3 self-end "
-        />
       </div>
     </Modal>
   );
