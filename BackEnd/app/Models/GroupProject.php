@@ -20,7 +20,7 @@ class GroupProject extends Model
     }
     public function membersInfo(): BelongsToMany
     {
-        return $this->belongsToMany(User::class,'student_projects','projet_id','student_id');
+        return $this->belongsToMany(User::class,'student_projects','project_id','student_id');
     }
 }
 
