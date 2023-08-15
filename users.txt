@@ -1,25 +1,25 @@
-+------------------------------+-----------+
-| email                        | user_type |
-+------------------------------+-----------+
-| admin@admin.com              |         1 |
-| ritchie.gregoria@example.org |         4 |
-| myriam07@example.net         |         3 |
-| sammy.block@example.com      |         2 |
-| camila57@example.net         |         2 |
-| jborer@example.com           |         3 |
-| qpouros@example.org          |         3 |
-| gabe22@example.com           |         4 |
-| yerdman@example.net          |         4 |
-| gnitzsche@example.com        |         2 |
-| jermaine21@example.org       |         2 |
-| schimmel.kiley@example.org   |         2 |
-| pollich.selena@example.net   |         3 |
-| robb18@example.com           |         3 |
-| alfred93@example.com         |         2 |
-| gfunk@example.com            |         2 |
-| russel.letha@example.org     |         3 |
-| gerda70@example.com          |         3 |
-| wjones@example.net           |         4 |
-| rosalinda91@example.net      |         2 |
-| xdicki@example.net           |         2 |
-+------------------------------+-----------+
++----------------------------------+-----------+
+| email                            | user_type |
++----------------------------------+-----------+
+| admin@admin.com                  |         1 |
+| gryan@example.com                |         4 |
+| marvin.duncan@example.com        |         3 |
+| fahey.orville@example.com        |         3 |
+| verla37@example.org              |         2 |
+| armstrong.christophe@example.net |         3 |
+| cleo.anderson@example.com        |         4 |
+| pkuphal@example.org              |         3 |
+| wromaguera@example.net           |         3 |
+| dion.lueilwitz@example.com       |         2 |
+| champlin.alyce@example.net       |         3 |
+| blanda.carrie@example.org        |         4 |
+| anna89@example.com               |         2 |
+| jacklyn25@example.org            |         4 |
+| jkshlerin@example.net            |         2 |
+| srutherford@example.com          |         4 |
+| ludwig68@example.com             |         3 |
+| wschmidt@example.net             |         2 |
+| anastasia89@example.net          |         3 |
+| swolf@example.org                |         3 |
+| zcrona@example.net               |         3 |
++----------------------------------+-----------+
