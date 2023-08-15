@@ -399,11 +399,21 @@ class TeacherController extends Controller
 
         try{
             if($feedback_id!==null){
-                $feedback=Feedback::where([["id",'=',$feedback_id],["course_id","=",$request->course_id]])->update(['rating' => $request->rating,'comment'=>$request->comment]);
-                return response()->json([
-                    'status' => '200',
-                    'feedback'=>$feedback
-                ]);
+                $affectedRows=Feedback::where([["id",'=',$feedback_id],["course_id","=",$request->course_id]])->update(['rating' => $request->rating,'comment'=>$request->comment]);
+                
+                    if ($affectedRows > 0) {
+                        $updatedFeedback = Feedback::find($feedback_id); 
+                        return response()->json([
+                            'status' => '200',
+                            'feedback' => $updatedFeedback
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Feedback not found or not updated'
+                        ]);
+                    }
+                
             }else{
                 $feedback=new Feedback;
                 $feedback->teacher_id=Auth::id();
