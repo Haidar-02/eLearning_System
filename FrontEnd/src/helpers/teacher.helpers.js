@@ -611,14 +611,14 @@ async function getStudentAttendance(session_id, student_id) {
 async function addSessionAttendance({
   student_id,
   session_id,
-  status,
+  attendance_status,
 }) {
   try {
     const res = await axios.put(
       `${remoteUrl}teacher/add-session-attendance/${session_id}`,
       {
         student_id,
-        status,
+        attendance_status,
       },
       auth()
     );
