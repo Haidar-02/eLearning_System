@@ -5,22 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Conference;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
 use App\Models\Feedback;
 use App\Models\ParentRelation;
-use App\Models\Schedule;
 use App\Models\Task;
 use App\Models\TaskSubmission;
-use App\Models\TeacherMeetSchedule;
-use App\Models\UserType;
 use Error;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
-use function Laravel\Prompts\error;
 
 class ParentController extends Controller
 {
