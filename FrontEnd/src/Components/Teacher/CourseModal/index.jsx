@@ -11,7 +11,6 @@ import homeIcon from "../../../assets/icons/house-solid.svg";
 import group from "../../../assets/icons/people-group-solid.svg";
 import feedbackIcon from '../../../assets/icons/feedback.svg';
 import progressIcon from '../../../assets/icons/progress-report.svg';
-
 import TeacherScheduleManager from './HomePage';
 import GroupProject from "./GroupProject";
 import StudentManager from "./Feedback";
@@ -116,6 +115,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           {group_project && <GroupProject course_id={course.id}/>}
           {feedback && <StudentManager course_id={course.id}/>}
           {progress && <ProgressManager course_id={course.id}/>}
+
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {discussion_board && (
             <span className="h-[500px] p-10">discussion board</span>

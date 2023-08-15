@@ -328,7 +328,7 @@ async function removeScheduleSession(session_id) {
       auth()
     );
 
-    if (res.status == 200) {
+    if (res.data.status == 200) {
       const data = res.data;
       return { data };
     }

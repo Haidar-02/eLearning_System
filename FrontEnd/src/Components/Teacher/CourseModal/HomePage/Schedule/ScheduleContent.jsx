@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { getScheduleMaterials,getScheduleTasks } from "../../../../../helpers/common.helpers";
+import { getScheduleMaterials,getScheduleSessions,getScheduleTasks } from "../../../../../helpers/common.helpers";
 import Button from "../../../../Common/Button";
 import TaskAdd from "./ScheduleContent/TaskAdd";
 import TaskCard from "./ScheduleContent/TaskCard";
 import MaterialAdd from "./ScheduleContent/MaterialAdd";
 import MaterialCard from "./ScheduleContent/MaterialCard";
 import Submissions from "./ScheduleContent/Submissions/Submissions";
+import SessionAdd from "./ScheduleContent/SessionAdd";
+import SessionCard from "./ScheduleContent/SessionCard";
 const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     const [materials,setMaterials]=useState()
     const [tasks,setTasks]=useState();
+    const [sessions,setSessions]=useState();
+
     const [showTaskAdd,setTaskAdd]=useState(false);
     const [showMaterialAdd,setMaterialAdd]=useState(false);
+    const [showSessionAdd,setSessionAdd]=useState(false);
     const [showSubmissions,setShowSubmissions]=useState({show:false,id:null});
 
-    // const [showTask,setShowTask]=useState(false);
-    // const [showMaterial,setShowMaterial]=useState(false);
 
     useEffect(() => {
         const fetchMaterials = async () => {
@@ -32,6 +35,14 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     
         fetchTasks();
       }, []);
+      useEffect(() => {
+        const fetchSessions = async () => {
+          const res = await getScheduleSessions(schedule_id);
+          setSessions(res);
+        };
+    
+        fetchSessions();
+      }, []);
     return ( 
       <>
       {showSubmissions.show ? 
@@ -41,7 +52,7 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
       <div>
       {showTaskAdd && <TaskAdd setTaskAdd={setTaskAdd} setTasks={setTasks} course_id={course_id} schedule_id={schedule_id}/> }
       {showMaterialAdd && <MaterialAdd setMaterialAdd={setMaterialAdd} setMaterials={setMaterials} course_id={course_id} schedule_id={schedule_id}/> }
-
+      {showSessionAdd && <SessionAdd setSessionAdd={setSessionAdd} setSessions={setSessions} course_id={course_id} schedule_id={schedule_id}/>}
           <div className="flex  justify-between items-center">
               <div className="page-header gothic color-cyan-dark text-2xl py-5">
                   Schedule Content
@@ -62,6 +73,11 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
                   text="Add Material"
                   className="p-0 bg-cyan text-xl text-white"
                   />
+                  <Button
+                  onClick={() => setSessionAdd(true)}
+                  text="Add Session"
+                  className="p-0 bg-cyan text-xl text-white"
+                  />
               </div>
           </div>
           <div className="tasks">
@@ -78,6 +94,14 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
             materials &&
             materials.map((material, index) => (
                 <MaterialCard key={index} material={material} setMaterials={setMaterials}/>
+            ))
+            }
+          </div>
+          <div className="sessions">
+            {
+            sessions &&
+            sessions.map((session, index) => (
+                <SessionCard key={index} session={session} setSessions={setSessions} setShowAttendance={setShowAttendance}/>
             ))
             }
           </div>
