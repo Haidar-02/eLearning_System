@@ -186,7 +186,7 @@ class CommonController extends Controller
                 //     ->get());
                 return response()->json([
                     'count'=>$submitted_tasks
-                ])
+                ]);
                 // return response()->json([
                 //     'status' => '200',
                 //     'submitted_tasks' => $submitted_tasks,
@@ -194,9 +194,7 @@ class CommonController extends Controller
                 //     'ungraded_tasks' => $ungraded_tasks
                 // ]);
             }
-    
-            // Add an else case here if needed
-    
+        
         } catch (\Throwable $e) {
             return response()->json([
                 'status' => 'error',
