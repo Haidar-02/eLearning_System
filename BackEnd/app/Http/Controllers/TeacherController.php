@@ -381,7 +381,7 @@ class TeacherController extends Controller
 
     public function modifyProjectGrade(Request $request){
         try{
-            $group_id=$request->project_id;
+            $group_id=$request->group_id;
             $grade=$request->grade;
             GroupProject::where([['id','=',$group_id]])->update(['grade' => $grade]);
             return response()->json([
