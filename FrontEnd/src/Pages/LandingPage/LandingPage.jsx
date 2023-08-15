@@ -21,7 +21,7 @@ const LandingPage = () => {
             <div className="main-text gothic  text-[48px]">
               Learning and teaching online, made easy.
             </div>
-            <div>Enjoy various games, puzzles, and challenges</div>
+            <div>Enjoy assignments from day to night, and night to day...</div>
           </div>
         </div>
         <div className="right "></div>

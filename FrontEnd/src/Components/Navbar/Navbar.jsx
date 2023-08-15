@@ -10,26 +10,10 @@ const Navbar = ({ setShow }) => {
   return (
     <nav className="nav-container flex justify-between items-center monster">
       <div className="logo gothic flex items-center">
-        <span className="text-4xl cursor-pointer">Kidzo</span>
+        <span className="text-4xl cursor-pointer">SE-Learning</span>
       </div>
-      <div className="  mid-section flex justify-center items-center grow ">
-        <div className="nav-button  hover:font-semibold text text-lg  transition-all cursor-pointer">
-          Home
-        </div>
-        <div className="nav-button hover:font-semibold  text text-lg transition-all cursor-pointer">
-          Textbook
-        </div>
-        <div className="nav-button  hover:font-semibold text text-lg  transition-all cursor-pointer">
-          Games
-        </div>
-      </div>
+
       <div className="right-section flex items-center justify-">
-        <div className="monster user flex items-center cursor-pointer">
-          <div className="user-letter  flex items-center justify-center rounded-full bg-cyan-dark">
-            <span className="text-white font-medium">A</span>
-          </div>
-          <div className="user-name ">Alex</div>
-        </div>
         <span
           onClick={() => {
             setShow(true);
