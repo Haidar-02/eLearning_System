@@ -332,7 +332,7 @@ class TeacherController extends Controller
                 $member->project_id = $group->id;
                 $member->save();
             }
-            $group=$group->membersInfo;
+            $group=$group->membersInfo()->first();
 
             return response()->json([
                 'status' => '200',
