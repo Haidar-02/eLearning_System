@@ -10,7 +10,6 @@ const SessionCard = ({ session,setSessions,setShowAttendance}) => {
     course_id,
     schedule_id
   } = session;
-
   const deleteSession = async () => {
     const res = await removeScheduleSession(id);
     setSessions((prev)=>prev.filter(i => i.id !== id));
@@ -18,7 +17,7 @@ const SessionCard = ({ session,setSessions,setShowAttendance}) => {
   return ( 
       <div className="flex flex-col p-3 border gap-3 rounded-md transition-colors bg-cyan-light m-5 hover:bg-slate-200">
       <div
-        className="course-title cursor-pointer" onClick={()=>setShowAttendance({show:true,task_id:id})}
+        className="course-title cursor-pointer" onClick={()=>setShowAttendance({show:true,id:id})}
       >
         <span className="text-md font-bold uppercase hover:underline">
           Session

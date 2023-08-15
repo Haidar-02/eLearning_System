@@ -581,7 +581,7 @@ async function addFeedback({
 async function getStudentAttendance(session_id, student_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-student-attendance/${session_id}/${student_id}`,
+      `${remoteUrl}teacher/get-session-attendance/${session_id}/${student_id}`,
       auth()
     );
     if (res.data.status == 200) {
@@ -614,7 +614,7 @@ async function addSessionAttendance({
   status,
 }) {
   try {
-    const res = await axios.post(
+    const res = await axios.put(
       `${remoteUrl}teacher/add-session-attendance`,
       {
         student_id,

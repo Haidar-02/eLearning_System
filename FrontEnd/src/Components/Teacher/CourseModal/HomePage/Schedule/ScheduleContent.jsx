@@ -47,7 +47,7 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     return ( 
       <>
       {showAttendance.show ? 
-        <Attendance course_id={course_id} session_id={showSubmissions.id} setShowAttendance={setShowAttendance}/>
+        <Attendance course_id={course_id} session_id={showAttendance.id} setShowAttendance={setShowAttendance}/>
       :(
       <>
       {showSubmissions.show ? 

@@ -12,7 +12,6 @@ const Attendance = ({course_id,session_id,setShowAttendance}) => {
         attendance_status:"",
         attendance_date:"",
       }
-
       const [students,setStudents]=useState([]);
       const [attendance,setAttendance]=useState({...initialState});
     
