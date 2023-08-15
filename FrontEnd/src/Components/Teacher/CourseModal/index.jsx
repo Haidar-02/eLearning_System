@@ -124,7 +124,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           {home_page && <TeacherScheduleManager course={course} />}
           {group_project && <GroupProject course_id={course.id}/>}
           {feedback && <StudentManager course_id={course.id}/>}
-          {progress && <ProgressManager/>}
+          {progress && <ProgressManager course_id={course.id}/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
           {discussion_board && (
