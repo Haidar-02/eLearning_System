@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Course;
@@ -30,11 +31,11 @@ class ParentController extends Controller
             ->select('users.*')
             ->first();
         
-        if (!$child) {
-            return response()->json(['error' => 'Invalid child ID'], 404);
-        }
+            if (!$child) {
+                return response()->json(['status' => 'error', 'message' => 'Invalid child ID'], 404);
+            }
         
-        return response()->json($child);
+            return response()->json(['status' => 200, 'child' => $child]);
     }
 
     public function getChildCourses()
@@ -49,7 +50,7 @@ class ParentController extends Controller
                 ->whereIn('student_id', $studentIds);
         })->get();
 
-        return response()->json($courses);
+        return response()->json(['status' => 200, 'courses' => $courses]);
     }
 
     
@@ -64,7 +65,7 @@ class ParentController extends Controller
             ->where('user_type', 2)
             ->get();
     
-        return response()->json($teachers);
+            return response()->json(['status' => 200, 'teachers' => $teachers]);
     }
 
     public function getChildAttendance()
@@ -81,44 +82,42 @@ class ParentController extends Controller
             ->orderBy('sessions.date', 'desc')
             ->get();
     
-        return response()->json($attendance);
+            return response()->json(['status' => 200, 'data' => $attendance]);
     }
     
-    public function getChildCourseSchedules($courseId)
-    {
-        $parentId = Auth::user()->id;
     
-        $schedules = Schedule::select('schedules.*')
-            ->join('courses', 'schedules.course_id', '=', 'courses.id')
-            ->join('course_enrollments', 'courses.id', '=', 'course_enrollments.course_id')
-            ->join('parent_relations', 'course_enrollments.student_id', '=', 'parent_relations.student_id')
-            ->where('parent_relations.parent_id', $parentId)
-            ->where('courses.id', $courseId)
+    public function getAvailableTeacherConferences($teacherId)
+    {
+        $availableSlots = Conference::where('teacher_id', $teacherId)
+            ->whereNull('parent_id')
             ->get();
     
-        return response()->json($schedules);
+        return response()->json(['status' => 200, 'available_slots' => $availableSlots]);
+    }
+
+    public function getParentConferences()
+    {
+        $parentId = Auth::user()->id;
+
+        $parentSlots = Conference::where('parent_id', $parentId)
+            ->get();
+    
+        return response()->json(['status' => 200, 'parent_slots' => $parentSlots]);
     }
     
-    public function getTeacherConferenceSlots($teacherId)
-    {
-        $slots = TeacherMeetSchedule::where('teacher_id', $teacherId)->get();
-        return response()->json($slots);
-    }
 
-    public function scheduleConferenceWithTeacher($teacherId, Request $request)
+    public function scheduleConferenceWithTeacher($conference_id)
     {
-        $data = $request->validate([
-            'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
-        ]);
+        $conference = Conference::find($conference_id);
 
-        $conference = new TeacherMeetSchedule();
-        $conference->teacher_id = $teacherId;
-        $conference->start_time = $data['start_time'];
-        $conference->end_time = $data['end_time'];
+        if (!$conference) {
+            return response()->json(['error' => 'Conference not found'], 404);
+        }
+
+        $conference->parent_id = Auth::user()->id;
         $conference->save();
 
-        return response()->json(['message' => 'Conference scheduled successfully'], 201);
+        return response()->json(['message' => 'Conference scheduled successfully'], 200);
     }
 
     public function getStudentFeedback()
@@ -131,7 +130,7 @@ class ParentController extends Controller
             ->with(['teacher', 'course'])
             ->get();
     
-        return response()->json($feedbacks);
+            return response()->json(['status' => 200, 'feedbacks' => $feedbacks]);
     }
 
     public function getChildTasks()
@@ -155,32 +154,7 @@ class ParentController extends Controller
         ->where('parent_relations.parent_id', $parentId)
         ->get();
     
-        return response()->json($tasks);
-    }
-    
-
-    public function getChildUndoneTasks()
-    {
-        $parentId = Auth::user()->id;
-        $childId = ParentRelation::where('parent_id', $parentId)->value('student_id');
-        
-        $undoneTasks = Task::select('tasks.*', 'task_types.name as task_type_name', 'users.name as teacher_name', 'users.email as teacher_email')
-            ->join('schedules', 'tasks.schedule_id', '=', 'schedules.id')
-            ->join('courses', 'schedules.course_id', '=', 'courses.id')
-            ->join('course_enrollments', 'courses.id', '=', 'course_enrollments.course_id')
-            ->join('parent_relations', 'course_enrollments.student_id', '=', 'parent_relations.student_id')
-            ->join('task_types', 'tasks.task_type', '=', 'task_types.id')
-            ->join('users', 'tasks.teacher_id', '=', 'users.id')
-            ->where('parent_relations.parent_id', $parentId)
-            ->whereNotExists(function ($query) use ($childId) {
-                $query->select(DB::raw(1))
-                    ->from('task_submissions')
-                    ->whereRaw('task_submissions.task_id = tasks.id')
-                    ->where('task_submissions.student_id', $childId);
-            })
-            ->get();
-    
-        return response()->json($undoneTasks);
+        return response()->json(['status' => 200, 'tasks' => $tasks]);
     }
 
 }

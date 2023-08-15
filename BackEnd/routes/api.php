@@ -119,10 +119,9 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("getChildAttendance", "getChildAttendance");
             Route::get("getChildFeedback", "getStudentFeedback");
             Route::get("getChildTasks", "getChildTasks");
-            Route::get("getChildUndoneTasks", "getChildUndoneTasks");
-            Route::get("getChildCourseSchedules/{course_id}", "getChildCourseSchedules");
-            Route::get("getTeacherConferenceSlots/{teacher_id}", "getTeacherConferenceSlots");
-            Route::post("scheduleConferenceWithTeacher/{teacher_id}", "scheduleConferenceWithTeacher");
+            Route::get("getParentConferences", "getParentConferences");
+            Route::get("getTeacherConferenceSlots/{teacher_id}", "getAvailableTeacherConferences");
+            Route::post("scheduleConferenceWithTeacher/{teacher_schedule_id}", "scheduleConferenceWithTeacher");
         });
     });
 });
