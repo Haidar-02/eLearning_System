@@ -3,33 +3,33 @@ import CustomInput from "../../../Inputs/CustomInput";
 import Button from "../../../Common/Button";
 import { addFeedback } from "../../../../helpers/Teacher.helpers";
 
-const StudentFeedback = ({feedback,setFeedback,error,showFeedback,fetchFeedback}) => {
-
+const StudentFeedback = ({feedback,setFeedback,showFeedback}) => {
+    const [addError, setAddError] = useState();
+    const [state,setState]=useState({...feedback,student_id: showFeedback.id});
+    
     function inputHandler(e) {
         const { name, value } = e.target;
-        setFeedback((prev) => ({ ...prev, [name]: value }));
+        setState((prev) => ({ ...prev, [name]: value }));
     }
-    useEffect(()=>{
-        fetchFeedback()
-    },[showFeedback])
-
 
     async function handleUpdate() {
-        setFeedback((prev) => ({ ...prev, student_id:showFeedback.id}));
-        const { data, errorMessages, message } = await addFeedback(feedback);
+        // setFeedback(prevFeedback => ({
+        //     ...prevFeedback,
+        //     student_id: showFeedback.id
+        //   }));
+        console.log(state);
+        const { data, errorMessages, message } = await addFeedback(state);
         if (errorMessages) {
-          setError(errorMessages[0]);
+            setAddError(errorMessages[0]);
           return;
         } else if (message) {
-          setError(message);
+            setAddError(message);
           return;
         }
 
-        console.log(state);
-        let newState=replaceObjectById(group.id,state,groups);
-        console.log(newState)
-        setGroups(newState);    
-        setShow(false);
+        let newState=replaceObjectById(feedback.id,state,feedback);
+        setFeedback(newState);  
+        console.log(feedback);  
       }
 
     return ( 
@@ -48,7 +48,7 @@ const StudentFeedback = ({feedback,setFeedback,error,showFeedback,fetchFeedback}
                 onChange={inputHandler}
             />
 
-            <div className="error text-sm text-red-500 ">{error}</div>
+            <div className="add-error text-sm text-red-500 ">{addError}</div>
 
             <div className="button-container flex gap-5 justify-end">
                 <Button

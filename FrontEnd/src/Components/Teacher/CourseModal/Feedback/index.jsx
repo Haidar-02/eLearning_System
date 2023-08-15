@@ -18,6 +18,7 @@ const StudentManager = ({course_id}) => {
   const [error, setError] = useState();
 
   const [showFeedback,setShowFeedback]=useState({id:"",show:false});
+
   useEffect(()=>{
     const fetchStudents = async () => {
       const res = await getCourseStudents(course_id);
@@ -25,6 +26,16 @@ const StudentManager = ({course_id}) => {
     };
     fetchStudents()
   },[])
+
+
+  useEffect(() => {
+
+    if (showFeedback.show) {
+        fetchFeedback();
+    }
+  }, [showFeedback]);
+
+
   const fetchFeedback = async () => {
     let student_id = showFeedback.id;
     const { data, errorMessages, message } = await getStudentFeedback(course_id,student_id);
