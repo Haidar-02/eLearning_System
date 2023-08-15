@@ -55,7 +55,6 @@ async function getCourseSchedules(course_id) {
     const { data } = res;
 
     if (res.status == 200) {
-      console.log(res);
       return data.schedules;
     }
   } catch (error) {
@@ -204,6 +203,8 @@ async function getStudentFeedback(course_id, student_id) {
   }
 }
 
+
+
 async function sendMessage({ message, receiver_id }) {
   try {
     const res = await axios.post(
@@ -215,7 +216,6 @@ async function sendMessage({ message, receiver_id }) {
       auth()
     );
     const { data } = res;
-    console.log(res);
     if (res.status == 200) {
       return data.message;
     }

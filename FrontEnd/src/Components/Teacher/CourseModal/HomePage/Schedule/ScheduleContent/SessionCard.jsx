@@ -3,7 +3,7 @@ import Button from "../../../../../Common/Button";
 import { removeScheduleSession } from "../../../../../../helpers/Teacher.helpers";
 import Submissions from "./Submissions/Submissions";
 
-const TaskCard = ({ session,setSessions,setShowAttendance}) => {
+const SessionCard = ({ session,setSessions,setShowAttendance}) => {
   const {
     id,
     date,
@@ -21,7 +21,7 @@ const TaskCard = ({ session,setSessions,setShowAttendance}) => {
         className="course-title cursor-pointer" onClick={()=>setShowAttendance({show:true,task_id:id})}
       >
         <span className="text-md font-bold uppercase hover:underline">
-          Schedule
+          Session
         </span>
       </div>
       <div className="content monster text-xs flex flex-col gap-5 cursor-default">
@@ -40,4 +40,4 @@ const TaskCard = ({ session,setSessions,setShowAttendance}) => {
   );
 };
 
-export default TaskCard;
+export default SessionCard;

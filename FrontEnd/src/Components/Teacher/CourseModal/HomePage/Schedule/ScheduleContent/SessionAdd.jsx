@@ -23,12 +23,11 @@ const SessionAdd = ({ setSessionAdd, setSessions,schedule_id,course_id}) => {
       return;
     }
     if (data) {
-      console.log(data);
-      setMaterials((prev) => {
-        return [data.material, ...prev];
+      setSessions((prev) => {
+        return [data.session, ...prev];
       });
 
-      setSessions(false);
+      setSessionAdd(false);
     }
   }
 
@@ -38,7 +37,7 @@ const SessionAdd = ({ setSessionAdd, setSessions,schedule_id,course_id}) => {
     setShow={setSessionAdd}
     className="bg-cyan-medium flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
-    <input type="datetime-local" value={date} name="Date" onChange={inputHandler}/>
+    <input type="datetime-local" value={date} name="date" onChange={inputHandler}/>
 
     <div className="error text-sm text-red-500 ">{error}</div>
 

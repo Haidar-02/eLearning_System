@@ -578,6 +578,76 @@ async function addFeedback({
     return { message };
   }
 }
+async function getStudentAttendance(session_id, student_id) {
+  try {
+    const res = await axios.get(
+      `${remoteUrl}common/get-student-attendance/${session_id}/${student_id}`,
+      auth()
+    );
+    if (res.data.status == 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+async function addSessionAttendance({
+  student_id,
+  session_id,
+  status,
+}) {
+  try {
+    const res = await axios.post(
+      `${remoteUrl}teacher/add-session-attendance`,
+      {
+        student_id,
+        session_id,
+        status,
+      },
+      auth()
+    );
+
+    if (res.status == 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
 
 async function addNotification({ course_id, notification }) {
   try {
@@ -633,4 +703,6 @@ export {
   modifyGroupProjectGrade,
   addFeedback,
   addNotification,
+  addSessionAttendance,
+  getStudentAttendance
 };

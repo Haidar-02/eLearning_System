@@ -8,6 +8,7 @@ import MaterialCard from "./ScheduleContent/MaterialCard";
 import Submissions from "./ScheduleContent/Submissions/Submissions";
 import SessionAdd from "./ScheduleContent/SessionAdd";
 import SessionCard from "./ScheduleContent/SessionCard";
+import Attendance from "./ScheduleContent/Attendance";
 const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     const [materials,setMaterials]=useState()
     const [tasks,setTasks]=useState();
@@ -17,7 +18,7 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     const [showMaterialAdd,setMaterialAdd]=useState(false);
     const [showSessionAdd,setSessionAdd]=useState(false);
     const [showSubmissions,setShowSubmissions]=useState({show:false,id:null});
-
+    const [showAttendance,setShowAttendance]=useState({show:false,id:null});
 
     useEffect(() => {
         const fetchMaterials = async () => {
@@ -44,6 +45,10 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
         fetchSessions();
       }, []);
     return ( 
+      <>
+      {showAttendance.show ? 
+        <Attendance course_id={course_id} session_id={showSubmissions.id} setShowAttendance={setShowAttendance}/>
+      :(
       <>
       {showSubmissions.show ? 
         <Submissions task_id={showSubmissions.task_id} setShowSubmissions={setShowSubmissions}/>
@@ -109,6 +114,8 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
       )
       }
        </>
+      )}
+      </>
 
     );
 }
