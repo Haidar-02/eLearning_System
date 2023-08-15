@@ -180,9 +180,9 @@ class StudentController extends Controller
                     ->where('student_id', $student_id)->get();
 
 
-                $succeeded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                $graded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
                     ->where('student_id', $student_id)
-                    ->where('grade', '>', 60)->get();
+                    ->where('grade', '!=', null)->get();
 
                 $ungraded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
                     ->where('student_id', $student_id)
@@ -190,6 +190,7 @@ class StudentController extends Controller
                 return response()->json([
                     'status' => '200',
                     'submitted_tasks' => $submitted_tasks,
+                    'graded_tasks' => $graded_tasks,
                     'ungraded_tasks' => $ungraded_tasks,
                     'total_tasks' => Task::where('course_id', $course_id)->count(),
                 ]);
