@@ -7,7 +7,6 @@ const ProgressManager = ({course_id}) => {
     const [students,setStudents]=useState([]);
 
     const [showProgress,setShowProgress]=useState({id:null,show:false});
-
     useEffect(()=>{
         const fetchStudents = async () => {
           const res = await getCourseStudents(course_id);
@@ -32,7 +31,7 @@ const ProgressManager = ({course_id}) => {
             </div>
             <div className="feedback-container flex-grow bg-cyan-light rounded-md ml-4 p-3">
             <h2 className=' mb-2 border color-cyan-medium p-2 text-center font-bold'>Progress</h2>
-              {/* {showFeedback.show && <StudentProgress course_id={course_id} feedback={feedback} setFeedback={setFeedback} showFeedback={showFeedback}/>} */}
+              {showProgress.show && <StudentProgress course_id={course_id} showProgress={showProgress}/>}
             </div>
         </div>
         </>

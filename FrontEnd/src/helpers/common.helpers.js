@@ -15,6 +15,37 @@ async function getAllCourses() {
     console.log(error);
   }
 }
+// get-student-progress/10/8
+async function getStudentProgress(course_id,student_id){
+  try {
+    const res = await axios.get(
+      `${remoteUrl}common/get-student-progress/${student_id}/${course_id}`,
+      auth()
+    );
+    if (res.status == 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
 async function getCourseSchedules(course_id) {
   try {
     const res = await axios.get(
@@ -24,6 +55,7 @@ async function getCourseSchedules(course_id) {
     const { data } = res;
 
     if (res.status == 200) {
+      console.log(res);
       return data.schedules;
     }
   } catch (error) {
@@ -304,6 +336,7 @@ export {
   getProjectGroups,
   getStudentFeedback,
   sendMessage,
+  getStudentProgress,
   search,
   getMessages,
   getMessagesById,
