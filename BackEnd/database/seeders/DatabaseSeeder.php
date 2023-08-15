@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\AttendanceStatus;
 use App\Models\Course;
 use App\Models\CourseEnrollment;
 use App\Models\CourseMaterial;
@@ -29,6 +30,11 @@ class DatabaseSeeder extends Seeder
         UserType::create(['name' => 'Teacher']);
         UserType::create(['name' => 'Parent']);
         UserType::create(['name' => 'Student']);
+
+        AttendanceStatus::create(['status'=>'present']);
+        AttendanceStatus::create(['status'=>'absent']);
+        AttendanceStatus::create(['status'=>'late']);
+
 
         TaskType::create(['name' => 'assignment']);
         TaskType::create(['name' => 'quiz']);
