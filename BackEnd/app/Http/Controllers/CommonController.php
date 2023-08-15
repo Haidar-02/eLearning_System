@@ -171,6 +171,7 @@ class CommonController extends Controller
     public function getStudentProgress($student_id, $course_id = null)
     {
         try {   
+            $course_id;
             if ($course_id !== null) {
                 $taskIds = Task::where('course_id', $course_id)->pluck('id');
         
