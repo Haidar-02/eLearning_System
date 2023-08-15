@@ -48,7 +48,7 @@ const SignInForm = ({ setShow }) => {
   return (
     <Modal
       setShow={setShow}
-      className=" signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border rounded-b-2xl "
+      className="bg-grey-light signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border rounded-b-2xl "
     >
       <div className="form-header gothic bg-cyan-dark flex p-6 w-full rounded-t-2xl ">
         Sign In
