@@ -48,7 +48,7 @@ const SubmitTask = ({ setMaterial, task, setShow, setSubmission }) => {
     <Modal
       setShow={setShow}
       backDropColor={' hidden '}
-      className=" z-30 flex flex-col p-5 justify-center  rounded-2xl gap-5 min-w-[400px] absolut w-full h-full"
+      className=" z-30 flex flex-col p-5 justify-center bg-white  rounded-2xl gap-5 min-w-[400px] absolut w-full h-full"
     >
       <CustomInput type="file" name="title" onChange={onFileChange} />
 
