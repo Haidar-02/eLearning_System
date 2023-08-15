@@ -173,24 +173,26 @@ class CommonController extends Controller
         try {
             if ($course_id !== null) {
                 $task = new Task();
-                $submitted_tasks = count($task->submissions()
-                ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
-                ->get());
+                $submitted_tasks = count($task->submissions());
+                // ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
+                // ->get());
 
-                $succeeded_tasks = count($task->submissions()
-                    ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '>', 60]])
-                    ->get());
+                // $succeeded_tasks = count($task->submissions()
+                //     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '>', 60]])
+                //     ->get());
 
-                $ungraded_tasks = count($task->submissions()
-                    ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '=', null]])
-                    ->get());
-    
+                // $ungraded_tasks = count($task->submissions()
+                //     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '=', null]])
+                //     ->get());
                 return response()->json([
-                    'status' => '200',
-                    'submitted_tasks' => $submitted_tasks,
-                    'succeeded_tasks' => $succeeded_tasks,
-                    'ungraded_tasks' => $ungraded_tasks
-                ]);
+                    'count'=>$submitted_tasks
+                ])
+                // return response()->json([
+                //     'status' => '200',
+                //     'submitted_tasks' => $submitted_tasks,
+                //     'succeeded_tasks' => $succeeded_tasks,
+                //     'ungraded_tasks' => $ungraded_tasks
+                // ]);
             }
     
             // Add an else case here if needed
