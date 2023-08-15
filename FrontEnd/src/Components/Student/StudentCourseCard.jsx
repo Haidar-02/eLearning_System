@@ -32,7 +32,7 @@ const StudentCourseCard = ({
               setEnrolledCourses={setEnrolledCourses}
             />
           )}
-          <div className="course-title ">
+          <div className="course-title  hover:underline cursor-pointer ">
             <span
               onClick={() => {
                 details && setShowDetails((prev) => !prev);

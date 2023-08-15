@@ -30,7 +30,7 @@ const CourseDetails = ({ course, setShowDetails }) => {
   return (
     <Modal
       setShow={setShowDetails}
-      className={'w-full overflow-scroll h-full p-5'}
+      className={'w-full overflow-scroll h-full p-5  bg-white'}
     >
       <img
         className="p-[12px] w-30"
@@ -65,8 +65,12 @@ const CourseDetails = ({ course, setShowDetails }) => {
 
               {material.materials && (
                 <div className="flex flex-col">
-                  {material.materials.map((m) => (
-                    <StudentMaterialCard material={m} className={''} />
+                  {material.materials.map((m, index) => (
+                    <StudentMaterialCard
+                      key={index}
+                      material={m}
+                      className={''}
+                    />
                   ))}
                 </div>
               )}
