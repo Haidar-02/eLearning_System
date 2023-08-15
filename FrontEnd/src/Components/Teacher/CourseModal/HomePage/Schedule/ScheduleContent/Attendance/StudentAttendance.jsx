@@ -25,7 +25,7 @@ const StudentAttendance = ({session_id,attendance,setAttendance,showStudentAtten
         } else {
           setAttendance(prevAttendance => ({
             ...prevAttendance,
-            student_id: showStudentAttendance.id
+            id:"",student_id: showStudentAttendance.id
         }));        }
       };
 
