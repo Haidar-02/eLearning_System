@@ -7,9 +7,7 @@ const StudentAttendance = ({session_id,attendance,setAttendance,showStudentAtten
     const [error, setError] = useState();
 
     useEffect(()=>{
-        setAttendance({...attendance,student_id: showStudentAttendance.id});
         fetchAttendance();
-        
     }, [showStudentAttendance]);
 
     const fetchAttendance = async () => {
@@ -25,13 +23,15 @@ const StudentAttendance = ({session_id,attendance,setAttendance,showStudentAtten
         if(data.attendance){
           setAttendance(data.attendance);
         } else {
-          setAttendance(initialState);
-        }
+          setAttendance(prevAttendance => ({
+            ...prevAttendance,
+            student_id: showStudentAttendance.id
+        }));        }
       };
 
     function inputHandler(e) {
         const { name, value } = e.target;
-        setFeedback((prev) => ({ ...prev, [name]: value }));
+        setAttendance((prev) => ({ ...prev, [name]: value }));
     }
 
     async function handleUpdate() {
@@ -48,7 +48,7 @@ const StudentAttendance = ({session_id,attendance,setAttendance,showStudentAtten
 
     return ( 
         <div className="student-attendance">
-            <select name="status" onChange={inputHandler}>
+            <select name="attendance_status" defaultValue={attendance.attendance_status} onChange={inputHandler}>
               <option value="1">Present</option>
               <option value="2">Absent</option>
             </select>

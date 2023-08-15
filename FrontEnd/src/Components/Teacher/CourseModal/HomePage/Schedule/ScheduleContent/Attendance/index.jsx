@@ -6,11 +6,8 @@ import { getCourseStudents } from "../../../../../../../helpers/common.helpers";
 
 const Attendance = ({course_id,session_id,setShowAttendance}) => {
     const initialState={
-        id:"",
         session_id,
-        student_id:"",
-        attendance_status:"",
-        attendance_date:"",
+        attendance_status:1,
       }
       const [students,setStudents]=useState([]);
       const [attendance,setAttendance]=useState({...initialState});

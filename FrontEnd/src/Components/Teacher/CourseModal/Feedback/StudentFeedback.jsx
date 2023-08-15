@@ -8,11 +8,7 @@ const StudentFeedback = ({course_id,feedback,setFeedback,showFeedback,initialSta
     const [addError, setAddError] = useState();
     const [error, setError] = useState();
 
-    useEffect(()=>{
-        setFeedback({...feedback,student_id: showFeedback.id});
-    },[showFeedback])
     useEffect(() => {
-
         fetchFeedback();
         
     }, [showFeedback]);
@@ -30,8 +26,10 @@ const StudentFeedback = ({course_id,feedback,setFeedback,showFeedback,initialSta
         if(data.feedback){
           setFeedback(data.feedback);
         } else {
-          setFeedback(initialState);
-        }
+          setFeedback(prev => ({
+            ...prev,
+            student_id: showFeedback.id
+        }));        }
       };
 
     function inputHandler(e) {
@@ -40,7 +38,9 @@ const StudentFeedback = ({course_id,feedback,setFeedback,showFeedback,initialSta
     }
 
     async function handleUpdate() {
+
         const { data, errorMessages, message } = await addFeedback(feedback);
+        console.log(data);
         if (errorMessages) {
             setAddError(errorMessages[0]);
           return;

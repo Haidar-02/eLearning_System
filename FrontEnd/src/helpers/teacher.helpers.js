@@ -615,10 +615,9 @@ async function addSessionAttendance({
 }) {
   try {
     const res = await axios.put(
-      `${remoteUrl}teacher/add-session-attendance`,
+      `${remoteUrl}teacher/add-session-attendance/${session_id}`,
       {
         student_id,
-        session_id,
         status,
       },
       auth()
