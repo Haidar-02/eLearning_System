@@ -173,11 +173,11 @@ class CommonController extends Controller
         try {
             if ($course_id !== null) {
                 $task = new Task();
-                $submitted_tasks = $task->submissions();
+                $submitted_tasks = $task->submissions()->get();
 
-                $succeeded_tasks = $task->submissions();
+                $succeeded_tasks = $task->submissions()->get();
 
-                $ungraded_tasks = $task->submissions();
+                $ungraded_tasks = $task->submissions()->get();
  
                 return response()->json([
                     'status' => '200',
