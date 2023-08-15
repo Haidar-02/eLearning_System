@@ -172,15 +172,16 @@ class CommonController extends Controller
     {
         try {
             if ($course_id !== null) {
-                $submitted_tasks = count(Task::submissions()
-                    ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
-                    ->get());
-    
-                $succeeded_tasks = count(Task::submissions()
+                $task = new Task();
+                $submitted_tasks = count($task->submissions()
+                ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
+                ->get());
+
+                $succeeded_tasks = count($task->submissions()
                     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '>', 60]])
                     ->get());
-    
-                $ungraded_tasks = count(Task::submissions()
+
+                $ungraded_tasks = count($task->submissions()
                     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '=', null]])
                     ->get());
     
