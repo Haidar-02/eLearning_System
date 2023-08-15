@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('parent_id');
             $table->unsignedBigInteger('student_id');
             $table->foreign('parent_id')->references('id')->on('users');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
         });
 
 
@@ -214,8 +214,8 @@ return new class extends Migration {
             $table->text('message');
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id');
-            $table->foreign('sender_id')->references('id')->on('users');
-            $table->foreign('receiver_id')->references('id')->on('users');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();
         });
 

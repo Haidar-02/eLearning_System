@@ -1,51 +1,79 @@
 import React, { useEffect, useState } from 'react';
 import UserCard from '../../Components/Admin/UserCard';
+import axios from 'axios';
 
 import teacherIcon from'../../assets/icons/teacher.svg'
 import parentIcon from'../../assets/icons/parent.svg'
 import studentIcon from'../../assets/icons/student.svg'
 import { getAllUsers } from '../../helpers/admin.helpers';
+import { auth } from '../../helpers/auth.helpers';
 
 const AdminUserManager = () => {
   const [users, setUsers] = useState([]); 
   const [show, setShow] = useState(false);
+  const [typeNum, setTypeNum] = useState(1);
 
   useEffect(() => {
     const fetchUsers = async () => {
       const res = await getAllUsers();
-      console.log(res.users);
+      const filteredUsers = res.users.filter(user => user.user_type === typeNum);
 
-      setUsers([...res.users]);
-      
+      setUsers([...filteredUsers]);
     };
 
     fetchUsers();
-  }, []);
+  }, [typeNum]);
 
-  console.log(users);
+  const handleTeacherClick = () => {
+    setTypeNum(2); 
+  };
+
+  const handleParentClick = () => {
+    setTypeNum(3);
+  };
+
+  const handleStudentClick = () => {
+    setTypeNum(4);
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+
+      await axios.delete(`http://127.0.0.1:8000/api/admin/deleteUser/${userId}`,auth());
+      console.log('User deleted successfully');
+  
+      setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+  
+  
+  
 
   return (
-<div>
-  <div className="w-24 dark">
-    <img className="" src={teacherIcon} alt="teacherIcon" />
-  </div>
-  <div className="w-24">
-    <img src={parentIcon} alt="parentIcon" />
-  </div>
-  <div className="w-24">
-    <img src={studentIcon} alt="studentIcon" />
-  </div>
-
-  <div>
-        <h1>User List</h1>
-        <div className="user-list">
-          {users.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
+    <div className='flex flex-col items-center grow' >
+      <div className='flex flex-row justify-between w-[]' >
+        <div className="w-24 dark" onClick={handleTeacherClick}>
+          <img className="" src={teacherIcon} alt="teacherIcon" />
         </div>
-      </div>
+        <div className="w-24" onClick={handleParentClick}>
+          <img src={parentIcon} alt="parentIcon" />
+        </div>
+        <div className="w-24" onClick={handleStudentClick}>
+          <img src={studentIcon} alt="studentIcon" />
+        </div>
+       </div> 
+        <div>
+          <div className="user-list">
+            {users.map((user) => (
+              <UserCard key={user.id} user={user} onDelete={handleDeleteUser} />
+            ))}
+          </div>
+        </div>
     </div>
   );
 };
 
 export default AdminUserManager;
+

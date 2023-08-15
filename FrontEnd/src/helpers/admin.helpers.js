@@ -10,10 +10,10 @@ async function getAllUsers() {
     const res = await axios.get(`${baseUrl}admin/getAllUsers`,auth());
     if (res.status === 200) {
       const data = res.data;
-      console.log(data);
       return data ;
     }
-    } catch (error) {    console.log(error);
+    } catch (error) {   
+       console.log(error);
     }
 }
 

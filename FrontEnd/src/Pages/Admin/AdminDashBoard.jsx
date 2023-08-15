@@ -42,7 +42,7 @@ const AdminDashBoard = () => {
   const completionPercentage = 66;
 
   return (
-    <div className="  dashBoardWrapper flex justify-between h-full">
+    <div className="  dashBoardWrapper flex  h-full">
       <SideBar className="bg-cyan-dark">
         <div className="logo  flex items-center justify-center gothic">
           <span className="text-3xl cursor-pointer p-5 py-10 text-white">
@@ -100,19 +100,11 @@ const AdminDashBoard = () => {
           <CourseProgressbar targetPercentage={completionPercentage} />
         </div>
       </div>}
-        {users && <span className="h-[500px] p-10"><AdminUserManager/></span>}
+        {users && <div className="h-[500px] p-10"><AdminUserManager/></div>}
         {classes && <AdminCourseManager />}
-        {assignments && <span className="h-[500px] p-10">Assignments</span>}
+        {assignments && <div className="h-[500px] p-10">Assignments</div>}
       </div>
 
-      <SideBar className={'right-0'}>
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar>
     </div>
   );
 };
