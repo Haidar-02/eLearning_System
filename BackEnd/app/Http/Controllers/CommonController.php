@@ -167,20 +167,20 @@ class CommonController extends Controller
             ]);
         }
     }
-    
+
     public function getStudentProgress($student_id, $course_id = null)
     {
         try {
             if ($course_id !== null) {
-                $submitted_tasks = count(TaskSubmission::submissions()
+                $submitted_tasks = count(Task::submissions()
                     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
                     ->get());
     
-                $succeeded_tasks = count(TaskSubmission::submissions()
+                $succeeded_tasks = count(Task::submissions()
                     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '>', 60]])
                     ->get());
     
-                $ungraded_tasks = count(TaskSubmission::submissions()
+                $ungraded_tasks = count(Task::submissions()
                     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '=', null]])
                     ->get());
     
