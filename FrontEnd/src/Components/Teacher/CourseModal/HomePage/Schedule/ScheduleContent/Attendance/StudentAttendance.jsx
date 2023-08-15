@@ -51,6 +51,8 @@ const StudentAttendance = ({session_id,attendance,setAttendance,showStudentAtten
             <select name="attendance_status" defaultValue={attendance.attendance_status} onChange={inputHandler}>
               <option value="1">Present</option>
               <option value="2">Absent</option>
+              <option value="3">Late</option>
+
             </select>
 
 
