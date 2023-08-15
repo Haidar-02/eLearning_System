@@ -14,7 +14,7 @@ const GroupUpdateModel = ({setShow,group,groups,setGroups}) => {
       async function handleUpdate() {
         let group_id=state.id;
         let grade=state.grade;
-        const { data, errorMessages, message } = await modifyGroupProjectGrade({group_id,grade});
+        const { data, errorMessages, message } = await modifyGroupProjectGrade(group_id,grade);
         if (errorMessages) {
           setError(errorMessages[0]);
           return;
