@@ -80,7 +80,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("get-course-teacher/{course_id}", 'getCourseTeacher');
             Route::get("searchUser/{user_type}/{search}", 'searchUser');
             Route::get("get/{user_type}/{search}", 'searchUser');
-            Route::get("get-student-progress/{student_id}/{course_id?}","getStudentProgress");
+            Route::get("get-student-progress/{student_id}/{course_id?}", "getStudentProgress");
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
@@ -92,6 +92,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post("add-submission", 'addTaskSubmission');
             Route::post("add-teacher_meet", "addTeacherMeet");
             Route::get("get-teacher-meet/{teacher_id}", "getTeacherMeet");
+            Route::get("getStudentProgressDetails/{course_id}", "getStudentProgressDetails");
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
