@@ -149,7 +149,7 @@ async function getStudentFeedback(course_id, student_id) {
     );
     if (res.data.status == 200) {
       const data = res.data;
-      return {data};
+      return { data };
     }
   } catch (error) {
     console.log(error);
@@ -172,16 +172,18 @@ async function getStudentFeedback(course_id, student_id) {
   }
 }
 
-async function sendMessage(message, receiver_id) {
+async function sendMessage({ message, receiver_id }) {
   try {
     const res = await axios.post(
-      `${remoteUrl}common/send-message`,
-      message,
-      receiver_id,
+      `${baseUrl}common/send-message`,
+      {
+        message,
+        receiver_id,
+      },
       auth()
     );
     const { data } = res;
-
+    console.log(res);
     if (res.status == 200) {
       return data.message;
     }
