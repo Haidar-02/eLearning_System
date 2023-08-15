@@ -274,8 +274,28 @@ class TeacherController extends Controller
         } 
 
     }
-    public function addSessionAttendance(Request $request){
+
+    public function addSessionAttendance(Request $request, $attendance_id = null)
+    {
+
         try{
+                    if($attendance_id!==null){
+                        $affectedRows=Attendance::where([["id",'=',$attendance_id]])->update(['status' => $request->status]);
+                        
+                            if ($affectedRows > 0) {
+                                $updated_attendance = Attendance::find($attendance_id); 
+                                return response()->json([
+                                    'status' => '200',
+                                    'feedback' => $updated_attendance
+                                ]);
+                            } else {
+                                return response()->json([
+                                    'status' => 'error',
+                                    'message' => 'Feedback not found or not updated'
+                                ]);
+                            }
+                        
+                    }else{
             $attendance=new Attendance;
             $attendance->student_id=$request->student_id;
             $attendance->session_id=$request->session_id;
@@ -285,6 +305,7 @@ class TeacherController extends Controller
                 'status' => '200',
                 'attendance'=>$attendance
             ]);
+        }
         } catch(Exception $e){
             return response()->json([
                 'status' => 'error',
