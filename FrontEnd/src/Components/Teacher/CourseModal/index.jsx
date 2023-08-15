@@ -11,14 +11,18 @@ import discussionBoard from "../../../assets/icons/rectangle-list-regular.svg";
 import homeIcon from "../../../assets/icons/house-solid.svg";
 import group from "../../../assets/icons/people-group-solid.svg";
 import feedbackIcon from '../../../assets/icons/feedback.svg';
+import progressIcon from '../../../assets/icons/progress-report.svg';
+
 import TeacherScheduleManager from './HomePage';
 import GroupProject from "./GroupProject";
 import StudentManager from "./Feedback";
+import ProgressManager from "./Progress";
 const falseState = {
   home_page: false,
   anouncements: false,
   group_project:false,
   feedback:false,
+  progress:false,
   messages: false,
   discussion_board: false,
 };
@@ -28,6 +32,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
     home_page: true,
     group_project: false,
     feedback:false,
+    progress:false,
     anouncements: false,
     messages: false,
     discussion_board: false,
@@ -36,7 +41,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { home_page, group_project , feedback,anouncements, messages, discussion_board } = state;
+  const { home_page, group_project , feedback,progress,anouncements, messages, discussion_board } = state;
   return (
     <Modal
       setShow={setCourseModel}
@@ -60,7 +65,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
             <div className="button-wrapper bg-cyan-light">
               <DashBoardButton
                 icon={homeIcon}
-                iconStyle="w-[24px] "
+                iconStyle="w-[24px]"
                 textStyle="text-[18px] color-cyan-dark"
                 text="Home Page"
                 className="font-semibold text-lg"
@@ -81,6 +86,13 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
                 text="Feedback"
                 onClick={() => {
                   togglePage("feedback");
+                }}
+              /> 
+              <DashBoardButton
+                icon={progressIcon}
+                text="Progress"
+                onClick={() => {
+                  togglePage("progress");
                 }}
               /> 
             <DashBoardButton
@@ -112,6 +124,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           {home_page && <TeacherScheduleManager course={course} />}
           {group_project && <GroupProject course_id={course.id}/>}
           {feedback && <StudentManager course_id={course.id}/>}
+          {progress && <ProgressManager/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
           {discussion_board && (

@@ -31,6 +31,10 @@ const StudentManager = ({course_id}) => {
 
 
   return (
+    <>
+    <div className="page-header gothic color-cyan-dark text-2xl py-5">
+    Student Feedback
+    </div>
     <div className='p-3  flex flex-row justify-between'>
         <div className='bg-cyan-light rounded-md studens-container'>
           <h2 className=' mb-2 border color-cyan-medium p-2 text-center font-bold'>Student List</h2>
@@ -45,6 +49,7 @@ const StudentManager = ({course_id}) => {
           {showFeedback.show && <StudentFeedback course_id={course_id} feedback={feedback} setFeedback={setFeedback} showFeedback={showFeedback}/>}
         </div>
     </div>
+    </>
   );
 };
 
