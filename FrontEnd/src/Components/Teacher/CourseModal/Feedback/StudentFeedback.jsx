@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CustomInput from "../../../Inputs/CustomInput";
 import Button from "../../../Common/Button";
+import { addFeedback } from "../../../../helpers/Teacher.helpers";
 
 const StudentFeedback = ({feedback,setFeedback,error,showFeedback,fetchFeedback}) => {
 
@@ -11,6 +12,26 @@ const StudentFeedback = ({feedback,setFeedback,error,showFeedback,fetchFeedback}
     useEffect(()=>{
         fetchFeedback()
     },[showFeedback])
+
+
+    async function handleUpdate() {
+        setFeedback((prev) => ({ ...prev, student_id:showFeedback.id}));
+        const { data, errorMessages, message } = await addFeedback(feedback);
+        if (errorMessages) {
+          setError(errorMessages[0]);
+          return;
+        } else if (message) {
+          setError(message);
+          return;
+        }
+
+        console.log(state);
+        let newState=replaceObjectById(group.id,state,groups);
+        console.log(newState)
+        setGroups(newState);    
+        setShow(false);
+      }
+
     return ( 
         <div className="student-feedback">
             <CustomInput
@@ -33,9 +54,9 @@ const StudentFeedback = ({feedback,setFeedback,error,showFeedback,fetchFeedback}
                 <Button
                 text="Add"
                 className=" text-[16px] bg-green text-white p-3 self-end"
-                // onClick={() => {
-                //     handleSave();
-                // }}
+                onClick={() => {
+                    handleUpdate();
+                }}
                 />
             </div>
         </div>

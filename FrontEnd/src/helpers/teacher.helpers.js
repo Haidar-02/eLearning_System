@@ -536,19 +536,18 @@ async function modifyGroupProjectGrade(group_id, grade) {
 }
 
 async function addFeedback({
+  id,
   course_id,
   student_id,
-  feedback,
   rating,
   comment,
 }) {
   try {
-    const res = await axios.post(
-      `${remoteUrl}teacher/add-feedback`,
+    const res = await axios.put(
+      `${remoteUrl}teacher/add-feedback/${id}`,
       {
         course_id,
         student_id,
-        feedback,
         rating,
         comment,
       },

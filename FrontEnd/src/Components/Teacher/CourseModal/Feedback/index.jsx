@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { getCourseStudents, getStudentFeedback } from '../../../../helpers/common.helpers';
 import StudentCard from './StudentCard';
 import StudentFeedback from './StudentFeedback';
-const initialState={
-  rating:0,
-  comment:"",
-}
+
 
 
 const StudentManager = ({course_id}) => {
-  
+  const initialState={
+    id:"",
+    course_id,
+    student_id:"",
+    rating:0,
+    comment:"",
+  }
   const [students,setStudents]=useState([]);
   const [feedback,setFeedback]=useState({...initialState});
   const [error, setError] = useState();
@@ -44,9 +47,7 @@ const StudentManager = ({course_id}) => {
           <h2 className=' mb-2 border color-cyan-medium p-2 text-center font-bold'>Student List</h2>
           <ul>
             {students.map(student => (
-              <li>
                 <StudentCard student_id={student.id} name={student.name} key={student.id} setShowFeedback={setShowFeedback}/>
-              </li>
             ))}
           </ul>
         </div>
