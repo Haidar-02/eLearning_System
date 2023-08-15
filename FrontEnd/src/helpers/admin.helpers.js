@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { auth } from './auth.helpers';
-const remoteUrl = 'http://54.165.111.250:8000/api/';
-const baseUrl = 'http://127.0.0.1:8000/api/';
+import axios from "axios";
+import { auth } from "./auth.helpers";
+const remoteUrl = "http://54.165.111.250:8000/api/";
+const baseUrl = "http://127.0.0.1:8000/api/";
 
 async function getAllUsers() {
   try {
-    const { token } = localStorage.getItem('user');
+    const { token } = localStorage.getItem("user");
     const res = await axios.get(`${remoteUrl}`);
   } catch (error) {}
 }

@@ -109,7 +109,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('task_type');
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            ;
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->foreign('teacher_id')->references('id')->on('users');
             $table->foreign('task_type')->references('id')->on('task_types');
@@ -153,7 +152,6 @@ return new class extends Migration {
             $table->dateTime('attendance_date');
             $table->timestamp('created_at')->useCurrent();
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            ;
             $table->foreign('session_id')->references('id')->on('sessions');
             $table->foreign('attendance_status')->references('id')->on('attendance_status');
 

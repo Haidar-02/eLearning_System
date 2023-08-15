@@ -16,8 +16,11 @@ use App\Models\Task;
 use App\Models\TaskSubmission;
 use App\Models\TeacherMeetSchedule;
 use App\Models\UserType;
+use Error;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use function Laravel\Prompts\error;
 
 class ParentController extends Controller
 {
@@ -156,6 +159,34 @@ class ParentController extends Controller
     
         return response()->json(['status' => 200, 'tasks' => $tasks]);
     }
+    public function getChildGrades()
+    {
+        try {
+            $parentId = Auth::user()->id;
+
+            $childId = ParentRelation::where('parent_id', $parentId)->value('student_id');
+
+            $grades = TaskSubmission::select(
+                'task_submissions.*',
+                'tasks.title as task_title',
+                'tasks.max_score as max_score',
+                'tasks.due_date as task_due_date'
+            )
+                ->join('tasks', 'task_submissions.task_id', '=', 'tasks.id')
+                ->join('schedules', 'tasks.schedule_id', '=', 'schedules.id')
+                ->join('courses', 'schedules.course_id', '=', 'courses.id')
+                ->join('course_enrollments', 'courses.id', '=', 'course_enrollments.course_id')
+                ->join('parent_relations', 'course_enrollments.student_id', '=', 'parent_relations.student_id')
+                ->where('parent_relations.parent_id', $parentId)
+                ->where('task_submissions.student_id', $childId)
+                ->get();
+
+            return response()->json(['status' => 200, 'grades' => $grades]);
+        } catch (Error $error) {
+            return response()->json(['error' => $error], 500);
+        }
+    }
+
 
 }
 

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import gradesIcon from '../../assets/icons/ChartSquareBarOutline.svg';
-import dashIcon from '../../assets/icons/dashboard.svg';
-import classesIcon from '../../assets/icons/UserGroupOutline.svg';
-import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
+import gradesIcon from "../../assets/icons/ChartSquareBarOutline.svg";
+import dashIcon from "../../assets/icons/dashboard.svg";
+import classesIcon from "../../assets/icons/UserGroupOutline.svg";
+import clipBoardIcon from "../../assets/icons/ClipboardListOutline.svg";
 
-import SideBar from '../../Components/DashBoard/SideBar';
-import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
+import SideBar from "../../Components/DashBoard/SideBar";
+import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 
 const falseState = {
   dashboard: false,
@@ -48,27 +48,27 @@ const AdminDashBoard = () => {
               text="Dashboard"
               className="font-semibold text-lg"
               onClick={() => {
-                togglePage('dashboard');
+                togglePage("dashboard");
               }}
             />
           </div>
           <DashBoardButton
             onClick={() => {
-              togglePage('grades');
+              togglePage("grades");
             }}
             icon={gradesIcon}
             text="Users"
           />
           <DashBoardButton
             onClick={async () => {
-              togglePage('classes');
+              togglePage("classes");
             }}
             icon={classesIcon}
             text="Classes"
           />
           <DashBoardButton
             onClick={() => {
-              togglePage('assignments');
+              togglePage("assignments");
             }}
             icon={clipBoardIcon}
             text="Assignments"
@@ -86,7 +86,7 @@ const AdminDashBoard = () => {
         {assignments && <span className="h-[500px] p-10">Assignments</span>}
       </div>
 
-      <SideBar className={'right-0'}>
+      <SideBar className={"right-0"}>
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
         <DashBoardButton icon={dashIcon} text="Dashboard" />
