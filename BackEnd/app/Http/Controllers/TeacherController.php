@@ -399,7 +399,7 @@ class TeacherController extends Controller
 
         try{
             if($feedback_id!==null){
-                $feedback=Feedback::where([["id",'=',`$feedback_id`],["course_id","=",`$request->course_id`]])->update(['grade' => $request->grade,'comment'=>$request->comment]);
+                $feedback=Feedback::where([["id",'=',$feedback_id],["course_id","=",$request->course_id]])->update(['grade' => $request->grade,'comment'=>$request->comment]);
                 return response()->json([
                     'status' => '200',
                     'feedback'=>$feedback
