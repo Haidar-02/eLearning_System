@@ -30,10 +30,10 @@ class CourseEnrollmentFactory extends Factory
         return $this->afterMaking(function (CourseEnrollment $courseEnrollment) {
             $uniqueCourseAndStudent = CourseEnrollment::where('course_id', $courseEnrollment->course_id)
                 ->where('student_id', $courseEnrollment->student_id)
-                ->count();
+                ->exists();
 
-            if ($uniqueCourseAndStudent > 0) {
-                $this->configure();
+            if ($uniqueCourseAndStudent) {
+                throw new \Exception("Duplicate combination of course_id and student_id");
             }
         });
     }
