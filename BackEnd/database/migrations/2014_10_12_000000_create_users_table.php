@@ -150,7 +150,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('attendance_status');
-            $table->dateTime('attendance_date');
             $table->timestamp('created_at')->useCurrent();
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             ;
