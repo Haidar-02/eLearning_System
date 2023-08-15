@@ -332,11 +332,11 @@ class TeacherController extends Controller
                 $member->project_id = $group->id;
                 $member->save();
             }
-            $group=$group->membersInfo()->first();
+            $groupWithMembers = GroupProject::with('membersInfo')->find($group->id);
 
             return response()->json([
                 'status' => '200',
-                'group' => $group
+                'group' => $groupWithMembers
             ]);
         } catch (Throwable $e) {
             return response()->json([
