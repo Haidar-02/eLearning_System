@@ -171,14 +171,24 @@ class CommonController extends Controller
     public function getStudentProgress($student_id, $course_id = null)
     {
         try {
+            echo $student_id;
+            echo $course_id;
             if ($course_id !== null) {
-                $task = new Task();
-                $submitted_tasks = $task->submissions()->get();
-
-                $succeeded_tasks = $task->submissions()->get();
-
-                $ungraded_tasks = $task->submissions()->get();
- 
+                $task=new Task;
+                $submissionsQuery = $task->submissions()
+                ->where('student_id', $student_id)
+                ->where('course_id', $course_id);
+    
+                $succeeded_tasks = $submissionsQuery
+                    ->where('grade', '>', 60)
+                    ->count();
+        
+                $ungraded_tasks = $submissionsQuery
+                    ->whereNull('grade')
+                    ->count();
+        
+                $submitted_tasks = $submissionsQuery
+                ->count();
                 return response()->json([
                     'status' => '200',
                     'submitted_tasks' => $submitted_tasks,
