@@ -173,7 +173,7 @@ class CommonController extends Controller
         try {
             if ($course_id !== null) {
                 $task = new Task();
-                $submitted_tasks = count($task->where('course_id',$course_id)->submissions);
+                $submitted_tasks = count($task->where('course_id',$course_id)->withCount('submissions')->get());
                 // ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
                 // ->get());
 
