@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\AdminController;
-
-
+use App\Http\Controllers\ParentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,13 +113,16 @@ Route::group(["middleware" => "auth:api"], function () {
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
         Route::controller(ParentController::class)->group(function () {
-            Route::get("get-child", "getChild");
-            Route::get("get-child-courses", "getChildCourses");
-            Route::get("get-child-teachers", "getChildTeachers");
-            Route::get("get-child-attendance", "getChildAttendance");
-            Route::get("get-child-course-schedules", "getChildCourseSchedules");
-            Route::get("get-teacher-conference-slots/{teacherId}", "getTeacherConferenceSlots");
-            Route::post("schedule-conference-with-teacher/{teacherId}", "scheduleConferenceWithTeacher");
+            Route::get("getChild", "getChild");
+            Route::get("getChildCourses", "getChildCourses");
+            Route::get("getChildTeachers", "getChildTeachers");
+            Route::get("getChildAttendance", "getChildAttendance");
+            Route::get("getChildFeedback", "getStudentFeedback");
+            Route::get("getChildTasks", "getChildTasks");
+            Route::get("getChildUndoneTasks", "getChildUndoneTasks");
+            Route::get("getChildCourseSchedules/{course_id}", "getChildCourseSchedules");
+            Route::get("getTeacherConferenceSlots/{teacher_id}", "getTeacherConferenceSlots");
+            Route::post("scheduleConferenceWithTeacher/{teacher_id}", "scheduleConferenceWithTeacher");
         });
     });
 });
