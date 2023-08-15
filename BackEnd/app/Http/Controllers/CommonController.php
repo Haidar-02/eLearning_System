@@ -167,9 +167,7 @@ class CommonController extends Controller
             ]);
         }
     }
-
-    use App\Models\TaskSubmission; // Make sure to import the TaskSubmission model
-
+    
     public function getStudentProgress($student_id, $course_id = null)
     {
         try {
