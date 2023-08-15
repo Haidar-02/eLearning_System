@@ -42,7 +42,7 @@ const TaskCard = ({ task,setTasks,setShowSubmissions}) => {
       <Button
                 onClick={() => deleteTask()}
                 text="Delete"
-                className="p-0 bg-cyan text-xl text-white"
+                className="p-0 bg-green text-xl text-white"
         />
     </div>
  

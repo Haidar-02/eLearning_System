@@ -55,7 +55,7 @@ const MaterialAdd = ({ setMaterialAdd, setMaterials,schedule_id,course_id}) => {
   return (
     <Modal
     setShow={setMaterialAdd}
-    className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+    className="bg-cyan-medium flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
     <CustomInput
       label="Title"
@@ -86,7 +86,7 @@ const MaterialAdd = ({ setMaterialAdd, setMaterials,schedule_id,course_id}) => {
         onClick={() => {
           setMaterialAdd(false);
         }}
-        className="text-[16px] bg-transparent text-cyan-600  p-3 self-end "
+        className="text-[16px] bg-transparent text-white  p-3 self-end "
       />
     </div>
     </Modal>

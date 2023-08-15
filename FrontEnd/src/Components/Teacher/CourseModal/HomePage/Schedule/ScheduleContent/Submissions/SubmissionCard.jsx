@@ -28,7 +28,7 @@ const SubmissionCard = ({ submission,submissions,setSubmissions}) => {
           <span className="font-semibold">File path: </span>
           {file_path}
         </div>
-        <div className="enrollment-limit cursor-pointer" onClick={()=>setShow(true)}>
+        <div className="enrollment-limit cursor-pointer hover:underline" onClick={()=>setShow(true)}>
           <span className="font-semibold">Grade: </span>
           {grade}
         </div>

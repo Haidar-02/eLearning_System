@@ -12,11 +12,11 @@ const StudentList = ({ handleSelectStudent,course_id,students,setStudents}) => {
   },[])
 
   return (
-    <div className='border'>
-      <h2 className=' mb-2'>Student List</h2>
+    <div className='border bg-cyan-light p-3'>
+      <h2 className=' mb-2 border-white border color-cyan-medium'>Student List</h2>
       <ul>
         {students.map(student => (
-          <li key={student.id} onClick={() => handleSelectStudent(student)}>
+          <li className="text-white" key={student.id} onClick={() => handleSelectStudent(student)}>
             {student.name}
           </li>
         ))}

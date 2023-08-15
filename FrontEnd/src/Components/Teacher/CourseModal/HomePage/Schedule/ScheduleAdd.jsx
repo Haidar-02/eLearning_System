@@ -36,7 +36,7 @@ const ScheduleAdd = ({ setShow, setSchedules, course_id}) => {
   const { name, start_date, end_date } = state;
   return (
     <div
-      className=" flex flex-col rounded-2xl gap-5 w-[400px]"
+      className=" flex flex-col rounded-2xl gap-5 w-[400px] self-center"
     >
     <div className="page-header gothic color-cyan-dark text-2xl py-5">
       Add Schedule
