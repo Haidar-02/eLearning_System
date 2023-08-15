@@ -16,7 +16,7 @@ async function editCourse(
 ) {
   try {
     const res = await axios.put(
-      `${baseUrl}admin/modifyCourse/${id}`,
+      `${remoteUrl}admin/modifyCourse/${id}`,
       {
         title,
         description,

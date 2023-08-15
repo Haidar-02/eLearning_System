@@ -5,7 +5,7 @@ const baseUrl = 'http://127.0.0.1:8000/api/';
 
 async function getStudentCourses() {
   try {
-    const res = await axios.get(`${baseUrl}common/get-courses`, auth());
+    const res = await axios.get(`${remoteUrl}common/get-courses`, auth());
     const { data } = res;
 
     if (res.status === 200) {
@@ -18,7 +18,7 @@ async function getStudentCourses() {
 async function enroll(course_id) {
   try {
     const res = await axios.post(
-      `${baseUrl}student/enroll-course`,
+      `${remoteUrl}student/enroll-course`,
       { course_id },
       auth()
     );
@@ -34,7 +34,7 @@ async function enroll(course_id) {
 async function getEnrolledCourses() {
   try {
     const res = await axios.get(
-      `${baseUrl}student/get-enrolled-courses`,
+      `${remoteUrl}student/get-enrolled-courses`,
       auth()
     );
     const { data } = res;
@@ -49,7 +49,7 @@ async function getEnrolledCourses() {
 async function addTaskSubmission({ due_date, task_id, file, file_name }) {
   try {
     const res = await axios.post(
-      `${baseUrl}student/add-submission`,
+      `${remoteUrl}student/add-submission`,
       { due_date, task_id, file, file_name },
       auth()
     );
