@@ -52,7 +52,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::delete("remove-group/{group_id}", "removeGroup");
             Route::put("modify-task-grade", "modifyTaskGrade");
             Route::put("modify-project-grade", "modifyProjectGrade");
-            Route::post("add-feedback", "addFeedback");
+            Route::put("add-feedback", "addFeedback");
             Route::post("add-notification", "addNotification");
 
         });

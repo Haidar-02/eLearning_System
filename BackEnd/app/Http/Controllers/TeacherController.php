@@ -395,19 +395,29 @@ class TeacherController extends Controller
         } 
     }
 
-    public function addFeedback(Request $request){
+    public function addFeedback(Request $request,$feedback_id){
 
         try{
-            $feedback=new Feedback;
-            $feedback->teacher_id=Auth::id();
-            $feedback->student_id=$request->student_id;
-            $feedback->course_id=$request->course_id;
-            $feedback->rating=$request->rating;
-            $feedback->comment=$request->comment;
-            $feedback->save();
-            return response()->json([
-                'status' => '200',
-            ]);
+            if($feedback_id){
+                $feedback=Feedback::where([["id",'=',`$feedback_id`],["course_id","=",`$request->course_id`]])->update(['grade' => $request->grade,'comment'=>$request->comment]);
+                return response()->json([
+                    'status' => '200',
+                    'feedback'=>$feedback
+                ]);
+            }else{
+                $feedback=new Feedback;
+                $feedback->teacher_id=Auth::id();
+                $feedback->student_id=$request->student_id;
+                $feedback->course_id=$request->course_id;
+                $feedback->rating=$request->rating;
+                $feedback->comment=$request->comment;
+                $feedback->save();
+                return response()->json([
+                    'status' => '200',
+                    'feedback'=>$feedback
+                ]);
+            }
+
         } catch(Exception $e){
             return response()->json([
                 'status' => 'error',
