@@ -168,35 +168,42 @@ class CommonController extends Controller
         }
     }
 
-    public function getStudentProgress($student_id,$course_id=null){
-    try{
-        if($course_id!==null){
+    use App\Models\TaskSubmission; // Make sure to import the TaskSubmission model
 
-            $submitted_tasks=count(TaskSubmission::where([['student_id','=',$student_id],['course_id','=',$course_id]])->get());
-            $succeeded_tasks=count(TaskSubmission::where([['student_id','=',$student_id],['course_id','=',$course_id],['grade','>',60]])->get());
-            $ungraded_tasks=count(TaskSubmission::where([['student_id','=',$student_id],['course_id','=',$course_id],['grade','=',null]])->get());
+    public function getStudentProgress($student_id, $course_id = null)
+    {
+        try {
+            if ($course_id !== null) {
+                $submitted_tasks = count(TaskSubmission::submissions()
+                    ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
+                    ->get());
+    
+                $succeeded_tasks = count(TaskSubmission::submissions()
+                    ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '>', 60]])
+                    ->get());
+    
+                $ungraded_tasks = count(TaskSubmission::submissions()
+                    ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '=', null]])
+                    ->get());
+    
+                return response()->json([
+                    'status' => '200',
+                    'submitted_tasks' => $submitted_tasks,
+                    'succeeded_tasks' => $succeeded_tasks,
+                    'ungraded_tasks' => $ungraded_tasks
+                ]);
+            }
+    
+            // Add an else case here if needed
+    
+        } catch (\Throwable $e) {
             return response()->json([
-                'status' => '200',
-                'submitted_tasks'=>$submitted_tasks,
-                'succeeded_tasks'=>$succeeded_tasks,
-                'ungraded_tasks'=>$ungraded_tasks
-
+                'status' => 'error',
+                'message' => $e->getMessage()
             ]);
         }
-        // } else{
-
-        //     return response()->json([
-        //         'status' => '200',
-        //         'progress'=>$progress
-        //     ]);
-        // }
-    } catch(Exception $e){
-        return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage()
-        ]);
-    }     
-}
+    }
+    
     public function getStudentFeedback($course_id, $student_id)
     {
         try {
