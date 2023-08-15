@@ -41,8 +41,8 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::delete("remove-schedule-material/{material_id}", "removeScheduleMaterial");
             Route::post("add-schedule-task", "addScheduleTask");
             Route::delete("remove-schedule-task/{task_id}", "removeScheduleTask");
-            Route::post("add-schedule-Session", "addScheduleSession");
-            Route::delete("remove-schedule-Session", "removeScheduleSession");
+            Route::post("add-schedule-session", "addScheduleSession");
+            Route::delete("remove-schedule-session/{session_id}", "removeScheduleSession");
             //leave till the end
             // Route::get("get-session-attendance","getSessionAttendance");
             // Route::post("add-session-attendance","addSessionAttendance");
