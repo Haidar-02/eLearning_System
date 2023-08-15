@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\BoardMessage;
 use App\Models\Course;
 use Illuminate\Support\Str;
@@ -257,26 +258,41 @@ class TeacherController extends Controller
 
 
 
-    // public function getSessionAttendance($session_id){
+    public function getSessionAttendance($session_id,$student_id){
 
-    //     try{
-    //         $session=Session::where([['id','=',$session_id]])->first();
-    //         $attendances=$session->attendances;
-    //         return response()->json([
-    //             'status' => '200',
-    //             'attendances'=>$attendances
-    //         ]);
-    //     } catch(Exception $e){
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     } 
+        try{
+            $attendance=Attendance::where([['session_id','=',$session_id],['student_id','=',$student_id]])->first();
+            return response()->json([
+                'status' => '200',
+                'attendance'=>$attendance
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
 
-    // }
-    // public function addSessionAttendance(Request $request){
+    }
+    public function addSessionAttendance(Request $request){
+        try{
+            $attendance=new Attendance;
+            $attendance->student_id=$request->student_id;
+            $attendance->session_id=$request->session_id;
+            $attendance->status=$request->status;
+
+            return response()->json([
+                'status' => '200',
+                'attendance'=>$attendance
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
         
-    // }
+    }
 
     // public function addCourseProject(Request $request){
     //     try{
