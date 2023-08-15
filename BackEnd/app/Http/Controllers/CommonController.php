@@ -176,8 +176,7 @@ class CommonController extends Controller
                 $submitted_tasks = $task
                 ->where('course_id', $course_id)
                 ->withCount(['submissions' => function ($query) use ($student_id) {
-                    $query->where('student_id', $student_id)
-                        ->where('grade', '');
+                    $query->where('student_id', $student_id);
                 }])
                 ->get();
                 $succeeded_tasks = $task
