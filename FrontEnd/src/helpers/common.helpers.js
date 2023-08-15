@@ -175,7 +175,7 @@ async function getStudentFeedback(course_id, student_id) {
 async function sendMessage({ message, receiver_id }) {
   try {
     const res = await axios.post(
-      `${baseUrl}common/send-message`,
+      `${remoteUrl}common/send-message`,
       {
         message,
         receiver_id,
