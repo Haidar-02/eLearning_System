@@ -96,14 +96,14 @@ class StudentController extends Controller
     {
 
         try {
-            $task=Task::find($request->task_id);
+            $task = Task::find($request->task_id);
             $dueDate = Carbon::parse($task->due_date);
             $submission = new TaskSubmission;
 
             if ($dueDate->isPast()) {
-                $submission->status="Late";
+                $submission->status = "Late";
             } else {
-               $submission->status="Submitted";
+                $submission->status = "Submitted";
             }
             $submission->task_id = $request->task_id;
             $submission->student_id = Auth::id();
@@ -136,6 +136,7 @@ class StudentController extends Controller
             $submission->save();
             return response()->json([
                 'status' => '200',
+                'submission' => $submission
             ]);
         } catch (Exception $e) {
             return response()->json([
