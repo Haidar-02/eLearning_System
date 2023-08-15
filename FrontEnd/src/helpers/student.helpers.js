@@ -22,10 +22,9 @@ async function enroll(course_id) {
       { course_id },
       auth()
     );
-    console.log(res);
 
-    if (res.status === 200) {
-      return res.data;
+    if (res.status == 200) {
+      return res.data.submission;
     }
   } catch (error) {
     console.log(error);
@@ -47,4 +46,20 @@ async function getEnrolledCourses() {
   }
 }
 
-export { getStudentCourses, getEnrolledCourses, enroll };
+async function addTaskSubmission({ due_date, task_id, file, file_name }) {
+  try {
+    const res = await axios.post(
+      `${baseUrl}student/add-submission`,
+      { due_date, task_id, file, file_name },
+      auth()
+    );
+    console.log(res);
+
+    if (res.status === 200) {
+      return res.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+export { getStudentCourses, getEnrolledCourses, enroll, addTaskSubmission };

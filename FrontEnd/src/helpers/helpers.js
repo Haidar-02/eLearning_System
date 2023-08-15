@@ -6,5 +6,13 @@ function toBase64(file) {
     reader.onerror = (error) => reject(error);
   });
 }
+const replaceObjectById = (id, newObject, state) => {
+  const updatedObjects = state.map((obj) => (obj.id === id ? newObject : obj));
+  return updatedObjects;
+};
 
-export { toBase64 };
+const getUser = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user;
+};
+export { toBase64, replaceObjectById, getUser };

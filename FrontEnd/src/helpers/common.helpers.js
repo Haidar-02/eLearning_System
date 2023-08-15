@@ -1,11 +1,11 @@
-import axios from "axios";
-import { auth } from "./auth.helpers";
+import axios from 'axios';
+import { auth } from './auth.helpers';
 
-const remoteUrl = "http://54.165.111.250:8000/api/";
-const baseUrl = "http://127.0.0.1:8000/api/";
+const remoteUrl = 'http://54.165.111.250:8000/api/';
+const baseUrl = 'http://127.0.0.1:8000/api/';
 async function getAllCourses() {
   try {
-    const res = await axios.get(`${remoteUrl}common/get-courses`, auth());
+    const res = await axios.get(`${baseUrl}common/get-courses`, auth());
     const { data } = res;
 
     if (res.status == 200) {
@@ -18,7 +18,7 @@ async function getAllCourses() {
 async function getCourseSchedules(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-course-schedules/${course_id}`,
+      `${baseUrl}common/get-course-schedules/${course_id}`,
       auth()
     );
     const { data } = res;
@@ -34,7 +34,7 @@ async function getCourseSchedules(course_id) {
 async function getScheduleTasks(schedule_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-schedule-tasks/${schedule_id}`,
+      `${baseUrl}common/get-schedule-tasks/${schedule_id}`,
       auth()
     );
     const { data } = res;
@@ -50,7 +50,7 @@ async function getScheduleTasks(schedule_id) {
 async function getScheduleMaterials(schedule_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-schedule-materials/${schedule_id}`,
+      `${baseUrl}common/get-schedule-materials/${schedule_id}`,
       auth()
     );
     const { data } = res;
@@ -65,7 +65,7 @@ async function getScheduleMaterials(schedule_id) {
 async function getCourseStudents(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-course-students/${course_id}`,
+      `${baseUrl}common/get-course-students/${course_id}`,
       auth()
     );
     const { data } = res;
@@ -81,7 +81,7 @@ async function getCourseStudents(course_id) {
 async function getScheduleSessions(schedule_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-schedule-sessions/${schedule_id}`,
+      `${baseUrl}common/get-schedule-sessions/${schedule_id}`,
       auth()
     );
     const { data } = res;
@@ -97,7 +97,7 @@ async function getScheduleSessions(schedule_id) {
 async function getTaskSubmissions(task_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-task-submissions/${task_id}`,
+      `${baseUrl}common/get-task-submissions/${task_id}`,
       auth()
     );
     const { data } = res;
@@ -112,7 +112,7 @@ async function getTaskSubmissions(task_id) {
 async function getProjectGroups(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-project-groups/${course_id}`,
+      `${baseUrl}common/get-project-groups/${course_id}`,
       auth()
     );
     const { data } = res;
@@ -128,7 +128,7 @@ async function getProjectGroups(course_id) {
 async function getGroupMembers(project_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-group-members/${project_id}`,
+      `${baseUrl}common/get-group-members/${project_id}`,
       auth()
     );
     const { data } = res;
@@ -144,7 +144,7 @@ async function getGroupMembers(project_id) {
 async function getStudentFeedback(course_id, student_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-student-feedback/${course_id}/${student_id}`,
+      `${baseUrl}common/get-student-feedback/${course_id}/${student_id}`,
       auth()
     );
     if (res.data.status == 200) {
@@ -175,7 +175,7 @@ async function getStudentFeedback(course_id, student_id) {
 async function sendMessage(message, receiver_id) {
   try {
     const res = await axios.post(
-      `${remoteUrl}common/send-message`,
+      `${baseUrl}common/send-message`,
       message,
       receiver_id,
       auth()
@@ -192,7 +192,7 @@ async function sendMessage(message, receiver_id) {
 
 async function getMessages() {
   try {
-    const res = await axios.get(`${remoteUrl}common/get-messages`, auth());
+    const res = await axios.get(`${baseUrl}common/get-messages`, auth());
     const { data } = res;
 
     if (res.status == 200) {
@@ -206,7 +206,7 @@ async function getMessages() {
 async function getCourseDiscussion(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-course-discussion/${course_id}`,
+      `${baseUrl}common/get-course-discussion/${course_id}`,
       auth()
     );
     const { data } = res;
@@ -217,12 +217,11 @@ async function getCourseDiscussion(course_id) {
   } catch (error) {
     console.log(error);
   }
-
-} 
+}
 async function getMessagesById(id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/getMessagesById/${id}`,
+      `${baseUrl}common/getMessagesById/${id}`,
 
       auth()
     );
@@ -236,7 +235,7 @@ async function getMessagesById(id) {
 async function addCourseDiscussion(message, course_id) {
   try {
     const res = await axios.post(
-      `${remoteUrl}common/add-course-discussion`,
+      `${baseUrl}common/add-course-discussion`,
       message,
       course_id,
       auth()
@@ -253,7 +252,7 @@ async function addCourseDiscussion(message, course_id) {
 async function search({ search, userType }) {
   try {
     const response = await axios.get(
-      `${remoteUrl}common/searchUser/${userType}/${search}`,
+      `${baseUrl}common/searchUser/${userType}/${search}`,
       auth()
     );
     return response;
@@ -265,7 +264,7 @@ async function search({ search, userType }) {
 async function getCourseNotifications(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-course-notifications/${course_id}`,
+      `${baseUrl}common/get-course-notifications/${course_id}`,
       auth()
     );
     const { data } = res;
@@ -281,7 +280,7 @@ async function getCourseNotifications(course_id) {
 async function getCourseTeacher(course_id) {
   try {
     const res = await axios.get(
-      `${remoteUrl}common/get-course-teacher/${course_id}`,
+      `${baseUrl}common/get-course-teacher/${course_id}`,
       auth()
     );
     const { data } = res;

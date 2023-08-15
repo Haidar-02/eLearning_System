@@ -3,6 +3,7 @@ import Modal from '../Common/Modal';
 import Button from '../Common/Button';
 import { enroll } from '../../helpers/student.helpers';
 import CourseDetails from '../Courses/CourseDetails';
+import { getCourseSchedules } from '../../helpers/common.helpers';
 
 const StudenCourseModal = ({
   course,
