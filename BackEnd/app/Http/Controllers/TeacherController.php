@@ -280,7 +280,7 @@ class TeacherController extends Controller
 
         try{
                     if($attendance_id!==null){
-                        $affectedRows=Attendance::where([["id",'=',$attendance_id]])->update(['status' => $request->status]);
+                        $affectedRows=Attendance::where([["id",'=',$attendance_id]])->update(['attendance_status' => $request->attendance_status]);
                         
                             if ($affectedRows > 0) {
                                 $updated_attendance = Attendance::find($attendance_id); 
@@ -299,7 +299,7 @@ class TeacherController extends Controller
             $attendance=new Attendance;
             $attendance->student_id=$request->student_id;
             $attendance->session_id=$request->session_id;
-            $attendance->status=$request->status;
+            $attendance->attendance_status=$request->attendance_status;
 
             return response()->json([
                 'status' => '200',
