@@ -39,8 +39,8 @@ const StudentManager = ({course_id}) => {
         <div className='bg-cyan-light rounded-md studens-container'>
           <h2 className=' mb-2 border color-cyan-medium p-2 text-center font-bold'>Student List</h2>
           <ul>
-            {students.map(student => (
-                <StudentCard student_id={student.id} name={student.name} key={student.id} setShowFeedback={setShowFeedback}/>
+            {students.map((student,index) => (
+                <StudentCard student_id={student.id} name={student.name} key={index} setShowFeedback={setShowFeedback}/>
             ))}
           </ul>
         </div>
