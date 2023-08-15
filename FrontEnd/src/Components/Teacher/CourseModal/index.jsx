@@ -10,12 +10,15 @@ import messageIcon from "../../../assets/icons/message-regular.svg";
 import discussionBoard from "../../../assets/icons/rectangle-list-regular.svg";
 import homeIcon from "../../../assets/icons/house-solid.svg";
 import group from "../../../assets/icons/people-group-solid.svg";
-
+import feedbackIcon from '../../../assets/icons/feedback.svg';
 import TeacherScheduleManager from './HomePage';
 import GroupProject from "./GroupProject";
+import Feedback from "./Feedback";
 const falseState = {
   home_page: false,
   anouncements: false,
+  group_project:false,
+  feedback:false,
   messages: false,
   discussion_board: false,
 };
@@ -24,6 +27,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
   const [state, setState] = useState({
     home_page: true,
     group_project: false,
+    feedback:false,
     anouncements: false,
     messages: false,
     discussion_board: false,
@@ -32,7 +36,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { home_page, group_project , anouncements, messages, discussion_board } = state;
+  const { home_page, group_project , feedback,anouncements, messages, discussion_board } = state;
   return (
     <Modal
       setShow={setCourseModel}
@@ -73,6 +77,13 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
                 }}
               />
             <DashBoardButton
+                icon={feedbackIcon}
+                text="Feedback"
+                onClick={() => {
+                  togglePage("feedback");
+                }}
+              /> 
+            <DashBoardButton
               onClick={() => {
                 togglePage("anouncements");
               }}
@@ -100,6 +111,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           {/* PAGES GO HERE */}
           {home_page && <TeacherScheduleManager course={course} />}
           {group_project && <GroupProject course_id={course.id}/>}
+          {feedback && <Feedback course_id={course.id}/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
           {discussion_board && (

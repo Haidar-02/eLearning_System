@@ -500,20 +500,19 @@ async function modifyTaskGrade({ submission_id, grade }) {
   }
 }
 
-async function modifyProjectGrade({ project_id, grade }) {
+async function modifyGroupProjectGrade(group_id, grade) {
   try {
     const res = await axios.put(
       `${remoteUrl}teacher/modify-project-grade`,
       {
-        project_id,
+        group_id,
         grade,
       },
       auth()
     );
 
-    if (res.status == 200) {
-      const data = res.data;
-      return { data };
+    if (res.data.status == 200) {
+      return res.data;
     }
   } catch (error) {
     console.log(error);
@@ -632,7 +631,7 @@ export {
   addCourseProject,
   addProjectGroupMembers,
   modifyTaskGrade,
-  modifyProjectGrade,
+  modifyGroupProjectGrade,
   addFeedback,
   addNotification,
 };

@@ -1,21 +1,20 @@
 import { useState } from "react";
-import { modifyTaskGrade } from "../../../../../../../helpers/Teacher.helpers";
-import CustomInput from "../../../../../../Inputs/CustomInput";
-import Button from "../../../../../../Common/Button";
-import Modal from "../../../../../../Common/Modal";
-import Submissions from "./Submissions";
+import { modifyGroupProjectGrade } from "../../../../helpers/Teacher.helpers";
+import CustomInput from "../../../Inputs/CustomInput";
+import Button from "../../../Common/Button";
+import Modal from "../../../Common/Modal";
 
-const SubmissionUpdateModel = ({setShow,submission,submissions,setSubmissions}) => {
-    const [state, setState] = useState({...submission,grade:""});
+const GroupUpdateModel = ({setShow,group,groups,setGroups}) => {
+    const [state, setState] = useState({...group,grade:""});
     function inputHandler(e) {
         const { name, value } = e.target;
         setState((prev) => ({ ...prev, [name]: value }));
     } 
 
       async function handleUpdate() {
-        let submission_id=state.id;
+        let group_id=state.id;
         let grade=state.grade;
-        const { data, errorMessages, message } = await modifyTaskGrade({submission_id,grade});
+        const { data, errorMessages, message } = await modifyGroupProjectGrade({group_id,grade});
         if (errorMessages) {
           setError(errorMessages[0]);
           return;
@@ -27,9 +26,9 @@ const SubmissionUpdateModel = ({setShow,submission,submissions,setSubmissions}) 
         //     return [data.task, ...prev];
         //   });
         console.log(state);
-        let newState=replaceObjectById(submission.id,state,submissions);
+        let newState=replaceObjectById(group.id,state,groups);
         console.log(newState)
-        setSubmissions(newState);    
+        setGroups(newState);    
         setShow(false);
       }
 
@@ -70,4 +69,4 @@ const SubmissionUpdateModel = ({setShow,submission,submissions,setSubmissions}) 
      );
 }
  
-export default SubmissionUpdateModel;
+export default GroupUpdateModel;
