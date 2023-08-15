@@ -398,7 +398,7 @@ class TeacherController extends Controller
     public function addFeedback(Request $request,$feedback_id){
 
         try{
-            if($feedback_id){
+            if($feedback_id!==null){
                 $feedback=Feedback::where([["id",'=',`$feedback_id`],["course_id","=",`$request->course_id`]])->update(['grade' => $request->grade,'comment'=>$request->comment]);
                 return response()->json([
                     'status' => '200',
