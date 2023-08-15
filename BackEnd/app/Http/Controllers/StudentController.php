@@ -169,6 +169,39 @@ class StudentController extends Controller
 
 
     }
+    public function getStudentProgressDetails($course_id)
+    {
+        $student_id = Auth::id();
+        try {
+            if ($course_id !== null) {
+                $taskIds = Task::where('course_id', $course_id)->pluck('id');
+
+                $submitted_tasks = TaskSubmission::with("task")->whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)->get();
+
+
+                $succeeded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)
+                    ->where('grade', '>', 60)->get();
+
+                $ungraded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)
+                    ->whereNull('grade')->get();
+                return response()->json([
+                    'status' => '200',
+                    'submitted_tasks' => $submitted_tasks,
+                    'ungraded_tasks' => $ungraded_tasks,
+                    'total_tasks' => Task::where('course_id', $course_id)->count(),
+                ]);
+            }
+
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 
     public function getTeacherMeet($teacher_id)
     {
