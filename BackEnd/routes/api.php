@@ -113,13 +113,13 @@ Route::group(["middleware" => "auth:api"], function () {
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
         Route::controller(ParentController::class)->group(function () {
-            Route::get("getChild", "getChild");
-            Route::get("getChildCourses", "getChildCourses");
-            Route::get("getChildTeachers", "getChildTeachers");
-            Route::get("getChildAttendance", "getChildAttendance");
-            Route::get("getChildFeedback", "getStudentFeedback");
-            Route::get("getChildTasks", "getChildTasks");
-            Route::get("getChildGrades", "getChildGrades");
+            Route::get("getChildren", "getChildren");
+            Route::get("getChildCourses/{child_id}", "getChildCourses");
+            Route::get("getChildTeachers/{child_id}", "getChildTeachers");
+            Route::get("getChildAttendance/{child_id}", "getChildAttendance");
+            Route::get("getChildFeedback/{child_id}", "getStudentFeedback");
+            Route::get("getChildTasks/{child_id}", "getChildTasks");
+            Route::get("getChildGrades/{child_id}", "getChildGrades");
             Route::get("getParentConferences", "getParentConferences");
             Route::get("getTeacherConferenceSlots/{teacher_id}", "getAvailableTeacherConferences");
             Route::post("scheduleConferenceWithTeacher/{teacher_schedule_id}", "scheduleConferenceWithTeacher");
