@@ -58,21 +58,20 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
             </span>
           </div>
           <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
-            <div className="button-wrapper bg-cyan-light">
               <DashBoardButton
                 icon={homeIcon}
                 iconStyle="w-[24px]"
-                textStyle="text-[18px] color-cyan-dark"
+                textStyle="text-[18px]"
                 text="Home Page"
-                className="font-semibold text-lg"
+                className={`${home_page && "bg-cyan-light color-cyan-dark"}`}
                 onClick={() => {
                   togglePage("home_page");
                 }}
               />
-            </div>
               <DashBoardButton
                 icon={group}
                 text="Group Project"
+                className={`${group_project && "bg-cyan-light color-cyan-dark"}`}
                 onClick={() => {
                   togglePage("group_project");
                 }}
@@ -80,6 +79,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
             <DashBoardButton
                 icon={feedbackIcon}
                 text="Feedback"
+                className={`${feedback && "bg-cyan-light color-cyan-dark"}`}
                 onClick={() => {
                   togglePage("feedback");
                 }}
@@ -87,6 +87,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
               <DashBoardButton
                 icon={progressIcon}
                 text="Progress"
+                className={`${progress && "bg-cyan-light color-cyan-dark"}`}
                 onClick={() => {
                   togglePage("progress");
                 }}
@@ -96,6 +97,8 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
                 togglePage("anouncements");
               }}
               icon={bullhornSolid}
+              className={`${anouncements && "bg-cyan-light color-cyan-dark"}`}
+
               text="Anouncements"
             />
 
@@ -104,6 +107,8 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
                 togglePage("discussion_board");
               }}
               icon={discussionBoard}
+              className={`${discussion_board && "bg-cyan-light color-cyan-dark"}`}
+
               text="Discussion Board"
             />
           </div>
