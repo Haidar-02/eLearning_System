@@ -46,7 +46,7 @@ const StudentManager = ({course_id}) => {
         </div>
         <div className="feedback-container flex-grow bg-cyan-light rounded-md ml-4 p-3">
         <h2 className=' mb-2 border color-cyan-medium p-2 text-center font-bold'>Student Feedback</h2>
-          {showFeedback.show && <StudentFeedback course_id={course_id} feedback={feedback} setFeedback={setFeedback} showFeedback={showFeedback}/>}
+          {showFeedback.show && <StudentFeedback course_id={course_id} feedback={feedback} setFeedback={setFeedback} showFeedback={showFeedback} initialState={initialState}/>}
         </div>
     </div>
     </>

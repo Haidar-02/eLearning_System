@@ -4,7 +4,7 @@ import Button from "../../../Common/Button";
 import { addFeedback } from "../../../../helpers/Teacher.helpers";
 import { getStudentFeedback } from "../../../../helpers/common.helpers";
 
-const StudentFeedback = ({course_id,feedback,setFeedback,showFeedback}) => {
+const StudentFeedback = ({course_id,feedback,setFeedback,showFeedback,initialState}) => {
     const [addError, setAddError] = useState();
     const [error, setError] = useState();
 
