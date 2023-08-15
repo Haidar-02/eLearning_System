@@ -291,7 +291,7 @@ class TeacherController extends Controller
                             } else {
                                 return response()->json([
                                     'status' => 'error',
-                                    'message' => 'Feedback not found or not updated'
+                                    'message' => 'attendance not found or not updated'
                                 ]);
                             }
                         
@@ -300,7 +300,7 @@ class TeacherController extends Controller
             $attendance->student_id=$request->student_id;
             $attendance->session_id=$request->session_id;
             $attendance->attendance_status=$request->attendance_status;
-
+            $attendance->save();
             return response()->json([
                 'status' => '200',
                 'attendance'=>$attendance
