@@ -173,26 +173,34 @@ class CommonController extends Controller
         try {
             if ($course_id !== null) {
                 $task = new Task();
-                $submitted_tasks = $task->where('course_id',$course_id)->withCount('submissions')->get();
-                // ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id]])
-                // ->get());
+                $submitted_tasks = $task
+                ->where('course_id', $course_id)
+                ->withCount(['submissions' => function ($query) use ($student_id) {
+                    $query->where('student_id', $student_id)
+                        ->where('grade', '');
+                }])
+                ->get();
+                $succeeded_tasks = $task
+                ->where('course_id', $course_id)
+                ->withCount(['submissions' => function ($query) use ($student_id) {
+                    $query->where('student_id', $student_id)
+                        ->where([['grade','>','60']]);
+                }])
+                ->get();
+                $ungraded_tasks = $task
+                ->where('course_id', $course_id)
+                ->withCount(['submissions' => function ($query) use ($student_id) {
+                    $query->where('student_id', $student_id)
+                        ->where('grade','=',null);
+                }])
+                ->get();
 
-                // $succeeded_tasks = count($task->submissions()
-                //     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '>', 60]])
-                //     ->get());
-
-                // $ungraded_tasks = count($task->submissions()
-                //     ->where([['student_id', '=', $student_id], ['course_id', '=', $course_id], ['grade', '=', null]])
-                //     ->get());
                 return response()->json([
-                    'count'=>$submitted_tasks
+                    'status' => '200',
+                    'submitted_tasks' => $submitted_tasks,
+                    'succeeded_tasks' => $succeeded_tasks,
+                    'ungraded_tasks' => $ungraded_tasks
                 ]);
-                // return response()->json([
-                //     'status' => '200',
-                //     'submitted_tasks' => $submitted_tasks,
-                //     'succeeded_tasks' => $succeeded_tasks,
-                //     'ungraded_tasks' => $ungraded_tasks
-                // ]);
             }
         
         } catch (\Throwable $e) {
