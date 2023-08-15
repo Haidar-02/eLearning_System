@@ -19,22 +19,16 @@ class CourseEnrollmentFactory extends Factory
      */
     public function definition(): array
     {
+        do {
+            $course_id = \App\Models\Course::factory()->create()->id;
+            $student_id = \App\Models\User::factory()->create()->id;
+        } while (CourseEnrollment::where('course_id', $course_id)->where('student_id', $student_id)->exists());
+
         return [
-            "student_id" => User::all()->where("user_type", 4)->random(),
-            "course_id" => Course::all()->random(),
-            "grade" => null,
+            'course_id' => $course_id,
+            'student_id' => $student_id,
+            'grade' => null
         ];
     }
-    public function configure()
-    {
-        return $this->afterMaking(function (CourseEnrollment $courseEnrollment) {
-            $uniqueCourseAndStudent = CourseEnrollment::where('course_id', $courseEnrollment->course_id)
-                ->where('student_id', $courseEnrollment->student_id)
-                ->exists();
-
-            if ($uniqueCourseAndStudent) {
-                throw new \Exception("Duplicate combination of course_id and student_id");
-            }
-        });
-    }
+  
 }
