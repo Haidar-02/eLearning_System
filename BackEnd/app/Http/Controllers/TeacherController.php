@@ -395,7 +395,7 @@ class TeacherController extends Controller
         } 
     }
 
-    public function addFeedback(Request $request,$feedback_id){
+    public function addFeedback(Request $request,$feedback_id = null){
 
         try{
             if($feedback_id!==null){
