@@ -6,7 +6,6 @@ import SideBar from "../../DashBoard/SideBar";
 import DashBoardButton from "../../DashBoard/DashBoardButton";
 // import dashIcon from '../../assets/icons/dashboard.svg';
 import bullhornSolid from "../../../assets/icons/bullhorn-solid.svg";
-import messageIcon from "../../../assets/icons/message-regular.svg";
 import discussionBoard from "../../../assets/icons/rectangle-list-regular.svg";
 import homeIcon from "../../../assets/icons/house-solid.svg";
 import group from "../../../assets/icons/people-group-solid.svg";
@@ -23,7 +22,6 @@ const falseState = {
   group_project:false,
   feedback:false,
   progress:false,
-  messages: false,
   discussion_board: false,
 };
 
@@ -34,14 +32,13 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
     feedback:false,
     progress:false,
     anouncements: false,
-    messages: false,
     discussion_board: false,
   });
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { home_page, group_project , feedback,progress,anouncements, messages, discussion_board } = state;
+  const { home_page, group_project , feedback,progress,anouncements, discussion_board } = state;
   return (
     <Modal
       setShow={setCourseModel}
@@ -102,13 +99,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
               icon={bullhornSolid}
               text="Anouncements"
             />
-            <DashBoardButton
-              onClick={async () => {
-                togglePage("messages");
-              }}
-              icon={messageIcon}
-              text="Messages"
-            />
+
             <DashBoardButton
               onClick={() => {
                 togglePage("discussion_board");
@@ -126,7 +117,6 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           {feedback && <StudentManager course_id={course.id}/>}
           {progress && <ProgressManager course_id={course.id}/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
-          {messages && <span className="h-[500px] p-10">messages</span>}
           {discussion_board && (
             <span className="h-[500px] p-10">discussion board</span>
           )}

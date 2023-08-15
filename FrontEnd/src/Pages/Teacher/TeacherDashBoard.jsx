@@ -8,6 +8,7 @@ import logoutIcon from "../../assets/icons/right-from-bracket-solid-white.svg";
 import SideBar from "../../Components/DashBoard/SideBar";
 import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 import TeacherCourseManager from "../../Components/Teacher/TeacherCourseManager";
+import MessageBox from "../../Components/Messaging/MessageBox";
 
 
 const falseState = {
@@ -91,17 +92,9 @@ const TeacherDashBoard = () => {
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
         {/* {grades && <span className="h-[500px] p-10">Manage Users</span>} */}
         {classes && <TeacherCourseManager />}
-        {messages && <MessagesList />}
+        {messages && <MessageBox user_type={4}/>}
       </div>
-      {/* 
-      <SideBar className={'right-0'}>
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar> */}
+
     </div>
   );
 };
