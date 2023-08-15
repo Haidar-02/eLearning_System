@@ -2,23 +2,45 @@ import { useEffect, useState } from "react";
 import CustomInput from "../../../Inputs/CustomInput";
 import Button from "../../../Common/Button";
 import { addFeedback } from "../../../../helpers/Teacher.helpers";
+import { getStudentFeedback } from "../../../../helpers/common.helpers";
 
-const StudentFeedback = ({feedback,setFeedback,showFeedback}) => {
+const StudentFeedback = ({course_id,feedback,setFeedback,showFeedback}) => {
     const [addError, setAddError] = useState();
-    const [state,setState]=useState({...feedback,student_id: showFeedback.id});
-    
+    const [error, setError] = useState();
+
+    useEffect(()=>{
+        setFeedback({...feedback,student_id: showFeedback.id});
+    },[showFeedback])
+    useEffect(() => {
+
+        fetchFeedback();
+        
+    }, [showFeedback]);
+
+    const fetchFeedback = async () => {
+        let student_id = showFeedback.id;
+        const { data, errorMessages, message } = await getStudentFeedback(course_id,student_id);
+        if (errorMessages) {
+            setError(errorMessages[0]);
+            return;
+          } else if (message) {
+            setError(message);
+            return;
+        }
+        if(data.feedback){
+          setFeedback(data.feedback);
+        } else {
+          setFeedback(initialState);
+        }
+      };
+
     function inputHandler(e) {
         const { name, value } = e.target;
-        setState((prev) => ({ ...prev, [name]: value }));
+        setFeedback((prev) => ({ ...prev, [name]: value }));
     }
 
     async function handleUpdate() {
-        // setFeedback(prevFeedback => ({
-        //     ...prevFeedback,
-        //     student_id: showFeedback.id
-        //   }));
-        console.log(state);
-        const { data, errorMessages, message } = await addFeedback(state);
+        const { data, errorMessages, message } = await addFeedback(feedback);
         if (errorMessages) {
             setAddError(errorMessages[0]);
           return;
@@ -27,9 +49,6 @@ const StudentFeedback = ({feedback,setFeedback,showFeedback}) => {
           return;
         }
 
-        let newState=replaceObjectById(feedback.id,state,feedback);
-        setFeedback(newState);  
-        console.log(feedback);  
       }
 
     return ( 

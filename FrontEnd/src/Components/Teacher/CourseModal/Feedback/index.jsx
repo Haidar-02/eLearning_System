@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getCourseStudents, getStudentFeedback } from '../../../../helpers/common.helpers';
+import { getCourseStudents } from '../../../../helpers/common.helpers';
 import StudentCard from './StudentCard';
 import StudentFeedback from './StudentFeedback';
 
@@ -15,7 +15,6 @@ const StudentManager = ({course_id}) => {
   }
   const [students,setStudents]=useState([]);
   const [feedback,setFeedback]=useState({...initialState});
-  const [error, setError] = useState();
 
   const [showFeedback,setShowFeedback]=useState({id:"",show:false});
 
@@ -28,30 +27,9 @@ const StudentManager = ({course_id}) => {
   },[])
 
 
-  useEffect(() => {
-
-    if (showFeedback.show) {
-        fetchFeedback();
-    }
-  }, [showFeedback]);
 
 
-  const fetchFeedback = async () => {
-    let student_id = showFeedback.id;
-    const { data, errorMessages, message } = await getStudentFeedback(course_id,student_id);
-    if (errorMessages) {
-        setError(errorMessages[0]);
-        return;
-      } else if (message) {
-        setError(message);
-        return;
-    }
-    if(data.feedback){
-      setFeedback(data.feedback);
-    } else {
-      setFeedback(initialState);
-    }
-  };
+
   return (
     <div className='p-3  flex flex-row justify-between'>
         <div className='bg-cyan-light rounded-md studens-container'>
@@ -64,7 +42,7 @@ const StudentManager = ({course_id}) => {
         </div>
         <div className="feedback-container flex-grow bg-cyan-light rounded-md ml-4 p-3">
         <h2 className=' mb-2 border color-cyan-medium p-2 text-center font-bold'>Student Feedback</h2>
-          {showFeedback.show && <StudentFeedback course_id={course_id} feedback={feedback} setFeedback={setFeedback} error={error} showFeedback={showFeedback} fetchFeedback={fetchFeedback}/>}
+          {showFeedback.show && <StudentFeedback course_id={course_id} feedback={feedback} setFeedback={setFeedback} showFeedback={showFeedback}/>}
         </div>
     </div>
   );
