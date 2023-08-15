@@ -147,13 +147,28 @@ async function getStudentFeedback(course_id, student_id) {
       `${remoteUrl}common/get-student-feedback/${course_id}/${student_id}`,
       auth()
     );
-    const { data } = res;
-
-    if (res.status == 200) {
-      return data.feedback;
+    if (res.data.status == 200) {
+      const data = res.data;
+      return {data};
     }
   } catch (error) {
     console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
   }
 }
 

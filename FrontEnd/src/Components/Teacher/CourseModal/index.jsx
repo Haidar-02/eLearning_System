@@ -13,7 +13,7 @@ import group from "../../../assets/icons/people-group-solid.svg";
 import feedbackIcon from '../../../assets/icons/feedback.svg';
 import TeacherScheduleManager from './HomePage';
 import GroupProject from "./GroupProject";
-import Feedback from "./Feedback";
+import StudentManager from "./Feedback";
 const falseState = {
   home_page: false,
   anouncements: false,
@@ -111,7 +111,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           {/* PAGES GO HERE */}
           {home_page && <TeacherScheduleManager course={course} />}
           {group_project && <GroupProject course_id={course.id}/>}
-          {feedback && <Feedback course_id={course.id}/>}
+          {feedback && <StudentManager course_id={course.id}/>}
           {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {messages && <span className="h-[500px] p-10">messages</span>}
           {discussion_board && (
