@@ -80,7 +80,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
   return (
     <Modal
       setShow={setShow}
-      className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+      className="dark:bg-slate-700 flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
       {toggleEdit ? (
         <CourseEdit

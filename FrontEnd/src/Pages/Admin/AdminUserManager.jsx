@@ -47,13 +47,19 @@ const AdminUserManager = () => {
       console.error('Error deleting user:', error);
     }
   };
-  
-  
-  
 
+
+  const handleUserUpdated = (userId, updatedProperties) => {
+    const updatedUsers = users.map((user) =>
+      user.id === userId ? { ...user, ...updatedProperties } : user
+    );
+    setUsers(updatedUsers);
+  };
+  
+  
   return (
     <div className='flex flex-col items-center grow' >
-      <div className='flex flex-row justify-between w-[]' >
+      <div className='flex flex-row justify-between w-[100%]' >
         <div className="w-24 dark" onClick={handleTeacherClick}>
           <img className="" src={teacherIcon} alt="teacherIcon" />
         </div>
@@ -65,9 +71,9 @@ const AdminUserManager = () => {
         </div>
        </div> 
         <div>
-          <div className="user-list">
+          <div className="user-list w-max">
             {users.map((user) => (
-              <UserCard key={user.id} user={user} onDelete={handleDeleteUser} />
+              <UserCard key={user.id} user={user} onDelete={handleDeleteUser} onUserUpdated={handleUserUpdated} />
             ))}
           </div>
         </div>
@@ -76,4 +82,3 @@ const AdminUserManager = () => {
 };
 
 export default AdminUserManager;
-

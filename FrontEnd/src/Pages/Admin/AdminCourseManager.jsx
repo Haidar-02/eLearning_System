@@ -24,11 +24,11 @@ const AdminCourseManager = () => {
         <div className="page-header gothic color-cyan-dark text-2xl py-5">
           Manage Courses
         </div>
-        <div className="button-container flex justify-center items-center rounded-full p-3 w-[20px] h-[20px] bg-cyan-dark">
+        <div className="button-container flex justify-center items-center rounded-full bg-cyan-dark">
           <Button
             onClick={() => setShow(true)}
-            text="+"
-            className="p-0 bg-transparent text-xl text-white"
+            text="Add Course"
+            className="bg-transparent text-xl text-white"
           />
         </div>
       </div>

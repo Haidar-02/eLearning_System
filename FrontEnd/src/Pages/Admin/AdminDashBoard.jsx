@@ -9,6 +9,7 @@ import SideBar from '../../Components/DashBoard/SideBar';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 import AdminCourseManager from './AdminCourseManager';
 import AdminUserManager from './AdminUserManager';
+import CreateBackupButton from '../../Components/Admin/CreateBackUpButton';
 
 
 
@@ -19,7 +20,7 @@ import 'react-circular-progressbar/dist/styles.css';
 const falseState = {
   dashboard: false,
   users: false,
-  classes: false,
+  courses: false,
   assignments: false,
   messages: false,
 };
@@ -28,7 +29,7 @@ const AdminDashBoard = () => {
   const [state, setState] = useState({
     dashboard: true,
     users: false,
-    classes: false,
+    courses: false,
     assignments: false,
     messages: false,
   });
@@ -37,7 +38,7 @@ const AdminDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { dashboard, users, classes, assignments } = state;
+  const { dashboard, users, courses, assignments } = state;
   
   const completionPercentage = 66;
 
@@ -46,7 +47,7 @@ const AdminDashBoard = () => {
       <SideBar className="bg-cyan-dark">
         <div className="logo  flex items-center justify-center gothic">
           <span className="text-3xl cursor-pointer p-5 py-10 text-white">
-            Kidzo
+            E-Learing
           </span>
         </div>
         <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
@@ -71,21 +72,14 @@ const AdminDashBoard = () => {
           />
           <DashBoardButton
             onClick={async () => {
-              togglePage('classes');
+              togglePage('courses');
             }}
             icon={classesIcon}
-            text="Classes"
+            text="Courses"
           />
-          <DashBoardButton
-            onClick={() => {
-              togglePage('assignments');
-            }}
-            icon={clipBoardIcon}
-            text="Assignments"
-          />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-        </div>
+          <CreateBackupButton/>
+
+          </div>
       </SideBar>
 
       <div className="mainContent flex flex-col   px-14 py-10 h-fit ">
@@ -101,8 +95,10 @@ const AdminDashBoard = () => {
         </div>
       </div>}
         {users && <div className="h-[500px] p-10"><AdminUserManager/></div>}
-        {classes && <AdminCourseManager />}
+        {courses && <AdminCourseManager />}
         {assignments && <div className="h-[500px] p-10">Assignments</div>}
+        <div>
+        </div>
       </div>
 
     </div>

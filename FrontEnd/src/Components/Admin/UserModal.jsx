@@ -1,43 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import Modal from '../Common/Modal';
 import Button from '../Common/Button';
-import CourseDetails from './CourseDetails';
-import CourseEdit from './CourseEdit';
+import UserDetails from './UserDetails';
+import UserEdit from './UserEdit';
 
-import { editCourse, deleteCourse } from '../../helpers/admin.helpers';
+import { editUser, deleteUser } from '../../helpers/admin.helpers';
 
-const CourseModal = ({ course, setShow, setCourses }) => {
-  console.log(course);
+const UserModal = ({ user, setShow, setUsers }) => {
+  console.log(user);
   const {
-    class_code,
-    description,
-    enrollment_limit,
     id,
-    meet_link,
-    teacher,
-    title,
-  } = course;
+    name,
+    email,
+    password,
+    user_type,
+  } = user;
 
   const [editState, setEditState] = useState({
     id,
-    title: '',
-    description: '',
-    teacher: '',
-    meet_link: '',
-    enrollment_limit: '',
+    name:'',
+    email:'',
+    password:'',
+    user_type:'',
   });
-  const [editError, setEditError] = useState();
 
+  const [editError, setEditError] = useState();
   const [toggleEdit, setToggleEdit] = useState(false);
 
   useEffect(() => {
     setEditState({
-      id,
-      teacher: { ...teacher },
-      title,
-      description,
-      meet_link,
-      enrollment_limit,
+    id,
+    name,
+    email,
+    password,
+    user_type,
     });
   }, []);
 
@@ -48,7 +44,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
     return updatedObjects;
   };
   async function handleDelete() {
-    setCourses((prev) => {
+    setUsers((prev) => {
       const newArr = prev.filter((e) => e.id !== id);
       return newArr;
     });
@@ -61,7 +57,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
       meet_link: editState.meet_link,
       enrollment_limit: editState.enrollment_limit,
     };
-    const { data, errorMessages, message } = await editCourse(id, payload);
+    const { data, errorMessages, message } = await editUser(id, payload);
     if (errorMessages) {
       setEditError(errorMessages[0]);
       return;
@@ -70,7 +66,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
       return;
     }
     if (data) {
-      setCourses((prev) => {
+      setUsers((prev) => {
         const newArr = replaceObjectById(id, editState, prev);
         return newArr;
       });
@@ -83,15 +79,15 @@ const CourseModal = ({ course, setShow, setCourses }) => {
       className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
       {toggleEdit ? (
-        <CourseEdit
+        <UserEdit
           state={editState}
           setState={setEditState}
           error={editError}
-          course={course}
+          user={user}
           className="flex flex-col gap-10"
         />
       ) : (
-        <CourseDetails course={course} className="flex flex-col gap-10" />
+        <UserDetails user={user} className="flex flex-col gap-10" />
       )}
       <div className="button-container flex justify-end gap-3">
         <Button
@@ -109,7 +105,7 @@ const CourseModal = ({ course, setShow, setCourses }) => {
         <Button
           text="delete"
           onClick={() => {
-            deleteCourse(id);
+            deleteUser(id);
             handleDelete();
             setShow(false);
           }}
@@ -127,4 +123,4 @@ const CourseModal = ({ course, setShow, setCourses }) => {
   );
 };
 
-export default CourseModal;
+export default UserModal;

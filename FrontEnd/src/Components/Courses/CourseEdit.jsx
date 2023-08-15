@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
 import TextArea from '../Inputs/TextArea';
+
 const CourseEdit = ({ state, setState, error }) => {
   function textInputHandler(e) {
     const { value, name } = e.target;
