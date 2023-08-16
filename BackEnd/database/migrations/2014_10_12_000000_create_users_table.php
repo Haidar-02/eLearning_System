@@ -81,7 +81,7 @@ return new class extends Migration {
         Schema::create('course_materials', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('course_id')->on('schedules')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('teacher_id');
             $table->text('title');
@@ -109,7 +109,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('task_type');
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('course_id')->on('schedules')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             ;
             $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->foreign('teacher_id')->references('id')->on('users');

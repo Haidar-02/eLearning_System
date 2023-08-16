@@ -20,8 +20,8 @@ class CourseEnrollmentFactory extends Factory
     public function definition(): array
     {
         do {
-            $course_id = \App\Models\Course::factory()->create()->id;
-            $student_id = \App\Models\User::factory()->create()->id;
+            $course_id = Course::factory()->create()->id;
+            $student_id = User::factory()->create()->id;
         } while (CourseEnrollment::where('course_id', $course_id)->where('student_id', $student_id)->exists());
 
         return [
