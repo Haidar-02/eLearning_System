@@ -35,6 +35,7 @@ const AdminDashBoard = () => {
     assignments: false,
     messages: false,
   });
+  const navigate=useNavigate();
 
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });

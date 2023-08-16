@@ -15,6 +15,7 @@ import MessageBox from '../../Components/Messaging/MessageBox';
 import StudentProgress from '../../Components/Student/StudentProgress';
 import Interactive from '../../Components/Student/Interactive';
 import { logOut } from '../../helpers/auth.helpers';
+import { useNavigate } from 'react-router-dom';
 const falseState = {
   grades: false,
   classes: false,
@@ -30,7 +31,7 @@ const StudentDashBoard = () => {
     classes: true,
     messages: false,
   });
-
+  const navigate=useNavigate();
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
   };

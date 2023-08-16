@@ -27,6 +27,8 @@ const falseState = {
 };
 
 const ParentDashBoard = () => {
+  const navigate=useNavigate();
+
   const [state, setState] = useState({
     dashboard: true,
     grades: false,
