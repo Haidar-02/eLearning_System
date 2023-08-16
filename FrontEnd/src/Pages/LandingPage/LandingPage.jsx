@@ -15,7 +15,7 @@ const LandingPage = () => {
     <main className='flex flex-col h-full '>
       <Navbar setShow={setShow} />
       {show && <SignInForm setShow={setShow} />}
-      <div className="hero monster flex justify-center items-center grow">
+      <div className="hero monster flex justify-center items-center grow h-[500px]">
         <div className="left flex justify-center items-center">
           <div className="hero-text flex flex-col grow gap-2">
             <div className="">E-COURSE-PLATFORM</div>
