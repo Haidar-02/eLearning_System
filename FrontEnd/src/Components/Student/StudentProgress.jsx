@@ -30,14 +30,14 @@ const StudentProgress = () => {
         <div className=" rounded-2xl p-3 grow">
           <div className="title    text-base font-bold border-b">Tasks</div>
           {tasks &&
-            tasks.map((e) => {
+            tasks.map((e,index) => {
               const {
                 task: { title },
                 grade,
                 submission_date,
               } = e;
               return (
-                <div className="task-container border-t py-2 ">
+                <div className="task-container border-t py-2 " key={index}>
                   <div className="title font-semibold text-sm ">
                     <u> Title:</u> {title}
                   </div>
