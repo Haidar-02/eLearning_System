@@ -65,7 +65,7 @@ const AdminUserManager = () => {
 
     <div className='flex flex-col items-center grow' onClick={handleAddUserClick}>
 
-      <div className='font-bold text-lg '> {show && <div><CreateUser setShow={setShow} setUsers={setUsers}  /></div>}
+      <div className='font-bold text-lg '> {show && <div><CreateUser setShow={setShow} setState={setUsers}  /></div>}
       Add New User</div>
 
       <div className='flex flex-row justify-between w-[100%]' >
