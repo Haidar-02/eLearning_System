@@ -10,7 +10,6 @@ import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 import TeacherCourseManager from "../../Components/Teacher/TeacherCourseManager";
 import MessageBox from "../../Components/Messaging/MessageBox";
 
-
 const falseState = {
   dashboard: false,
   grades: false,
