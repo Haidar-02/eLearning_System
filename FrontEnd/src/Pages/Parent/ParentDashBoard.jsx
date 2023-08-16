@@ -17,6 +17,7 @@ import ChildTasksGrades from "../../Components/Parent/ChildTasksGrades";
 import ChildAttendances from "../../Components/Parent/ChildAttendances";
 import { logOut } from "../../helpers/auth.helpers";
 import ChildFeedbacks from "../../Components/Parent/ChildFeedbacks";
+import { useNavigate } from "react-router-dom";
 
 const falseState = {
   dashboard: false,
@@ -27,7 +28,6 @@ const falseState = {
 };
 
 const ParentDashBoard = () => {
-  const navigate=useNavigate();
 
   const [state, setState] = useState({
     dashboard: true,
@@ -39,6 +39,8 @@ const ParentDashBoard = () => {
     teachers: false,
     feedbacks: false,
   });
+  const navigate=useNavigate();
+
   const [children, setChildren] = useState([]);
   const [selectedChildId, setSelectedChildId] = useState(null);
 
