@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import gradesIcon from '../../assets/icons/ChartSquareBarOutline.svg';
 import dashIcon from '../../assets/icons/dashboard.svg';
@@ -17,17 +17,15 @@ const falseState = {
   dashboard: false,
   grades: false,
   classes: false,
-  assignments: false,
+
   messages: false,
   interactive: false,
 };
 
-const AdminDashBoard = () => {
+const StudentDashBoard = () => {
   const [state, setState] = useState({
-    dashboard: true,
     grades: false,
-    classes: false,
-    assignments: false,
+    classes: true,
     messages: false,
   });
 
@@ -53,10 +51,7 @@ const AdminDashBoard = () => {
               iconStyle="w-[24px] "
               textStyle="text-[18px] color-cyan-dark"
               text="Dashboard"
-              className="font-semibold text-lg"
-              onClick={() => {
-                togglePage('dashboard');
-              }}
+              className="font-semibold text-lg cursor-default "
             />
           </div>
           <DashBoardButton
@@ -73,14 +68,6 @@ const AdminDashBoard = () => {
             }}
             icon={gradesIcon}
             text="Grades"
-          />
-
-          <DashBoardButton
-            onClick={() => {
-              togglePage('assignments');
-            }}
-            icon={clipBoardIcon}
-            text="Assignments"
           />
 
           <DashBoardButton
@@ -107,7 +94,6 @@ const AdminDashBoard = () => {
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
         {classes && <StudentCourseManager className="p-20" />}
         {grades && <StudentProgress />}
-        {assignments && <span className="h-[500px] p-10">Assignments</span>}
         {messages && <MessageBox user_type={2} />}
         {interactive && <span className="h-[500px] p-10">Interactive</span>}
       </div>
@@ -115,4 +101,4 @@ const AdminDashBoard = () => {
   );
 };
 
-export default AdminDashBoard;
+export default StudentDashBoard;
