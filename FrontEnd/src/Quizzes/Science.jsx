@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '../Components/Common/Button';
 
 const ScienceQuiz = () => {
   const scienceQuestions = [
@@ -44,6 +45,10 @@ const ScienceQuiz = () => {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowScore(true);
+      setTimeout(() => {
+        setCurrentQuestion(0);
+        setShowScore(false);
+      }, 3000);
     }
   };
 
@@ -54,8 +59,8 @@ const ScienceQuiz = () => {
           You scored {score} out of {scienceQuestions.length}
         </div>
       ) : (
-        <div>
-          <div className="question-section">
+        <div className="flex flex-col gap-3">
+          <div className="question-section  flex flex-col gap-3">
             <div className="question-count">
               Question {currentQuestion + 1}/{scienceQuestions.length}
             </div>
@@ -63,11 +68,14 @@ const ScienceQuiz = () => {
               {scienceQuestions[currentQuestion].question}
             </div>
           </div>
-          <div className="answer-section">
+          <div className="answer-section flex gap-4">
             {scienceQuestions[currentQuestion].options.map((option, index) => (
-              <button key={index} onClick={() => handleAnswerClick(option)}>
-                {option}
-              </button>
+              <Button
+                text={option}
+                key={index}
+                onClick={() => handleAnswerClick(option)}
+                className={'text-white'}
+              />
             ))}
           </div>
         </div>
