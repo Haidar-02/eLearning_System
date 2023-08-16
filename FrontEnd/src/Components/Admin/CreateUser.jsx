@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CustomInput from '../Inputs/CustomInput';
 import Modal from '../Common/Modal';
 import Button from '../Common/Button';
+import { createUser } from '../../helpers/admin.helpers';
 
 const initialState = {
     name :"",
@@ -9,20 +10,20 @@ const initialState = {
     password:"",
     user_type :""
 };
-setShow(false);
 
 const CreateUser = ({ setShow, setUsers }) => {
 
   const [state, setState] = useState(initialState);
   const [error, setError] = useState();
-  console.log(state);
+//   console.log(state);
 
   function textInputHandler(e) {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
   }
+    console.log(state);
   async function handleSave() {
-    const { data, errorMessages, message } = await addUser(state);
+    const { data, errorMessages, message } = await createUser(state);
     if (errorMessages) {
       setError(errorMessages[0]);
       return;
@@ -41,11 +42,12 @@ const CreateUser = ({ setShow, setUsers }) => {
   }
 
   const { name, email, password, user_type } = state;
-  console.log(name);
+//   console.log(name);
+
   return (
     <Modal
       setShow={setShow}
-      className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+      className=" dark:bg-gray-700 flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
       <CustomInput
         label="Name"
@@ -85,6 +87,7 @@ const CreateUser = ({ setShow, setUsers }) => {
           text="cancel"
           onClick={() => {
             setShow(false);
+            console.log("hello")
           }}
           className="text-[16px] bg-transparent text-cyan-600  p-3 self-end "
         />

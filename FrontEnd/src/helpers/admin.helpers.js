@@ -109,4 +109,50 @@ async function deleteCourse(id) {
     console.log(error);
   }
 }
-export {getAllUsers, editCourse, deleteCourse, addCourse };
+
+  async function createUser({
+
+  name,
+  email,
+  password,
+  user_type,
+}) {
+  try {
+    const res = await axios.post(
+      `${baseUrl}register`,
+      {
+        name,
+        email,
+        password,
+        user_type 
+           },
+      auth()
+    );
+    console.log(res);
+    if (res.status === 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+  };
+
+
+export {getAllUsers, editCourse, deleteCourse, addCourse,createUser};

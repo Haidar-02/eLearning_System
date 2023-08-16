@@ -114,8 +114,7 @@ Route::group(["middleware" => "auth:api"], function () {
 
         });
 
-        Route::controller(AuthController::class)->group(function () {
-        });
+
     });
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
@@ -124,7 +123,6 @@ Route::group(["middleware" => "auth:api"], function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post("register", "register");
 
     Route::post("login", "login");
     Route::post("register", "register");

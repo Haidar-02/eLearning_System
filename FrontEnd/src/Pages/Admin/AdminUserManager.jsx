@@ -37,6 +37,10 @@ const AdminUserManager = () => {
     setTypeNum(4);
   };
 
+  const handleAddUserClick=() => {
+    setShow(false);
+  };
+
   const handleDeleteUser = async (userId) => {
     try {
 
@@ -57,12 +61,15 @@ const AdminUserManager = () => {
     setUsers(updatedUsers);
   };
   console.log(users)
-  
   return (
-    <div className='flex flex-col items-center grow' >
-      <CreateUser/>
+
+    <div className='flex flex-col items-center grow' onClick={handleAddUserClick}>
+
+      <div className='font-bold text-lg '> {show && <div><CreateUser setShow={setShow} setUsers={setUsers}  /></div>}
+      Add New User</div>
+
       <div className='flex flex-row justify-between w-[100%]' >
-        <div className="w-24 dark" onClick={handleTeacherClick}>
+        <div className="w-24" onClick={handleTeacherClick}>
           <img className="" src={teacherIcon} alt="teacherIcon" />
         </div>
         <div className="w-24" onClick={handleParentClick}>
