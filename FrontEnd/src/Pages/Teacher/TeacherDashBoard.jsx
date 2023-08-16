@@ -13,19 +13,15 @@ import { logOut } from "../../helpers/auth.helpers";
 import { useNavigate } from "react-router-dom";
 
 const falseState = {
-  dashboard: false,
   grades: false,
   classes: false,
-  assignments: false,
   messages: false,
 };
 
 const TeacherDashBoard = () => {
   const [state, setState] = useState({
-    dashboard: true,
-    grades: false,
+    grades: true,
     classes: false,
-    assignments: false,
     messages: false,
   });
   const navigate = useNavigate();
@@ -34,7 +30,7 @@ const TeacherDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { dashboard, grades, classes, assignments, messages } = state;
+  const {  classes, messages } = state;
 
   return (
     <div className="dashBoardWrapper flex h-full">
@@ -45,25 +41,6 @@ const TeacherDashBoard = () => {
           </span>
         </div>
         <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
-          <div className="button-wrapper bg-cyan-light">
-            <DashBoardButton
-              icon={dashIcon}
-              iconStyle="w-[24px] "
-              textStyle="text-[18px] color-cyan-dark"
-              text="Dashboard"
-              className="font-semibold text-lg"
-              onClick={() => {
-                togglePage("dashboard");
-              }}
-            />
-          </div>
-          {/* <DashBoardButton
-            onClick={() => {
-              togglePage('grades');
-            }}
-            icon={gradesIcon}
-            text="Users"
-          /> */}
           <DashBoardButton
             onClick={async () => {
               togglePage("classes");
@@ -95,9 +72,6 @@ const TeacherDashBoard = () => {
       </SideBar>
 
       <div className="mainContent flex flex-col p-14 h-fit flex-grow ">
-        {/* PAGES GO HERE */}
-        {dashboard && <span className="h-[500px] p-10">Analytics</span>}
-        {/* {grades && <span className="h-[500px] p-10">Manage Users</span>} */}
         {classes && <TeacherCourseManager />}
         {messages && <MessageBox user_type={4}/>}
       </div>
