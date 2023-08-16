@@ -16,32 +16,14 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-const getStatusStyle = (status) => {
-  if (status === 1) {
-    return {
-      backgroundColor: "red",
-      color: "white",
-    };
-  } else if (status === 2) {
-    return {
-      backgroundColor: "gray",
-      color: "white",
-    };
-  } else if (status === 3) {
-    return {
-      backgroundColor: "green",
-      color: "white",
-    };
-  }
-};
-
-const ChildAttendances = ({ childId }) => {
+const ChildAttendances = ({ child_id }) => {
   const [attendances, setAttendances] = useState([]);
+  console.log(child_id);
 
   useEffect(() => {
     const fetchChildAttendances = async () => {
       try {
-        const response = await getChildAttendance(childId);
+        const response = await getChildAttendance(child_id);
         if (response && response.status === 200) {
           setAttendances(response.data);
         }
@@ -51,48 +33,54 @@ const ChildAttendances = ({ childId }) => {
     };
 
     fetchChildAttendances();
-  }, [childId]);
+  }, [child_id]);
 
   console.log(attendances);
   return (
-    <div className="m-5">
+    <div className="m-5 cursor-default w-96">
       <div>
         <h2 className="font-black text-lg">Child Attendances</h2>
         <div className="flex mt-2 gap-2 border-t-2 pt-3 cursor-default">
-          <div
-            style={getStatusStyle(3)}
-            className="bg-green-500 px-3 py-1 rounded-lg text-white"
-          >
+          <div className="bg-green-600 px-3 py-1 rounded-lg text-white">
             Present
           </div>
-          <div
-            style={getStatusStyle(2)}
-            className="bg-gray-600 px-3 py-1 rounded-lg text-white"
-          >
+          <div className="bg-gray-600 px-3 py-1 rounded-lg text-white">
             Late
           </div>
-          <div
-            style={getStatusStyle(1)}
-            className="bg-red-600 px-3 py-1 rounded-lg text-white"
-          >
+          <div className="bg-red-500 px-3 py-1 rounded-lg text-white">
             Absent
           </div>
         </div>
-        <div className="mt-4">
+        <div className="mt-7 w-full">
           {attendances.map((attendance) => (
             <div
               key={attendance.id}
-              className="border rounded-md p-3 mb-2 bg-white shadow-md"
+              className={`border rounded-md p-3 mb-3 bg-white shadow-md hover:scale-105 transition-all`}
             >
               <div>
                 <strong>Date:</strong> {formatDate(attendance.date)}
               </div>
-              <div>
-                <strong>Status:</strong> {attendance.attendance_status}
+              <div className="mt-2">
+                <strong>Status:</strong>{" "}
+                {attendance.attendance_status === 1 && (
+                  <span className="px-2 py-1 rounded-full bg-red-600 text-white">
+                    Abscent
+                  </span>
+                )}
+                {attendance.attendance_status === 2 && (
+                  <span className="px-2 py-1 rounded-full bg-gray-600 text-white">
+                    Late
+                  </span>
+                )}
+                {attendance.attendance_status === 3 && (
+                  <span className="px-2 py-1 rounded-full bg-green-600 text-white">
+                    Present
+                  </span>
+                )}
               </div>
             </div>
           ))}
-          {attendances.length === 0 && <p>No attendances available.</p>}
+          {attendances.length === 0 && <p>No attendances available to see.</p>}
         </div>
       </div>
     </div>

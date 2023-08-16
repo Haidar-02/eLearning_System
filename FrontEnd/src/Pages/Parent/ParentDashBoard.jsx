@@ -16,6 +16,7 @@ import MessageBox from "../../Components/Messaging/MessageBox";
 import ChildTasksGrades from "../../Components/Parent/ChildTasksGrades";
 import ChildAttendances from "../../Components/Parent/ChildAttendances";
 import { logOut } from "../../helpers/auth.helpers";
+import ChildFeedbacks from "../../Components/Parent/ChildFeedbacks";
 
 const falseState = {
   dashboard: false,
@@ -34,14 +35,18 @@ const ParentDashBoard = () => {
     attendances: false,
     messages: false,
     teachers: false,
-    conferences: false,
+    feedbacks: false,
   });
   const [children, setChildren] = useState([]);
+  const [selectedChildId, setSelectedChildId] = useState(null);
 
   useEffect(() => {
     const fetchChildren = async () => {
       const res = await getChildren();
       setChildren(res.children);
+      if (res.children.length > 0) {
+        setSelectedChildId(res.children[0].id);
+      }
     };
 
     fetchChildren();
@@ -50,7 +55,7 @@ const ParentDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { classes, assignments, messages, conferences, attendances } = state;
+  const { classes, assignments, messages, attendances, feedbacks } = state;
 
   return (
     <div className="dashBoardWrapper flex h-full">
@@ -83,17 +88,17 @@ const ParentDashBoard = () => {
             text="Attendances"
           />
           <DashBoardButton
+            onClick={() => {
+              togglePage("feedbacks");
+            }}
+            icon={clipBoardIcon}
+            text="Feedbacks"
+          />
+          <DashBoardButton
             icon={messageIcon}
             text="Messages"
             onClick={() => {
               togglePage("messages");
-            }}
-          />
-          <DashBoardButton
-            icon={messageIcon}
-            text="Conferences"
-            onClick={() => {
-              togglePage("conferences");
             }}
           />
           <DashBoardButton
@@ -109,21 +114,13 @@ const ParentDashBoard = () => {
         </div>
       </SideBar>
 
-      <div className="mainContent flex px-2 py-10 h-fit justify-between ">
+      <div className="mainContent flex px-2 py-10 h-fit justify-center items-center mx-5">
         {/* PAGES GO HERE */}
-        {classes && <ChildCourses />}
-        {attendances && <ChildAttendances />}
-        {assignments && (
-          <span className="h-[500px] p-10">
-            <ChildTasksGrades />
-          </span>
-        )}
-        {messages && (
-          <span className="h-[500px] p-10">
-            <MessageBox />
-          </span>
-        )}
-        {conferences && <span className="h-[500px] p-10">Conferences</span>}
+        {classes && <ChildCourses child_id={selectedChildId} />}
+        {feedbacks && <ChildFeedbacks child_id={selectedChildId} />}
+        {attendances && <ChildAttendances child_id={selectedChildId} />}
+        {assignments && <ChildTasksGrades child_id={selectedChildId} />}
+        {messages && <MessageBox />}
       </div>
 
       <SideBar className="right-0 p-3 bg-gray-200">
@@ -134,9 +131,17 @@ const ParentDashBoard = () => {
               key={index}
               icon={dashIcon}
               text={child.name}
-              className="border-2 rounded-md hover:bg-gray-800 hover:text-white m-2 transition-all"
+              className={`border-2 rounded-md m-2 transition-all ${
+                selectedChildId === child.id
+                  ? "bg-green-500 text-white"
+                  : " hover:text-white"
+              }`}
+              onClick={() => {
+                setSelectedChildId(child.id);
+                togglePage(classes);
+              }}
             />
-          ))}{" "}
+          ))}
       </SideBar>
     </div>
   );
