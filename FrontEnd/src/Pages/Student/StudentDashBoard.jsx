@@ -102,7 +102,6 @@ const StudentDashBoard = () => {
       </SideBar>
 
       <div className="mainContent flex flex-col grow h-full   px-14 py-10  ">
-        {/* PAGES GO HERE */}
         {classes && <StudentCourseManager className="p-20" />}
         {grades && <StudentProgress />}
         {messages && <MessageBox user_type={2} />}
