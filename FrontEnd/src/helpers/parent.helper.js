@@ -48,7 +48,7 @@ export const getChildAttendance = async (child_id) => {
   }
 };
 
-export const getChildFeedback = async (child_id) => {
+export const getChildFeedbacks = async (child_id) => {
   try {
     const response = await axios.get(
       `${baseUrl}/getChildFeedback/${child_id}`,
@@ -131,7 +131,7 @@ export default {
   getChildCourses,
   getChildTeachers,
   getChildAttendance,
-  getChildFeedback,
+  getChildFeedbacks,
   // getChildGrades,
   // getChildTasks,
   getParentConferences,

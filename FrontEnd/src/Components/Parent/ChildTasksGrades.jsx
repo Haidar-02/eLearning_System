@@ -34,7 +34,7 @@ const ChildTasksGrades = () => {
 
   return (
     <div className="flex-col w-96 pt-2">
-      <h2 className="font-black text-xl">Tasks</h2>
+      <h2 className="font-black text-xl">Child Tasks and Grading</h2>
       <div className="flex mt-2 gap-2 border-t-2 pt-3 cursor-default">
         <div className="bg-green-500 px-3 py-1 rounded-lg text-white">Done</div>
         <div className="bg-gray-600 px-3 py-1 rounded-lg text-white">
