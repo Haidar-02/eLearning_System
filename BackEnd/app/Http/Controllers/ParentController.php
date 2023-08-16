@@ -27,6 +27,7 @@ class ParentController extends Controller
                 ->where('parent_relations.parent_id', $parentId)
                 ->where('users.user_type', 4)
                 ->select('users.*')
+                ->distinct()
                 ->get();
             
             return response()->json(['status' => 200, 'children' => $children]);
