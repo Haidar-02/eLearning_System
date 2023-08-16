@@ -18,6 +18,7 @@ import Toggle from '../../Components/toggle';
 import PieChart from '../../Components/DashBoard/PieChart';
 import CourseProgressbar from '../../Components/DashBoard/CircularProgressBar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useNavigate } from 'react-router-dom';
 
 const falseState = {
   dashboard: false,
