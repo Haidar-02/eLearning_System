@@ -195,11 +195,16 @@ class AdminController extends Controller
 
     }
 
-    function getSupportMessage()
+    public function getCourseEnrollmentsRate()
     {
-
+        try {
+            $result = CourseEnrollment::join('courses', 'course_enrollments.course_id', '=', 'courses.id')
+                ->selectRaw('COUNT(course_enrollments.id) as enrollment_count, SUM(courses.max_capacity) as max_capacity_sum')
+                ->first();
+    
+            return response()->json(['status' => 200, 'data' => $result]);
+        } catch (Error $error) {}
     }
-
 
 
     public function createBackup()

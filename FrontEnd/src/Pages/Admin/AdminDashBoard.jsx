@@ -38,9 +38,23 @@ const AdminDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
+    const handleProgressBar = async () => {
+      try {
+        const res = await axios.get(
+          `http://127.0.0.1:8000/api/admin/getCourseEnrollmentsRate`,
+          auth()
+        );
+      }catch (e) {
+        console.log(e);
+      }
+    }
+    handleProgressBar();
+
+
+
   const { dashboard, users, courses, assignments } = state;
   
-  const completionPercentage = 66;
+  const completionPercentage =66;
 
   return (
     <div className="  dashBoardWrapper flex  h-full">
@@ -93,7 +107,7 @@ const AdminDashBoard = () => {
          </span>
         </div>
         <div className='w-32'>
-          <CourseProgressbar targetPercentage={completionPercentage} />
+          <CourseProgressbar  targetPercentage={completionPercentage} />
         </div>
       </div>}
         {users && <div className="h-[500px] p-10"><AdminUserManager/></div>}

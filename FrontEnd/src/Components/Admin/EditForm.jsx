@@ -8,7 +8,6 @@ const EditForm = ({ user, setState,onClose, onUserUpdated }) => {
     const {name,email,user_type} = user;
   const [editedUser, setEditedUser] = React.useState({...user});
 
-// console.log(user);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +29,7 @@ console.log(editedUser);
         email: editedUser.email,
         user_type: editedUser.user_type
       };
-      
+
       onUserUpdated(editedUser.id, updatedProperties);
       onClose();
     } catch (error) {

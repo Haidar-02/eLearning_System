@@ -15,7 +15,7 @@ const CreateUser = ({ setShow, setUsers }) => {
 
   const [state, setState] = useState(initialState);
   const [error, setError] = useState();
-//   console.log(state);
+  console.log(setShow);
 
   function textInputHandler(e) {
     const { name, value } = e.target;
@@ -36,13 +36,11 @@ const CreateUser = ({ setShow, setUsers }) => {
       setUsers((prev) => {
         return [data.user, ...prev];
       });
-
       setShow(false);
     }
   }
 
   const { name, email, password, user_type } = state;
-//   console.log(name);
 
   return (
     <Modal

@@ -60,13 +60,14 @@ const AdminUserManager = () => {
     );
     setUsers(updatedUsers);
   };
-  console.log(users)
+
   return (
 
-    <div className='flex flex-col items-center grow' onClick={handleAddUserClick}>
-
-      <div className='font-bold text-lg '> {show && <div><CreateUser setShow={setShow} setState={setUsers}  /></div>}
-      Add New User</div>
+    <div className='flex flex-col items-center grow'>
+      <div onClick={handleAddUserClick}> Add New User </div>
+      <div className='font-bold text-lg ' > {show && <div><CreateUser setShow={setShow} setState={setUsers}  /></div>}
+      </div>
+ 
 
       <div className='flex flex-row justify-between w-[100%]' >
         <div className="w-24" onClick={handleTeacherClick}>

@@ -4,6 +4,8 @@ import { CircularProgressbar as ReactCircularProgressbar } from 'react-circular-
 function CourseProgressbar({ targetPercentage }) {
   const [percentage, setPercentage] = useState(0);
 
+
+  
   useEffect(() => {
     if (percentage < targetPercentage) {
       const timer = setInterval(() => {
@@ -29,7 +31,7 @@ function CourseProgressbar({ targetPercentage }) {
               stroke: '#d6d6d6',
             },
             text: {
-              fill: '#333',
+              fill: '#2b788b',
               fontSize: '14px',
             },
           }}

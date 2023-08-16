@@ -109,9 +109,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::delete('/deleteCourse/{course}', "deleteCourse");
             Route::get('/checkEnrollmentLimit/{course}', "checkEnrollmentLimit");
             Route::get('/createBackup', 'createBackup');
-            
-            
-
+            Route::get('/getCourseEnrollmentsRate', 'getCourseEnrollmentsRate');
         });
 
 
