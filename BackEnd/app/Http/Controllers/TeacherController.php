@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\BoardMessage;
 use App\Models\Course;
 use Illuminate\Support\Str;
@@ -257,26 +258,62 @@ class TeacherController extends Controller
 
 
 
-    // public function getSessionAttendance($session_id){
+    public function getSessionAttendance($session_id,$student_id){
 
-    //     try{
-    //         $session=Session::where([['id','=',$session_id]])->first();
-    //         $attendances=$session->attendances;
-    //         return response()->json([
-    //             'status' => '200',
-    //             'attendances'=>$attendances
-    //         ]);
-    //     } catch(Exception $e){
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => $e->getMessage()
-    //         ]);
-    //     } 
+        try{
+            $attendance=Attendance::where([['session_id','=',$session_id],['student_id','=',$student_id]])->first();
+            return response()->json([
+                'status' => '200',
+                'attendance'=>$attendance
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
 
-    // }
-    // public function addSessionAttendance(Request $request){
+    }
+
+    public function addSessionAttendance(Request $request, $attendance_id = null)
+    {
+
+        try{
+                    if($attendance_id!==null){
+                        $affectedRows=Attendance::where([["id",'=',$attendance_id]])->update(['attendance_status' => $request->attendance_status]);
+                        
+                            if ($affectedRows > 0) {
+                                $updated_attendance = Attendance::find($attendance_id); 
+                                return response()->json([
+                                    'status' => '200',
+                                    'feedback' => $updated_attendance
+                                ]);
+                            } else {
+                                return response()->json([
+                                    'status' => 'error',
+                                    'message' => 'attendance not found or not updated'
+                                ]);
+                            }
+                        
+                    }else{
+            $attendance=new Attendance;
+            $attendance->student_id=$request->student_id;
+            $attendance->session_id=$request->session_id;
+            $attendance->attendance_status=$request->attendance_status;
+            $attendance->save();
+            return response()->json([
+                'status' => '200',
+                'attendance'=>$attendance
+            ]);
+        }
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        } 
         
-    // }
+    }
 
     // public function addCourseProject(Request $request){
     //     try{
@@ -332,11 +369,11 @@ class TeacherController extends Controller
                 $member->project_id = $group->id;
                 $member->save();
             }
-            $group=$group->with('members')->first();
+            $groupWithMembers = GroupProject::with('membersInfo')->find($group->id);
 
             return response()->json([
                 'status' => '200',
-                'group' => $group
+                'group' => $groupWithMembers
             ]);
         } catch (Throwable $e) {
             return response()->json([
@@ -381,9 +418,9 @@ class TeacherController extends Controller
 
     public function modifyProjectGrade(Request $request){
         try{
-            $project_id=$request->project_id;
+            $group_id=$request->group_id;
             $grade=$request->grade;
-            GroupProject::where([['id','=',$project_id]])->update(['grade' => $grade]);
+            GroupProject::where([['id','=',$group_id]])->update(['grade' => $grade]);
             return response()->json([
                 'status' => '200',
             ]);
@@ -395,19 +432,39 @@ class TeacherController extends Controller
         } 
     }
 
-    public function addFeedback(Request $request){
+    public function addFeedback(Request $request,$feedback_id = null){
 
         try{
-            $feedback=new Feedback;
-            $feedback->teacher_id=Auth::id();
-            $feedback->student_id=$request->student_id;
-            $feedback->course_id=$request->course_id;
-            $feedback->rating=$request->rating;
-            $feedback->comment=$request->comment;
-            $feedback->save();
-            return response()->json([
-                'status' => '200',
-            ]);
+            if($feedback_id!==null){
+                $affectedRows=Feedback::where([["id",'=',$feedback_id],["course_id","=",$request->course_id]])->update(['rating' => $request->rating,'comment'=>$request->comment]);
+                
+                    if ($affectedRows > 0) {
+                        $updatedFeedback = Feedback::find($feedback_id); 
+                        return response()->json([
+                            'status' => '200',
+                            'feedback' => $updatedFeedback
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Feedback not found or not updated'
+                        ]);
+                    }
+                
+            }else{
+                $feedback=new Feedback;
+                $feedback->teacher_id=Auth::id();
+                $feedback->student_id=$request->student_id;
+                $feedback->course_id=$request->course_id;
+                $feedback->rating=$request->rating;
+                $feedback->comment=$request->comment;
+                $feedback->save();
+                return response()->json([
+                    'status' => '200',
+                    'feedback'=>$feedback
+                ]);
+            }
+
         } catch(Exception $e){
             return response()->json([
                 'status' => 'error',

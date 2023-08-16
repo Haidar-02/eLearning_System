@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Course;
+use App\Models\CourseEnrollment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,10 +19,16 @@ class CourseEnrollmentFactory extends Factory
      */
     public function definition(): array
     {
+        do {
+            $course_id = Course::factory()->create()->id;
+            $student_id = User::factory()->create()->id;
+        } while (CourseEnrollment::where('course_id', $course_id)->where('student_id', $student_id)->exists());
+
         return [
-            "student_id" => User::all()->where("user_type", 4)->random(),
-            "course_id" => Course::all()->random(),
-            "grade" => null,
+            'course_id' => $course_id,
+            'student_id' => $student_id,
+            'grade' => null
         ];
     }
+  
 }

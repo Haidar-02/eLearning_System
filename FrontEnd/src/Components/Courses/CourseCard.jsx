@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import CourseModal from './CourseModal';
-import Button from '../Common/Button';
+import React, { useState } from "react";
+import CourseModal from "./CourseModal";
+import Button from "../Common/Button";
 
 const CourseCard = ({ course, onClick, setCourses }) => {
   const [show, setShow] = useState(false);

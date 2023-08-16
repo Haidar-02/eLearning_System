@@ -3,6 +3,7 @@ import Modal from '../Common/Modal';
 import Button from '../Common/Button';
 import { enroll } from '../../helpers/student.helpers';
 import CourseDetails from '../Courses/CourseDetails';
+import { getCourseSchedules } from '../../helpers/common.helpers';
 
 const StudenCourseModal = ({
   course,
@@ -18,7 +19,7 @@ const StudenCourseModal = ({
   return (
     <Modal
       setShow={setShow}
-      className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+      className=" flex flex-col bg-white p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
     >
       <CourseDetails course={course} className="flex flex-col gap-10" />
 

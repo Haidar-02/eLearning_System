@@ -100,14 +100,14 @@ class StudentController extends Controller
     {
 
         try {
-            $task=Task::find($request->task_id);
+            $task = Task::find($request->task_id);
             $dueDate = Carbon::parse($task->due_date);
             $submission = new TaskSubmission;
 
             if ($dueDate->isPast()) {
-                $submission->status="Late";
+                $submission->status = "Late";
             } else {
-               $submission->status="Submitted";
+                $submission->status = "Submitted";
             }
             $submission->task_id = $request->task_id;
             $submission->student_id = Auth::id();
@@ -140,6 +140,7 @@ class StudentController extends Controller
             $submission->save();
             return response()->json([
                 'status' => '200',
+                'submission' => $submission
             ]);
         } catch (Exception $e) {
             return response()->json([
@@ -171,6 +172,40 @@ class StudentController extends Controller
         }
 
 
+    }
+    public function getStudentProgressDetails($course_id)
+    {
+        $student_id = Auth::id();
+        try {
+            if ($course_id !== null) {
+                $taskIds = Task::where('course_id', $course_id)->pluck('id');
+
+                $submitted_tasks = TaskSubmission::with("task")->whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)->get();
+
+
+                $graded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)
+                    ->where('grade', '!=', null)->get();
+
+                $ungraded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)
+                    ->whereNull('grade')->get();
+                return response()->json([
+                    'status' => '200',
+                    'submitted_tasks' => $submitted_tasks,
+                    'graded_tasks' => $graded_tasks,
+                    'ungraded_tasks' => $ungraded_tasks,
+                    'total_tasks' => Task::where('course_id', $course_id)->count(),
+                ]);
+            }
+
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
     public function getTeacherMeet($teacher_id)

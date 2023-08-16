@@ -168,6 +168,41 @@ class CommonController extends Controller
         }
     }
 
+    public function getStudentProgress($student_id, $course_id = null)
+    {
+        try {   
+            if ($course_id !== null) {
+                $taskIds = Task::where('course_id', $course_id)->pluck('id');
+        
+                $submitted_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)
+                    ->count();
+        
+                $succeeded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)
+                    ->where('grade', '>', 60)
+                    ->count();
+        
+                $ungraded_tasks = TaskSubmission::whereIn('task_id', $taskIds)
+                    ->where('student_id', $student_id)
+                    ->whereNull('grade')
+                    ->count();
+                return response()->json([
+                    'status' => '200',
+                    'submitted_tasks' => $submitted_tasks,
+                    'succeeded_tasks' => $succeeded_tasks,
+                    'ungraded_tasks' => $ungraded_tasks
+                ]);
+            }
+        
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+    
     public function getStudentFeedback($course_id, $student_id)
     {
         try {

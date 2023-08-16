@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import CourseCard from "./TeacherCourseCard";
+import TeacherCourseCard from "./TeacherCourseCard";
 import Button from "../Common/Button";
 import { getTeacherCourses } from "../../helpers/Teacher.helpers";
 
@@ -33,7 +33,7 @@ const TeacherCourseManager = () => {
       </div>
       {courses &&
         courses.map((course, index) => (
-          <CourseCard key={index} course={course} />
+          <TeacherCourseCard key={index} course={course} />
         ))}{" "}
     </div>
   );

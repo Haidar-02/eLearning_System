@@ -13,6 +13,7 @@ use App\Http\Controllers\MailController;
 
 
 
+use App\Http\Controllers\ParentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,18 +45,18 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::delete("remove-schedule-material/{material_id}", "removeScheduleMaterial");
             Route::post("add-schedule-task", "addScheduleTask");
             Route::delete("remove-schedule-task/{task_id}", "removeScheduleTask");
-            Route::post("add-schedule-Session", "addScheduleSession");
-            Route::delete("remove-schedule-Session", "removeScheduleSession");
+            Route::post("add-schedule-session", "addScheduleSession");
+            Route::delete("remove-schedule-session/{session_id}", "removeScheduleSession");
             //leave till the end
-            // Route::get("get-session-attendance","getSessionAttendance");
-            // Route::post("add-session-attendance","addSessionAttendance");
+            Route::get("get-session-attendance/{session_id}/{student_id}","getSessionAttendance");
+            Route::put("add-session-attendance/{attendance_id?}","addSessionAttendance");
             // Route::post("add-course-project", "addCourseProject");
 
             Route::post("add-project-group-members", "addProjectGroupMembers");
             Route::delete("remove-group/{group_id}", "removeGroup");
             Route::put("modify-task-grade", "modifyTaskGrade");
             Route::put("modify-project-grade", "modifyProjectGrade");
-            Route::post("add-feedback", "addFeedback");
+            Route::put("add-feedback/{feedback_id?}", "addFeedback");
             Route::post("add-notification", "addNotification");
 
         });
@@ -83,6 +84,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::get("get-course-teacher/{course_id}", 'getCourseTeacher');
             Route::get("searchUser/{user_type}/{search}", 'searchUser');
             Route::get("get/{user_type}/{search}", 'searchUser');
+            Route::get("get-student-progress/{student_id}/{course_id?}", "getStudentProgress");
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
@@ -94,6 +96,7 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::post("add-submission", 'addTaskSubmission');
             Route::post("add-teacher_meet", "addTeacherMeet");
             Route::get("get-teacher-meet/{teacher_id}", "getTeacherMeet");
+            Route::get("getStudentProgressDetails/{course_id}", "getStudentProgressDetails");
             // Route::get("unauthorized", [UnauthorizedController::class, "unauthorized"]);
         });
     });
@@ -116,12 +119,23 @@ Route::group(["middleware" => "auth:api"], function () {
     });
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
-
+        Route::controller(ParentController::class)->group(function () {
+            Route::get("getChildren", "getChildren");
+            Route::get("getChildCourses/{child_id}", "getChildCourses");
+            Route::get("getChildTeachers/{child_id}", "getChildTeachers");
+            Route::get("getChildAttendance/{child_id}", "getChildAttendance");
+            Route::get("getChildFeedback/{child_id}", "getStudentFeedback");
+            Route::get("getChildTasks/{child_id}", "getChildTasks");
+            Route::get("getChildGrades/{child_id}", "getChildGrades");
+            Route::get("getChildTasksAndGrades/{child_id}", "getChildTasksAndGrades");
+            Route::get("getParentConferences", "getParentConferences");
+            Route::get("getTeacherConferenceSlots/{teacher_id}", "getAvailableTeacherConferences");
+            Route::post("scheduleConferenceWithTeacher/{teacher_schedule_id}", "scheduleConferenceWithTeacher");
+        });
     });
 });
 
 Route::controller(AuthController::class)->group(function () {
-
     Route::post("login", "login");
     Route::post("register", "register");
 

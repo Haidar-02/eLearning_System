@@ -61,6 +61,7 @@ const StudentCourseManager = ({ className }) => {
               course={course}
               setEnrolledCourses={setEnrolledCourses}
               enrolledIn={enrolledIn}
+              details
             />
           ))}
     </div>

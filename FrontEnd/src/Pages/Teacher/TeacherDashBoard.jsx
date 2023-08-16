@@ -8,7 +8,7 @@ import logoutIcon from "../../assets/icons/right-from-bracket-solid-white.svg";
 import SideBar from "../../Components/DashBoard/SideBar";
 import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 import TeacherCourseManager from "../../Components/Teacher/TeacherCourseManager";
-
+import MessageBox from "../../Components/Messaging/MessageBox";
 
 const falseState = {
   dashboard: false,
@@ -38,7 +38,7 @@ const TeacherDashBoard = () => {
       <SideBar className="bg-cyan-dark">
         <div className="logo  flex items-center justify-center gothic">
           <span className="text-3xl cursor-pointer p-5 py-10 text-white">
-            Kidzo
+            SE-Learning
           </span>
         </div>
         <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
@@ -91,17 +91,9 @@ const TeacherDashBoard = () => {
         {dashboard && <span className="h-[500px] p-10">Analytics</span>}
         {/* {grades && <span className="h-[500px] p-10">Manage Users</span>} */}
         {classes && <TeacherCourseManager />}
-        {messages && <MessagesList />}
+        {messages && <MessageBox user_type={4}/>}
       </div>
-      {/* 
-      <SideBar className={'right-0'}>
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar> */}
+
     </div>
   );
 };

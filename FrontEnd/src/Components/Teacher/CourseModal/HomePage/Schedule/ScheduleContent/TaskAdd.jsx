@@ -40,7 +40,7 @@ const TaskAdd = ({ setTaskAdd, setTasks,schedule_id,course_id}) => {
   return (
     <Modal
     setShow={setTaskAdd}
-    className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+    className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px] bg-cyan-medium"
     >
     <CustomInput
       label="Title"
@@ -75,7 +75,7 @@ const TaskAdd = ({ setTaskAdd, setTasks,schedule_id,course_id}) => {
         onClick={() => {
           setTaskAdd(false);
         }}
-        className="text-[16px] bg-transparent text-cyan-600  p-3 self-end "
+        className="text-[16px] bg-transparent text-white  p-3 self-end "
       />
     </div>
     </Modal>

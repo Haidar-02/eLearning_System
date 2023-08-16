@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
-import { getScheduleMaterials,getScheduleTasks } from "../../../../../helpers/common.helpers";
+import { getScheduleMaterials,getScheduleSessions,getScheduleTasks } from "../../../../../helpers/common.helpers";
 import Button from "../../../../Common/Button";
 import TaskAdd from "./ScheduleContent/TaskAdd";
 import TaskCard from "./ScheduleContent/TaskCard";
 import MaterialAdd from "./ScheduleContent/MaterialAdd";
 import MaterialCard from "./ScheduleContent/MaterialCard";
 import Submissions from "./ScheduleContent/Submissions/Submissions";
+import SessionAdd from "./ScheduleContent/SessionAdd";
+import SessionCard from "./ScheduleContent/SessionCard";
+import Attendance from "./ScheduleContent/Attendance";
 const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     const [materials,setMaterials]=useState()
     const [tasks,setTasks]=useState();
+    const [sessions,setSessions]=useState();
+
     const [showTaskAdd,setTaskAdd]=useState(false);
     const [showMaterialAdd,setMaterialAdd]=useState(false);
+    const [showSessionAdd,setSessionAdd]=useState(false);
     const [showSubmissions,setShowSubmissions]=useState({show:false,id:null});
-
-    // const [showTask,setShowTask]=useState(false);
-    // const [showMaterial,setShowMaterial]=useState(false);
+    const [showAttendance,setShowAttendance]=useState({show:false,id:null});
 
     useEffect(() => {
         const fetchMaterials = async () => {
@@ -32,7 +36,19 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
     
         fetchTasks();
       }, []);
+      useEffect(() => {
+        const fetchSessions = async () => {
+          const res = await getScheduleSessions(schedule_id);
+          setSessions(res);
+        };
+    
+        fetchSessions();
+      }, []);
     return ( 
+      <>
+      {showAttendance.show ? 
+        <Attendance course_id={course_id} session_id={showAttendance.id} setShowAttendance={setShowAttendance}/>
+      :(
       <>
       {showSubmissions.show ? 
         <Submissions task_id={showSubmissions.task_id} setShowSubmissions={setShowSubmissions}/>
@@ -41,7 +57,7 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
       <div>
       {showTaskAdd && <TaskAdd setTaskAdd={setTaskAdd} setTasks={setTasks} course_id={course_id} schedule_id={schedule_id}/> }
       {showMaterialAdd && <MaterialAdd setMaterialAdd={setMaterialAdd} setMaterials={setMaterials} course_id={course_id} schedule_id={schedule_id}/> }
-
+      {showSessionAdd && <SessionAdd setSessionAdd={setSessionAdd} setSessions={setSessions} course_id={course_id} schedule_id={schedule_id}/>}
           <div className="flex  justify-between items-center">
               <div className="page-header gothic color-cyan-dark text-2xl py-5">
                   Schedule Content
@@ -60,6 +76,11 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
                   <Button
                   onClick={() => setMaterialAdd(true)}
                   text="Add Material"
+                  className="p-0 bg-cyan text-xl text-white"
+                  />
+                  <Button
+                  onClick={() => setSessionAdd(true)}
+                  text="Add Session"
                   className="p-0 bg-cyan text-xl text-white"
                   />
               </div>
@@ -81,10 +102,20 @@ const ScheduleContent = ({schedule_id,course_id,setScheduleContent}) => {
             ))
             }
           </div>
+          <div className="sessions">
+            {
+            sessions &&
+            sessions.map((session, index) => (
+                <SessionCard key={index} session={session} setSessions={setSessions} setShowAttendance={setShowAttendance}/>
+            ))
+            }
+          </div>
         </div>
       )
       }
        </>
+      )}
+      </>
 
     );
 }

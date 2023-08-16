@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Button from "../Common/Button";
 import CourseModal from "./CourseModal";
 
-const CourseCard = ({ course }) => {
+const TeacherCourseCard = ({ course }) => {
   const [courseModel, setCourseModel] = useState(false);
 
   const {
@@ -67,4 +66,4 @@ const CourseCard = ({ course }) => {
   );
 };
 
-export default CourseCard;
+export default TeacherCourseCard;

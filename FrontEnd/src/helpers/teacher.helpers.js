@@ -134,7 +134,6 @@ async function addScheduleMaterial({
   file_name,
 }) {
   try {
-
     const res = await axios.post(
       `${remoteUrl}teacher/add-schedule-material`,
       {
@@ -328,7 +327,7 @@ async function removeScheduleSession(session_id) {
       auth()
     );
 
-    if (res.status == 200) {
+    if (res.data.status == 200) {
       const data = res.data;
       return { data };
     }
@@ -400,7 +399,7 @@ async function addCourseProject({
 
 async function addProjectGroupMembers({ course_id, selectedStudents }) {
   try {
-    let students=selectedStudents;
+    let students = selectedStudents;
 
     const res = await axios.post(
       `${remoteUrl}teacher/add-project-group-members`,
@@ -464,7 +463,6 @@ async function removeGroup(group_id) {
   }
 }
 
-
 async function modifyTaskGrade({ submission_id, grade }) {
   try {
     const res = await axios.put(
@@ -500,13 +498,56 @@ async function modifyTaskGrade({ submission_id, grade }) {
   }
 }
 
-async function modifyProjectGrade({ project_id, grade }) {
+async function modifyGroupProjectGrade(group_id, grade) {
   try {
     const res = await axios.put(
       `${remoteUrl}teacher/modify-project-grade`,
       {
-        project_id,
+        group_id,
         grade,
+      },
+      auth()
+    );
+
+    if (res.data.status == 200) {
+      return res.data;
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+
+async function addFeedback({
+  id,
+  course_id,
+  student_id,
+  rating,
+  comment,
+}) {
+  try {
+    const res = await axios.put(
+      `${remoteUrl}teacher/add-feedback/${id}`,
+      {
+        course_id,
+        student_id,
+        rating,
+        comment,
       },
       auth()
     );
@@ -535,23 +576,49 @@ async function modifyProjectGrade({ project_id, grade }) {
     return { message };
   }
 }
+async function getStudentAttendance(session_id, student_id) {
+  try {
+    const res = await axios.get(
+      `${remoteUrl}teacher/get-session-attendance/${session_id}/${student_id}`,
+      auth()
+    );
+    if (res.data.status == 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
 
-async function addFeedback({
-  course_id,
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+async function addSessionAttendance({
+  id,
   student_id,
-  feedback,
-  rating,
-  comment,
+  session_id,
+  attendance_status,
 }) {
   try {
-    const res = await axios.post(
-      `${remoteUrl}teacher/add-feedback`,
+    const res = await axios.put(
+      `${remoteUrl}teacher/add-session-attendance/${id}`,
       {
-        course_id,
+        session_id,
         student_id,
-        feedback,
-        rating,
-        comment,
+        attendance_status,
       },
       auth()
     );
@@ -632,7 +699,9 @@ export {
   addCourseProject,
   addProjectGroupMembers,
   modifyTaskGrade,
-  modifyProjectGrade,
+  modifyGroupProjectGrade,
   addFeedback,
   addNotification,
+  addSessionAttendance,
+  getStudentAttendance
 };

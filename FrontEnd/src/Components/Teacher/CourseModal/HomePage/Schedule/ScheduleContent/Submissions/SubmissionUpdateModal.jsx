@@ -42,7 +42,7 @@ const SubmissionUpdateModel = ({setShow,submission,submissions,setSubmissions}) 
     return ( 
         <Modal
         setShow={setShow}
-        className=" flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
+        className="bg-cyan-medium flex flex-col p-5 justify-center rounded-2xl gap-5 min-w-[400px]"
       >
         
   

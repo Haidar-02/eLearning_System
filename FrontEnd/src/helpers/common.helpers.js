@@ -1,5 +1,5 @@
-import axios from "axios";
-import { auth } from "./auth.helpers";
+import axios from 'axios';
+import { auth } from './auth.helpers';
 
 const remoteUrl = "http://54.165.111.250:8000/api/";
 const baseUrl = "http://127.0.0.1:8000/api/";
@@ -15,6 +15,37 @@ async function getAllCourses() {
   } catch (error) {
     console.log(error);
     return[];
+  }
+}
+// get-student-progress/10/8
+async function getStudentProgress(course_id, student_id) {
+  try {
+    const res = await axios.get(
+      `${remoteUrl}common/get-student-progress/${student_id}/${course_id}`,
+      auth()
+    );
+    if (res.status == 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
   }
 }
 async function getCourseSchedules(course_id) {
@@ -149,26 +180,42 @@ async function getStudentFeedback(course_id, student_id) {
       `${remoteUrl}common/get-student-feedback/${course_id}/${student_id}`,
       auth()
     );
-    const { data } = res;
-
-    if (res.status == 200) {
-      return data.feedback;
+    if (res.data.status == 200) {
+      const data = res.data;
+      return { data };
     }
   } catch (error) {
     console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
   }
 }
 
-async function sendMessage(message, receiver_id) {
+async function sendMessage({ message, receiver_id }) {
   try {
     const res = await axios.post(
       `${remoteUrl}common/send-message`,
-      message,
-      receiver_id,
+      {
+        message,
+        receiver_id,
+      },
       auth()
     );
     const { data } = res;
-
     if (res.status == 200) {
       return data.message;
     }
@@ -204,8 +251,7 @@ async function getCourseDiscussion(course_id) {
   } catch (error) {
     console.log(error);
   }
-
-} 
+}
 async function getMessagesById(id) {
   try {
     const res = await axios.get(
@@ -292,6 +338,7 @@ export {
   getProjectGroups,
   getStudentFeedback,
   sendMessage,
+  getStudentProgress,
   search,
   getMessages,
   getMessagesById,

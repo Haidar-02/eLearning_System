@@ -8,7 +8,7 @@ import {
 } from '../../helpers/common.helpers';
 import TextArea from '../Inputs/TextArea';
 import send from '../../assets/icons/play-black.svg';
-const MessageBox = ({ messages }) => {
+const MessageBox = ({user_type}) => {
   const [userMessage, setUserMessage] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState('');
   const [selectedMessages, setSelectedMessages] = useState();
@@ -22,7 +22,7 @@ const MessageBox = ({ messages }) => {
       <Search
         setMessages={setSelectedMessages}
         setUser={setSelectedTeacher}
-        userType={2}
+        userType={user_type}
       />
 
       <div className="messages flex flex-col gap-3 border   border-gray-300 w-[400px] h-[400px] p-4 rounded-2xl">
@@ -35,13 +35,13 @@ const MessageBox = ({ messages }) => {
             <span className="text-sm text-gray-400 italic">Chat is empty</span>
           ) : (
             selectedMessages &&
-            selectedMessages.map((message) => {
+            selectedMessages.map((message,index) => {
               const sent = message.is_sender.user_type === 2;
               return (
                 <div
                   className={`flex flex-col gap-1  p-2 rounded-md ${
                     sent ? 'bg-green-200' : 'bg-gray-100'
-                  }`}
+                  }`} key={index}
                 >
                   <div className={`flex gap-2 items-center`}>
                     <span className="text-black text-sm font-semibold">
