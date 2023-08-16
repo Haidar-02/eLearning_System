@@ -7,7 +7,7 @@ const baseUrl = "http://127.0.0.1:8000/api/";
 
 async function getAllUsers() {
   try {
-    const res = await axios.get(`${baseUrl}admin/getAllUsers`,auth());
+    const res = await axios.get(`${remoteUrl}admin/getAllUsers`,auth());
     if (res.status === 200) {
       const data = res.data;
       return data ;
@@ -67,7 +67,7 @@ async function addCourse({
 }) {
   try {
     const res = await axios.post(
-      `${baseUrl}admin/addCourse`,
+      `${remoteUrl}admin/addCourse`,
       {
         title,
         description,
@@ -104,7 +104,7 @@ async function addCourse({
 
 async function deleteCourse(id) {
   try {
-    await axios.delete(`${baseUrl}admin/deleteCourse/${id}`, auth());
+    await axios.delete(`${remoteUrl}admin/deleteCourse/${id}`, auth());
   } catch (error) {
     console.log(error);
   }
@@ -119,7 +119,7 @@ async function deleteCourse(id) {
 }) {
   try {
     const res = await axios.post(
-      `${baseUrl}register`,
+      `${remoteUrl}register`,
       {
         name,
         email,

@@ -12,7 +12,7 @@ const auth = () => {
 
 async function logIn({ email, password }) {
   try {
-    const res = await axios.post(`${baseUrl}login`, {
+    const res = await axios.post(`${remoteUrl}login`, {
       email,
       password,
     });
