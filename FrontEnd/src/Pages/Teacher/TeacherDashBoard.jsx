@@ -9,7 +9,6 @@ import SideBar from "../../Components/DashBoard/SideBar";
 import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 import TeacherCourseManager from "../../Components/Teacher/TeacherCourseManager";
 
-
 const falseState = {
   dashboard: false,
   grades: false,

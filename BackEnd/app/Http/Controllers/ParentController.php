@@ -183,6 +183,34 @@ class ParentController extends Controller
         }
     }
     
+    public function getChildTasksAndGrades($studentId)
+    {
+        try {
+            $tasksAndGrades = Task::select(
+                'tasks.*',
+                'task_types.name as task_type_name',
+                'users.name as teacher_name',
+                'users.email as teacher_email',
+                DB::raw('(SELECT COUNT(*) FROM task_submissions WHERE task_submissions.task_id = tasks.id AND task_submissions.student_id = ' . $studentId . ') > 0 as is_done')
+            )
+            ->addSelect('task_submissions.*')
+            ->join('schedules', 'tasks.schedule_id', '=', 'schedules.id')
+            ->join('courses', 'schedules.course_id', '=', 'courses.id')
+            ->join('course_enrollments', 'courses.id', '=', 'course_enrollments.course_id')
+            ->leftJoin('task_submissions', function ($join) use ($studentId) {
+                $join->on('task_submissions.task_id', '=', 'tasks.id')
+                    ->where('task_submissions.student_id', '=', $studentId);
+            })
+            ->join('task_types', 'tasks.task_type', '=', 'task_types.id')
+            ->join('users', 'tasks.teacher_id', '=', 'users.id')
+            ->where('course_enrollments.student_id', $studentId)
+            ->get();
+        
+            return response()->json(['status' => 200, 'tasksAndGrades' => $tasksAndGrades]);
+        } catch (Error $error) {
+            return response()->json(['status' => 'error', 'message' => $error], 500);
+        }
+    }
 
 
 }

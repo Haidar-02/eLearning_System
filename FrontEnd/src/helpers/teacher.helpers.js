@@ -134,7 +134,6 @@ async function addScheduleMaterial({
   file_name,
 }) {
   try {
-
     const res = await axios.post(
       `${remoteUrl}teacher/add-schedule-material`,
       {
@@ -400,7 +399,7 @@ async function addCourseProject({
 
 async function addProjectGroupMembers({ course_id, selectedStudents }) {
   try {
-    let students=selectedStudents;
+    let students = selectedStudents;
 
     const res = await axios.post(
       `${remoteUrl}teacher/add-project-group-members`,
@@ -463,7 +462,6 @@ async function removeGroup(group_id) {
     return { message };
   }
 }
-
 
 async function modifyTaskGrade({ submission_id, grade }) {
   try {

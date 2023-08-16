@@ -1,9 +1,10 @@
-import axios from 'axios';
-const remoteUrl = 'http://54.165.111.250:8000/api/';
-const baseUrl = 'http://127.0.0.1:8000/api/';
+import axios from "axios";
+// const remoteUrl = 'http://54.165.111.250:8000/api/';
+// const baseUrl = 'http://127.0.0.1:8000/api/';
+const remoteUrl = "http://127.0.0.1:8000/api/";
 
 const auth = () => {
-  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { token } = JSON.parse(localStorage.getItem("user"));
 
   return {
     headers: { Authorization: `Bearer ${token}` },
