@@ -102,7 +102,7 @@ const ParentDashBoard = () => {
             text="Feedbacks"
           />
           <DashBoardButton
-            className={`hover:bg-gray-400 transition-all`}
+            className={`hover:bg-green-500 transition-all`}
             icon={messageIcon}
             text="Messages"
             onClick={() => {
