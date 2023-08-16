@@ -16,7 +16,7 @@ async function getAllCourses() {
   }
 }
 // get-student-progress/10/8
-async function getStudentProgress(course_id,student_id){
+async function getStudentProgress(course_id, student_id) {
   try {
     const res = await axios.get(
       `${remoteUrl}common/get-student-progress/${student_id}/${course_id}`,
@@ -202,8 +202,6 @@ async function getStudentFeedback(course_id, student_id) {
     return { message };
   }
 }
-
-
 
 async function sendMessage({ message, receiver_id }) {
   try {
