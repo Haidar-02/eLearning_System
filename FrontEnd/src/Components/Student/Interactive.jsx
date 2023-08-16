@@ -3,6 +3,7 @@ import General from '../../Quizzes/General';
 import ScienceQuiz from '../../Quizzes/Science';
 import MathQuiz from '../../Quizzes/Math';
 import Button from '../Common/Button';
+import Game from '../../Game/game';
 
 const Interactive = () => {
   const [selected, setSelected] = useState();
@@ -10,7 +11,7 @@ const Interactive = () => {
 
   return (
     <div>
-      <div className="Quizzes underline font-bold text-3xl mb-5">Quizzes</div>
+      <div className="Quizzes underline font-bold text-2xl mb-5">Quizzes</div>
 
       <div className="general flex flex-col gap-10 ">
         <div className="border p-5 rounded-2xl">
@@ -23,6 +24,7 @@ const Interactive = () => {
           <ScienceQuiz />
         </div>
       </div>
+      <Game />
     </div>
   );
 };
