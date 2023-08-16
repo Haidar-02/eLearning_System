@@ -16,7 +16,6 @@ import StudentProgress from '../../Components/Student/StudentProgress';
 import Interactive from '../../Components/Student/Interactive';
 import { logOut } from '../../helpers/auth.helpers';
 const falseState = {
-  dashboard: false,
   grades: false,
   classes: false,
 
@@ -36,7 +35,7 @@ const StudentDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { dashboard, grades, classes, assignments, messages, interactive } =
+  const { grades, classes, messages, interactive } =
     state;
 
   return (
@@ -48,7 +47,7 @@ const StudentDashBoard = () => {
           </span>
         </div>
         <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
-          <div className="button-wrapper bg-cyan-light">
+          {/* <div className="button-wrapper bg-cyan-light">
             <DashBoardButton
               icon={dashIcon}
               iconStyle="w-[24px] "
@@ -56,7 +55,7 @@ const StudentDashBoard = () => {
               text="Dashboard"
               className="font-semibold text-lg cursor-default "
             />
-          </div>
+          </div> */}
           <DashBoardButton
             onClick={async () => {
               togglePage('classes');
@@ -104,7 +103,6 @@ const StudentDashBoard = () => {
 
       <div className="mainContent flex flex-col grow h-full   px-14 py-10  ">
         {/* PAGES GO HERE */}
-        {dashboard && <span className="h-[500px] p-10">Analytics</span>}
         {classes && <StudentCourseManager className="p-20" />}
         {grades && <StudentProgress />}
         {messages && <MessageBox user_type={2} />}
