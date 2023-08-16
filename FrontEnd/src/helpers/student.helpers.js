@@ -62,4 +62,33 @@ async function addTaskSubmission({ due_date, task_id, file, file_name }) {
     console.log(error);
   }
 }
-export { getStudentCourses, getEnrolledCourses, enroll, addTaskSubmission };
+async function getStudentProgressDetails(course_id) {
+  try {
+    const res = await axios.get(
+      `${remoteUrl}student/getStudentProgressDetails/${course_id}`,
+      auth()
+    );
+    if (res.data.status == 200) {
+      const data = res.data;
+      return { data };
+    }
+  } catch (error) {
+    console.log(error);
+    const {
+      response: {
+        data: { message, errors },
+      },
+    } = error;
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((key) => {
+        const firstError = errors[key][0];
+        if (firstError) {
+          return firstError;
+        }
+      });
+      return { errorMessages };
+    }
+    return { message };
+  }
+}
+export { getStudentCourses, getEnrolledCourses, enroll, addTaskSubmission,getStudentProgressDetails };
