@@ -38,7 +38,7 @@ const AdminUserManager = () => {
   };
 
   const handleAddUserClick=() => {
-    setShow(false);
+    setShow(true);
   };
 
   const handleDeleteUser = async (userId) => {
