@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
-import Toggle from '../../Components/toggle';
 
 
 const Navbar = ({ setShow }) => {
@@ -32,7 +31,6 @@ const Navbar = ({ setShow }) => {
             <span className="text-white font-medium">A</span>
           </div> */}
           {/* <div className="user-name ">Alex</div> */}
-          <Toggle />
 
         </div>
         <span

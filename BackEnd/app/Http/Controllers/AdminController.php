@@ -22,7 +22,7 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $request->validate([
             'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|string|email|max:255|unique:users',
+            'email' => 'sometimes|string|email|max:255',
             'password' => 'sometimes|string|min:6',
             'user_type' => 'sometimes|integer',
         ]);

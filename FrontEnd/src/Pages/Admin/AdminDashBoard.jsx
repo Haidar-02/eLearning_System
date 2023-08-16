@@ -10,7 +10,7 @@ import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 import AdminCourseManager from './AdminCourseManager';
 import AdminUserManager from './AdminUserManager';
 import CreateBackupButton from '../../Components/Admin/CreateBackUpButton';
-
+import Toggle from '../../Components/toggle';
 
 
 import PieChart from '../../Components/DashBoard/PieChart';
@@ -78,6 +78,8 @@ const AdminDashBoard = () => {
             text="Courses"
           />
           <CreateBackupButton/>
+          <Toggle />
+
 
           </div>
       </SideBar>

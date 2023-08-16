@@ -7,6 +7,7 @@ import parentIcon from'../../assets/icons/parent.svg'
 import studentIcon from'../../assets/icons/student.svg'
 import { getAllUsers } from '../../helpers/admin.helpers';
 import { auth } from '../../helpers/auth.helpers';
+import CreateUser from '../../Components/Admin/CreateUser';
 
 const AdminUserManager = () => {
   const [users, setUsers] = useState([]); 
@@ -55,10 +56,11 @@ const AdminUserManager = () => {
     );
     setUsers(updatedUsers);
   };
-  
+  console.log(users)
   
   return (
     <div className='flex flex-col items-center grow' >
+      <CreateUser/>
       <div className='flex flex-row justify-between w-[100%]' >
         <div className="w-24 dark" onClick={handleTeacherClick}>
           <img className="" src={teacherIcon} alt="teacherIcon" />

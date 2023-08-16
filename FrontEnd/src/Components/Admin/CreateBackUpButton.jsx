@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { auth } from '../../helpers/auth.helpers';
-import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
 
 
 const CreateBackupButton = () => {
