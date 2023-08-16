@@ -8,12 +8,9 @@ const StudentProgress = () => {
   const [total, setTotal] = useState();
   const [graphData, setGraphData] = useState();
 
-  const data = [
+  const initialState = [
     ['data', 'grades'],
-    ['2014', 1000],
-    ['2015', 1170],
-    ['2016', 660],
-    ['2017', 1030],
+    ['0', 0],
   ];
 
   const options = {
@@ -21,7 +18,7 @@ const StudentProgress = () => {
       title: 'Grades',
     },
   };
-  console.log(graphData);
+
   return (
     <div className="grow min-w-full min-h-full">
       <div className="flex gap-5">
@@ -59,17 +56,14 @@ const StudentProgress = () => {
             })}
         </div>
       </div>
-
       <div className="chart-container mt-20">
-        {graphData[0] && (
-          <Chart
-            chartType="Bar"
-            width="100%"
-            height="400px"
-            data={[['data', 'grades'], ...graphData]}
-            options={options}
-          />
-        )}
+        <Chart
+          chartType="Bar"
+          width="100%"
+          height="400px"
+          data={graphData ? [['data', 'grades'], ...graphData] : initialState}
+          options={options}
+        />
       </div>
     </div>
   );
