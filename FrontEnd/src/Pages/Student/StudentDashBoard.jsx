@@ -12,6 +12,7 @@ import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 import StudentCourseManager from '../../Components/Student/StudentCourseManager';
 import MessageBox from '../../Components/Messaging/MessageBox';
 import StudentProgress from '../../Components/Student/StudentProgress';
+import General from '../../Quizzes/General';
 
 const falseState = {
   dashboard: false,
@@ -95,7 +96,7 @@ const StudentDashBoard = () => {
         {classes && <StudentCourseManager className="p-20" />}
         {grades && <StudentProgress />}
         {messages && <MessageBox user_type={2} />}
-        {interactive && <span className="h-[500px] p-10">Interactive</span>}
+        {interactive && <General />}
       </div>
     </div>
   );
