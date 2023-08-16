@@ -24,7 +24,7 @@ async function enroll(course_id) {
     );
 
     if (res.status == 200) {
-      return res.data.submission;
+      return res.data;
     }
   } catch (error) {
     console.log(error);
@@ -91,4 +91,10 @@ async function getStudentProgressDetails(course_id) {
     return { message };
   }
 }
-export { getStudentCourses, getEnrolledCourses, enroll, addTaskSubmission,getStudentProgressDetails };
+export {
+  getStudentCourses,
+  getEnrolledCourses,
+  enroll,
+  addTaskSubmission,
+  getStudentProgressDetails,
+};
