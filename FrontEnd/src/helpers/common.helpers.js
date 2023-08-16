@@ -243,8 +243,8 @@ async function getCourseDiscussion(course_id) {
     );
     const { data } = res;
 
-    if (res.status == 200) {
-      return data.discussion;
+    if (res.data.status == 200) {
+      return data;
     }
   } catch (error) {
     console.log(error);
@@ -268,14 +268,16 @@ async function addCourseDiscussion(message, course_id) {
   try {
     const res = await axios.post(
       `${remoteUrl}common/add-course-discussion`,
+      {
       message,
       course_id,
+      },
       auth()
     );
     const { data } = res;
-
-    if (res.status == 200) {
-      return data.discussion;
+    
+    if (data.status == 200) {
+      return {data};
     }
   } catch (error) {
     console.log(error);

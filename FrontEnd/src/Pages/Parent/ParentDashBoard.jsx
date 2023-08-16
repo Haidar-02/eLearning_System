@@ -15,6 +15,7 @@ import ChildCourses from "../../Components/Parent/ChildCourses";
 import MessageBox from "../../Components/Messaging/MessageBox";
 import ChildTasksGrades from "../../Components/Parent/ChildTasksGrades";
 import ChildAttendances from "../../Components/Parent/ChildAttendances";
+import { logOut } from "../../helpers/auth.helpers";
 
 const falseState = {
   dashboard: false,
@@ -99,6 +100,11 @@ const ParentDashBoard = () => {
             icon={logoutIcon}
             text="Logout"
             className={"hover:bg-red-600 transition-all"}
+            onClick={()=>{
+              logOut();
+              localStorage.clear();
+              navigate('/')
+            }}
           />
         </div>
       </SideBar>

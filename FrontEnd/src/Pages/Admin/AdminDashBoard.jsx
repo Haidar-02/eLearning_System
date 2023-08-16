@@ -4,10 +4,12 @@ import gradesIcon from '../../assets/icons/ChartSquareBarOutline.svg';
 import dashIcon from '../../assets/icons/dashboard.svg';
 import classesIcon from '../../assets/icons/UserGroupOutline.svg';
 import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
+import logoutIcon from "../../assets/icons/right-from-bracket-solid-white.svg";
 
 import SideBar from '../../Components/DashBoard/SideBar';
 import AdminCourseManager from './AdminCourseManager';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
+import { logOut } from '../../helpers/auth.helpers';
 
 const falseState = {
   dashboard: false,
@@ -74,8 +76,16 @@ const AdminDashBoard = () => {
             icon={clipBoardIcon}
             text="Assignments"
           />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
-          <DashBoardButton icon={dashIcon} text="Dashboard" />
+          <DashBoardButton
+            icon={logoutIcon}
+            text="Logout"
+            className={"hover:bg-red-600 transition-all"}
+            onClick={()=>{
+              logOut();
+              localStorage.clear();
+              navigate('/')
+            }}
+          />
         </div>
       </SideBar>
 

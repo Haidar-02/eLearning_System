@@ -15,9 +15,10 @@ import TeacherScheduleManager from './HomePage';
 import GroupProject from "./GroupProject";
 import StudentManager from "./Feedback";
 import ProgressManager from "./Progress";
+import DiscussionBoard from "./Discussion";
 const falseState = {
   home_page: false,
-  anouncements: false,
+  // anouncements: false,
   group_project:false,
   feedback:false,
   progress:false,
@@ -30,14 +31,14 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
     group_project: false,
     feedback:false,
     progress:false,
-    anouncements: false,
+    // anouncements: false,
     discussion_board: false,
   });
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { home_page, group_project , feedback,progress,anouncements, discussion_board } = state;
+  const { home_page, group_project , feedback,progress, discussion_board } = state;
   return (
     <Modal
       setShow={setCourseModel}
@@ -92,7 +93,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
                   togglePage("progress");
                 }}
               /> 
-            <DashBoardButton
+            {/* <DashBoardButton
               onClick={() => {
                 togglePage("anouncements");
               }}
@@ -100,7 +101,7 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
               className={`${anouncements && "bg-cyan-light color-cyan-dark"}`}
 
               text="Anouncements"
-            />
+            /> */}
 
             <DashBoardButton
               onClick={() => {
@@ -120,11 +121,11 @@ const CourseModal = ({ course, courseModel, setCourseModel }) => {
           {group_project && <GroupProject course_id={course.id}/>}
           {feedback && <StudentManager course_id={course.id}/>}
           {progress && <ProgressManager course_id={course.id}/>}
-
-          {anouncements && <span className="h-[500px] p-10">anouncements</span>}
           {discussion_board && (
-            <span className="h-[500px] p-10">discussion board</span>
+            <DiscussionBoard course_id={course.id}/>
           )}
+          {/* {anouncements && <span className="h-[500px] p-10">anouncements</span>} */}
+
         </div>
 
       </div>

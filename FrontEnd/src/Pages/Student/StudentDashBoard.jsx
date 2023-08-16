@@ -6,6 +6,7 @@ import classesIcon from '../../assets/icons/UserGroupOutline.svg';
 import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
 import chat from '../../assets/icons/ChatOutline.svg';
 import play from '../../assets/icons/noun-interactive-1171204 (1).svg';
+import logoutIcon from "../../assets/icons/right-from-bracket-solid-white.svg";
 
 import SideBar from '../../Components/DashBoard/SideBar';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
@@ -13,6 +14,7 @@ import StudentCourseManager from '../../Components/Student/StudentCourseManager'
 import MessageBox from '../../Components/Messaging/MessageBox';
 import StudentProgress from '../../Components/Student/StudentProgress';
 import Interactive from '../../Components/Student/Interactive';
+import { logOut } from '../../helpers/auth.helpers';
 const falseState = {
   dashboard: false,
   grades: false,
@@ -20,6 +22,7 @@ const falseState = {
 
   messages: false,
   interactive: false,
+  
 };
 
 const StudentDashBoard = () => {
@@ -85,6 +88,16 @@ const StudentDashBoard = () => {
             icon={play}
             text="Interactive"
             iconStyle={'w-[15px]'}
+          />
+          <DashBoardButton
+            icon={logoutIcon}
+            text="Logout"
+            className={"hover:bg-red-600 transition-all"}
+            onClick={()=>{
+              logOut();
+              localStorage.clear();
+              navigate('/')
+            }}
           />
         </div>
       </SideBar>

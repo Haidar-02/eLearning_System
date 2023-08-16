@@ -9,6 +9,8 @@ import SideBar from "../../Components/DashBoard/SideBar";
 import DashBoardButton from "../../Components/DashBoard/DashBoardButton";
 import TeacherCourseManager from "../../Components/Teacher/TeacherCourseManager";
 import MessageBox from "../../Components/Messaging/MessageBox";
+import { logOut } from "../../helpers/auth.helpers";
+import { useNavigate } from "react-router-dom";
 
 const falseState = {
   dashboard: false,
@@ -26,6 +28,7 @@ const TeacherDashBoard = () => {
     assignments: false,
     messages: false,
   });
+  const navigate = useNavigate();
   const [courseModel, setCourseModel] = useState(false);
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
@@ -81,6 +84,11 @@ const TeacherDashBoard = () => {
             icon={logoutIcon}
             text="Logout"
             className={"hover:bg-red-600 transition-all"}
+            onClick={()=>{
+              logOut();
+              localStorage.clear();
+              navigate('/')
+            }}
           />
           {/* <DashBoardButton icon={dashIcon} text="Dashboard" /> */}
         </div>
