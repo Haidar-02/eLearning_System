@@ -23,7 +23,7 @@ const ChildCourses = ({ child_id }) => {
 
   return (
     <div className="flex gap-5 justify-between">
-      <div className="w-fit flex-col items-center justify-start ml-5 border-r-2">
+      <div className="w-fit flex-col items-center justify-start ml-5">
         <h2 className="text-xl mb-2 font-black pr-2">Courses</h2>
         {courses.length === 0 ? (
           <p>No courses available</p>

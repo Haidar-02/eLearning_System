@@ -32,7 +32,7 @@ const ChildTasksGrades = ({ child_id }) => {
   console.log(tasksAndGrades);
 
   return (
-    <div className="flex-col w-96 pt-2">
+    <div className="flex-col w-auto pt-2">
       <h2 className="font-black text-xl">Child Tasks and Grading</h2>
       <div className="flex mt-2 gap-2 border-t-2 pt-3 cursor-default">
         <div className="bg-green-500 px-3 py-1 rounded-lg text-white">Done</div>
@@ -51,8 +51,8 @@ const ChildTasksGrades = ({ child_id }) => {
                 task.is_done ? "bg-green-600" : "bg-gray-600"
               } px-3 py-2 rounded-lg text-white w-full flex-col m-3 cursor-default hover:scale-105 transition-all`}
             >
-              <div className="flex justify-between border-b-2 mb-2 pb-2">
-                {task.title}
+              <div className="flex justify-between border-b-2 mb-2 pb-2 min-w-sm">
+                <p className="break-words max-w-sm">{task.title}</p>
                 {task.grade !== 0 && task.grade !== null ? (
                   <span
                     className={`${

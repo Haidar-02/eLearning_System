@@ -28,7 +28,6 @@ const falseState = {
 };
 
 const ParentDashBoard = () => {
-
   const [state, setState] = useState({
     dashboard: true,
     grades: false,
@@ -39,7 +38,7 @@ const ParentDashBoard = () => {
     teachers: false,
     feedbacks: false,
   });
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const [children, setChildren] = useState([]);
   const [selectedChildId, setSelectedChildId] = useState(null);
@@ -58,7 +57,7 @@ const ParentDashBoard = () => {
   const togglePage = (page) => {
     setState({ ...falseState, [page]: true });
   };
-
+  console.log(children);
   const { classes, assignments, messages, attendances, feedbacks } = state;
 
   return (
@@ -71,6 +70,7 @@ const ParentDashBoard = () => {
         </div>
         <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
           <DashBoardButton
+            className={`hover:bg-gray-400 transition-all`}
             onClick={async () => {
               togglePage("classes");
             }}
@@ -78,6 +78,7 @@ const ParentDashBoard = () => {
             text="Classes and Teachers"
           />
           <DashBoardButton
+            className={`hover:bg-gray-400 transition-all`}
             onClick={() => {
               togglePage("assignments");
             }}
@@ -85,6 +86,7 @@ const ParentDashBoard = () => {
             text="Tasks and Grades"
           />
           <DashBoardButton
+            className={`hover:bg-gray-400 transition-all`}
             onClick={() => {
               togglePage("attendances");
             }}
@@ -92,6 +94,7 @@ const ParentDashBoard = () => {
             text="Attendances"
           />
           <DashBoardButton
+            className={`hover:bg-gray-400 transition-all`}
             onClick={() => {
               togglePage("feedbacks");
             }}
@@ -99,6 +102,7 @@ const ParentDashBoard = () => {
             text="Feedbacks"
           />
           <DashBoardButton
+            className={`hover:bg-green-500 transition-all`}
             icon={messageIcon}
             text="Messages"
             onClick={() => {
@@ -109,10 +113,10 @@ const ParentDashBoard = () => {
             icon={logoutIcon}
             text="Logout"
             className={"hover:bg-red-600 transition-all"}
-            onClick={()=>{
+            onClick={() => {
               logOut();
               localStorage.clear();
-              navigate('/')
+              navigate("/");
             }}
           />
         </div>
@@ -130,19 +134,21 @@ const ParentDashBoard = () => {
       <SideBar className="right-0 p-3 bg-gray-200">
         <h2 className="text-center font-semibold mt-2">My Children</h2>
         {children &&
-          children.map((child, index) => (
+          children.map((child) => (
             <DashBoardButton
-              key={index}
+              key={child.id}
               icon={dashIcon}
               text={child.name}
               className={`border-2 rounded-md m-2 transition-all ${
                 selectedChildId === child.id
                   ? "bg-green-500 text-white"
-                  : " hover:text-white"
+                  : "  hover:bg-gray-300"
               }`}
               onClick={() => {
                 setSelectedChildId(child.id);
-                togglePage(classes);
+                if (selectedChildId !== child.id) {
+                  togglePage(classes);
+                }
               }}
             />
           ))}
