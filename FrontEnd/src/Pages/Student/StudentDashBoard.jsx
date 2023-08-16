@@ -111,15 +111,6 @@ const AdminDashBoard = () => {
         {messages && <MessageBox user_type={2} />}
         {interactive && <span className="h-[500px] p-10">Interactive</span>}
       </div>
-
-      {/* <SideBar className={'right-0'}>
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar> */}
     </div>
   );
 };
