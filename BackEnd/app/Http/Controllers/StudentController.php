@@ -18,6 +18,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\CourseEnrollmentNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
@@ -40,6 +42,8 @@ class StudentController extends Controller
             $course->student_id = Auth::id();
             $course->course_id = $request->course_id;
             $course->save();
+            $CRF = Course::find($course->course_id);
+            Mail::to(Auth::user()->email)->send(new CourseEnrollmentNotification($CRF));
             return response()->json([
                 'status' => 'success',
                 'course' => Course::with('teacher')->find($request->course_id),

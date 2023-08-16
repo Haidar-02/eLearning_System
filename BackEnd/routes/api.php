@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
+
+
+
+
 use App\Http\Controllers\ParentController;
 
 /*
@@ -99,6 +104,7 @@ Route::group(["middleware" => "auth:api"], function () {
     Route::group(["prefix" => "admin", "middleware" => "admin.valid"], function () {
 
         Route::controller(AdminController::class)->group(function () {
+            Route::get('/getAllUsers', 'getAllUsers');
             Route::put("modifyUser/{user_id}", "modifyUser");
             Route::delete('/deleteUser/{user}', "deleteUser");
             Route::post('/addCourse', "addCourse");
@@ -106,11 +112,10 @@ Route::group(["middleware" => "auth:api"], function () {
             Route::delete('/deleteCourse/{course}', "deleteCourse");
             Route::get('/checkEnrollmentLimit/{course}', "checkEnrollmentLimit");
             Route::get('/createBackup', 'createBackup');
-
+            Route::get('/getCourseEnrollmentsRate', 'getCourseEnrollmentsRate');
         });
 
-        Route::controller(AuthController::class)->group(function () {
-        });
+
     });
 
     Route::group(["prefix" => "parent", "middleware" => "parent.valid"], function () {
@@ -131,16 +136,12 @@ Route::group(["middleware" => "auth:api"], function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post("register", "register");
     Route::post("login", "login");
+    Route::post("register", "register");
+
 });
 
 
-// Route::get('send-email',function(){
-//     $mailData = [
-//         "name" => "test test",
-//         "message" => "12392"
-//     ];
-//     Mail::to*("hello@example.com")->send(new TestEmail ($mailData));
-//     dd("sent successfully")
-// });
+
+Route::get('/send-mail',[MailController::class,'sendMail']);
+

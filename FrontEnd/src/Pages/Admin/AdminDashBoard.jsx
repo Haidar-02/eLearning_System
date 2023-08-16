@@ -7,14 +7,22 @@ import clipBoardIcon from '../../assets/icons/ClipboardListOutline.svg';
 import logoutIcon from "../../assets/icons/right-from-bracket-solid-white.svg";
 
 import SideBar from '../../Components/DashBoard/SideBar';
-import AdminCourseManager from './AdminCourseManager';
 import DashBoardButton from '../../Components/DashBoard/DashBoardButton';
 import { logOut } from '../../helpers/auth.helpers';
+import AdminCourseManager from './AdminCourseManager';
+import AdminUserManager from './AdminUserManager';
+import CreateBackupButton from '../../Components/Admin/CreateBackUpButton';
+import Toggle from '../../Components/toggle';
+
+
+import PieChart from '../../Components/DashBoard/PieChart';
+import CourseProgressbar from '../../Components/DashBoard/CircularProgressBar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const falseState = {
   dashboard: false,
-  grades: false,
-  classes: false,
+  users: false,
+  courses: false,
   assignments: false,
   messages: false,
 };
@@ -22,8 +30,8 @@ const falseState = {
 const AdminDashBoard = () => {
   const [state, setState] = useState({
     dashboard: true,
-    grades: false,
-    classes: false,
+    users: false,
+    courses: false,
     assignments: false,
     messages: false,
   });
@@ -32,14 +40,30 @@ const AdminDashBoard = () => {
     setState({ ...falseState, [page]: true });
   };
 
-  const { dashboard, grades, classes, assignments } = state;
+    const handleProgressBar = async () => {
+      try {
+        const res = await axios.get(
+          `http://127.0.0.1:8000/api/admin/getCourseEnrollmentsRate`,
+          auth()
+        );
+      }catch (e) {
+        console.log(e);
+      }
+    }
+    handleProgressBar();
+
+
+
+  const { dashboard, users, courses, assignments } = state;
+  
+  const completionPercentage =66;
 
   return (
-    <div className="dashBoardWrapper flex justify-between h-full">
+    <div className="  dashBoardWrapper flex  h-full">
       <SideBar className="bg-cyan-dark">
         <div className="logo  flex items-center justify-center gothic">
           <span className="text-3xl cursor-pointer p-5 py-10 text-white">
-            Kidzo
+            E-Learing
           </span>
         </div>
         <div className="button-container flex flex-col gap-5 min-w-[300px] monster font-medium text-white">
@@ -57,17 +81,17 @@ const AdminDashBoard = () => {
           </div>
           <DashBoardButton
             onClick={() => {
-              togglePage('grades');
+              togglePage('users');
             }}
             icon={gradesIcon}
             text="Users"
           />
           <DashBoardButton
             onClick={async () => {
-              togglePage('classes');
+              togglePage('courses');
             }}
             icon={classesIcon}
-            text="Classes"
+            text="Courses"
           />
           <DashBoardButton
             onClick={() => {
@@ -87,24 +111,29 @@ const AdminDashBoard = () => {
             }}
           />
         </div>
+          <CreateBackupButton/>
+          <Toggle />
       </SideBar>
 
       <div className="mainContent flex flex-col   px-14 py-10 h-fit ">
-        {/* PAGES GO HERE */}
-        {dashboard && <span className="h-[500px] p-10">Analytics</span>}
-        {grades && <span className="h-[500px] p-10">Manage Users</span>}
-        {classes && <AdminCourseManager />}
-        {assignments && <span className="h-[500px] p-10">Assignments</span>}
+      {dashboard &&
+      <div className='flex flex-col items-center'>
+        <div>
+         <span className="h-[50px] p-10">
+          <PieChart />
+         </span>
+        </div>
+        <div className='w-32'>
+          <CourseProgressbar  targetPercentage={completionPercentage} />
+        </div>
+      </div>}
+        {users && <div className="h-[500px] p-10"><AdminUserManager/></div>}
+        {courses && <AdminCourseManager />}
+        {assignments && <div className="h-[500px] p-10">Assignments</div>}
+        <div>
+        </div>
       </div>
 
-      <SideBar className={'right-0'}>
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-        <DashBoardButton icon={dashIcon} text="Dashboard" />
-      </SideBar>
     </div>
   );
 };

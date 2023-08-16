@@ -11,7 +11,7 @@ const CustomInput = ({
 }) => {
   return (
     <div className="input-container flex flex-col gap-2 font-normal">
-      <label className=" monster block uppercase tracking-wide text-gray-700 text-xs font-bold">
+      <label className=" dark:text-slate-200 monster block uppercase tracking-wide text-gray-700 text-xs font-bold">
         {label}
       </label>
       <input

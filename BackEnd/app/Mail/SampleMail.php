@@ -9,37 +9,27 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MailableName extends Mailable
+class SampleMail extends Mailable
 {
     use Queueable, SerializesModels;
-    
-    public $mailData;  
+
     /**
      * Create a new message instance.
      */
     public function __construct()
     {
-        $this->mailData = $mailData;
+        //
     }
 
     /**
      * Get the message envelope.
      */
-    // public function envelope(): Envelope
-    // {
-    //     return new Envelope(
-    //         subject: 'Mailable Name',
-    //     );
-    // }
-
-    public function envelope()
-{
-   return new Envelope(
-       from: new Address('example@example.com', 'Test Sender'),
-       subject: 'Test Email',
-   );
-}
-
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'Sample Mail',
+        );
+    }
 
     /**
      * Get the message content definition.
@@ -47,7 +37,7 @@ class MailableName extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'emails.SampleMail',
         );
     }
 

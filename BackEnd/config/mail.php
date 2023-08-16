@@ -98,10 +98,15 @@ return [
     |
     */
 
+    // 'from' => [
+    //     // 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+    //     'address' => 'hilal_bodon@hotmail.com', 'name' => 'App Name',
+    //     'name' => env('MAIL_FROM_NAME', 'Example'),
+    // ],
+
     'from' => [
-        // 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'address' => 'example@example.com', 'name' => 'App Name',
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'hilal_bodon@hotmail.com',
+        'name' => 'hilal bodon',
     ],
 
     /*

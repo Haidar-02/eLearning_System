@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserType;
 use App\Models\Course;
+use App\Models\Assignment;
+
+use App\Mail\HomeworkNotification;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -18,7 +22,7 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $request->validate([
             'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|string|email|max:255|unique:users',
+            'email' => 'sometimes|string|email|max:255',
             'password' => 'sometimes|string|min:6',
             'user_type' => 'sometimes|integer',
         ]);
@@ -60,38 +64,46 @@ class AdminController extends Controller
         ]);
     }
 
+    function getAllUsers(){
+        try{
+            $users=User::All();
+            return response()->json([
+                'status' => 'success',
+                'users' => $users,
+            ]);
+        } catch(Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
 
 
 
     function addCourse(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'teacher_id' => 'required|exists:users,id',
-            'enrollment_limit' => 'required|integer|min:1',
-            // 'class_code' => 'required|unique:courses,class_code',
-        ]);
 
-        try {
-
-            $course = new Course([
-                'title' => $request->title,
-                'description' => $request->description,
-                'teacher_id' => $request->teacher_id,
-                'enrollment_limit' => $request->enrollment_limit,
-            ]);
-        } catch (\Exception $e) {
-            error_log($e->getMessage());
-            return response()->json(['error' => 'An error occurred while creating the course'], 500);
-        }
-        $course->class_code = substr(Str::uuid(), 0, 8);
-        $course->save();
-
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'teacher_id' => 'required|exists:users,id',
+        'enrollment_limit' => 'required|integer|min:1',
+    ]);
+ 
+    $course = new Course([
+        'title' => $request->title,
+        'description' => $request->description,
+        'teacher_id' => $request->teacher_id,
+        'enrollment_limit' => $request->enrollment_limit,
+    ]);
+    $course->class_code = substr(Str::uuid(), 0, 8) ; 
+    $course->save();
 
         return response()->json([
             'message' => 'Course created successfully',
-            // 'course' => $course,
+
             'course' => [
                 'teacher' => $course->teacher,
                 'description' => $course->description,
@@ -183,11 +195,16 @@ class AdminController extends Controller
 
     }
 
-    function getSupportMessage()
+    public function getCourseEnrollmentsRate()
     {
-
+        try {
+            $result = CourseEnrollment::join('courses', 'course_enrollments.course_id', '=', 'courses.id')
+                ->selectRaw('COUNT(course_enrollments.id) as enrollment_count, SUM(courses.max_capacity) as max_capacity_sum')
+                ->first();
+    
+            return response()->json(['status' => 200, 'data' => $result]);
+        } catch (Error $error) {}
     }
-
 
 
     public function createBackup()

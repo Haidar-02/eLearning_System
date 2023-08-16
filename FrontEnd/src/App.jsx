@@ -7,9 +7,12 @@ import StudentDashBoard from "./Pages/Student/StudentDashBoard";
 import ParentDashBoard from "./Pages/Parent/ParentDashBoard";
 import TeacherDashBoard from "./Pages/Teacher/TeacherDashBoard";
 
+
 function App() {
+
+
   return (
-    <div className="App h-full monster">
+    <div className="App h-full monster ">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/adminDash" element={<AdminDashBoard />} />
@@ -17,7 +20,7 @@ function App() {
         <Route path="/parentDash" element={<ParentDashBoard />} />
         <Route path="/teacherDash" element={<TeacherDashBoard />} />
       </Routes>
-    </div>
+      </div>
   );
 }
 

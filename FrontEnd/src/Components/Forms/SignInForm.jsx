@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 import Modal from '../Common/Modal';
 import CustomInput from '../Inputs/CustomInput';
-
 import { logIn } from '../../helpers/auth.helpers';
 import { useNavigate } from 'react-router-dom';
 
@@ -48,9 +46,9 @@ const SignInForm = ({ setShow }) => {
   return (
     <Modal
       setShow={setShow}
-      className="bg-grey-light signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border rounded-b-2xl "
-    >
-      <div className="form-header gothic bg-cyan-dark flex p-6 w-full rounded-t-2xl ">
+      className=" dark:border dark:bg-slate-900 dark:text-slate-200 signIn-container text-white  text-lg   flex flex-col items-center gap-5 insta-border rounded-2xl " >
+      <div className=" dark:bg-slate-900 form-header gothic bg-cyan-dark flex p-6 w-full rounded-t-2xl ">
+
         Sign In
       </div>
       <div className="form-container flex flex-col gap-5 p-6 pb-0 ">
@@ -61,6 +59,7 @@ const SignInForm = ({ setShow }) => {
           onChange={onChange}
           value={email}
           className={'w-[300px]'}
+          labelStyle={{ color: 'white' }}
         />
         <CustomInput
           label="password"

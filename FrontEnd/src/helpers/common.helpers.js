@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { auth } from './auth.helpers';
 
-const remoteUrl = 'http://54.165.111.250:8000/api/';
-const baseUrl = 'http://127.0.0.1:8000/api/';
+const remoteUrl = "http://54.165.111.250:8000/api/";
+const baseUrl = "http://127.0.0.1:8000/api/";
+
 async function getAllCourses() {
   try {
     const res = await axios.get(`${remoteUrl}common/get-courses`, auth());
@@ -13,6 +14,7 @@ async function getAllCourses() {
     }
   } catch (error) {
     console.log(error);
+    return[];
   }
 }
 // get-student-progress/10/8
