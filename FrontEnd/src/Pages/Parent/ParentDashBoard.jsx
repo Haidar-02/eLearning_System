@@ -37,11 +37,15 @@ const ParentDashBoard = () => {
     feedbacks: false,
   });
   const [children, setChildren] = useState([]);
+  const [selectedChildId, setSelectedChildId] = useState(null);
 
   useEffect(() => {
     const fetchChildren = async () => {
       const res = await getChildren();
       setChildren(res.children);
+      if (res.children.length > 0) {
+        setSelectedChildId(res.children[0].id);
+      }
     };
 
     fetchChildren();
@@ -106,10 +110,10 @@ const ParentDashBoard = () => {
 
       <div className="mainContent flex px-2 py-10 h-fit justify-center items-center mx-5">
         {/* PAGES GO HERE */}
-        {classes && <ChildCourses />}
-        {feedbacks && <ChildFeedbacks />}
-        {attendances && <ChildAttendances />}
-        {assignments && <ChildTasksGrades />}
+        {classes && <ChildCourses child_id={selectedChildId} />}
+        {feedbacks && <ChildFeedbacks child_id={selectedChildId} />}
+        {attendances && <ChildAttendances child_id={selectedChildId} />}
+        {assignments && <ChildTasksGrades child_id={selectedChildId} />}
         {messages && <MessageBox />}
       </div>
 
@@ -121,9 +125,17 @@ const ParentDashBoard = () => {
               key={index}
               icon={dashIcon}
               text={child.name}
-              className="border-2 rounded-md hover:bg-gray-800 hover:text-white m-2 transition-all"
+              className={`border-2 rounded-md m-2 transition-all ${
+                selectedChildId === child.id
+                  ? "bg-green-500 text-white"
+                  : " hover:text-white"
+              }`}
+              onClick={() => {
+                setSelectedChildId(child.id);
+                togglePage(classes);
+              }}
             />
-          ))}{" "}
+          ))}
       </SideBar>
     </div>
   );

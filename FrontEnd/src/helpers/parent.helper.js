@@ -5,7 +5,7 @@ const baseUrl = "http://127.0.0.1:8000/api/parent";
 
 export const getChildren = async () => {
   try {
-    const response = await axios.get(`${baseUrl}/getChildren`, auth());
+    const response = await axios.get(`${remoteUrl}/getChildren`, auth());
     return response.data;
   } catch (error) {
     console.log(`Failed to fetch child: ${error.message}`);
@@ -15,7 +15,7 @@ export const getChildren = async () => {
 export const getChildCourses = async (child_id) => {
   try {
     const response = await axios.get(
-      `${baseUrl}/getChildCourses/${child_id}`,
+      `${remoteUrl}/getChildCourses/${child_id}`,
       auth()
     );
     return response.data;
@@ -27,7 +27,7 @@ export const getChildCourses = async (child_id) => {
 export const getChildTeachers = async (child_id) => {
   try {
     const response = await axios.get(
-      `${baseUrl}/getChildTeachers/${child_id}`,
+      `${remoteUrl}/getChildTeachers/${child_id}`,
       auth()
     );
     return response.data;
@@ -39,7 +39,7 @@ export const getChildTeachers = async (child_id) => {
 export const getChildAttendance = async (child_id) => {
   try {
     const response = await axios.get(
-      `${baseUrl}/getChildAttendance/${child_id}`,
+      `${remoteUrl}/getChildAttendance/${child_id}`,
       auth()
     );
     return response.data;
@@ -51,7 +51,7 @@ export const getChildAttendance = async (child_id) => {
 export const getChildFeedbacks = async (child_id) => {
   try {
     const response = await axios.get(
-      `${baseUrl}/getChildFeedback/${child_id}`,
+      `${remoteUrl}/getChildFeedback/${child_id}`,
       auth()
     );
     return response.data;
@@ -85,7 +85,7 @@ export const getChildFeedbacks = async (child_id) => {
 export const getChildTasksAndGrades = async (child_id) => {
   try {
     const response = await axios.get(
-      `${baseUrl}/getChildTasksAndGrades/${child_id}`,
+      `${remoteUrl}/getChildTasksAndGrades/${child_id}`,
       auth()
     );
     return response.data;
@@ -95,7 +95,10 @@ export const getChildTasksAndGrades = async (child_id) => {
 };
 export const getParentConferences = async () => {
   try {
-    const response = await axios.get(`${baseUrl}/getParentConferences`, auth());
+    const response = await axios.get(
+      `${remoteUrl}/getParentConferences`,
+      auth()
+    );
     return response.data;
   } catch (error) {
     console.log(`Failed to fetch parent conferences: ${error.message}`);
@@ -105,7 +108,7 @@ export const getParentConferences = async () => {
 export const getTeacherConferenceSlots = async (teacherId) => {
   try {
     const response = await axios.get(
-      `${baseUrl}/getTeacherConferenceSlots/${teacherId}`,
+      `${remoteUrl}/getTeacherConferenceSlots/${teacherId}`,
       auth()
     );
     return response.data;
@@ -117,7 +120,7 @@ export const getTeacherConferenceSlots = async (teacherId) => {
 export const scheduleConferenceWithTeacher = async (teacherScheduleId) => {
   try {
     const response = await axios.post(
-      `${baseUrl}/scheduleConferenceWithTeacher/${teacherScheduleId}`,
+      `${remoteUrl}/scheduleConferenceWithTeacher/${teacherScheduleId}`,
       auth()
     );
     return response.data;

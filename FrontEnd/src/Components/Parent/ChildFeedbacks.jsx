@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getChildFeedbacks } from "../../helpers/parent.helper";
 
-const ChildFeedbacks = () => {
-  const childId = 4;
+const ChildFeedbacks = ({ child_id }) => {
   const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
     const fetchChildFeedbacks = async () => {
       try {
-        const response = await getChildFeedbacks(childId);
+        const response = await getChildFeedbacks(child_id);
         if (response && response.status === 200) {
           setFeedbacks(response.feedbacks);
         }
@@ -18,7 +17,7 @@ const ChildFeedbacks = () => {
     };
 
     fetchChildFeedbacks();
-  }, [childId]);
+  }, [child_id]);
 
   return (
     <div className="w-96 cursor-default">

@@ -16,13 +16,14 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-const ChildAttendances = ({ childId }) => {
+const ChildAttendances = ({ child_id }) => {
   const [attendances, setAttendances] = useState([]);
+  console.log(child_id);
 
   useEffect(() => {
     const fetchChildAttendances = async () => {
       try {
-        const response = await getChildAttendance(childId);
+        const response = await getChildAttendance(child_id);
         if (response && response.status === 200) {
           setAttendances(response.data);
         }
@@ -32,7 +33,7 @@ const ChildAttendances = ({ childId }) => {
     };
 
     fetchChildAttendances();
-  }, [childId]);
+  }, [child_id]);
 
   console.log(attendances);
   return (

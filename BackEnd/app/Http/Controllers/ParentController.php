@@ -68,14 +68,11 @@ class ParentController extends Controller
     }
     
 
-    public function getChildAttendance()
+    public function getChildAttendance($child_id)
     {
         try {
-            $parentId = Auth::user()->id;
-        
-            $studentIds = ParentRelation::where('parent_id', $parentId)->pluck('student_id');
-        
-            $attendance = Attendance::whereIn('student_id', $studentIds)
+                
+            $attendance = Attendance::where('student_id', $child_id)
                 ->join('sessions', 'attendances.session_id', '=', 'sessions.id')
                 ->join('schedules', 'sessions.schedule_id', '=', 'schedules.id')
                 ->join('courses', 'schedules.course_id', '=', 'courses.id')

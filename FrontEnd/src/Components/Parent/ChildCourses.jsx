@@ -2,34 +2,32 @@ import React, { useEffect, useState } from "react";
 import { getChildCourses, getChildTeachers } from "../../helpers/parent.helper";
 import Button from "../Common/Button";
 
-const ChildCourses = () => {
+const ChildCourses = ({ child_id }) => {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
 
-  const child_id = 4;
   useEffect(() => {
     const fetchChildCourses = async () => {
       const res = await getChildCourses(child_id);
       setCourses(res.courses);
     };
 
-    fetchChildCourses();
-  }, []);
-
-  useEffect(() => {
     const fetchChildTeachers = async () => {
       const res = await getChildTeachers(child_id);
       setTeachers(res.teachers);
     };
 
+    fetchChildCourses();
     fetchChildTeachers();
-  }, []);
+  }, [child_id]);
 
   return (
     <div className="flex gap-5 justify-between">
-      <div className=" w-fit flex-col items-center justify-start ml-5 border-r-2">
-        <h2 className="text-xl mb-2 font-black">Courses</h2>
-        {courses &&
+      <div className="w-fit flex-col items-center justify-start ml-5 border-r-2">
+        <h2 className="text-xl mb-2 font-black pr-2">Courses</h2>
+        {courses.length === 0 ? (
+          <p>No courses available</p>
+        ) : (
           courses.map((course) => (
             <div
               key={course.id}
@@ -43,16 +41,18 @@ const ChildCourses = () => {
               <div className="content monster text-xs flex flex-col gap-2">
                 <div className="description">
                   <span className="font-semibold">Description </span>
-                  {course.descripton}
+                  {course.description}
                 </div>
               </div>
             </div>
-          ))}
-        {""}
+          ))
+        )}
       </div>
-      <div className=" w-fit flex-col items-center justify-start ml-5">
+      <div className="w-fit flex-col items-center justify-start ml-5">
         <h2 className="text-xl mb-2 font-black">Teachers</h2>
-        {teachers &&
+        {teachers.length === 0 ? (
+          <p>No teachers available</p>
+        ) : (
           teachers.map((teacher) => (
             <div
               key={teacher.id}
@@ -70,8 +70,8 @@ const ChildCourses = () => {
                 </div>
               </div>
             </div>
-          ))}
-        {""}
+          ))
+        )}
       </div>
     </div>
   );
