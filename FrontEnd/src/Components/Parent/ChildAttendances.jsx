@@ -63,18 +63,18 @@ const ChildAttendances = ({ child_id }) => {
               <div className="mt-2">
                 <strong>Status:</strong>{" "}
                 {attendance.attendance_status === 1 && (
-                  <span className="px-2 py-1 rounded-full bg-red-600 text-white">
-                    Abscent
+                  <span className="px-2 py-1 rounded-full bg-green-600 text-white">
+                    Present
                   </span>
                 )}
                 {attendance.attendance_status === 2 && (
-                  <span className="px-2 py-1 rounded-full bg-gray-600 text-white">
-                    Late
+                  <span className="px-2 py-1 rounded-full bg-red-600 text-white">
+                    Absent
                   </span>
                 )}
                 {attendance.attendance_status === 3 && (
-                  <span className="px-2 py-1 rounded-full bg-green-600 text-white">
-                    Present
+                  <span className="px-2 py-1 rounded-full bg-gray-600 text-white">
+                    Late
                   </span>
                 )}
               </div>
